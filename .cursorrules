@@ -1,0 +1,19 @@
+# Reglas del Proyecto / Project Rules
+
+Este archivo contiene instrucciones críticas para todos los agentes de IA y desarrolladores que trabajen en este repositorio.
+
+## Regla Principal: Commits Incrementales
+
+> [!IMPORTANT]
+> **Es obligatorio realizar un commit de Git por cada cambio individual o feature implementada.**
+
+### Lineamientos de Commits:
+1. **Frecuencia**: No acumules múltiples cambios visuales o funcionales sin confirmar. Haz un commit inmediatamente después de completar cada paso o corrección de error.
+2. **Mensajes Claros**: Utiliza mensajes de commit claros, descriptivos y profesionales que sigan la convención estándar (por ejemplo: `feat: ...`, `fix: ...`, `docs: ...`, `chore: ...`).
+3. **Independencia**: Cada cambio debe ser autocontenido y estar en su propio commit para facilitar el rastreo y la reversión si es necesario.
+
+## Regla de Git Push / Origin
+
+> [!CAUTION]
+> **Queda estrictamente PROHIBIDO para los agentes de IA ejecutar `git push` o subir cambios al repositorio remoto (`origin`).**
+> Todos los commits deben permanecer únicamente en el entorno local. El usuario se encargará de realizar el push a `origin` de forma manual.

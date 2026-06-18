@@ -1,0 +1,388 @@
+import { useEffect } from 'react'
+import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
+import useInView from '../hooks/useInView'
+
+/* ─── Data from old services page ─── */
+
+const coreServices = [
+  {
+    icon: 'architecture',
+    title: 'Arquitectura',
+    desc: 'Tu visión personalizada. Creamos espacios únicos e innovadores, profesionales, para el sistema Steel Frame.',
+  },
+  {
+    icon: 'engineering',
+    title: 'Ingeniería',
+    desc: 'Seguridad y eficiencia. Nuestro enfoque innovador garantiza construcciones sólidas, eficientes y perdurables.',
+  },
+  {
+    icon: 'construction',
+    title: 'Construcción',
+    desc: 'Ejecución rápida y cuidada. Detalle de nuestro proceso limpio con Steel Frame, enfocado en la eficiencia y la calidad.',
+  },
+  {
+    icon: 'assignment_turned_in',
+    title: 'Dirección de Obra',
+    desc: 'Calidad garantizada. Control total de la obra. Supervisamos cada etapa para asegurar plazos, presupuesto y máxima calidad.',
+  },
+]
+
+const projectTypes = [
+  {
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYdd8Y8bNMQsVs_UGsSnMOjsPyVcMoyHhIlnNGJm7Pxx_684U9Lc5hvrX9YryGRNVNsIkkpqdcGQy-e0_fM_kAsCADy5eHB5wnoypiLWv0dIr3nWfirszhvc0TmAfgUnMn0WCG9cfwukYKjsIfQ9FppTtvE8Hz6DZB0R0o-nZdDA0My_MTMuddFzJ4Kjf62G__WQ0-2YNd02xBaC9tgT06xhZeowQu2cHe8vN0nYb-8W8zMeA-6PVmmQJPWYZX8uEYHOMH2xQSPP0',
+    title: 'Edificios de mediana altura',
+    desc: 'Implementamos ingeniería de precisión para proyectos de desarrollo vertical. Optimizamos la operación de la estructura y la logística, asegurando un proceso eficiente.',
+    tag: 'Desarrollo Vertical',
+  },
+  {
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDWTiJX1Wnzh0nXXIA1n_5V4VWwhoky2_U3w2fkn34XgOKeqAKvOfjgKkYDS5lrLab2ln4Lue6xcIeNIRq4-7elFny4MYSyHwJKPA5iWBxdRpc9nlpWZPyIwg05Fcy6mbNIeCHcMvLZrkgqpL6D9B4Zhk4IUg-Kzvgyt_8t-yoJRxlbyRVKK0hPv9nRhSAQUP4UI9smeXcfaI1RbPx-3nxVxDQTQ0wRQu8PAKrXl_wrd-zEakJmHVPM6kCIJgmPaUvYTNfhU7V5G9k',
+    title: 'Viviendas unifamiliares',
+    desc: 'Construcción residencial de calidad superior. Ofrecemos hogares de habitabilidad excepcional que articulen confort térmico y acústico, con alta durabilidad garantizada a largo plazo.',
+    tag: 'Residencial',
+  },
+  {
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCYo-F-iKmr869WS-J3bAAOkDStaqo9pfM9IiYh_JyVoZ4zQfo9izNQMBRpKIRAw8sgQsf--jLxXMcwFvRQxrgCaNO3D_m9v4oj536qm3yFnaYmTByuH4UzcaYpHc_g8bMFayohPg08gPWMIE09RYWuNs-c8H8jJoORIe8oupIaY2aZR66lhkygqbWGmjrgoAsOUcQo4F8hrOVL1LJ-zwCQrpfIcR-2EIv11S3uuIje6-Y_rRrjdkX7BfJbopKSnG5zgJ4iYF69a-4',
+    title: 'Industriales | Locales comerciales',
+    desc: 'Desarrollamos infraestructura industrial y comercial de alto rendimiento. Aseguramos máxima funcionalidad y adaptabilidad, facilitando la rentabilidad económica de cualquier proyecto privado o público.',
+    tag: 'Comercial / Industrial',
+  },
+  {
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYdd8Y8bNMQsVs_UGsSnMOjsPyVcMoyHhIlnNGJm7Pxx_684U9Lc5hvrX9YryGRNVNsIkkpqdcGQy-e0_fM_kAsCADy5eHB5wnoypiLWv0dIr3nWfirszhvc0TmAfgUnMn0WCG9cfwukYKjsIfQ9FppTtvE8Hz6DZB0R0o-nZdDA0My_MTMuddFzJ4Kjf62G__WQ0-2YNd02xBaC9tgT06xhZeowQu2cHe8vN0nYb-8W8zMeA-6PVmmQJPWYZX8uEYHOMH2xQSPP0',
+    title: 'Reformas y Ampliaciones',
+    desc: 'Reconfiguramos y potenciamos tus ambientes existentes. Realizamos intervenciones estructurales con mínima interferencia, potenciando la funcionalidad y el valor patrimonial de tu propiedad.',
+    tag: 'Renovación',
+  },
+  {
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDWTiJX1Wnzh0nXXIA1n_5V4VWwhoky2_U3w2fkn34XgOKeqAKvOfjgKkYDS5lrLab2ln4Lue6xcIeNIRq4-7elFny4MYSyHwJKPA5iWBxdRpc9nlpWZPyIwg05Fcy6mbNIeCHcMvLZrkgqpL6D9B4Zhk4IUg-Kzvgyt_8t-yoJRxlbyRVKK0hPv9nRhSAQUP4UI9smeXcfaI1RbPx-3nxVxDQTQ0wRQu8PAKrXl_wrd-zEakJmHVPM6kCIJgmPaUvYTNfhU7V5G9k',
+    title: 'Clínicas | Consultorios',
+    desc: 'Desarrollamos espacios de salud con foco en la higiene y la funcionalidad. Proyectamos clínicas bajo estricto cumplimiento normativo, creando ambientes óptimos para la atención médica especializada.',
+    tag: 'Salud',
+  },
+]
+
+const differentiators = [
+  { icon: 'speed', value: '60%', label: 'Más rápido', desc: 'que la construcción tradicional en húmedo' },
+  { icon: 'recycling', value: '100%', label: 'Reciclable', desc: 'acero galvanizado de alta calidad' },
+  { icon: 'verified', value: '10+', label: 'Años', desc: 'de garantía estructural documentada' },
+  { icon: 'shield_with_heart', value: '100%', label: 'Antisísmico', desc: 'diseño resistente certificado' },
+]
+
+export default function Servicios() {
+  const [heroRef, heroVisible] = useInView()
+  const [coreRef, coreVisible] = useInView()
+  const [projectsRef, projectsVisible] = useInView()
+  const [diffRef, diffVisible] = useInView()
+  const [ctaRef, ctaVisible] = useInView()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    document.title = 'Servicios | STEEL CORE - WP Construcciones Especiales'
+  }, [])
+
+  return (
+    <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
+      <NavBar />
+
+      <main className="pt-20">
+
+        {/* ═══════════════════════════════════════════════════════
+            HERO — Full-width cinematic dark hero
+        ═══════════════════════════════════════════════════════ */}
+        <section
+          className="relative py-28 lg:py-40 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-[#0a1510] via-[#111e16] to-[#0d1710]"
+          ref={heroRef}
+        >
+          {/* Atmospheric background elements */}
+          <div className="absolute inset-0 opacity-[0.018]" style={{ backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(255,255,255,0.08) 100px, rgba(255,255,255,0.08) 101px), repeating-linear-gradient(0deg, transparent, transparent 100px, rgba(255,255,255,0.08) 100px, rgba(255,255,255,0.08) 101px)' }} />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_40%,rgba(184,203,188,0.12)_0%,transparent_55%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_60%,rgba(184,203,188,0.06)_0%,transparent_45%)]" />
+
+          {/* Animated shimmer line */}
+          <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes svc-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(300%); } }
+            .svc-shimmer-line { animation: svc-shimmer 8s cubic-bezier(0.4,0,0.2,1) infinite; }
+          `}} />
+          <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/8 to-transparent overflow-hidden">
+            <div className="absolute inset-0 w-1/4 h-full bg-gradient-to-r from-transparent via-primary-fixed-dim/30 to-transparent svc-shimmer-line" />
+          </div>
+
+          <div className="relative max-w-7xl mx-auto z-10">
+            <div className={`animate-on-scroll ${heroVisible ? 'visible' : ''}`}>
+              {/* Eyebrow */}
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-12 h-px bg-primary-fixed-dim/60" />
+                <span className="text-primary-fixed-dim text-[11px] font-extrabold tracking-[0.35em] uppercase">WP Construcciones Especiales</span>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-end">
+                <div>
+                  <h1 className="font-headline text-5xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tighter leading-[0.92] mb-8">
+                    <span className="text-white">Nuestros</span>
+                    <br />
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-fixed-dim via-[#a4c7aa] to-primary-fixed-dim">Servicios</span>
+                  </h1>
+                  <p className="text-white/55 text-lg md:text-xl leading-relaxed max-w-xl font-medium">
+                    Transformá tus ideas en realidad. Agendá una cita sin compromiso con nuestros
+                    expertos en construcción. Descubrí cómo revolucionamos tus espacios con
+                    soluciones innovadoras y sustentables.
+                  </p>
+                </div>
+
+                {/* Floating stat cluster */}
+                <div className="flex flex-wrap gap-4 justify-end">
+                  {[
+                    { val: '200+', lab: 'Proyectos entregados' },
+                    { val: '15+', lab: 'Años de experiencia' },
+                    { val: '100%', lab: 'Garantía estructural' },
+                  ].map(({ val, lab }) => (
+                    <div key={lab} className="group flex flex-col items-center justify-center px-6 py-5 rounded-2xl bg-white/[0.03] border border-white/8 backdrop-blur-md hover:bg-white/[0.06] hover:border-primary-fixed-dim/30 hover:-translate-y-1 transition-all duration-500 min-w-[130px]">
+                      <span className="text-primary-fixed-dim text-2xl md:text-3xl font-black font-headline tracking-tight group-hover:scale-105 transition-transform duration-300">{val}</span>
+                      <span className="text-white/40 text-[10px] font-bold uppercase tracking-wider text-center mt-1.5 group-hover:text-white/55 transition-colors duration-300">{lab}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Scroll indicator */}
+              <div className="flex items-center gap-3 mt-16">
+                <div className="w-8 h-12 rounded-full border border-white/15 flex items-start justify-center pt-2">
+                  <div className="w-1 h-3 rounded-full bg-primary-fixed-dim/60 animate-bounce" />
+                </div>
+                <span className="text-white/30 text-xs font-bold tracking-widest uppercase">Desplazá para explorar</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════
+            CORE SERVICES — 4 Pillar cards with creative layout
+        ═══════════════════════════════════════════════════════ */}
+        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={coreRef}>
+          {/* Decorative shapes */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-fixed/15 rounded-full blur-3xl -translate-y-1/3 translate-x-1/4 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-tertiary-fixed/20 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none" />
+
+          <div className="relative max-w-7xl mx-auto">
+            <div className={`mb-16 animate-on-scroll ${coreVisible ? 'visible' : ''}`}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-px bg-primary/40" />
+                <span className="text-primary text-xs font-extrabold tracking-[0.25em] uppercase">Áreas de Expertise</span>
+              </div>
+              <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tighter text-primary mb-4 leading-tight">
+                Cuatro pilares,<br /><span className="text-[#3a7a4a]">un equipo integral</span>
+              </h2>
+              <p className="text-on-surface-variant text-lg max-w-xl font-medium leading-relaxed">
+                Cada proyecto pasa por nuestras cuatro áreas especializadas, garantizando un proceso fluido desde la idea hasta la entrega.
+              </p>
+            </div>
+
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll ${coreVisible ? 'visible' : ''}`}>
+              {coreServices.map(({ icon, title, desc }, i) => (
+                <div
+                  key={title}
+                  className="group relative p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary hover:shadow-2xl hover:shadow-primary/8 hover:-translate-y-2 transition-all duration-500 overflow-hidden cursor-default"
+                  style={{ transitionDelay: `${i * 80}ms` }}
+                >
+                  {/* Hover glow */}
+                  <div className="absolute -top-8 -right-8 w-24 h-24 bg-primary-fixed/30 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                  {/* Step number watermark */}
+                  <span className="absolute top-4 right-5 font-headline text-5xl font-black text-primary/[0.04] group-hover:text-primary/[0.08] transition-colors duration-500 select-none">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+
+                  {/* Corner accents */}
+                  <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary/15 rounded-tl-xl pointer-events-none group-hover:border-primary/40 transition-colors duration-300" />
+                  <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-primary/15 rounded-br-xl pointer-events-none group-hover:border-primary/40 transition-colors duration-300" />
+
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-fixed/50 to-primary-fixed/15 flex items-center justify-center border border-primary/5 mb-6 group-hover:scale-110 group-hover:bg-primary transition-all duration-500">
+                    <span className="material-symbols-outlined text-primary text-2xl group-hover:text-white transition-colors duration-500">{icon}</span>
+                  </div>
+
+                  <h3 className="font-headline text-xl font-black text-primary mb-3 relative z-10">{title}</h3>
+                  <p className="text-on-surface-variant text-sm font-semibold leading-relaxed relative z-10">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════
+            PROJECTS — "Lo que hacemos" — Masonry-inspired cards
+        ═══════════════════════════════════════════════════════ */}
+        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={projectsRef}>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(61,140,90,0.04)_0%,transparent_60%)]" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
+
+          <div className="relative max-w-7xl mx-auto">
+            <div className={`mb-16 animate-on-scroll ${projectsVisible ? 'visible' : ''}`}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-px bg-primary/40" />
+                <span className="text-primary text-xs font-extrabold tracking-[0.25em] uppercase">Tipologías</span>
+              </div>
+              <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tighter text-primary mb-4 leading-tight">
+                Lo que hacemos
+              </h2>
+              <p className="text-on-surface-variant text-lg max-w-xl font-medium leading-relaxed">
+                Abordamos una amplia variedad de tipologías constructivas, cada una adaptada a las necesidades específicas del proyecto.
+              </p>
+            </div>
+
+            {/* Creative grid: 3 top + 2 bottom centered */}
+            <div className={`animate-on-scroll ${projectsVisible ? 'visible' : ''}`}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                {projectTypes.slice(0, 3).map(({ img, title, desc, tag }, i) => (
+                  <div
+                    key={title}
+                    className="group relative rounded-3xl overflow-hidden min-h-[420px] cursor-pointer"
+                    style={{ transitionDelay: `${i * 100}ms` }}
+                  >
+                    <img
+                      src={img}
+                      alt={title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    {/* Overlay layers */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#070c08]/90 via-[#070c08]/30 to-transparent" />
+                    <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    {/* Top tag */}
+                    <div className="absolute top-5 left-5">
+                      <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white/90 text-[11px] font-bold tracking-widest uppercase">
+                        {tag}
+                      </span>
+                    </div>
+
+                    {/* Bottom content */}
+                    <div className="absolute inset-x-0 bottom-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                      <h3 className="font-headline text-xl lg:text-2xl font-bold text-white mb-2 leading-tight">{title}</h3>
+                      <p className="text-white/55 text-sm leading-relaxed mb-4 line-clamp-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{desc}</p>
+                      <a
+                        href="/#contact"
+                        className="inline-flex items-center gap-2 text-white font-bold text-sm opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200 hover:gap-3"
+                      >
+                        Ver más
+                        <span className="material-symbols-outlined text-primary-fixed-dim text-base">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                {projectTypes.slice(3).map(({ img, title, desc, tag }, i) => (
+                  <div
+                    key={title}
+                    className="group relative rounded-3xl overflow-hidden min-h-[420px] cursor-pointer"
+                    style={{ transitionDelay: `${(i + 3) * 100}ms` }}
+                  >
+                    <img
+                      src={img}
+                      alt={title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#070c08]/90 via-[#070c08]/30 to-transparent" />
+                    <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    <div className="absolute top-5 left-5">
+                      <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white/90 text-[11px] font-bold tracking-widest uppercase">
+                        {tag}
+                      </span>
+                    </div>
+
+                    <div className="absolute inset-x-0 bottom-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                      <h3 className="font-headline text-xl lg:text-2xl font-bold text-white mb-2 leading-tight">{title}</h3>
+                      <p className="text-white/55 text-sm leading-relaxed mb-4 line-clamp-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{desc}</p>
+                      <a
+                        href="/#contact"
+                        className="inline-flex items-center gap-2 text-white font-bold text-sm opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200 hover:gap-3"
+                      >
+                        Ver más
+                        <span className="material-symbols-outlined text-primary-fixed-dim text-base">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════
+            DIFFERENTIATORS — Stats strip
+        ═══════════════════════════════════════════════════════ */}
+        <section className="relative py-20 px-6 lg:px-16 overflow-hidden bg-background" ref={diffRef}>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(184,203,188,0.08)_0%,transparent_60%)]" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
+
+          <div className="relative max-w-7xl mx-auto">
+            <div className={`grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 animate-on-scroll ${diffVisible ? 'visible' : ''}`}>
+              {differentiators.map(({ icon, value, label, desc }, i) => (
+                <div
+                  key={label}
+                  className="group relative p-8 rounded-3xl bg-white/70 backdrop-blur-md border border-white/90 shadow-sm hover:shadow-xl hover:border-primary-fixed-dim hover:-translate-y-1 transition-all duration-500 overflow-hidden text-center"
+                  style={{ transitionDelay: `${i * 80}ms` }}
+                >
+                  <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
+
+                  <div className="w-12 h-12 rounded-xl bg-primary-fixed/40 flex items-center justify-center mx-auto mb-5 border border-primary/5 group-hover:scale-110 transition-transform duration-300">
+                    <span className="material-symbols-outlined text-primary text-xl">{icon}</span>
+                  </div>
+
+                  <p className="font-headline text-4xl lg:text-5xl font-black bg-gradient-to-br from-primary to-[#2a5a3a] bg-clip-text text-transparent mb-1">{value}</p>
+                  <p className="font-headline text-sm font-extrabold text-primary uppercase tracking-wider mb-2">{label}</p>
+                  <p className="text-on-surface-variant text-xs font-semibold leading-relaxed">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════
+            CTA — Contact
+        ═══════════════════════════════════════════════════════ */}
+        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-surface-container-low via-[#eaf2ed] to-surface-container-low" ref={ctaRef}>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(61,140,90,0.06)_0%,transparent_55%)] pointer-events-none" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/8 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/8 to-transparent" />
+
+          <div className={`relative max-w-4xl mx-auto text-center animate-on-scroll ${ctaVisible ? 'visible' : ''}`}>
+            <div className="w-20 h-20 rounded-3xl bg-primary-fixed/50 flex items-center justify-center mx-auto mb-8 border border-primary-fixed-dim/20 shadow-md hover:scale-110 transition-transform duration-500">
+              <span className="material-symbols-outlined text-primary text-5xl font-medium" style={{ fontVariationSettings: "'FILL' 1" }}>contact_mail</span>
+            </div>
+
+            <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-primary mb-6 leading-tight">
+              ¿Listo para tu<br /><span className="text-[#3a7a4a]">próximo proyecto?</span>
+            </h2>
+
+            <p className="text-on-surface-variant text-lg md:text-xl leading-relaxed mb-12 max-w-2xl mx-auto font-semibold">
+              Para cotizaciones, consultas sobre proyectos o servicios de construcción, escribinos o llamanos. Estamos para ayudarte.
+            </p>
+
+            <div className="flex flex-col md:flex-row justify-center items-center gap-6">
+              <a
+                href="/#contact"
+                className="group flex items-center gap-3 bg-primary hover:bg-[#203728] text-white px-10 py-5 rounded-xl font-headline font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5"
+              >
+                <span>Hablemos</span>
+                <span className="material-symbols-outlined text-xl group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
+              </a>
+              <a
+                href="/"
+                className="group flex items-center gap-2 text-primary/70 hover:text-primary text-sm font-bold transition-colors py-5 px-4"
+              >
+                <span>Volver al Inicio</span>
+                <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <Footer showCTA={false} />
+    </div>
+  )
+}

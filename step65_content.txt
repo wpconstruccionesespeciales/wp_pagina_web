@@ -1,0 +1,69 @@
+Created At: 2026-05-20T14:29:36Z
+Completed At: 2026-05-20T14:29:36Z
+File Path: `file:///c:/Users/Gime/Desktop/wpp/steel-core/src/pages/WMU.jsx`
+Total Lines: 966
+Total Bytes: 67598
+Showing lines 600 to 850
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+600:           {/* right — empty, lets the parallax image breathe */}
+601:           <div className="expand-spacer" />
+602:         </div>
+603:       </div>
+604:     </section>
+605:   )
+606: }
+607: 
+608: /* ═══════════════════════════════════════════════════════════════════════════
+609:    6 · RECOGNITION + PRESS  — light section with dark glass value cards
+610: ═══════════════════════════════════════════════════════════════════════════ */
+611: function RecognitionSection() {
+612:   const [ref, vis] = useFadeIn()
+613:   const values = [
+614:     { icon: '◈', title: 'Nuestra visión',  text: 'Seguir construyendo con la misma calidad y método que nos distingue, para que tu inversión sea sólida.' },
+615:     { icon: '◉', title: 'Nuestra misión',  text: 'Calidad innegociable y máxima eficiencia, cumpliendo siempre el compromiso de entrega pactado.' },
+616:     { icon: '◎', title: 'Sustentabilidad', text: 'Casas más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
+617:   ]
+618:   return (
+619:     <section ref={ref} style={{
+620:       background: 'linear-gradient(180deg, #ECEDEB 0%, #E7E8E6 46%, #E1E2E0 100%)',
+621:       padding: 'clamp(80px,10vw,140px) 0', position: 'relative', overflow: 'hidden'
+622:     }}>
+623:    
+<truncated 17834 bytes>
+L CSS
+816: ═══════════════════════════════════════════════════════════════════════════ */
+817: const CSS = `
+818:   html { scroll-behavior: smooth; }
+819: 
+820:   .wmu-btn-primary {
+821:     padding: 14px 26px; border-radius: 12px; font-weight: 800;
+822:     letter-spacing: .2px; text-decoration: none; display: inline-block;
+823:     background: #337F57; color: #F3F5F4; font-family: "Nunito Sans", sans-serif;
+824:     box-shadow: 0 10px 26px rgba(53,195,107,.2); white-space: nowrap;
+825:     transition: transform .15s ease, box-shadow .25s ease;
+826:   }
+827:   .wmu-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(53,195,107,.3); }
+828:   .wmu-btn-ghost {
+829:     padding: 14px 26px; border-radius: 12px; font-weight: 800;
+830:     letter-spacing: .2px; text-decoration: none; display: inline-block;
+831:     background: transparent; color: #F3F5F4; font-family: "Nunito Sans", sans-serif;
+832:     border: 1px solid rgba(255,255,255,.14); white-space: nowrap;
+833:     transition: background .2s, border-color .2s;
+834:   }
+835:   .wmu-btn-ghost:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.22); }
+836: 
+837:   /* WhatsApp float pulse */
+838:   .wa-float {
+839:     animation: wa-pulse 2.5s ease-in-out infinite;
+840:   }
+841:   .wa-float:hover {
+842:     animation: none;
+843:     transform: translateY(0) scale(1.1) !important;
+844:     box-shadow: 0 8px 32px rgba(37,211,102,.5) !important;
+845:   }
+846:   @keyframes wa-pulse {
+847:     0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,.45); }
+848:     50% { box-shadow: 0 6px 32px rgba(37,211,102,.65), 0 0 0 10px rgba(37,211,102,.08); }
+849:   }
+850: 
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.
