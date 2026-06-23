@@ -1,0 +1,63 @@
+Created At: 2026-05-20T14:25:23Z
+Completed At: 2026-05-20T14:25:23Z
+File Path: `file:///c:/Users/Gime/Desktop/wpp/steel-core/src/pages/WMU.jsx`
+Total Lines: 966
+Total Bytes: 67598
+Showing lines 1 to 800
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: import { useEffect, useState, useRef } from 'react'
+2: import { Link } from 'react-router-dom'
+3: import wpWhite from '../assets/wpblanco.webp'
+4: 
+5: /* ── tokens ── */
+6: const G    = '#35C36B'
+7: const BG   = '#0C1210'
+8: const TXT  = '#F3F5F4'
+9: const SOFT = '#B7C0BB'
+10: const LIGHT_BG   = '#E6EBE4'
+11: const LIGHT_BG_2 = '#DCE4DC'
+12: const LIGHT_TXT  = '#102016'
+13: const LIGHT_SOFT = '#51665A'
+14: const LIGHT_LINE = 'rgba(16,32,22,.12)'
+15: 
+16: const HEADING = '"Manrope", sans-serif'
+17: const BODY    = '"Nunito Sans", sans-serif'
+18: 
+19: /* ── urls ── */
+20: const WA  = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_number&app_absent=0'
+21: const FIN = 'https://docs.google.com/forms/d/e/1FAIpQLSd_rGHeiPW9_uMoIS-dab8gdf3YrvRRn6mvH6ELiNwZTbi2DQ/viewform'
+22: 
+23: /* parallax image URLs */
+24: const SKY_URL   = 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=2000&auto=format&fit=crop'
+25: const ARA10_URL = 'https://images.squarespace-cdn.com/content/67ffc8a20990bb5f40749245/43c9f557-3bde-4964-a050-aa7b927f4751/Ara10.jpg?content-type=image%2Fjpeg'
+26: const ALDEA_URL = 'https://images.squarespace-cdn.com/content/67ffc8a20990bb5f40749245/7098cb63-4f7b-46d9-b1de-188fac63b4f0/aldea%20%283%29.png?content-type=image%2Fpng'
+27: const HEX_IMG   = 'https://images.squarespace-cdn.com/content/67ffc8a20990bb5f40749245/7098cb63-4f7b-46d9-b1de-188fac63b4f0/aldea+%283%29.png?content-type=image%2Fpng'
+28: 
+29: /* ── data ── */
+30: const MODELS = [
+31:   { name: 'WMU CERO',   size: '36 m²',  img:
+<truncated 45284 bytes>
+══════════════════
+609:    6 · RECOGNITION + PRESS  — light section with dark glass value cards
+610: ═══════════════════════════════════════════════════════════════════════════ */
+611: function RecognitionSection() {
+612:   const [ref, vis] = useFadeIn()
+613:   const values = [
+614:     { icon: '◈', title: 'Nuestra visión',  text: 'Seguir construyendo con la misma calidad y método que nos distingue, para que tu inversión sea sólida.' },
+615:     { icon: '◉', title: 'Nuestra misión',  text: 'Calidad innegociable y máxima eficiencia, cumpliendo siempre el compromiso de entrega pactado.' },
+616:     { icon: '◎', title: 'Sustentabilidad', text: 'Casas más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
+617:   ]
+618:   return (
+619:     <section ref={ref} style={{
+620:       background: 'linear-gradient(180deg, #ECEDEB 0%, #E7E8E6 46%, #E1E2E0 100%)',
+621:       padding: 'clamp(80px,10vw,140px) 0', position: 'relative', overflow: 'hidden'
+622:     }}>
+623:       <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 150, pointerEvents: 'none',
+624:         background: 'linear-gradient(to bottom, rgba(12,18,16,.28) 0%, rgba(12,18,16,.1) 42%, rgba(12,18,16,0) 100%)' }} />
+625:       <div aria-hidden="true" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 160, pointerEvents: 'none',
+626:         background: 'linear-gradient(to top, rgba(12,18,16,.28) 0%, rgba(12,18,16,.1) 38%, rgba(12,18,16,0) 100%)' }} />
+627:       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none',
+628:         background: 'radial-gradient(ellipse 60% 70% at 82% 82%
+<truncated 16209 bytes>
+
+NOTE: The output was truncated because it was too long. Use a more targeted query or a smaller range to get the information you need.

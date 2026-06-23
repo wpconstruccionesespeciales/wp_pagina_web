@@ -1,0 +1,95 @@
+Created At: 2026-05-20T14:29:38Z
+Completed At: 2026-05-20T14:29:38Z
+File Path: `file:///c:/Users/Gime/Desktop/wpp/steel-core/src/pages/WMU.jsx`
+Total Lines: 966
+Total Bytes: 67598
+Showing lines 850 to 966
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+850: 
+851:   /* press card hover */
+852:   .press-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.1) !important; transform: translateY(-3px); }
+853:   .press-card:hover .press-card-img { transform: scale(1.04); }
+854:   .light-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(16,35,25,.22) !important; }
+855: 
+856:   /* parallax — only on desktop */
+857:   .wmu-parallax {
+858:     background-attachment: scroll;
+859:   }
+860:   .wmu-parallax-mobile-bg {
+861:     position: absolute;
+862:     inset: -12%;
+863:     background-size: cover;
+864:     background-position: center;
+865:     will-change: transform;
+866:     transform: translate3d(0, 0px, 0) scale(1.14);
+867:   }
+868:   @media (min-width: 1025px) {
+869:     .wmu-parallax {
+870:       background-attachment: fixed !important;
+871:     }
+872:   }
+873: 
+874:   /* ── responsive ── */
+875:   @media (max-width: 900px) {
+876:     .hero-inner { grid-template-columns: 1fr !important; gap: 28px !important; }
+877:     .hero-hex   { order: -1; }
+878:     .model-featured { grid-template-columns: 1fr !important; }
+879:     .expand-layout { grid-template-columns: 1fr !important; }
+880:     .expand-spacer { display: none; }
+881:   }
+882:   @media (max-width: 768px) {
+883:     .fin-grid     { grid-template-columns: 1fr !important; }
+884:     .fin-img      { order: -1; }
+885:     .fin-stats    { grid-template-columns: 1fr !important; }
+886:     .values-row   { grid-template-columns: 1fr !important; }
+887:     .press-grid   { grid-template-columns: 1fr !important; }
+888:     .specs-layout { grid-t
+<truncated 1069 bytes>
+  }
+921:   @media (max-width: 560px) {
+922:     .models-grid { grid-template-columns: 1fr !important; }
+923:     .hero-actions {
+924:       gap: 10px !important;
+925:     }
+926:     .hero-action-btn {
+927:       font-size: 12px !important;
+928:       padding: 13px 10px !important;
+929:       letter-spacing: .12em !important;
+930:     }
+931:     .process-section {
+932:       min-height: 560px !important;
+933:     }
+934:     .process-copy {
+935:       padding: 88px 18px 0 !important;
+936:     }
+937:     .process-image {
+938:       object-position: 55% bottom !important;
+939:     }
+940:   }
+941: `
+942: 
+943: /* ═══════════════════════════════════════════════════════════════════════════
+944:    PAGE
+945: ═══════════════════════════════════════════════════════════════════════════ */
+946: export default function WMU() {
+947:   const mobileParallaxEnabled = useMobileParallaxEnabled()
+948: 
+949:   useEffect(() => { window.scrollTo(0, 0) }, [])
+950:   return (
+951:     <div style={{ fontFamily: BODY, width: '100%', maxWidth: '100%', overflowX: 'clip' }}>
+952:       <style>{CSS}</style>
+953:       <WMUNav />
+954:       <HeroSection />
+955:       <ProcessSection />
+956:       <ModelsSection mobileParallaxEnabled={mobileParallaxEnabled} />
+957:       <FinancingSection />
+958:       <ExpandSection mobileParallaxEnabled={mobileParallaxEnabled} />
+959:       <RecognitionSection />
+960:       <SpecsSection mobileParallaxEnabled={mobileParallaxEnabled} />
+961:       <WMUFooter />
+962:       <FloatingWhatsApp />
+963:     </div>
+964:   )
+965: }
+966: 
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.
