@@ -3,176 +3,248 @@ import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
 
+const dataCards = [
+  {
+    icon: 'person',
+    title: 'Datos de Contacto',
+    desc: 'Nombre, correo electrónico, número de teléfono y dirección postal cuando usted nos contacta voluntariamente.',
+  },
+  {
+    icon: 'engineering',
+    title: 'Datos del Proyecto',
+    desc: 'Información sobre el proyecto de construcción que nos envía a través de formularios o consultas técnicas.',
+  },
+  {
+    icon: 'web',
+    title: 'Datos de Navegación',
+    desc: 'Información técnica anónima sobre cómo interactúa con nuestro sitio web, incluyendo páginas visitadas y tiempo de sesión.',
+  },
+  {
+    icon: 'mail',
+    title: 'Comunicación',
+    desc: 'Contenido de sus consultas, solicitudes de presupuesto y cualquier otra comunicación que nos envíe.',
+  },
+]
+
+const rightCards = [
+  {
+    icon: 'visibility',
+    title: 'Acceso',
+    desc: 'Solicitar información sobre los datos personales que tenemos suyos y el uso que les damos.',
+  },
+  {
+    icon: 'edit',
+    title: 'Rectificación',
+    desc: 'Corregir cualquier dato inexacto o incompleto que figure en nuestros registros.',
+  },
+  {
+    icon: 'delete',
+    title: 'Supresión',
+    desc: 'Solicitar la eliminación de sus datos personales cuando ya no sean necesarios para los fines originales.',
+  },
+]
+
 export default function Privacidad() {
   const [heroRef, heroVisible] = useInView()
   const [dataRef, dataVisible] = useInView()
   const [rightsRef, rightsVisible] = useInView()
-  const [contactRef, contactVisible] = useInView()
+  const [useRef, useVisible] = useInView()
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = "Política de Privacidad | STEEL CORE - WP Construcciones Especiales"
+    document.title = 'Política de Privacidad | STEEL CORE - WP Construcciones Especiales'
   }, [])
 
   return (
-    <div className="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
       <NavBar />
 
       <main className="pt-20">
+        {/* ═══════════════════════════════════════════════════════
+            HERO
+        ═══════════════════════════════════════════════════════ */}
+        <section className="relative py-24 lg:py-32 px-6 lg:px-16 overflow-hidden bg-background" ref={heroRef}>
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-fixed/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 opacity-70 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-tertiary-fixed/30 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 opacity-70 pointer-events-none" />
+          <div className="bg-geo-dots bg-geo-dots-left opacity-[0.15] top-12 left-12 pointer-events-none scale-110" />
+          <div className="bg-geo-corners bg-geo-corners-left opacity-[0.25] bottom-16 left-8 pointer-events-none" />
 
-        <section className="px-8 lg:px-16 py-24 md:py-32 max-w-screen-2xl mx-auto" ref={heroRef}>
-          <div className={`animate-on-scroll ${heroVisible ? 'visible' : ''}`}>
-            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">
-              Protección de Datos
-            </span>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none mb-8 text-primary font-headline">
-              Política de Privacidad
-            </h1>
-            <p className="text-xl md:text-2xl text-secondary leading-relaxed mb-8 max-w-3xl">
-              En WP Construcciones Especiales respetamos su privacidad y nos comprometemos
-              a proteger sus datos personales. Esta política describe cómo recopilamos,
-              usamos y salvaguardamos su información.
-            </p>
-            <div className="flex gap-4 items-center">
-              <div className="w-16 h-1 bg-primary flex-shrink-0" />
-              <p className="text-on-surface-variant font-medium italic">
-                Última actualización: Mayo 2026
+          <div className="max-w-7xl mx-auto relative">
+            <div className={`animate-on-scroll ${heroVisible ? 'visible' : ''}`}>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-px bg-primary/40" />
+                <span className="text-primary text-xs font-extrabold tracking-[0.25em] uppercase">Protección de Datos</span>
+              </div>
+
+              <h1 className="font-headline text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[0.95] mb-6 text-primary">
+                Política de Privacidad
+              </h1>
+
+              <p className="text-on-surface-variant text-lg md:text-xl leading-relaxed mb-8 max-w-3xl font-medium">
+                En WP Construcciones Especiales respetamos su privacidad y nos comprometemos
+                a proteger sus datos personales. Esta política describe cómo recopilamos,
+                usamos y salvaguardamos su información.
               </p>
-            </div>
-          </div>
-        </section>
 
-        <section className="bg-surface-container-low py-24 px-8 lg:px-16" ref={dataRef}>
-          <div className="max-w-screen-xl mx-auto">
-            <div className={`mb-16 animate-on-scroll ${dataVisible ? 'visible' : ''}`}>
-              <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tighter text-primary mb-4">
-                Datos que Recopilamos
-              </h2>
-              <p className="text-secondary text-lg max-w-2xl">
-                Recopilamos únicamente la información necesaria para brindarle
-                nuestros servicios y comunicarnos con usted de manera efectiva.
-              </p>
-            </div>
-
-            <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 animate-on-scroll ${dataVisible ? 'visible' : ''}`}>
-              {[
-                {
-                  icon: 'person',
-                  title: 'Datos de Contacto',
-                  desc: 'Nombre, correo electrónico, número de teléfono y dirección postal cuando usted nos contacta voluntariamente.'
-                },
-                {
-                  icon: 'engineering',
-                  title: 'Datos del Proyecto',
-                  desc: 'Información sobre el proyecto de construcción que nos envía a través de formularios o consultas técnicas.'
-                },
-                {
-                  icon: 'web',
-                  title: 'Datos de Navegación',
-                  desc: 'Información técnica anónima sobre cómo interactúa con nuestro sitio web, incluyendo páginas visitadas y tiempo de sesión.'
-                },
-                {
-                  icon: 'mail',
-                  title: 'Comunicación',
-                  desc: 'Contenido de sus consultas, solicitudes de presupuesto y cualquier otra comunicación que nos envíe.'
-                },
-              ].map(({ icon, title, desc }) => (
-                <div key={title} className="bg-surface-container-lowest p-8 rounded-xl border border-outline/10">
-                  <span className="material-symbols-outlined text-primary text-4xl mb-4 block">{icon}</span>
-                  <h4 className="font-headline text-xl font-bold text-primary mb-3">{title}</h4>
-                  <p className="text-on-surface-variant text-sm leading-relaxed">{desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-24 px-8 lg:px-16" ref={rightsRef}>
-          <div className="max-w-screen-xl mx-auto">
-            <div className={`mb-16 animate-on-scroll ${rightsVisible ? 'visible' : ''}`}>
-              <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tighter text-primary mb-4">
-                Sus Derechos
-              </h2>
-              <p className="text-secondary text-lg max-w-2xl">
-                Usted tiene derecho a conocer, acceder, rectificar y suprimir sus datos
-                personales, en cumplimiento con la Ley de Protección de Datos Personales.
-              </p>
-            </div>
-
-            <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 animate-on-scroll ${rightsVisible ? 'visible' : ''}`}>
-              {[
-                {
-                  icon: 'visibility',
-                  title: 'Acceso',
-                  desc: 'Solicitar información sobre los datos personales que tenemos suyos y el uso que les damos.'
-                },
-                {
-                  icon: 'edit',
-                  title: 'Rectificación',
-                  desc: 'Corregir cualquier dato inexacto o incompleto que figure en nuestros registros.'
-                },
-                {
-                  icon: 'delete',
-                  title: 'Supresión',
-                  desc: 'Solicitar la eliminación de sus datos personales cuando ya no sean necesarios para los fines originales.'
-                },
-              ].map(({ icon, title, desc }) => (
-                <div key={title} className="bg-surface-container-low p-8 rounded-xl border border-outline/10">
-                  <span className="material-symbols-outlined text-primary text-4xl mb-4 block">{icon}</span>
-                  <h4 className="font-headline text-xl font-bold text-primary mb-3">{title}</h4>
-                  <p className="text-on-surface-variant text-sm leading-relaxed">{desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-surface-container-low py-24 px-8 lg:px-16" ref={contactRef}>
-          <div className="max-w-screen-xl mx-auto">
-            <div className={`animate-on-scroll ${contactVisible ? 'visible' : ''}`}>
-              <div className="bg-primary p-10 md:p-16 rounded-2xl text-white">
-                <span className="material-symbols-outlined text-6xl mb-8 block">contact_mail</span>
-                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter mb-6">
-                  Uso de sus Datos
-                </h2>
-                <p className="font-body text-xl text-white/80 max-w-3xl leading-relaxed mb-8">
-                  Utilizamos sus datos únicamente para responder sus consultas, procesar
-                  solicitudes de presupuesto y mantenerlo informado sobre novedades de la
-                  empresa. No compartimos su información con terceros con fines de marketing.
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-px bg-primary/30" />
+                <p className="text-on-surface-variant/70 text-sm italic font-semibold">
+                  Última actualización: Mayo 2026
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
-                  <div className="bg-white/10 p-6 rounded-xl">
-                    <span className="material-symbols-outlined text-3xl mb-4 block">lock</span>
-                    <h4 className="font-headline text-lg font-bold mb-2">Datos Protegidos</h4>
-                    <p className="text-white/70 text-sm">Implementamos medidas de seguridad técnicas y organizativas para proteger su información.</p>
-                  </div>
-                  <div className="bg-white/10 p-6 rounded-xl">
-                    <span className="material-symbols-outlined text-3xl mb-4 block">rule</span>
-                    <h4 className="font-headline text-lg font-bold mb-2">Sin Terceros</h4>
-                    <p className="text-white/70 text-sm">No vendemos, alquilamos ni transferimos sus datos personales a empresas externas.</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-24 px-8 lg:px-16">
-          <div className="max-w-screen-xl mx-auto">
-            <div className="bg-surface-container-low p-10 rounded-xl border border-outline/10">
-              <h3 className="font-headline text-2xl font-bold text-primary mb-4">Contacto para Ejercitar sus Derechos</h3>
-              <p className="text-on-surface-variant leading-relaxed mb-6">
-                Si desea ejercer cualquiera de sus derechos o tiene consultas sobre esta
-                política de privacidad, puede contactarnos a través de los medios
-                indicados en la sección de contacto de nuestro sitio web.
+        {/* ═══════════════════════════════════════════════════════
+            DATOS QUE RECOPILAMOS
+        ═══════════════════════════════════════════════════════ */}
+        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={dataRef}>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(61,140,90,0.04)_0%,transparent_60%)]" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
+
+          <div className="relative max-w-7xl mx-auto">
+            <div className={`mb-16 animate-on-scroll ${dataVisible ? 'visible' : ''}`}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-px bg-primary/40" />
+                <span className="text-primary text-xs font-extrabold tracking-[0.25em] uppercase">Información</span>
+              </div>
+              <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tighter text-primary mb-4 leading-tight">
+                Datos que Recopilamos
+              </h2>
+              <p className="text-on-surface-variant text-lg max-w-xl font-medium leading-relaxed">
+                Recopilamos únicamente la información necesaria para brindarle
+                nuestros servicios y comunicarnos con usted de manera efectiva.
               </p>
-              <p className="text-on-surface-variant text-sm leading-relaxed">
-                Responsable: WP Construcciones Especiales | Contacto: +54 9 3435 05-6918 | wpsascentral@gmail.com
-              </p>
+            </div>
+
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 animate-on-scroll ${dataVisible ? 'visible' : ''}`}>
+              {dataCards.map(({ icon, title, desc }) => (
+                <div
+                  key={title}
+                  className="group relative p-8 lg:p-10 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden"
+                >
+                  <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
+                  <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary/20 rounded-tl-xl pointer-events-none group-hover:border-primary-fixed-dim transition-colors duration-300" />
+                  <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-primary/20 rounded-br-xl pointer-events-none group-hover:border-primary-fixed-dim transition-colors duration-300" />
+
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-fixed/40 to-primary-fixed/10 flex items-center justify-center border border-primary/5 mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <span className="material-symbols-outlined text-primary text-2xl">{icon}</span>
+                  </div>
+                  <h4 className="font-headline text-xl lg:text-2xl font-black text-primary mb-3 relative z-10">{title}</h4>
+                  <p className="text-on-surface-variant text-sm font-semibold leading-relaxed relative z-10">{desc}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
+        {/* ═══════════════════════════════════════════════════════
+            SUS DERECHOS
+        ═══════════════════════════════════════════════════════ */}
+        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={rightsRef}>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/15 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+          <div className="bg-geo-dots bg-geo-dots-left opacity-[0.1] -top-12 left-10 pointer-events-none" />
+
+          <div className="relative max-w-7xl mx-auto">
+            <div className={`mb-16 animate-on-scroll ${rightsVisible ? 'visible' : ''}`}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-px bg-primary/40" />
+                <span className="text-primary text-xs font-extrabold tracking-[0.25em] uppercase">Protección</span>
+              </div>
+              <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tighter text-primary mb-4 leading-tight">
+                Sus Derechos
+              </h2>
+              <p className="text-on-surface-variant text-lg max-w-xl font-medium leading-relaxed">
+                Usted tiene derecho a conocer, acceder, rectificar y suprimir sus datos
+                personales, en cumplimiento con la Ley de Protección de Datos Personales.
+              </p>
+            </div>
+
+            <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 animate-on-scroll ${rightsVisible ? 'visible' : ''}`}>
+              {rightCards.map(({ icon, title, desc }) => (
+                <div
+                  key={title}
+                  className="group relative p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden"
+                >
+                  <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
+                  <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary/20 rounded-tl-xl pointer-events-none group-hover:border-primary-fixed-dim transition-colors duration-300" />
+                  <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-primary/20 rounded-br-xl pointer-events-none group-hover:border-primary-fixed-dim transition-colors duration-300" />
+
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-fixed/40 to-primary-fixed/10 flex items-center justify-center border border-primary/5 mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <span className="material-symbols-outlined text-primary text-2xl">{icon}</span>
+                  </div>
+                  <h4 className="font-headline text-xl lg:text-2xl font-black text-primary mb-3 relative z-10">{title}</h4>
+                  <p className="text-on-surface-variant text-sm font-semibold leading-relaxed relative z-10">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════
+            USO DE SUS DATOS
+        ═══════════════════════════════════════════════════════ */}
+        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={useRef}>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(61,140,90,0.06)_0%,transparent_60%)] pointer-events-none" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/8 to-transparent" />
+
+          <div className={`relative max-w-7xl mx-auto animate-on-scroll ${useVisible ? 'visible' : ''}`}>
+            <div className="rounded-3xl bg-primary p-10 lg:p-16 text-white relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none" />
+              <div className="bg-geo-dots bg-geo-dots-right opacity-[0.08] top-6 right-6 pointer-events-none" />
+
+              <div className="relative z-10">
+                <div className="w-20 h-20 rounded-3xl bg-white/10 flex items-center justify-center mb-8 border border-white/15">
+                  <span className="material-symbols-outlined text-primary-fixed-dim text-5xl font-medium" style={{ fontVariationSettings: "'FILL' 1" }}>contact_mail</span>
+                </div>
+
+                <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-6 leading-tight">
+                  Uso de sus Datos
+                </h2>
+                <p className="font-body text-lg md:text-xl text-white/70 max-w-3xl leading-relaxed mb-10 font-semibold">
+                  Utilizamos sus datos únicamente para responder sus consultas, procesar
+                  solicitudes de presupuesto y mantenerlo informado sobre novedades de la
+                  empresa. No compartimos su información con terceros con fines de marketing.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
+                  <div className="group p-7 rounded-2xl bg-white/8 backdrop-blur-sm border border-white/10 hover:bg-white/12 transition-all duration-500">
+                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-500">
+                      <span className="material-symbols-outlined text-primary-fixed-dim text-2xl">lock</span>
+                    </div>
+                    <h4 className="font-headline text-lg font-bold mb-2">Datos Protegidos</h4>
+                    <p className="text-white/70 text-sm leading-relaxed font-semibold">
+                      Implementamos medidas de seguridad técnicas y organizativas para proteger su información.
+                    </p>
+                  </div>
+                  <div className="group p-7 rounded-2xl bg-white/8 backdrop-blur-sm border border-white/10 hover:bg-white/12 transition-all duration-500">
+                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-500">
+                      <span className="material-symbols-outlined text-primary-fixed-dim text-2xl">rule</span>
+                    </div>
+                    <h4 className="font-headline text-lg font-bold mb-2">Sin Terceros</h4>
+                    <p className="text-white/70 text-sm leading-relaxed font-semibold">
+                      No vendemos, alquilamos ni transferimos sus datos personales a empresas externas.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-12 pt-10 border-t border-white/15">
+                  <h3 className="font-headline text-2xl font-bold text-white mb-4">Contacto para Ejercitar sus Derechos</h3>
+                  <p className="text-white/70 text-sm leading-relaxed font-semibold">
+                    Si desea ejercer cualquiera de sus derechos o tiene consultas sobre esta
+                    política de privacidad, puede contactarnos a través de los medios
+                    indicados en la sección de contacto de nuestro sitio web.
+                  </p>
+                  <p className="text-white/55 text-xs leading-relaxed mt-4 uppercase tracking-widest font-bold">
+                    Responsable: WP Construcciones Especiales &nbsp;·&nbsp; Contacto: +54 9 3435 05-6918 &nbsp;·&nbsp; wpsascentral@gmail.com
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />
