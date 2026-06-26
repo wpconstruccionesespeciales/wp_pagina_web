@@ -129,18 +129,44 @@ export default function Servicios() {
                   </p>
                 </div>
 
-                {/* Floating stat cluster */}
-                <div className="flex flex-wrap gap-4 justify-end">
-                  {[
-                    { val: '200+', lab: 'Proyectos entregados' },
-                    { val: '15+', lab: 'Años de experiencia' },
-                    { val: '100%', lab: 'Garantía estructural' },
-                  ].map(({ val, lab }) => (
-                    <div key={lab} className="group flex flex-col items-center justify-center px-6 py-5 rounded-2xl bg-white/[0.03] border border-white/8 backdrop-blur-md hover:bg-white/[0.06] hover:border-primary-fixed-dim/30 hover:-translate-y-1 transition-all duration-500 min-w-[130px]">
-                      <span className="text-primary-fixed-dim text-2xl md:text-3xl font-black font-headline tracking-tight group-hover:scale-105 transition-transform duration-300">{val}</span>
-                      <span className="text-white/40 text-[10px] font-bold uppercase tracking-wider text-center mt-1.5 group-hover:text-white/55 transition-colors duration-300">{lab}</span>
+                {/* Blueprint técnico con cotas */}
+                <div className="blueprint-panel">
+                  <div className="blueprint-grid" />
+
+                  <svg className="blueprint-wire" viewBox="0 0 400 400" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path d="M 130 90 L 130 310" />
+                    <path d="M 270 90 L 270 310" />
+                    <path d="M 130 90 L 270 90" />
+                    <path d="M 130 310 L 270 310" />
+                    <path d="M 130 90 L 270 310" />
+                  </svg>
+
+                  <div className="blueprint-cot blueprint-cot--01">
+                    <span className="blueprint-cot__dot" />
+                    <span className="blueprint-cot__line" />
+                    <div className="blueprint-cot__label">
+                      <span className="blueprint-cot__value">200+</span>
+                      <span className="blueprint-cot__desc">Proyectos entregados</span>
                     </div>
-                  ))}
+                  </div>
+
+                  <div className="blueprint-cot blueprint-cot--02">
+                    <span className="blueprint-cot__dot" />
+                    <span className="blueprint-cot__line" />
+                    <div className="blueprint-cot__label">
+                      <span className="blueprint-cot__value">15+</span>
+                      <span className="blueprint-cot__desc">Años de experiencia</span>
+                    </div>
+                  </div>
+
+                  <div className="blueprint-cot blueprint-cot--03">
+                    <span className="blueprint-cot__dot" />
+                    <span className="blueprint-cot__line" />
+                    <div className="blueprint-cot__label">
+                      <span className="blueprint-cot__value">100%</span>
+                      <span className="blueprint-cot__desc">Garantía estructural</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
