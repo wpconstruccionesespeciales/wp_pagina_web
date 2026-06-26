@@ -1,65 +1,100 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function Hero() {
-  const [scrollY, setScrollY] = useState(0)
+  const videoRef = useRef(null)
+  const sectionRef = useRef(null)
+  const gridRef = useRef(null)
+  const overlayRef = useRef(null)
+  const accentRef = useRef(null)
+  const panelLeftRef = useRef(null)
+  const panelRightRef = useRef(null)
 
   useEffect(() => {
     let ticking = false
+    let io
 
-    const updateScroll = () => {
-      setScrollY(window.scrollY)
+    const update = () => {
+      const scrollY = window.scrollY
+      const vh = window.innerHeight || 1
+      const progress = Math.min(scrollY / vh, 1.2)
+      if (gridRef.current) gridRef.current.style.transform = `translate3d(0, ${scrollY * 0.09}px, 0) scale(${1.02 + progress * 0.03})`
+      if (overlayRef.current) overlayRef.current.style.transform = `translate3d(0, ${scrollY * 0.06}px, 0)`
+      if (accentRef.current) accentRef.current.style.transform = `translate3d(0, ${scrollY * -0.05}px, 0)`
+      if (panelLeftRef.current) panelLeftRef.current.style.transform = `translate3d(0, ${scrollY * 0.12}px, 0) rotate(-10deg)`
+      if (panelRightRef.current) panelRightRef.current.style.transform = `translate3d(0, ${scrollY * 0.08}px, 0) rotate(11deg)`
       ticking = false
     }
 
     const onScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(updateScroll)
+        window.requestAnimationFrame(update)
         ticking = true
       }
     }
 
-    updateScroll()
+    update()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
-  const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 1
-  const progress = Math.min(scrollY / viewportHeight, 1.2)
-  const imageTransform = `translate3d(0, ${scrollY * 0.18}px, 0) scale(${1.12 + progress * 0.06})`
-  const gridTransform = `translate3d(0, ${scrollY * 0.09}px, 0) scale(${1.02 + progress * 0.03})`
-  const overlayTransform = `translate3d(0, ${scrollY * 0.06}px, 0)`
-  const accentTransform = `translate3d(0, ${scrollY * -0.05}px, 0)`
-  const panelTransform = `translate3d(0, ${scrollY * 0.12}px, 0) rotate(-10deg)`
-  const panelTransformAlt = `translate3d(0, ${scrollY * 0.08}px, 0) rotate(11deg)`
+    const video = videoRef.current
+    const section = sectionRef.current
+    if (video && section && 'IntersectionObserver' in window) {
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              const p = video.play()
+              if (p && typeof p.catch === 'function') p.catch(() => {})
+            } else {
+              video.pause()
+            }
+          }
+        },
+        { threshold: 0.1 }
+      )
+      io.observe(section)
+    }
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (io) io.disconnect()
+    }
+  }, [])
 
   return (
     <>
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Parallax BG */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-[-6%] will-change-transform" style={{ transform: imageTransform }}>
-            <img
-              className="w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcC4RlmZk72IG2JI_z569dnckX4AFaCfPFmdySXUCjpnoKlwQ48ZmxT9wU_GdB4RNNb6HlbohyuPr9Tg3GG-DQBbqJ1mFqaqq3FfhFbSkDwzPCHKcOSM5mdyomCCgHZaQnjTlg7Kf0YZbo_26unTtsgfXDtaKNWx3o960gkwK5Mt0np4F4RZq4XKei22Vkw3CQIKjI8S07yhZsIZuPUFxjdLXCnDin9htT9Gx_XlXAG3lrOBCtEgOXEK_JVWcIEGfW9tMMF6XJLLQ"
-              alt="luxury modern architectural villa with steel frame structure"
-            />
-          </div>
+      <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Video BG (estático, sin parallax) */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <video
+            ref={videoRef}
+            className="hero-video-kenburns absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/wp/Secuencia%2001_1.jpg"
+            aria-hidden="true"
+          >
+            <source src="/wp/Secuencia%2001_1.webm" type="video/webm" />
+            <source src="/wp/Secuencia%2001_1.mp4" type="video/mp4" />
+          </video>
+        </div>
           <div className="absolute inset-0 hero-gradient" />
-          <div className="absolute inset-0 will-change-transform" style={{ transform: gridTransform }}>
+          <div ref={gridRef} className="absolute inset-0 will-change-transform">
             <div className="absolute inset-0 grid-pattern hero-grid-fade" />
           </div>
-          <div className="absolute inset-0 will-change-transform" style={{ transform: overlayTransform }}>
+          <div ref={overlayRef} className="absolute inset-0 will-change-transform">
             <div className="absolute inset-0 hero-noise opacity-60" />
           </div>
-          <div className="absolute inset-0 will-change-transform" style={{ transform: accentTransform }}>
+          <div ref={accentRef} className="absolute inset-0 will-change-transform">
             <div className="hero-orb hero-orb-left" />
             <div className="hero-orb hero-orb-right" />
             <div className="hero-wire hero-wire-top" />
             <div className="hero-wire hero-wire-bottom" />
           </div>
-          <div className="hero-blueprint hero-blueprint-left will-change-transform" style={{ transform: panelTransform }} />
-          <div className="hero-blueprint hero-blueprint-right will-change-transform" style={{ transform: panelTransformAlt }} />
-        </div>
+          <div ref={panelLeftRef} className="hero-blueprint hero-blueprint-left will-change-transform" />
+          <div ref={panelRightRef} className="hero-blueprint hero-blueprint-right will-change-transform" />
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 w-full pt-32 pb-24 hero-reveal">

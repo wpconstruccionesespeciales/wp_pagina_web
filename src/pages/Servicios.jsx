@@ -87,18 +87,18 @@ export default function Servicios() {
       <main className="pt-20">
 
         {/* ═══════════════════════════════════════════════════════
-            HERO — Full-width cinematic dark hero
+            HERO — Compact premium services hero
         ═══════════════════════════════════════════════════════ */}
         <section
-          className="relative py-28 lg:py-40 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-[#0a1510] via-[#111e16] to-[#0d1710]"
+          className="relative py-20 lg:py-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-[#0a1510] via-[#111e16] to-[#0d1710]"
           ref={heroRef}
         >
           {/* Atmospheric background elements */}
-          <div className="absolute inset-0 opacity-[0.018]" style={{ backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(255,255,255,0.08) 100px, rgba(255,255,255,0.08) 101px), repeating-linear-gradient(0deg, transparent, transparent 100px, rgba(255,255,255,0.08) 100px, rgba(255,255,255,0.08) 101px)' }} />
+          <div className="absolute inset-0 opacity-[0.022]" style={{ backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.06) 80px, rgba(255,255,255,0.06) 81px), repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.06) 80px, rgba(255,255,255,0.06) 81px)' }} />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_40%,rgba(184,203,188,0.12)_0%,transparent_55%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_60%,rgba(184,203,188,0.06)_0%,transparent_45%)]" />
 
-          {/* Animated shimmer line */}
+          {/* Animated bottom line */}
           <style dangerouslySetInnerHTML={{ __html: `
             @keyframes svc-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(300%); } }
             .svc-shimmer-line { animation: svc-shimmer 8s cubic-bezier(0.4,0,0.2,1) infinite; }
@@ -110,72 +110,108 @@ export default function Servicios() {
           <div className="relative max-w-7xl mx-auto z-10">
             <div className={`animate-on-scroll ${heroVisible ? 'visible' : ''}`}>
               {/* Eyebrow */}
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-px bg-primary-fixed-dim/60" />
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-px bg-primary-fixed-dim/60" />
                 <span className="text-primary-fixed-dim text-[11px] font-extrabold tracking-[0.35em] uppercase">WP Construcciones Especiales</span>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-end">
-                <div>
-                  <h1 className="font-headline text-5xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tighter leading-[0.92] mb-8">
-                    <span className="text-white">Nuestros</span>
-                    <br />
+              <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+                <div className="lg:col-span-7">
+                  <h1 className="font-headline text-4xl sm:text-5xl lg:text-[3.75rem] xl:text-[4.25rem] font-bold tracking-tighter leading-[0.95] mb-6">
+                    <span className="text-white">Nuestros </span>
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-fixed-dim via-[#a4c7aa] to-primary-fixed-dim">Servicios</span>
                   </h1>
-                  <p className="text-white/55 text-lg md:text-xl leading-relaxed max-w-xl font-medium">
+                  <p className="text-white/55 text-base md:text-lg leading-relaxed max-w-2xl font-medium mb-8">
                     Transformá tus ideas en realidad. Agendá una cita sin compromiso con nuestros
                     expertos en construcción. Descubrí cómo revolucionamos tus espacios con
                     soluciones innovadoras y sustentables.
                   </p>
+                  <a
+                    href="#contact"
+                    className="group inline-flex items-center gap-3 bg-white/6 hover:bg-white/10 border border-white/12 hover:border-primary-fixed-dim/40 text-white px-7 py-3.5 rounded-xl font-headline font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 backdrop-blur-sm"
+                  >
+                    <span>Agendar consulta</span>
+                    <span className="material-symbols-outlined text-lg group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
+                  </a>
                 </div>
 
-                {/* Blueprint técnico con cotas */}
-                <div className="blueprint-panel">
-                  <div className="blueprint-grid" />
+                {/* Premium technical blueprint panel */}
+                <div className="lg:col-span-5">
+                  <div className="services-hero-panel">
+                    <div className="services-hero-panel__grid" />
+                    <div className="services-hero-panel__corners" />
 
-                  <svg className="blueprint-wire" viewBox="0 0 400 400" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                    <path d="M 130 90 L 130 310" />
-                    <path d="M 270 90 L 270 310" />
-                    <path d="M 130 90 L 270 90" />
-                    <path d="M 130 310 L 270 310" />
-                    <path d="M 130 90 L 270 310" />
-                  </svg>
+                    <div className="relative z-10 p-5 lg:p-6">
+                      <div className="flex items-center justify-between mb-5">
+                        <span className="text-[10px] font-extrabold tracking-[0.25em] uppercase text-white/35">Especificaciones técnicas</span>
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 text-[9px] font-black tracking-widest uppercase text-primary-fixed-dim">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim animate-pulse" />
+                          Steel Frame
+                        </span>
+                      </div>
 
-                  <div className="blueprint-cot blueprint-cot--01">
-                    <span className="blueprint-cot__dot" />
-                    <span className="blueprint-cot__line" />
-                    <div className="blueprint-cot__label">
-                      <span className="blueprint-cot__value">200+</span>
-                      <span className="blueprint-cot__desc">Proyectos entregados</span>
-                    </div>
-                  </div>
+                      <div className="relative aspect-[16/10] mb-5">
+                        <svg className="services-hero-panel__wire" viewBox="0 0 320 200" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                          {/* Building frame */}
+                          <rect x="40" y="20" width="240" height="160" rx="2" />
+                          {/* Floor slabs */}
+                          <line x1="40" y1="73" x2="280" y2="73" />
+                          <line x1="40" y1="127" x2="280" y2="127" />
+                          {/* Columns */}
+                          <line x1="80" y1="20" x2="80" y2="180" />
+                          <line x1="160" y1="20" x2="160" y2="180" />
+                          <line x1="240" y1="20" x2="240" y2="180" />
+                          {/* Bracing diagonals */}
+                          <line x1="80" y1="73" x2="160" y2="127" />
+                          <line x1="160" y1="73" x2="80" y2="127" />
+                          <line x1="160" y1="73" x2="240" y2="127" />
+                          <line x1="240" y1="73" x2="160" y2="127" />
+                          <line x1="80" y1="127" x2="160" y2="180" />
+                          <line x1="160" y1="127" x2="80" y2="180" />
+                          <line x1="160" y1="127" x2="240" y2="180" />
+                          <line x1="240" y1="127" x2="160" y2="180" />
+                          {/* Foundation detail */}
+                          <line x1="30" y1="180" x2="290" y2="180" strokeDasharray="4 4" />
+                          <line x1="30" y1="186" x2="290" y2="186" />
+                          {/* Dimension lines */}
+                          <line x1="40" y1="8" x2="280" y2="8" />
+                          <line x1="40" y1="4" x2="40" y2="12" />
+                          <line x1="280" y1="4" x2="280" y2="12" />
+                          <text x="160" y="16" textAnchor="middle" className="services-hero-panel__dim">24.00 m</text>
+                          {/* Axis */}
+                          <line x1="160" y1="20" x2="160" y2="8" strokeDasharray="2 2" />
+                          {/* Nodes */}
+                          <circle cx="80" cy="73" r="2.5" />
+                          <circle cx="160" cy="73" r="2.5" />
+                          <circle cx="240" cy="73" r="2.5" />
+                          <circle cx="80" cy="127" r="2.5" />
+                          <circle cx="160" cy="127" r="2.5" />
+                          <circle cx="240" cy="127" r="2.5" />
+                          <circle cx="80" cy="180" r="2.5" />
+                          <circle cx="160" cy="180" r="2.5" />
+                          <circle cx="240" cy="180" r="2.5" />
+                        </svg>
+                      </div>
 
-                  <div className="blueprint-cot blueprint-cot--02">
-                    <span className="blueprint-cot__dot" />
-                    <span className="blueprint-cot__line" />
-                    <div className="blueprint-cot__label">
-                      <span className="blueprint-cot__value">15+</span>
-                      <span className="blueprint-cot__desc">Años de experiencia</span>
-                    </div>
-                  </div>
-
-                  <div className="blueprint-cot blueprint-cot--03">
-                    <span className="blueprint-cot__dot" />
-                    <span className="blueprint-cot__line" />
-                    <div className="blueprint-cot__label">
-                      <span className="blueprint-cot__value">100%</span>
-                      <span className="blueprint-cot__desc">Garantía estructural</span>
+                      <div className="grid grid-cols-3 gap-3">
+                        {[
+                          { value: '200+', label: 'Proyectos' },
+                          { value: '15+', label: 'Años' },
+                          { value: '100%', label: 'Garantía' },
+                        ].map(({ value, label }, i) => (
+                          <div
+                            key={label}
+                            className="services-hero-panel__stat"
+                            style={{ animationDelay: `${0.8 + i * 0.15}s` }}
+                          >
+                            <p className="font-headline text-xl lg:text-2xl font-black text-primary-fixed-dim leading-none mb-1">{value}</p>
+                            <p className="text-[9px] font-bold tracking-[0.18em] uppercase text-white/40">{label}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Scroll indicator */}
-              <div className="flex items-center gap-3 mt-16">
-                <div className="w-8 h-12 rounded-full border border-white/15 flex items-start justify-center pt-2">
-                  <div className="w-1 h-3 rounded-full bg-primary-fixed-dim/60 animate-bounce" />
-                </div>
-                <span className="text-white/30 text-xs font-bold tracking-widest uppercase">Desplazá para explorar</span>
               </div>
             </div>
           </div>

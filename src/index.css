@@ -38,6 +38,20 @@ body {
     linear-gradient(135deg, rgba(21, 37, 27, 0.94) 0%, rgba(21, 37, 27, 0.72) 48%, rgba(11, 18, 13, 0.74) 100%);
 }
 
+@keyframes heroVideoKenBurns {
+  0%, 100% { transform: scale3d(1, 1, 1) translate3d(0, 0, 0); }
+  50%      { transform: scale3d(1.04, 1.04, 1) translate3d(0, 0, 0); }
+}
+
+.hero-video-kenburns {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  animation: heroVideoKenBurns 28s ease-in-out infinite;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+}
+
 details summary::-webkit-details-marker {
   display: none;
 }
@@ -136,13 +150,12 @@ details summary::-webkit-details-marker {
     radial-gradient(rgba(255,255,255,0.04) 0.7px, transparent 0.7px);
   background-position: 0 0, 18px 18px;
   background-size: 36px 36px;
-  mix-blend-mode: soft-light;
 }
 
 .hero-orb {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(18px);
+  filter: blur(8px);
   opacity: 0.55;
 }
 
@@ -185,7 +198,7 @@ details summary::-webkit-details-marker {
   background:
     linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)),
     rgba(255,255,255,0.02);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(4px);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
@@ -972,28 +985,63 @@ details[open] summary ~ * {
 }
 
 /* ─── Hero blueprint (Servicios) ─── */
-.blueprint-panel {
+.services-hero-panel {
   position: relative;
   width: 100%;
-  height: 100%;
-  min-height: 440px;
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+    rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overflow: hidden;
   isolation: isolate;
 }
 
-.blueprint-grid {
+.services-hero-panel__grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
-  mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
   opacity: 0;
-  animation: bp-fade 0.4s ease-out 0.05s forwards;
+  animation: shp-fade 0.5s ease-out 0.1s forwards;
 }
 
-.blueprint-wire {
+.services-hero-panel__corners::before,
+.services-hero-panel__corners::after {
+  content: '';
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-color: rgba(184, 203, 188, 0.35);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.services-hero-panel__corners::before {
+  top: 16px;
+  left: 16px;
+  border-width: 1px 0 0 1px;
+  border-top-left-radius: 10px;
+}
+
+.services-hero-panel__corners::after {
+  bottom: 16px;
+  right: 16px;
+  border-width: 0 1px 1px 0;
+  border-bottom-right-radius: 10px;
+}
+
+.services-hero-panel__wire {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1001,191 +1049,90 @@ details[open] summary ~ * {
   pointer-events: none;
 }
 
-.blueprint-wire path {
+.services-hero-panel__wire rect,
+.services-hero-panel__wire line,
+.services-hero-panel__wire circle {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.22);
-  stroke-width: 1.5;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 1.2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: var(--len, 1000);
-  stroke-dashoffset: var(--len, 1000);
-  animation: bp-draw 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
-.blueprint-wire path:nth-child(1) { animation-delay: 0.15s; --len: 260; }
-.blueprint-wire path:nth-child(2) { animation-delay: 0.30s; --len: 260; }
-.blueprint-wire path:nth-child(3) { animation-delay: 0.45s; --len: 200; }
-.blueprint-wire path:nth-child(4) { animation-delay: 0.60s; --len: 200; }
-.blueprint-wire path:nth-child(5) { animation-delay: 0.75s; --len: 360; }
+.services-hero-panel__wire circle {
+  fill: rgba(184, 203, 188, 0.35);
+  stroke: rgba(184, 203, 188, 0.55);
+}
 
-@keyframes bp-fade {
+.services-hero-panel__wire line[strokeDasharray] {
+  stroke: rgba(255, 255, 255, 0.12);
+}
+
+.services-hero-panel__wire text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  fill: rgba(255, 255, 255, 0.35);
+  stroke: none;
+  stroke-dasharray: none;
+}
+
+.services-hero-panel__wire > * {
+  stroke-dasharray: var(--len, 400);
+  stroke-dashoffset: var(--len, 400);
+  animation: shp-draw 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* Approximate path lengths for the steel-frame SVG */
+.services-hero-panel__wire rect { animation-delay: 0.2s; --len: 800; }
+.services-hero-panel__wire line:nth-of-type(1),
+.services-hero-panel__wire line:nth-of-type(2) { animation-delay: 0.35s; --len: 240; }
+.services-hero-panel__wire line:nth-of-type(3),
+.services-hero-panel__wire line:nth-of-type(4),
+.services-hero-panel__wire line:nth-of-type(5) { animation-delay: 0.45s; --len: 160; }
+.services-hero-panel__wire line:nth-of-type(n+6):nth-of-type(-n+13) { animation-delay: 0.55s; --len: 120; }
+.services-hero-panel__wire line:nth-of-type(n+14):nth-of-type(-n+19) { animation-delay: 0.7s; --len: 300; }
+.services-hero-panel__wire circle { animation-delay: 0.85s; --len: 20; }
+.services-hero-panel__wire text { animation: shp-fade 0.5s ease-out 1s forwards; opacity: 0; }
+
+.services-hero-panel__stat {
+  text-align: center;
+  padding: 0.75rem 0.5rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: shp-stat-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes shp-fade {
   to { opacity: 1; }
 }
 
-@keyframes bp-draw {
+@keyframes shp-draw {
   to { stroke-dashoffset: 0; }
 }
 
-@keyframes bp-pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.55; }
-}
-
-@keyframes bp-line-grow {
-  to { transform: scaleX(1); }
-}
-
-@keyframes bp-label-in {
+@keyframes shp-stat-in {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.blueprint-cot {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  opacity: 0;
-  animation: bp-fade 0.5s ease-out forwards;
-}
-
-.blueprint-cot--01 {
-  top: 12%;
-  left: 8%;
-  animation-delay: 0.9s;
-  flex-direction: row-reverse;
-}
-
-.blueprint-cot--02 {
-  top: 44%;
-  right: 6%;
-  animation-delay: 1.1s;
-  flex-direction: row;
-}
-
-.blueprint-cot--03 {
-  bottom: 14%;
-  right: 4%;
-  animation-delay: 1.3s;
-  flex-direction: row;
-}
-
-.blueprint-cot__dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #8eb59a;
-  box-shadow: 0 0 0 3px rgba(142, 181, 154, 0.18);
-  flex-shrink: 0;
-  position: relative;
-  z-index: 2;
-}
-
-.blueprint-cot__dot::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  background: #8eb59a;
-  animation: bp-pulse 2.5s ease-in-out infinite;
-  z-index: -1;
-}
-
-.blueprint-cot__line {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.28);
-  width: 64px;
-  transform: scaleX(0);
-  transform-origin: left center;
-  animation: bp-line-grow 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-}
-
-.blueprint-cot--01 .blueprint-cot__line {
-  transform-origin: right center;
-  animation-delay: 1.1s;
-}
-
-.blueprint-cot--02 .blueprint-cot__line {
-  animation-delay: 1.3s;
-}
-
-.blueprint-cot--03 .blueprint-cot__line {
-  animation-delay: 1.5s;
-}
-
-.blueprint-cot__label {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-  opacity: 0;
-  transform: translateY(8px);
-  animation: bp-label-in 0.4s ease-out forwards;
-}
-
-.blueprint-cot--01 .blueprint-cot__label {
-  text-align: right;
-  animation-delay: 1.25s;
-}
-
-.blueprint-cot--02 .blueprint-cot__label {
-  animation-delay: 1.45s;
-}
-
-.blueprint-cot--03 .blueprint-cot__label {
-  animation-delay: 1.65s;
-}
-
-.blueprint-cot__value {
-  font-family: 'Inter', sans-serif;
-  font-weight: 900;
-  font-size: 1.75rem;
-  color: #8eb59a;
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.blueprint-cot__desc {
-  font-family: 'Inter', sans-serif;
-  font-size: 9px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.45);
-  margin-top: 4px;
-}
-
 @media (max-width: 1023px) {
-  .blueprint-panel {
-    min-height: 360px;
+  .services-hero-panel {
+    border-radius: 20px;
   }
-  .blueprint-cot--01 { top: 8%; left: 4%; }
-  .blueprint-cot--02 { top: 46%; right: 4%; }
-  .blueprint-cot--03 { bottom: 10%; right: 2%; }
-  .blueprint-cot__value { font-size: 1.5rem; }
-  .blueprint-cot__line { width: 48px; }
+  .services-hero-panel__corners::before,
+  .services-hero-panel__corners::after {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 @media (max-width: 767px) {
-  .blueprint-panel {
-    min-height: auto;
-    padding: 2rem 0;
+  .services-hero-panel__stat p:first-child {
+    font-size: 1.25rem;
   }
-  .blueprint-wire {
-    display: none;
-  }
-  .blueprint-grid {
-    mask-image: none;
-    -webkit-mask-image: none;
-    opacity: 0.5;
-  }
-  .blueprint-cot {
-    position: relative;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    flex-direction: row !important;
-    margin-bottom: 1.25rem;
-  }
-  .blueprint-cot__label { text-align: left !important; }
-  .blueprint-cot__line { width: 32px; }
 }
