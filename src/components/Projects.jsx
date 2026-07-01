@@ -2,19 +2,19 @@ import useInView from '../hooks/useInView'
 
 const cards = [
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCfGjTBGXLZul7JDDhMPm4TV9aa6_aL2x6tZr9D6gtAaopbwPBit3UYmbairxD2je7mmahjCnruzzc9SF9IMfrTsvbG2gs5KM9HedoFoFY3F4--zJjnCRQ-kecuWdSCSWKO5_wKmC1KDnCBRtFWjNnpphyPQD7gg49olMZZhOB8P56noVjkQ6RCzVA0CZFJ2vO1dKDzCL8ArQhEgilN96cT0Z1EJZeC6uCFGQZRmV2F9M6f7TmU24hRrR0UA4ZPLnce5EpVgI5i90Y',
+    img: '/media/aida/aida-11-AB6AXuCfGjTB.jpg',
     title: 'Viviendas Unifamiliares',
     desc: 'Hogares diseñados para la vida moderna con eficiencia energética superior.',
     tag: 'Residencial',
   },
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAdcelHpdK4iWgrUiE_nx9kVXOzey5xHdMcR_jlsqYs4wMvNUOTCjzfMFxo7jLGOvzjor6SQiEEiddPaX7nI2kFfmHokEQKmQsXn7ZjZvrJd1dk8rgWKFq0cA2BB1oN1n3Jc4csumpdxENxpzmSv_pFcYHsXmPWvbUxLmOzIkWbDOYkvUDVqDNrz4ZjHoMOviA-5qzbQPfVHJEXJjQshv2glO9yt2cusmU5e3Ca6m7jzVBk3Pl2Y4nwWMNzNgQ0hl2T4vgptiV9Ycg',
+    img: '/media/aida/aida-1-AB6AXuAdcelH.jpg',
     title: 'Oficinas y Comercial',
     desc: 'Espacios de trabajo dinámicos con grandes luces y plantas libres.',
     tag: 'Comercial',
   },
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnfYeybM1c8heLYZ0HjVTmbjBsSvmOJO04_y0BX3Uw1giMzV3kSyKb5VsRuImWyWQVDr0nVWZ20dvXhEb0iFsae0CM8wdS-UpUrP04bodgz81-qm2VcIBmY79uVvA51G4VZoMBkVIPhvVY7cEzrRtO0MYZOImF9vsdXzx67BAi5d7pBsnKTHSRlobSr--ZikqjAKR8ebqAya5WcasTv7Nhne3fAxwfILNYddO7eLDFzI3wmS0eRCSXYRl4Byc9ZEthIHMggFSY1ko',
+    img: '/media/aida/aida-5-AB6AXuAnfYey.jpg',
     title: 'Ampliaciones',
     desc: 'Crecimiento vertical u horizontal sin peso excesivo para estructuras existentes.',
     tag: 'Expansión',

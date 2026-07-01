@@ -11,13 +11,13 @@ const steps = [
     num: '02',
     icon: 'draw',
     title: 'Diseño & Ingeniería',
-    desc: 'Creamos planos arquitectónicos y estructurales con tecnología BIM de última generación.',
+    desc: 'Modelamos tu proyecto en 3D para que veas cómo quedará antes de construir.',
   },
   {
     num: '03',
     icon: 'precision_manufacturing',
     title: 'Fabricación',
-    desc: 'Cada perfil es cortado y perforado con precisión milimétrica en nuestra planta industrial.',
+    desc: 'Cada perfil es cortado y perforado con precisión milimétrica en nuestras instalaciones.',
   },
   {
     num: '04',

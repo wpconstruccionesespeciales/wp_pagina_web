@@ -30,31 +30,31 @@ const coreServices = [
 
 const projectTypes = [
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYdd8Y8bNMQsVs_UGsSnMOjsPyVcMoyHhIlnNGJm7Pxx_684U9Lc5hvrX9YryGRNVNsIkkpqdcGQy-e0_fM_kAsCADy5eHB5wnoypiLWv0dIr3nWfirszhvc0TmAfgUnMn0WCG9cfwukYKjsIfQ9FppTtvE8Hz6DZB0R0o-nZdDA0My_MTMuddFzJ4Kjf62G__WQ0-2YNd02xBaC9tgT06xhZeowQu2cHe8vN0nYb-8W8zMeA-6PVmmQJPWYZX8uEYHOMH2xQSPP0',
+    img: '/media/aida/aida-1-AB6AXuAdcelH.jpg',
     title: 'Edificios de mediana altura',
     desc: 'Implementamos ingeniería de precisión para proyectos de desarrollo vertical. Optimizamos la operación de la estructura y la logística, asegurando un proceso eficiente.',
     tag: 'Desarrollo Vertical',
   },
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDWTiJX1Wnzh0nXXIA1n_5V4VWwhoky2_U3w2fkn34XgOKeqAKvOfjgKkYDS5lrLab2ln4Lue6xcIeNIRq4-7elFny4MYSyHwJKPA5iWBxdRpc9nlpWZPyIwg05Fcy6mbNIeCHcMvLZrkgqpL6D9B4Zhk4IUg-Kzvgyt_8t-yoJRxlbyRVKK0hPv9nRhSAQUP4UI9smeXcfaI1RbPx-3nxVxDQTQ0wRQu8PAKrXl_wrd-zEakJmHVPM6kCIJgmPaUvYTNfhU7V5G9k',
+    img: '/media/aida/aida-13-AB6AXuDWTiJX.jpg',
     title: 'Viviendas unifamiliares',
     desc: 'Construcción residencial de calidad superior. Ofrecemos hogares de habitabilidad excepcional que articulen confort térmico y acústico, con alta durabilidad garantizada a largo plazo.',
     tag: 'Residencial',
   },
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCYo-F-iKmr869WS-J3bAAOkDStaqo9pfM9IiYh_JyVoZ4zQfo9izNQMBRpKIRAw8sgQsf--jLxXMcwFvRQxrgCaNO3D_m9v4oj536qm3yFnaYmTByuH4UzcaYpHc_g8bMFayohPg08gPWMIE09RYWuNs-c8H8jJoORIe8oupIaY2aZR66lhkygqbWGmjrgoAsOUcQo4F8hrOVL1LJ-zwCQrpfIcR-2EIv11S3uuIje6-Y_rRrjdkX7BfJbopKSnG5zgJ4iYF69a-4',
+    img: '/media/aida/aida-12-AB6AXuCYo-F-.jpg',
     title: 'Industriales | Locales comerciales',
     desc: 'Desarrollamos infraestructura industrial y comercial de alto rendimiento. Aseguramos máxima funcionalidad y adaptabilidad, facilitando la rentabilidad económica de cualquier proyecto privado o público.',
     tag: 'Comercial / Industrial',
   },
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYdd8Y8bNMQsVs_UGsSnMOjsPyVcMoyHhIlnNGJm7Pxx_684U9Lc5hvrX9YryGRNVNsIkkpqdcGQy-e0_fM_kAsCADy5eHB5wnoypiLWv0dIr3nWfirszhvc0TmAfgUnMn0WCG9cfwukYKjsIfQ9FppTtvE8Hz6DZB0R0o-nZdDA0My_MTMuddFzJ4Kjf62G__WQ0-2YNd02xBaC9tgT06xhZeowQu2cHe8vN0nYb-8W8zMeA-6PVmmQJPWYZX8uEYHOMH2xQSPP0',
+    img: '/media/aida/aida-1-AB6AXuAdcelH.jpg',
     title: 'Reformas y Ampliaciones',
     desc: 'Reconfiguramos y potenciamos tus ambientes existentes. Realizamos intervenciones estructurales con mínima interferencia, potenciando la funcionalidad y el valor patrimonial de tu propiedad.',
     tag: 'Renovación',
   },
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDWTiJX1Wnzh0nXXIA1n_5V4VWwhoky2_U3w2fkn34XgOKeqAKvOfjgKkYDS5lrLab2ln4Lue6xcIeNIRq4-7elFny4MYSyHwJKPA5iWBxdRpc9nlpWZPyIwg05Fcy6mbNIeCHcMvLZrkgqpL6D9B4Zhk4IUg-Kzvgyt_8t-yoJRxlbyRVKK0hPv9nRhSAQUP4UI9smeXcfaI1RbPx-3nxVxDQTQ0wRQu8PAKrXl_wrd-zEakJmHVPM6kCIJgmPaUvYTNfhU7V5G9k',
+    img: '/media/aida/aida-13-AB6AXuDWTiJX.jpg',
     title: 'Clínicas | Consultorios',
     desc: 'Desarrollamos espacios de salud con foco en la higiene y la funcionalidad. Proyectamos clínicas bajo estricto cumplimiento normativo, creando ambientes óptimos para la atención médica especializada.',
     tag: 'Salud',

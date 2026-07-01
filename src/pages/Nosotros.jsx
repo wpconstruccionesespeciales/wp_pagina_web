@@ -37,7 +37,7 @@ function BeforeAfterSlider() {
     >
       {/* DESPUÉS — full size, clipped from left */}
       <img
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYo-F-iKmr869WS-J3bAAOkDStaqo9pfM9IiYh_JyVoZ4zQfo9izNQMBRpKIRAw8sgQsf--jLxXMcwFvRQxrgCaNO3D_m9v4oj536qm3yFnaYmTByuH4UzcaYpHc_g8bMFayohPg08gPWMIE09RYWuNs-c8H8jJoORIe8oupIaY2aZR66lhkygqbWGmjrgoAsOUcQo4F8hrOVL1LJ-zwCQrpfIcR-2EIv11S3uuIje6-Y_rRrjdkX7BfJbopKSnG5zgJ4iYF69a-4"
+        src="/media/aida/aida-12-AB6AXuCYo-F-.jpg"
         alt="Resultado final Steel Frame"
         className="absolute inset-0 w-full h-full object-cover"
         draggable={false}
@@ -46,7 +46,7 @@ function BeforeAfterSlider() {
       {/* ANTES — full size, clipped from right */}
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
         <img
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdmEsohwOT5izQIIS1N4NVhnW7nxzyEv1pCinKXNMKHUelTts9kahLmz5MD7ElgcO2vDFYB5NSqGxrUX6SvcYdFsyNhMjcDJscBzwxDlZodYGhxeoCjULmyv1FdqK5Hy7KKQhogqS9fkUAy8EHWiYrKEofeBdMY-7rRWuTiSBP2veE_ghgojp82KQUq9z2OHcIsnHs9FV9Xhz9PEmOOTAQqSem1KzhPG4zMaLRsDaEUMkH2DSfNALV9kv_tcwMJasOut32da4Lzn8"
+          src="/media/aida/aida-2-AB6AXuAdmEso.jpg"
           alt="Estado original antes de obra"
           className="w-full h-full object-cover grayscale brightness-75"
           draggable={false}
@@ -102,7 +102,7 @@ const processFeatures = [
 
 const timelineItems = [
   {
-    year: '2004',
+    year: '2005',
     label: 'Los Cimientos',
     subtitle: 'The Foundation',
     description:
@@ -131,7 +131,7 @@ const bentoCards = [
   {
     span: 'md:col-span-8 md:row-span-2',
     type: 'image',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuALaPpD4Cq-TavG6F9qRrjLBmBcf90lzu0-lygAAklgy1EpY-wlSYcbpbVDQX1IYYUtO_qQM2pYEatFM0qXYowGI28CNxETRVtLAGQPZhOwxuBVj2pES1GF0jFhQtsDbptRaA4RjwS5oX_DCTc-dM1g8sMyw3xq_Wj-IIAnH1vcmDr0th456z4B-0XxtGRZUKWc4GihQQ7k72lRrYa5AD4WLhVP7GUOSOMggP-HSolpcRuIq3Cn59VwHy4fcSO8Jo7AGnJ0LcC9RWE',
+    img: '/media/aida/aida-4-AB6AXuALaPpD.jpg',
     title: 'Edificios de mediana altura',
     desc: 'Soluciones verticales con máxima eficiencia estructural y rapidez de montaje.',
   },
@@ -146,7 +146,7 @@ const bentoCards = [
   {
     span: 'md:col-span-4 md:row-span-1',
     type: 'image-light',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBIz4wlWosI0hj3B49l5xgty4UYd0pwqHhlYlFAref3k06TSALs_8fo3ZhEjJBc4F1r3CvhJSww5ATRw2GJTVrkCApunf5vOnodNbveQmf7Hf_3dR-130TydkA2h_BtiDUhoRH6955G19g3x-zA7LwXWcRvp9CkX0',
+    img: '/media/aida/aida-3-AB6AXuAdtCZW.jpg',
     title: 'Industriales | Locales comerciales',
   },
   {
@@ -154,7 +154,7 @@ const bentoCards = [
     type: 'reforma',
     title: 'Reformas y Ampliaciones',
     desc: 'La ligereza del acero permite ampliar estructuras existentes sin comprometer la cimentación original.',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAdtCZWe9QEC61ovU1B7aieiNcwHpCNbk-sMZx23J41YvNqaW0VGSjmWIj7g01uJSvXOuHA5jrIIw_Vm7euO8kpe9tOMYHMiJHv99u5y31XqGK6SMrFezaxtQFUzFizmgqox-y1-NBD_oQZ6ObyTCDWKro8w0yEkXc_sd4B9VRQZikrBtBTzU5zk_ZBi7neyNfhOg39wZr-n-9xJKW6v4rfVFAO73ojCUrW1jelv6HGwOxpXtSGuohUuobohSto4E_Hs7WicLRLCl0',
+    img: '/media/aida/aida-3-AB6AXuAdtCZW.jpg',
   },
   {
     span: 'md:col-span-4 md:row-span-1',
@@ -359,7 +359,7 @@ export default function Nosotros() {
                   <img
                     alt="Ingeniería estructural de precisión"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe3Ep1pD-Un-mWeiBNPRllD0MV-yNN3VRnbyPPpoo_MYHGsKoR4PYDsR0L2Lnktu5pg-54roY1Bc2xEI7SOsjQgRj_qme13pz43VMXxRH24aeQ0EwWEph6RCeSCOW3kjlwEmXw9Hg9tmTcZOdMjL49ofCe4xr1sYHCpVf0w8KpmVfLHzJFzqBFeBdvZUSUCRtiHc5Uy_YoNkPJLJlibY8cJiVYgonvxvUuAKxpS3nsBBDepIAXfAIhbrI0BG1TbzIPjzeXlNv-Y3w"
+                    src="/media/aida/aida-10-AB6AXuCe3Ep1.jpg"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
 
@@ -414,7 +414,7 @@ export default function Nosotros() {
                 </p>
               </div>
               <div className="text-right hidden md:block">
-                <span className="text-8xl font-black text-outline/15 select-none font-headline">EST. 2004</span>
+                <span className="text-8xl font-black text-outline/15 select-none font-headline">EST. 2005</span>
               </div>
             </div>
 
@@ -535,7 +535,7 @@ export default function Nosotros() {
                 <div className="aspect-[4/5] overflow-hidden rounded-3xl">
                   <img
                     className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZqT859Mtu8ZGD-BJQpSCCjEENWwFhOucU-5-GGaG4hYNlFlBS-9qmV00pO1mBA2TdMUIWqMZXIZV8mUKKrdwprSS_A3oa16r5wsFUlDxx4WZ2xsAWrwXtoL9qnHsb_CSaGKDwr0TbPIagsW4MnvDKW7h126XTXZVSnU7YVdPZOLkqVxKT4ENDXpfnFSIhqjoiJUKOcRYaII64_2M_3wqqGf26g5fb7_N9jtl-mXOfO_NgGlizJocEYHBq8AA6jlMeB7Erx1mJQQY"
+                    src="/media/aida/aida-14-AB6AXuDZqT85.jpg"
                     alt="Maquinaria roll-forming"
                   />
                 </div>
@@ -543,7 +543,7 @@ export default function Nosotros() {
                   <div className="aspect-video overflow-hidden rounded-3xl">
                     <img
                       className="w-full h-full object-cover"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOAXrwlsgZefcaTSVmDG-0NknvHyPVT_D8PbUG_Rn8mFJupiLvFOWAwu2PKimVRhkOQ82pHtMKZoHEyc4XhNSUmaVkHVFD6LOVJ5HB4n5dnX0hOhhlph8BBYfhFXU5qLQ_HE4bccy5THJXVVqd0ZxgsfqX-jukYprf3Oed6EVveF0EPiWCnUuHUl-7XWfemstLPUMa3lLg_HLHPNsV9rA4eQrApNq6EmiRZgkSZnIZJT8owvSFxAgLJAl-kjJUcpEYHhhgf1ifk4o"
+                      src="/media/aida/aida-7-AB6AXuBOAXrw.jpg"
                       alt="Ensamblaje estructura"
                     />
                   </div>

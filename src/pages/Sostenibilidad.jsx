@@ -174,7 +174,7 @@ export default function Sostenibilidad() {
                   <img
                     alt="Construcción sostenible Steel Frame"
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYo-F-iKmr869WS-J3bAAOkDStaqo9pfM9IiYh_JyVoZ4zQfo9izNQMBRpKIRAw8sgQsf--jLxXMcwFvRQxrgCaNO3D_m9v4oj536qm3yFnaYmTByuH4UzcaYpHc_g8bMFayohPg08gPWMIE09RYWuNs-c8H8jJoORIe8oupIaY2aZR66lhkygqbWGmjrgoAsOUcQo4F8hrOVL1LJ-zwCQrpfIcR-2EIv11S3uuIje6-Y_rRrjdkX7BfJbopKSnG5zgJ4iYF69a-4"
+                    src="/media/aida/aida-12-AB6AXuCYo-F-.jpg"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6">

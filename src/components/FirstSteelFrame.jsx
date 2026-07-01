@@ -296,7 +296,7 @@ function Particles() {
 }
 
 const statItems = [
-  { value: '2001', label: 'Fundación en Paraná', icon: 'calendar_month' },
+  { value: '2005', label: 'Fundación en Paraná', icon: 'calendar_month' },
   { value: '2014', label: '1er edificio Steel Frame de la región', icon: 'apartment' },
   { value: '+20', label: 'Años de trayectoria', icon: 'auto_graph' }
 ]
@@ -388,7 +388,7 @@ export default function FirstSteelFrame() {
             >
               <div className="w-10 h-px bg-gradient-to-r from-primary-fixed-dim/60 to-transparent" />
               <span className="text-primary-fixed-dim/60 text-[0.55rem] font-bold tracking-[0.25em] uppercase">
-                2001 &bull; Pioneros en Paraná
+                2005 &bull; Pioneros en Paraná
               </span>
             </motion.div>
 

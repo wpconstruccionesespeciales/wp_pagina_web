@@ -14,11 +14,11 @@ const BODY    = '"Nunito Sans", sans-serif'
 /* ── urls ── */
 const WA  = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_number&app_absent=0'
 
-/* parallax image URLs */
-const SKY_URL   = 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=2000&auto=format&fit=crop'
-const ARA10_URL = 'https://images.squarespace-cdn.com/content/67ffc8a20990bb5f40749245/43c9f557-3bde-4964-a050-aa7b927f4751/Ara10.jpg?content-type=image%2Fjpeg'
-const ALDEA_URL = 'https://images.squarespace-cdn.com/content/67ffc8a20990bb5f40749245/7098cb63-4f7b-46d9-b1de-188fac63b4f0/aldea%20%283%29.png?content-type=image%2Fpng'
-const HEX_IMG   = 'https://images.squarespace-cdn.com/content/67ffc8a20990bb5f40749245/7098cb63-4f7b-46d9-b1de-188fac63b4f0/aldea+%283%29.png?content-type=image%2Fpng'
+/* parallax image URLs (local) */
+const SKY_URL   = '/media/sky-hero.jpg'
+const ARA10_URL = '/wmu/Ara10.jpg'
+const ALDEA_URL = '/wmu/aldea+(3).png'
+const HEX_IMG   = '/wmu/aldea+(3).png'
 
 /* ── data ── */
 const MODELS = [
@@ -191,7 +191,7 @@ function HeroSection() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', background: 'rgba(0,0,0,.45)', border: '1px solid rgba(255,255,255,.14)', padding: '10px 14px', borderRadius: 12, backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', width: 'max-content', maxWidth: '100%' }}>
             <span style={{ fontSize: '.85rem', fontFamily: BODY }}>Empezá hoy · financiación Banco Hipotecario</span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Banco_Hipotecario.png" alt="Banco Hipotecario" style={{ height: 21, width: 'auto', objectFit: 'contain', filter: 'contrast(1.05) brightness(1.2)', marginLeft: 'auto' }} />
+            <img src="/media/banco-hipotecario.png" alt="Banco Hipotecario" style={{ height: 21, width: 'auto', objectFit: 'contain', filter: 'contrast(1.05) brightness(1.2)', marginLeft: 'auto' }} />
           </div>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '15px 0 0' }}>
@@ -233,7 +233,7 @@ function ProcessSection() {
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,.72) 0%, rgba(0,0,0,.5) 28%, rgba(0,0,0,.12) 52%, transparent 70%)', pointerEvents: 'none' }} />
       <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 80, background: 'linear-gradient(to bottom, #000 0%, rgba(0,0,0,.6) 60%, transparent 100%)', zIndex: 1, pointerEvents: 'none' }} />
 
-      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: 'clamp(100px,14vw,170px) clamp(20px,5vw,80px) 0' }}>
+      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: 'clamp(60px,9vw,110px) clamp(20px,5vw,80px) 0' }}>
         <h2 style={{
           fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,5vw,41px)', color: TXT,
           lineHeight: 1.15, maxWidth: 900, margin: '0 auto 8px',
@@ -241,7 +241,7 @@ function ProcessSection() {
           opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(20px)',
           transition: 'opacity .75s ease, transform .75s ease',
         }}>
-          <span style={{ color: G }}>Disfrutá el proceso:</span> nosotros te entregamos<br/>tu casa sin complicaciones.
+          <span style={{ color: G }}>El proceso, en nuestras manos:</span> vos disfrutá<br/>el resultado.
         </h2>
         <p style={{
           fontFamily: BODY, color: SOFT, fontSize: 'clamp(16px,1.6vw,20px)',
@@ -249,7 +249,7 @@ function ProcessSection() {
           textShadow: '0 1px 10px rgba(0,0,0,.6)',
           opacity: vis ? 1 : 0, transition: 'opacity .75s ease .15s',
         }}>
-          Construir no tiene que ser un problema. Con el sistema en seco, todo es más rápido y simple. En poco tiempo, tu casa lista.
+          Construir no tiene que ser un problema. Con el sistema en seco, todo es más rápido y simple. En poco tiempo, tu proyecto listo.
         </p>
       </div>
     </section>
@@ -523,7 +523,7 @@ function RecognitionSection() {
   const values = [
     { num: '01', title: 'Nuestra visión',  text: 'Seguir construyendo con la misma calidad y método que nos distingue, para que tu inversión sea sólida.' },
     { num: '02', title: 'Nuestra misión',  text: 'Calidad innegociable y máxima eficiencia, cumpliendo siempre el compromiso de entrega pactado.' },
-    { num: '03', title: 'Sustentabilidad', text: 'Casas más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
+    { num: '03', title: 'Sustentabilidad', text: 'Construcciones más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
   ]
   return (
     <section ref={ref} style={{

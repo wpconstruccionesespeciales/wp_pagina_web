@@ -73,7 +73,7 @@ export default function Prensa() {
               >
                 <img
                   className="w-full aspect-video object-cover"
-                  src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                  src={`/prensa/${video.id}.jpg`}
                   alt={video.title}
                 />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">

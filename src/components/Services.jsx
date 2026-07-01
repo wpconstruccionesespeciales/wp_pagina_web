@@ -2,7 +2,7 @@ import useInView from '../hooks/useInView'
 
 const services = [
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYdd8Y8bNMQsVs_UGsSnMOjsPyVcMoyHhIlnNGJm7Pxx_684U9Lc5hvrX9YryGRNVNsIkkpqdcGQy-e0_fM_kAsCADy5eHB5wnoypiLWv0dIr3nWfirszhvc0TmAfgUnMn0WCG9cfwukYKjsIfQ9FppTtvE8Hz6DZB0R0o-nZdDA0My_MTMuddFzJ4Kjf62G__WQ0-2YNd02xBaC9tgT06xhZeowQu2cHe8vN0nYb-8W8zMeA-6PVmmQJPWYZX8uEYHOMH2xQSPP0',
+    img: '/media/aida/aida-1-AB6AXuAdcelH.jpg',
     title: 'Construcciones Especiales',
     label: 'Solución a medida',
     desc: 'Proyectos únicos que desafían los límites de la construcción tradicional con estructuras de acero de alta resistencia.',
@@ -11,7 +11,7 @@ const services = [
     cta: 'Consultar Proyecto',
   },
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDWTiJX1Wnzh0nXXIA1n_5V4VWwhoky2_U3w2fkn34XgOKeqAKvOfjgKkYDS5lrLab2ln4Lue6xcIeNIRq4-7elFny4MYSyHwJKPA5iWBxdRpc9nlpWZPyIwg05Fcy6mbNIeCHcMvLZrkgqpL6D9B4Zhk4IUg-Kzvgyt_8t-yoJRxlbyRVKK0hPv9nRhSAQUP4UI9smeXcfaI1RbPx-3nxVxDQTQ0wRQu8PAKrXl_wrd-zEakJmHVPM6kCIJgmPaUvYTNfhU7V5G9k',
+    img: '/media/aida/aida-13-AB6AXuDWTiJX.jpg',
     title: 'Arquitectura Modular',
     label: 'Sistema industrializado',
     desc: 'Eficiencia industrializada para una ejecución rápida, limpia y con estándares de calidad superiores.',
