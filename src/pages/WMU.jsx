@@ -52,10 +52,16 @@ const PRESS = [
 /* ── hook ── */
 function useFadeIn(threshold = 0.12) {
   const ref = useRef(null)
-  const [vis, setVis] = useState(false)
+  const [vis, setVis] = useState(() => typeof window === 'undefined' || !('IntersectionObserver' in window))
   useEffect(() => {
     const el = ref.current; if (!el) return
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVis(true); obs.disconnect() } }, { threshold })
+    if (!('IntersectionObserver' in window)) {
+      return
+    }
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVis(true); obs.disconnect() } },
+      { threshold: Math.min(threshold, 0.05), rootMargin: '0px 0px -48px 0px' }
+    )
     obs.observe(el)
     return () => obs.disconnect()
   }, [threshold])
@@ -82,7 +88,7 @@ function useCascadeReveal(itemCount) {
             obs.disconnect()
           }
         },
-        { threshold: [0.1, 0.25, 0.5][i] || 0.1, rootMargin: '0px 0px -10% 0px' }
+        { threshold: 0.04, rootMargin: '0px 0px -48px 0px' }
       )
       obs.observe(el)
       observers.push(obs)
@@ -224,7 +230,7 @@ function HeroSection() {
 function ProcessSection() {
   const [ref, vis] = useFadeIn(0.05)
   return (
-    <section ref={ref} style={{
+    <section id="proceso-wmu" ref={ref} style={{
       position: 'relative', overflow: 'hidden', minHeight: '100vh',
       display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
     }}>
@@ -817,6 +823,12 @@ function WMUFooter() {
 const CSS = `
   html { scroll-behavior: smooth; }
 
+  .wmu-page {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: clip;
+  }
+
   .wmu-btn-primary {
     padding: 14px 26px; border-radius: 12px; font-weight: 800;
     letter-spacing: .2px; text-decoration: none; display: inline-block;
@@ -833,6 +845,23 @@ const CSS = `
     transition: background .2s, border-color .2s;
   }
   .wmu-btn-ghost:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.22); }
+
+  .wmu-subnav {
+    position: sticky; top: 82px; z-index: 80;
+    display: flex; justify-content: center; gap: 6px;
+    padding: 10px 16px;
+    background: rgba(12,18,16,.9);
+    border-block: 1px solid rgba(255,255,255,.08);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  }
+  .wmu-subnav a {
+    padding: 9px 14px; border-radius: 10px;
+    color: rgba(243,245,244,.68); text-decoration: none;
+    font-family: "Nunito Sans", sans-serif; font-size: 12px; font-weight: 800;
+    transition: color .2s ease, background-color .2s ease, transform .15s ease;
+  }
+  .wmu-subnav a:hover { color: #F3F5F4; background: rgba(53,195,107,.12); }
+  .wmu-subnav a:active { transform: scale(.97); }
 
   /* WhatsApp float pulse */
   .wa-float {
@@ -893,6 +922,8 @@ const CSS = `
   }
   @media (max-width: 560px) {
     .models-grid { grid-template-columns: 1fr !important; }
+    .wmu-subnav { justify-content: flex-start; overflow-x: auto; }
+    .wmu-subnav a { white-space: nowrap; }
   }
 
   /* ════════ MANIFIESTO ════════ */
@@ -1119,10 +1150,16 @@ const CSS = `
 export default function WMU() {
   useEffect(() => { window.scrollTo(0, 0) }, [])
   return (
-    <div style={{ fontFamily: BODY }}>
+    <div className="wmu-page" style={{ fontFamily: BODY }}>
       <style>{CSS}</style>
       <WMUNav />
       <HeroSection />
+      <nav className="wmu-subnav" aria-label="Secciones de arquitectura modular">
+        <a href="#proceso-wmu">Proceso</a>
+        <a href="#models">Modelos</a>
+        <a href="#extender">Extensiones</a>
+        <a href="#manifiesto">Manifiesto</a>
+      </nav>
       <ProcessSection />
       <ModelsSection />
       <RecognitionSection />

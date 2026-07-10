@@ -2,11 +2,15 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function useInView(options = {}) {
   const ref = useRef(null)
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(() => typeof window === 'undefined' || !('IntersectionObserver' in window))
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    if (!('IntersectionObserver' in window)) {
+      return
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -15,7 +19,7 @@ export default function useInView(options = {}) {
           observer.unobserve(el)
         }
       },
-      { threshold: options.threshold ?? 0.15, rootMargin: options.rootMargin ?? '0px' }
+      { threshold: options.threshold ?? 0.01, rootMargin: options.rootMargin ?? '160px 0px' }
     )
 
     observer.observe(el)

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import wpDark from '../assets/WP.png'
 import wpWhite from '../assets/wpblanco.webp'
@@ -7,12 +7,16 @@ import gaudiIcon from '../assets/WMU-Gaudi.webp'
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const progressRef = useRef(null)
 
   useEffect(() => {
     let ticking = false
     const update = () => {
       const next = window.scrollY > 40
       setScrolled((current) => current === next ? current : next)
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+      const progress = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0
+      if (progressRef.current) progressRef.current.style.transform = `scaleX(${progress})`
       ticking = false
     }
     const onScroll = () => {
@@ -48,13 +52,16 @@ export default function NavBar() {
         {/* Nav links — izquierda */}
         <div className="hidden lg:flex items-center gap-2 font-headline tracking-tight flex-1">
           {links.map(({ href, label, router }) => {
+            const active = router && location.pathname === href
             const cls = `px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300 ${
               (scrolled || !isHome)
-                ? 'text-on-surface-variant hover:text-primary hover:bg-primary/5'
+                ? active
+                  ? 'text-primary bg-primary/8'
+                  : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'
                 : 'text-white/75 hover:text-white hover:bg-white/10'
             }`
             return router
-              ? <Link key={href} to={href} className={cls}>{label}</Link>
+              ? <Link key={href} to={href} className={cls} aria-current={active ? 'page' : undefined}>{label}</Link>
               : <a key={href} href={href} className={cls}>{label}</a>
           })}
         </div>
@@ -120,7 +127,7 @@ export default function NavBar() {
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className={`sm:hidden w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
-            scrolled ? 'text-primary hover:bg-primary/5' : 'text-white hover:bg-white/10'
+            (scrolled || !isHome) ? 'text-primary hover:bg-primary/5' : 'text-white hover:bg-white/10'
           }`}
           aria-label="Menu"
           aria-expanded={mobileOpen}
@@ -137,9 +144,12 @@ export default function NavBar() {
       >
         <div className="p-5 space-y-1">
           {links.map(({ href, label, router }) => {
-            const cls = "block py-3 px-4 text-on-surface font-medium rounded-lg hover:bg-primary/5 hover:text-primary transition-colors"
+            const active = router && location.pathname === href
+            const cls = `block py-3 px-4 font-medium rounded-lg transition-colors ${
+              active ? 'bg-primary/8 text-primary' : 'text-on-surface hover:bg-primary/5 hover:text-primary'
+            }`
             return router
-              ? <Link key={href} to={href} onClick={() => setMobileOpen(false)} className={cls}>{label}</Link>
+              ? <Link key={href} to={href} onClick={() => setMobileOpen(false)} className={cls} aria-current={active ? 'page' : undefined}>{label}</Link>
               : <a key={href} href={href} onClick={() => setMobileOpen(false)} className={cls}>{label}</a>
           })}
           <Link
@@ -152,6 +162,11 @@ export default function NavBar() {
           </Link>
         </div>
       </div>
+      <div
+        ref={progressRef}
+        className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-primary-fixed-dim via-primary to-primary-fixed-dim motion-reduce:hidden"
+        aria-hidden="true"
+      />
     </nav>
   )
 }

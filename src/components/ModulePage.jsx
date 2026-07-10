@@ -24,13 +24,16 @@ const WA = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_n
 /* ───────────────────────── hooks ───────────────────────── */
 function useFadeIn(threshold = 0.12) {
   const ref = useRef(null)
-  const [vis, setVis] = useState(false)
+  const [vis, setVis] = useState(() => typeof window === 'undefined' || !('IntersectionObserver' in window))
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    if (!('IntersectionObserver' in window)) {
+      return
+    }
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVis(true); obs.disconnect() } },
-      { threshold }
+      { threshold: Math.min(threshold, 0.05), rootMargin: '0px 0px -48px 0px' }
     )
     obs.observe(el)
     return () => obs.disconnect()
@@ -612,6 +615,24 @@ const CSS = `
 
   .wc-contact-card:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(16,104,67,.30); }
 
+  .wc-subnav {
+    position: sticky; top: 80px; z-index: 35;
+    display: flex; justify-content: center; gap: 6px;
+    padding: 10px 16px;
+    background: rgba(255,255,255,.88);
+    border-block: 1px solid rgba(16,104,67,.10);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 10px 30px rgba(15,31,21,.05);
+  }
+  .wc-subnav a {
+    padding: 9px 14px; border-radius: 10px;
+    color: #3a5145; font-family: "Nunito Sans", sans-serif;
+    font-size: 12px; font-weight: 800; text-decoration: none;
+    transition: color .2s ease, background-color .2s ease, transform .15s ease;
+  }
+  .wc-subnav a:hover { color: ${G_DARK}; background: #e8f5ee; }
+  .wc-subnav a:active { transform: scale(.97); }
+
   .wc-thumb:hover { box-shadow: 0 16px 40px rgba(15,31,21,.16) !important; }
   .wc-thumb:hover .wc-thumb-img { transform: scale(1.06); }
   .wc-thumb:hover .wc-thumb-fade { opacity: 1 !important; }
@@ -630,6 +651,8 @@ const CSS = `
   }
   @media (max-width: 480px) {
     .wc-gallery-grid { grid-template-columns: 1fr !important; }
+    .wc-subnav { top: 72px; justify-content: flex-start; overflow-x: auto; }
+    .wc-subnav a { white-space: nowrap; }
   }
 `
 
@@ -648,6 +671,11 @@ export default function ModulePage({ data }) {
       <NavBar />
       <main>
         <HeroSection    data={data} />
+        <nav className="wc-subnav" aria-label={`Secciones de ${data.module.name}`}>
+          <a href="#galeria">Galería</a>
+          <a href="#ficha">Ficha técnica</a>
+          <a href="#que-incluye">Qué incluye</a>
+        </nav>
         <GallerySection data={data} />
         <FichaSection   data={data} />
         <QueIncluyeSection />
