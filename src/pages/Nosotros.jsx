@@ -237,7 +237,7 @@ function TimelineItem({ item, index, isVisible, nodeRef }) {
           style={delayStyle}
         >
           <div
-            className={`bg-white p-8 md:p-10 rounded-[2rem] border border-outline/10 shadow-sm shadow-primary/5 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-500 ${cardAlignment}`}
+            className={`page-card bg-white p-8 md:p-10 rounded-[2rem] border border-outline/10 ${cardAlignment}`}
           >
             {/* Año y subtítulo mobile */}
             <div className="md:hidden mb-4">
@@ -316,7 +316,7 @@ export default function Nosotros() {
         {/* ═══════════════════════════════════════════════════════
             HERO — Quiénes Somos (premium, claro)
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-12 md:py-16 lg:py-20 xl:py-28 2xl:py-32 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={heroRef}>
+        <section className="subpage-hero relative py-12 md:py-16 lg:py-20 xl:py-28 2xl:py-32 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={heroRef}>
           {/* Decoración geométrica sutil */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="bg-geo-dots bg-geo-dots-left opacity-[0.08] top-20 left-20" />
@@ -393,7 +393,7 @@ export default function Nosotros() {
         {/* ═══════════════════════════════════════════════════════
             NUESTRA HISTORIA — Timeline
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={historyRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={historyRef}>
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(61,140,90,0.04)_0%,transparent_60%)]" />
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
@@ -453,7 +453,7 @@ export default function Nosotros() {
         {/* ═══════════════════════════════════════════════════════
             ANTES / DESPUÉS
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={beforeAfterRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={beforeAfterRef}>
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/15 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 pointer-events-none" />
           <div className="bg-geo-dots bg-geo-dots-left opacity-[0.08] -top-12 left-10 pointer-events-none" />
 
@@ -482,7 +482,7 @@ export default function Nosotros() {
               {metaStats.map(({ value, label }) => (
                 <div
                   key={label}
-                  className="group relative p-6 lg:p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden"
+                  className="page-card group relative p-6 lg:p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim overflow-hidden"
                 >
                   <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
                   <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-primary/20 rounded-tl-xl pointer-events-none" />
@@ -498,7 +498,7 @@ export default function Nosotros() {
         {/* ═══════════════════════════════════════════════════════
             TRAE TU PROYECTO
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={processRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={processRef}>
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(61,140,90,0.04)_0%,transparent_60%)] pointer-events-none" />
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
           <div className="bg-geo-corners bg-geo-corners-left opacity-[0.15] bottom-12 left-8 pointer-events-none" />
@@ -567,7 +567,7 @@ export default function Nosotros() {
         {/* ═══════════════════════════════════════════════════════
             VERSATILIDAD ESTRUCTURAL — Bento
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={bentoRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={bentoRef}>
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/15 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 pointer-events-none" />
           <div className="bg-geo-dots bg-geo-dots-left opacity-[0.08] top-12 left-10 pointer-events-none" />
           <div className="bg-geo-ring bg-geo-ring-right opacity-[0.06] top-24 pointer-events-none" />
@@ -631,7 +631,7 @@ export default function Nosotros() {
               )}
 
               {bentoCards[3] && (
-                <div className={`${bentoCards[3].span} group relative overflow-hidden rounded-3xl bg-white border border-outline/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-500`}>
+                <div className={`${bentoCards[3].span} page-card group relative overflow-hidden rounded-3xl bg-white border border-outline/10`}>
                   <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
                   <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary/20 rounded-tl-3xl pointer-events-none" />
                   <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-primary/20 rounded-br-3xl pointer-events-none" />
@@ -687,7 +687,7 @@ export default function Nosotros() {
         {/* ═══════════════════════════════════════════════════════
             CTA FINAL
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-surface-container-low via-[#eaf2ed] to-surface-container-low" ref={ctaRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-surface-container-low via-[#eaf2ed] to-surface-container-low" ref={ctaRef}>
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(61,140,90,0.08)_0%,transparent_60%)] pointer-events-none" />
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent" />

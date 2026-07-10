@@ -127,7 +127,7 @@ export default function Servicios() {
                     soluciones innovadoras y sustentables.
                   </p>
                   <a
-                    href="#contact"
+                    href="/#contact"
                     className="group inline-flex items-center gap-3 bg-white/6 hover:bg-white/10 border border-white/12 hover:border-primary-fixed-dim/40 text-white px-7 py-3.5 rounded-xl font-headline font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 backdrop-blur-sm"
                   >
                     <span>Agendar consulta</span>
@@ -220,7 +220,7 @@ export default function Servicios() {
         {/* ═══════════════════════════════════════════════════════
             CORE SERVICES — 4 Pillar cards with creative layout
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={coreRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={coreRef}>
           {/* Decorative shapes */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-fixed/15 rounded-full blur-3xl -translate-y-1/3 translate-x-1/4 pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-tertiary-fixed/20 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none" />
@@ -243,7 +243,7 @@ export default function Servicios() {
               {coreServices.map(({ icon, title, desc }, i) => (
                 <div
                   key={title}
-                  className="group relative p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary hover:shadow-2xl hover:shadow-primary/8 hover:-translate-y-2 transition-all duration-500 overflow-hidden cursor-default"
+                  className="page-card group relative p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary overflow-hidden cursor-default"
                   style={{ transitionDelay: `${i * 80}ms` }}
                 >
                   {/* Hover glow */}
@@ -273,7 +273,7 @@ export default function Servicios() {
         {/* ═══════════════════════════════════════════════════════
             PROJECTS — "Lo que hacemos" — Masonry-inspired cards
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={projectsRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={projectsRef}>
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(61,140,90,0.04)_0%,transparent_60%)]" />
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
 
@@ -293,16 +293,18 @@ export default function Servicios() {
 
             {/* Creative grid: 3 top + 2 bottom centered */}
             <div className={`animate-on-scroll ${projectsVisible ? 'visible' : ''}`}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">
                 {projectTypes.slice(0, 3).map(({ img, title, desc, tag }, i) => (
                   <div
                     key={title}
-                    className="group relative rounded-3xl overflow-hidden min-h-[420px] cursor-pointer"
+                    className={`page-card group relative rounded-3xl overflow-hidden min-h-[390px] lg:min-h-[460px] cursor-pointer ${i === 0 ? 'md:col-span-6' : 'md:col-span-3'}`}
                     style={{ transitionDelay: `${i * 100}ms` }}
                   >
                     <img
                       src={img}
                       alt={title}
+                      loading="lazy"
+                      decoding="async"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     {/* Overlay layers */}
@@ -317,12 +319,12 @@ export default function Servicios() {
                     </div>
 
                     {/* Bottom content */}
-                    <div className="absolute inset-x-0 bottom-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    <div className="absolute inset-x-0 bottom-0 p-6 md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-300">
                       <h3 className="font-headline text-xl lg:text-2xl font-bold text-white mb-2 leading-tight">{title}</h3>
-                      <p className="text-white/55 text-sm leading-relaxed mb-4 line-clamp-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{desc}</p>
+                      <p className="text-white/70 text-sm leading-relaxed mb-4 line-clamp-3 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">{desc}</p>
                       <a
                         href="/#contact"
-                        className="inline-flex items-center gap-2 text-white font-bold text-sm opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200 hover:gap-3"
+                        className="inline-flex items-center gap-2 text-white font-bold text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:gap-3"
                       >
                         Ver más
                         <span className="material-symbols-outlined text-primary-fixed-dim text-base">arrow_forward</span>
@@ -336,12 +338,14 @@ export default function Servicios() {
                 {projectTypes.slice(3).map(({ img, title, desc, tag }, i) => (
                   <div
                     key={title}
-                    className="group relative rounded-3xl overflow-hidden min-h-[420px] cursor-pointer"
+                    className="page-card group relative rounded-3xl overflow-hidden min-h-[390px] lg:min-h-[460px] cursor-pointer"
                     style={{ transitionDelay: `${(i + 3) * 100}ms` }}
                   >
                     <img
                       src={img}
                       alt={title}
+                      loading="lazy"
+                      decoding="async"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#070c08]/90 via-[#070c08]/30 to-transparent" />
@@ -353,12 +357,12 @@ export default function Servicios() {
                       </span>
                     </div>
 
-                    <div className="absolute inset-x-0 bottom-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    <div className="absolute inset-x-0 bottom-0 p-6 md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-300">
                       <h3 className="font-headline text-xl lg:text-2xl font-bold text-white mb-2 leading-tight">{title}</h3>
-                      <p className="text-white/55 text-sm leading-relaxed mb-4 line-clamp-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{desc}</p>
+                      <p className="text-white/70 text-sm leading-relaxed mb-4 line-clamp-3 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">{desc}</p>
                       <a
                         href="/#contact"
-                        className="inline-flex items-center gap-2 text-white font-bold text-sm opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200 hover:gap-3"
+                        className="inline-flex items-center gap-2 text-white font-bold text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:gap-3"
                       >
                         Ver más
                         <span className="material-symbols-outlined text-primary-fixed-dim text-base">arrow_forward</span>
@@ -374,7 +378,7 @@ export default function Servicios() {
         {/* ═══════════════════════════════════════════════════════
             DIFFERENTIATORS — Stats strip
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-20 px-6 lg:px-16 overflow-hidden bg-background" ref={diffRef}>
+        <section className="subpage-section relative py-20 px-6 lg:px-16 overflow-hidden bg-background" ref={diffRef}>
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(184,203,188,0.08)_0%,transparent_60%)]" />
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
@@ -384,7 +388,7 @@ export default function Servicios() {
               {differentiators.map(({ icon, value, label, desc }, i) => (
                 <div
                   key={label}
-                  className="group relative p-8 rounded-3xl bg-white/70 backdrop-blur-md border border-white/90 shadow-sm hover:shadow-xl hover:border-primary-fixed-dim hover:-translate-y-1 transition-all duration-500 overflow-hidden text-center"
+                  className="page-card group relative p-8 rounded-3xl bg-white/70 backdrop-blur-md border border-white/90 hover:border-primary-fixed-dim overflow-hidden text-center"
                   style={{ transitionDelay: `${i * 80}ms` }}
                 >
                   <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
@@ -405,7 +409,7 @@ export default function Servicios() {
         {/* ═══════════════════════════════════════════════════════
             CTA — Contact
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-surface-container-low via-[#eaf2ed] to-surface-container-low" ref={ctaRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-surface-container-low via-[#eaf2ed] to-surface-container-low" ref={ctaRef}>
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(61,140,90,0.06)_0%,transparent_55%)] pointer-events-none" />
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/8 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/8 to-transparent" />

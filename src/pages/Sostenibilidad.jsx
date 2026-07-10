@@ -119,7 +119,7 @@ export default function Sostenibilidad() {
 
       <main className="pt-20">
         {/* Hero Section - Light Background with Elegant Accents */}
-        <section className="relative py-24 lg:py-32 px-6 lg:px-16 overflow-hidden bg-background" ref={heroRef}>
+        <section className="subpage-hero relative py-24 lg:py-32 px-6 lg:px-16 overflow-hidden bg-background" ref={heroRef}>
           {/* Subtle Aesthetic Geometric Elements */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-fixed/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 opacity-70 pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-tertiary-fixed/30 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 opacity-70 pointer-events-none" />
@@ -205,7 +205,7 @@ export default function Sostenibilidad() {
         </section>
 
         {/* Stats Section - Premium Light Sage Background */}
-        <section className="relative py-16 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-surface-container-low via-[#eaf2ed] to-surface-container-low" ref={statsRef}>
+        <section className="subpage-section relative py-16 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-surface-container-low via-[#eaf2ed] to-surface-container-low" ref={statsRef}>
           {/* Subtle light organic glow */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(61,140,90,0.06)_0%,transparent_60%)]" />
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
@@ -216,7 +216,7 @@ export default function Sostenibilidad() {
           <div className="relative max-w-7xl mx-auto">
             <div className={`grid grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll ${statsVisible ? 'visible' : ''}`}>
               {environmentalStats.map(({ value, label, icon }, i) => (
-                <div key={label} className="group relative p-6 lg:p-8 rounded-3xl bg-white/60 backdrop-blur-md border border-white/90 shadow-sm hover:shadow-xl hover:border-primary-fixed-dim hover:-translate-y-1 transition-all duration-500 overflow-hidden">
+                <div key={label} className="page-card group relative p-6 lg:p-8 rounded-3xl bg-white/70 backdrop-blur-md border border-white/90 hover:border-primary-fixed-dim overflow-hidden">
                   {/* Hover green glow background inside the card */}
                   <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
                   
@@ -236,7 +236,7 @@ export default function Sostenibilidad() {
         </section>
 
         {/* Impact Section - Light and Structurally Decorated */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-background" id="impacto" ref={impactRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-background" id="impacto" ref={impactRef}>
           {/* Decorative Blueprint Background Shapes */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/15 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 pointer-events-none" />
           <div className="bg-geo-dots bg-geo-dots-left opacity-[0.1] -top-12 left-10 pointer-events-none scale-100" />
@@ -283,7 +283,7 @@ export default function Sostenibilidad() {
         </section>
 
         {/* Green Section - Premium Light Organic Background */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={benefitsRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={benefitsRef}>
           {/* Subtle Organic Glows */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,rgba(61,140,90,0.05)_0%,transparent_40%)] pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none" />
@@ -309,7 +309,7 @@ export default function Sostenibilidad() {
 
             <div className={`grid grid-cols-1 md:grid-cols-12 gap-8 animate-on-scroll ${benefitsVisible ? 'visible' : ''}`}>
               {/* Highlight Card: Sin Tala de Árboles */}
-              <div className="md:col-span-5 p-10 rounded-3xl bg-gradient-to-br from-primary-fixed/30 via-primary-fixed/10 to-transparent border border-primary/10 shadow-sm hover:shadow-md hover:border-primary-fixed-dim transition-all duration-500 relative overflow-hidden group">
+              <div className="page-card md:col-span-5 p-10 rounded-3xl bg-gradient-to-br from-primary-fixed/40 via-white/80 to-white/50 border border-primary/10 hover:border-primary-fixed-dim relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary-fixed/30 rounded-full blur-2xl opacity-50 pointer-events-none" />
                 
                 <div className="w-16 h-16 rounded-2xl bg-primary text-white flex items-center justify-center mb-6 shadow-md transition-transform duration-500 group-hover:scale-110">
@@ -334,7 +334,7 @@ export default function Sostenibilidad() {
               {/* Grid of complementary green cards */}
               <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {greenCards.map(({ icon, title, desc }) => (
-                  <div key={title} className="p-6 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden group">
+                  <div key={title} className="page-card p-6 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim relative overflow-hidden group">
                     {/* Corner subtle hover glow */}
                     <div className="absolute -top-6 -right-6 w-16 h-16 bg-primary-fixed/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                     
@@ -352,7 +352,7 @@ export default function Sostenibilidad() {
         </section>
 
         {/* Method Section - Light and Connected Timeline */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={methodRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={methodRef}>
           <div className="absolute top-0 left-0 w-64 h-64 bg-primary-fixed/20 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2 pointer-events-none" />
           
           <div className="bg-geo-dots bg-geo-dots-left opacity-[0.08] top-24 left-10 pointer-events-none scale-100" />
@@ -379,7 +379,7 @@ export default function Sostenibilidad() {
               
               <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10 animate-on-scroll ${methodVisible ? 'visible' : ''}`}>
                 {methodSteps.map(({ icon, title, desc, number }) => (
-                  <div key={title} className="group relative p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim hover:shadow-xl transition-all duration-500 flex flex-col items-start overflow-hidden">
+                  <div key={title} className="page-card group relative p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim flex flex-col items-start overflow-hidden">
                     {/* Floating connected node indicator for desktop */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white border-2 border-primary-fixed-dim flex items-center justify-center shadow-md z-20 group-hover:border-primary transition-colors duration-500 hidden md:flex">
                       <div className="w-2.5 h-2.5 rounded-full bg-primary-fixed-dim group-hover:bg-primary transition-colors duration-500" />
@@ -402,7 +402,7 @@ export default function Sostenibilidad() {
         </section>
 
         {/* Future Section - Premium Light Layout */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={futureRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-primary text-white" ref={futureRef}>
           {/* Subtle Background Glows */}
           <div className="absolute top-20 right-20 w-64 h-64 bg-primary-fixed/15 rounded-full blur-3xl pointer-events-none" />
           <div className="bg-geo-dots bg-geo-dots-right opacity-[0.06] top-8 right-8 pointer-events-none scale-100" />
@@ -410,13 +410,13 @@ export default function Sostenibilidad() {
           <div className="max-w-7xl mx-auto relative">
             <div className={`mb-16 animate-on-scroll ${futureVisible ? 'visible' : ''}`}>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-px bg-primary/45" />
-                <span className="text-primary text-xs font-extrabold tracking-[0.25em] uppercase">Visión Futura</span>
+                <div className="w-12 h-px bg-primary-fixed-dim/60" />
+                <span className="text-primary-fixed-dim text-xs font-extrabold tracking-[0.25em] uppercase">Visión Futura</span>
               </div>
-              <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tighter text-primary mb-4 leading-tight">
-                Compromiso con<br /><span className="text-[#5cb876]">el Futuro</span>
+              <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tighter text-white mb-4 leading-tight">
+                Compromiso con<br /><span className="text-primary-fixed-dim">el Futuro</span>
               </h2>
-              <p className="text-on-surface-variant text-lg max-w-xl font-medium">
+              <p className="text-white/65 text-lg max-w-xl font-medium">
                 Apostamos por un modelo constructivo que beneficie tanto a nuestros clientes
                 como al medio ambiente, siguiendo los principios de la economía circular.
               </p>
@@ -424,12 +424,12 @@ export default function Sostenibilidad() {
 
             <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll ${futureVisible ? 'visible' : ''}`}>
               {futureCards.map(({ icon, title, desc }) => (
-                <div key={title} className="p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
-                  <div className="w-14 h-14 rounded-2xl bg-primary-fixed/40 flex items-center justify-center mb-6 border border-primary/5 transition-transform duration-500 group-hover:scale-110">
-                    <span className="material-symbols-outlined text-primary text-2xl">{icon}</span>
+                <div key={title} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] p-8 backdrop-blur-sm transition-[transform,background-color,border-color] duration-200 hover:border-primary-fixed-dim/35 hover:bg-white/[0.09] motion-safe:hover:-translate-y-1">
+                  <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-6 border border-white/10 transition-transform duration-200 group-hover:scale-105">
+                    <span className="material-symbols-outlined text-primary-fixed-dim text-2xl">{icon}</span>
                   </div>
-                  <h4 className="font-headline text-xl font-black text-primary mb-3">{title}</h4>
-                  <p className="text-on-surface-variant leading-relaxed text-sm font-semibold">{desc}</p>
+                  <h4 className="font-headline text-xl font-black text-white mb-3">{title}</h4>
+                  <p className="text-white/60 leading-relaxed text-sm font-semibold">{desc}</p>
                 </div>
               ))}
             </div>
@@ -437,7 +437,7 @@ export default function Sostenibilidad() {
         </section>
 
         {/* CTA Section - Premium Light Sage Organic Background */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-surface-container-low via-[#eaf2ed] to-surface-container-low" ref={ctaRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-surface-container-low via-[#eaf2ed] to-surface-container-low" ref={ctaRef}>
           {/* Subtle Organic Radial Glow & Lines */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(61,140,90,0.08)_0%,transparent_60%)] pointer-events-none" />
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent" />

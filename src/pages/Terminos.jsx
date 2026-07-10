@@ -63,14 +63,15 @@ export default function Terminos() {
         {/* ═══════════════════════════════════════════════════════
             HERO
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-24 lg:py-32 px-6 lg:px-16 overflow-hidden bg-background" ref={heroRef}>
+        <section className="subpage-hero relative py-24 lg:py-32 px-6 lg:px-16 overflow-hidden bg-background" ref={heroRef}>
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-fixed/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 opacity-70 pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-tertiary-fixed/30 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 opacity-70 pointer-events-none" />
           <div className="bg-geo-dots bg-geo-dots-left opacity-[0.15] top-12 left-12 pointer-events-none scale-110" />
           <div className="bg-geo-corners bg-geo-corners-left opacity-[0.25] bottom-16 left-8 pointer-events-none" />
 
           <div className="max-w-7xl mx-auto relative">
-            <div className={`animate-on-scroll ${heroVisible ? 'visible' : ''}`}>
+            <div className={`grid items-end gap-12 lg:grid-cols-12 animate-on-scroll ${heroVisible ? 'visible' : ''}`}>
+              <div className="lg:col-span-8">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-px bg-primary/40" />
                 <span className="text-primary text-xs font-extrabold tracking-[0.25em] uppercase">Contrato de Servicio</span>
@@ -91,6 +92,23 @@ export default function Terminos() {
                   Última actualización: Mayo 2026
                 </p>
               </div>
+              </div>
+
+              <aside className="page-card relative overflow-hidden rounded-3xl border border-primary/10 bg-white/75 p-7 backdrop-blur-md lg:col-span-4" aria-label="Resumen del documento">
+                <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary-fixed/35 blur-2xl" />
+                <div className="relative">
+                  <div className="mb-6 grid h-12 w-12 place-items-center rounded-2xl bg-primary text-white">
+                    <span className="material-symbols-outlined">contract</span>
+                  </div>
+                  <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.22em] text-primary/55">Documento vigente</p>
+                  <h2 className="mb-5 font-headline text-2xl font-black text-primary">Un acuerdo claro</h2>
+                  <div className="space-y-3 border-t border-primary/10 pt-5 text-sm font-semibold text-on-surface-variant">
+                    <p className="flex justify-between gap-4"><span>Actualización</span><strong className="text-primary">Mayo 2026</strong></p>
+                    <p className="flex justify-between gap-4"><span>Etapas de pago</span><strong className="text-primary">3 hitos</strong></p>
+                    <p className="flex justify-between gap-4"><span>Documentación</span><strong className="text-primary">Por escrito</strong></p>
+                  </div>
+                </div>
+              </aside>
             </div>
           </div>
         </section>
@@ -98,7 +116,7 @@ export default function Terminos() {
         {/* ═══════════════════════════════════════════════════════
             CONDICIONES GENERALES
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={conditionsRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={conditionsRef}>
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(61,140,90,0.04)_0%,transparent_60%)]" />
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
@@ -122,7 +140,7 @@ export default function Terminos() {
               {generalConditions.map(({ icon, title, desc }) => (
                 <div
                   key={title}
-                  className="group relative p-8 lg:p-10 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden"
+                  className="page-card group relative p-8 lg:p-10 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim overflow-hidden"
                 >
                   <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
                   <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary/20 rounded-tl-xl pointer-events-none group-hover:border-primary-fixed-dim transition-colors duration-300" />
@@ -142,7 +160,7 @@ export default function Terminos() {
         {/* ═══════════════════════════════════════════════════════
             CONDICIONES DE PAGO
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={paymentsRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={paymentsRef}>
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/15 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 pointer-events-none" />
           <div className="bg-geo-dots bg-geo-dots-left opacity-[0.1] -top-12 left-10 pointer-events-none" />
           <div className="bg-geo-ring bg-geo-ring-right opacity-[0.06] top-24 pointer-events-none" />
@@ -166,7 +184,7 @@ export default function Terminos() {
               {paymentSteps.map(({ step, title, desc }) => (
                 <div
                   key={title}
-                  className="group relative p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden"
+                  className="page-card group relative p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim overflow-hidden"
                 >
                   <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
                   <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary/20 rounded-tl-xl pointer-events-none group-hover:border-primary-fixed-dim transition-colors duration-300" />
@@ -186,7 +204,7 @@ export default function Terminos() {
         {/* ═══════════════════════════════════════════════════════
             GARANTÍA Y RESPONSABILIDAD
         ═══════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={warrantyRef}>
+        <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-surface-container-low" ref={warrantyRef}>
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(61,140,90,0.06)_0%,transparent_60%)] pointer-events-none" />
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/8 to-transparent" />
 
