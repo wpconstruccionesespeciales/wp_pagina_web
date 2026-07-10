@@ -775,7 +775,7 @@ function SpecsSection() {
             </div>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', opacity: vis ? 1 : 0, transition: 'opacity .7s ease .4s' }}>
               <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-btn-primary" style={{ flex: 1, textAlign: 'center' }}>CONTÁCTANOS</a>
-              <a href="https://www.wpconstrucciones.com/wmu" target="_blank" rel="noopener noreferrer" className="wmu-btn-ghost" style={{ flex: 1, textAlign: 'center' }}>VER PLANES</a>
+              <Link to="/wmu-especificaciones" className="wmu-btn-ghost" style={{ flex: 1, textAlign: 'center', display: 'inline-block' }}>VER MÁS ESPECIFICACIONES</Link>
             </div>
           </div>
         </div>
@@ -827,6 +827,7 @@ const CSS = `
     width: 100%;
     max-width: 100vw;
     overflow-x: clip;
+    background-color: #000;
   }
 
   .wmu-btn-primary {
@@ -847,21 +848,41 @@ const CSS = `
   .wmu-btn-ghost:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.22); }
 
   .wmu-subnav {
-    position: sticky; top: 82px; z-index: 80;
-    display: flex; justify-content: center; gap: 6px;
-    padding: 10px 16px;
-    background: rgba(12,18,16,.9);
-    border-block: 1px solid rgba(255,255,255,.08);
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    position: sticky;
+    top: 94px;
+    z-index: 80;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 8px;
+    margin: -22px auto -22px;
+    width: max-content;
+    max-width: 90%;
+    background: rgba(12, 18, 16, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 99px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
   .wmu-subnav a {
-    padding: 9px 14px; border-radius: 10px;
-    color: rgba(243,245,244,.68); text-decoration: none;
-    font-family: "Nunito Sans", sans-serif; font-size: 12px; font-weight: 800;
+    padding: 8px 16px;
+    border-radius: 99px;
+    color: rgba(243, 245, 244, 0.72);
+    text-decoration: none;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 800;
     transition: color .2s ease, background-color .2s ease, transform .15s ease;
   }
-  .wmu-subnav a:hover { color: #F3F5F4; background: rgba(53,195,107,.12); }
-  .wmu-subnav a:active { transform: scale(.97); }
+  .wmu-subnav a:hover {
+    color: #F3F5F4;
+    background: rgba(53, 195, 107, 0.14);
+  }
+  .wmu-subnav a:active {
+    transform: scale(.96);
+  }
 
   /* WhatsApp float pulse */
   .wa-float {
@@ -922,8 +943,17 @@ const CSS = `
   }
   @media (max-width: 560px) {
     .models-grid { grid-template-columns: 1fr !important; }
-    .wmu-subnav { justify-content: flex-start; overflow-x: auto; }
-    .wmu-subnav a { white-space: nowrap; }
+    .wmu-subnav {
+      justify-content: flex-start;
+      overflow-x: auto;
+      border-radius: 20px;
+      max-width: 92%;
+      padding: 6px;
+      margin: -16px auto -16px;
+    }
+    .wmu-subnav a {
+      white-space: nowrap;
+    }
   }
 
   /* ════════ MANIFIESTO ════════ */
