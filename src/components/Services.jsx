@@ -2,7 +2,7 @@ import useInView from '../hooks/useInView'
 
 const services = [
   {
-    img: '/wp/1000231816.JPG',
+    img: '/wp/service-especial.webp',
     title: 'Construcciones Especiales',
     label: 'Solución a medida',
     desc: 'Proyectos únicos que desafían los límites de la construcción tradicional con estructuras de acero de alta resistencia.',
@@ -47,7 +47,7 @@ export default function Services() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 stagger-children">
-          {services.map(({ img, title, label, desc, tags, stat, cta }) => (
+          {services.map(({ img, title, label, desc, stat, cta }) => (
             <div
               key={title}
               className={`group services-card relative overflow-hidden min-h-[440px] lg:min-h-[460px] animate-on-scroll scale-in ${visible ? 'visible' : ''}`}
@@ -56,6 +56,10 @@ export default function Services() {
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 src={img}
                 alt={title}
+                width="1400"
+                height="1050"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 services-card__image-overlay" />
               <div className="absolute inset-x-0 top-0 h-32 services-card__top-fade" />

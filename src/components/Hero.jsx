@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 export default function Hero() {
+  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const videoRef = useRef(null)
   const sectionRef = useRef(null)
   const gridRef = useRef(null)
@@ -32,12 +33,14 @@ export default function Hero() {
       }
     }
 
-    update()
-    window.addEventListener('scroll', onScroll, { passive: true })
+    if (!prefersReducedMotion) {
+      update()
+      window.addEventListener('scroll', onScroll, { passive: true })
+    }
 
     const video = videoRef.current
     const section = sectionRef.current
-    if (video && section && 'IntersectionObserver' in window) {
+    if (video && section && !prefersReducedMotion && 'IntersectionObserver' in window) {
       io = new IntersectionObserver(
         (entries) => {
           for (const e of entries) {
@@ -58,7 +61,7 @@ export default function Hero() {
       window.removeEventListener('scroll', onScroll)
       if (io) io.disconnect()
     }
-  }, [])
+  }, [prefersReducedMotion])
 
   return (
     <>
@@ -67,8 +70,8 @@ export default function Hero() {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <video
             ref={videoRef}
-            className="hero-video-kenburns absolute inset-0 w-full h-full object-cover"
-            autoPlay
+            className={`${prefersReducedMotion ? '' : 'hero-video-kenburns'} absolute inset-0 w-full h-full object-cover`}
+            autoPlay={!prefersReducedMotion}
             muted
             loop
             playsInline

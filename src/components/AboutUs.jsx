@@ -15,8 +15,12 @@ export default function AboutUs() {
           <div className="relative rounded-2xl overflow-hidden">
             <img
               className="w-full aspect-[4/5] object-cover"
-              src="/wp/IMG_9133-sin-personas.jpg"
+              src="/wp/about-montaje.webp"
               alt="Estructura de steel frame en montaje rodeada de vegetación"
+              width="800"
+              height="1000"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           {/* Floating counter */}

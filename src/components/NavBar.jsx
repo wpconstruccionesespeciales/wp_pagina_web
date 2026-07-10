@@ -2,14 +2,26 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import wpDark from '../assets/WP.png'
 import wpWhite from '../assets/wpblanco.webp'
-import gaudiIcon from '../assets/WMU GAUDI.png'
+import gaudiIcon from '../assets/WMU-Gaudi.webp'
 
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    let ticking = false
+    const update = () => {
+      const next = window.scrollY > 40
+      setScrolled((current) => current === next ? current : next)
+      ticking = false
+    }
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update)
+        ticking = true
+      }
+    }
+    update()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -53,12 +65,18 @@ export default function NavBar() {
             src={wpWhite}
             alt="WP Construcciones Especiales"
             style={{ height: '72px', width: 'auto' }}
+            width="256"
+            height="72"
+            decoding="async"
             className={`object-contain transition-opacity duration-500 ${(scrolled || !isHome) ? 'opacity-0' : 'opacity-100'}`}
           />
           <img
             src={wpDark}
             alt="WP Construcciones Especiales"
             style={{ height: '72px', width: 'auto' }}
+            width="256"
+            height="72"
+            decoding="async"
             className={`object-contain absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 ${(scrolled || !isHome) ? 'opacity-100' : 'opacity-0'}`}
           />
         </Link>
@@ -73,6 +91,9 @@ export default function NavBar() {
               src={gaudiIcon}
               alt="WMU Arquitectura Modular"
               style={{ height: '72px', width: 'auto' }}
+              width="72"
+              height="72"
+              decoding="async"
               className="object-contain"
             />
             <span className={`font-headline font-bold text-sm transition-colors duration-500 ${
@@ -89,6 +110,7 @@ export default function NavBar() {
               (scrolled || !isHome) ? 'text-primary hover:bg-primary/5' : 'text-white hover:bg-white/10'
             }`}
             aria-label="Menu"
+            aria-expanded={mobileOpen}
           >
             <span className="material-symbols-outlined">{mobileOpen ? 'close' : 'menu'}</span>
           </button>
@@ -101,6 +123,7 @@ export default function NavBar() {
             scrolled ? 'text-primary hover:bg-primary/5' : 'text-white hover:bg-white/10'
           }`}
           aria-label="Menu"
+          aria-expanded={mobileOpen}
         >
           <span className="material-symbols-outlined">{mobileOpen ? 'close' : 'menu'}</span>
         </button>
@@ -124,7 +147,7 @@ export default function NavBar() {
             onClick={() => setMobileOpen(false)}
             className="flex items-center gap-3 mt-3 px-4 py-3 rounded-lg hover:bg-primary/5 transition-colors"
           >
-            <img src={gaudiIcon} alt="WMU" style={{ height: '40px', width: 'auto' }} className="object-contain" />
+            <img src={gaudiIcon} alt="WMU" width="40" height="40" decoding="async" style={{ height: '40px', width: 'auto' }} className="object-contain" />
             <span className="font-headline font-bold text-primary">Arquitectura Modular</span>
           </Link>
         </div>
