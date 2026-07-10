@@ -30,25 +30,25 @@ function BeforeAfterSlider() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-[4/5] sm:aspect-[16/9] max-h-[700px] overflow-hidden select-none cursor-col-resize rounded-3xl"
+      className="before-after-slider relative mx-auto w-full max-w-5xl aspect-[4/5] sm:aspect-[2/1] overflow-hidden select-none cursor-col-resize rounded-[1.25rem] sm:rounded-3xl"
       onMouseDown={(e) => { e.preventDefault(); dragging.current = true; move(e.clientX) }}
       onTouchMove={(e) => move(e.touches[0].clientX)}
       onTouchStart={(e) => move(e.touches[0].clientX)}
     >
       {/* DESPUÉS — full size, clipped from left */}
       <img
-        src="/media/aida/aida-12-AB6AXuCYo-F-.jpg"
+        src="/wp/after.jpg"
         alt="Resultado final Steel Frame"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="before-after-image before-after-image--after absolute inset-0 w-full h-full object-cover"
         draggable={false}
       />
 
       {/* ANTES — full size, clipped from right */}
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
         <img
-          src="/media/aida/aida-2-AB6AXuAdmEso.jpg"
+          src="/wp/before.jpg"
           alt="Estado original antes de obra"
-          className="w-full h-full object-cover grayscale brightness-75"
+          className="before-after-image before-after-image--before w-full h-full object-cover"
           draggable={false}
         />
       </div>
@@ -131,7 +131,7 @@ const bentoCards = [
   {
     span: 'md:col-span-8 md:row-span-2',
     type: 'image',
-    img: '/media/aida/aida-4-AB6AXuALaPpD.jpg',
+    img: '/wp/wp imagen.jpg',
     title: 'Edificios de mediana altura',
     desc: 'Soluciones verticales con máxima eficiencia estructural y rapidez de montaje.',
   },
@@ -146,7 +146,7 @@ const bentoCards = [
   {
     span: 'md:col-span-4 md:row-span-1',
     type: 'image-light',
-    img: '/media/aida/aida-3-AB6AXuAdtCZW.jpg',
+    img: '/wp/ECF_5848.jpg',
     title: 'Industriales | Locales comerciales',
   },
   {
@@ -154,7 +154,7 @@ const bentoCards = [
     type: 'reforma',
     title: 'Reformas y Ampliaciones',
     desc: 'La ligereza del acero permite ampliar estructuras existentes sin comprometer la cimentación original.',
-    img: '/media/aida/aida-3-AB6AXuAdtCZW.jpg',
+    img: '/wp/after.jpg',
   },
   {
     span: 'md:col-span-4 md:row-span-1',
@@ -354,12 +354,13 @@ export default function Nosotros() {
               </div>
 
               {/* Columna de imagen */}
-              <div className={`lg:col-span-5 relative animate-on-scroll ${heroVisible ? 'visible' : ''}`}>
-                <div className="relative aspect-[4/5] md:aspect-[5/4] lg:aspect-[5/4] rounded-[2rem] overflow-hidden group border border-outline/10 shadow-2xl shadow-primary/5">
+              <div className={`lg:col-span-5 lg:ml-auto relative animate-on-scroll flex justify-end ${heroVisible ? 'visible' : ''}`}>
+                <div className="scale-90 origin-right">
+                <div className="relative rounded-[2rem] overflow-hidden group border border-outline/10 shadow-2xl shadow-primary/5">
                   <img
                     alt="Ingeniería estructural de precisión"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    src="/media/aida/aida-10-AB6AXuCe3Ep1.jpg"
+                    className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
+                    src="/wp/wp imagen.jpg"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
 
@@ -382,6 +383,7 @@ export default function Nosotros() {
                 {/* Badge icono */}
                 <div className="hidden lg:flex absolute -top-4 -right-6 bg-primary text-white p-5 rounded-2xl shadow-2xl shadow-primary/30 items-center justify-center border border-primary-fixed-dim/20">
                   <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>architecture</span>
+                </div>
                 </div>
               </div>
             </div>
@@ -534,8 +536,8 @@ export default function Nosotros() {
               <div className={`md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4 animate-on-scroll ${processVisible ? 'visible' : ''}`}>
                 <div className="aspect-[4/5] overflow-hidden rounded-3xl">
                   <img
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                    src="/media/aida/aida-14-AB6AXuDZqT85.jpg"
+                    className="w-full h-full object-cover hover:grayscale transition-all duration-700"
+                    src="/wp/IMG_9158.jpg"
                     alt="Maquinaria roll-forming"
                   />
                 </div>
@@ -543,7 +545,7 @@ export default function Nosotros() {
                   <div className="aspect-video overflow-hidden rounded-3xl">
                     <img
                       className="w-full h-full object-cover"
-                      src="/media/aida/aida-7-AB6AXuBOAXrw.jpg"
+                      src="/wp/IMG_9135.jpg"
                       alt="Ensamblaje estructura"
                     />
                   </div>

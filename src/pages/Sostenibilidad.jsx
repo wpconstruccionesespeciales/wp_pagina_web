@@ -174,7 +174,7 @@ export default function Sostenibilidad() {
                   <img
                     alt="Construcción sostenible Steel Frame"
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                    src="/media/aida/aida-12-AB6AXuCYo-F-.jpg"
+                    src="/wp/ECF_5821.jpg"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6">

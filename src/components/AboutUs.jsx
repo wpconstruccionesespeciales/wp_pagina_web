@@ -15,8 +15,8 @@ export default function AboutUs() {
           <div className="relative rounded-2xl overflow-hidden">
             <img
               className="w-full aspect-[4/5] object-cover"
-              src="/media/aida/aida-8-AB6AXuBYAtlN.jpg"
-              alt="construction workers assembling a lightweight steel frame wall structure"
+              src="/wp/IMG_9133-sin-personas.jpg"
+              alt="Estructura de steel frame en montaje rodeada de vegetación"
             />
           </div>
           {/* Floating counter */}

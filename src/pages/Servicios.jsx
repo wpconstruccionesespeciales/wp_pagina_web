@@ -30,31 +30,31 @@ const coreServices = [
 
 const projectTypes = [
   {
-    img: '/media/aida/aida-1-AB6AXuAdcelH.jpg',
+    img: '/wp/IMG_9133.jpg',
     title: 'Edificios de mediana altura',
     desc: 'Implementamos ingeniería de precisión para proyectos de desarrollo vertical. Optimizamos la operación de la estructura y la logística, asegurando un proceso eficiente.',
     tag: 'Desarrollo Vertical',
   },
   {
-    img: '/media/aida/aida-13-AB6AXuDWTiJX.jpg',
+    img: '/wp/wp imagen.jpg',
     title: 'Viviendas unifamiliares',
     desc: 'Construcción residencial de calidad superior. Ofrecemos hogares de habitabilidad excepcional que articulen confort térmico y acústico, con alta durabilidad garantizada a largo plazo.',
     tag: 'Residencial',
   },
   {
-    img: '/media/aida/aida-12-AB6AXuCYo-F-.jpg',
+    img: '/wp/ECF_5821.jpg',
     title: 'Industriales | Locales comerciales',
     desc: 'Desarrollamos infraestructura industrial y comercial de alto rendimiento. Aseguramos máxima funcionalidad y adaptabilidad, facilitando la rentabilidad económica de cualquier proyecto privado o público.',
     tag: 'Comercial / Industrial',
   },
   {
-    img: '/media/aida/aida-1-AB6AXuAdcelH.jpg',
+    img: '/wp/after.jpg',
     title: 'Reformas y Ampliaciones',
     desc: 'Reconfiguramos y potenciamos tus ambientes existentes. Realizamos intervenciones estructurales con mínima interferencia, potenciando la funcionalidad y el valor patrimonial de tu propiedad.',
     tag: 'Renovación',
   },
   {
-    img: '/media/aida/aida-13-AB6AXuDWTiJX.jpg',
+    img: '/wp/ECF_5848.jpg',
     title: 'Clínicas | Consultorios',
     desc: 'Desarrollamos espacios de salud con foco en la higiene y la funcionalidad. Proyectamos clínicas bajo estricto cumplimiento normativo, creando ambientes óptimos para la atención médica especializada.',
     tag: 'Salud',

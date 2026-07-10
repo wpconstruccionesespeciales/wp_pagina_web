@@ -2,7 +2,7 @@ import useInView from '../hooks/useInView'
 
 const services = [
   {
-    img: '/media/aida/aida-1-AB6AXuAdcelH.jpg',
+    img: '/wp/1000231816.JPG',
     title: 'Construcciones Especiales',
     label: 'Solución a medida',
     desc: 'Proyectos únicos que desafían los límites de la construcción tradicional con estructuras de acero de alta resistencia.',
@@ -11,7 +11,7 @@ const services = [
     cta: 'Consultar Proyecto',
   },
   {
-    img: '/media/aida/aida-13-AB6AXuDWTiJX.jpg',
+    img: '/wp/Secuencia 01_1.jpg',
     title: 'Arquitectura Modular',
     label: 'Sistema industrializado',
     desc: 'Eficiencia industrializada para una ejecución rápida, limpia y con estándares de calidad superiores.',

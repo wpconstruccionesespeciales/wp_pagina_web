@@ -82,6 +82,23 @@ details summary::-webkit-details-marker {
   transform: translateX(0);
 }
 
+.before-after-slider {
+  background: transparent;
+}
+
+.before-after-image {
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.before-after-image--before {
+  object-position: center;
+}
+
+.before-after-image--after {
+  object-position: center;
+}
+
 .animate-on-scroll.scale-in {
   transform: scale(0.9);
 }
