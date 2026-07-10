@@ -19,6 +19,7 @@ import WhatsAppButton from './components/WhatsAppButton'
 
 const Nosotros = lazy(() => import('./pages/Nosotros'))
 const WMU = lazy(() => import('./pages/WMU'))
+const WmuEspecificaciones = lazy(() => import('./pages/WmuEspecificaciones'))
 const WmuCero = lazy(() => import('./pages/WmuCero'))
 const WmuCero2 = lazy(() => import('./pages/WmuCero2'))
 const WmuCampo = lazy(() => import('./pages/WmuCampo'))
@@ -79,6 +80,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/wmu" element={<WMU />} />
+        <Route path="/wmu-especificaciones" element={<WmuEspecificaciones />} />
         <Route path="/wmu-cero" element={<WmuCero />} />
         <Route path="/wmu-cero-2" element={<WmuCero2 />} />
         <Route path="/wmu-campo" element={<WmuCampo />} />

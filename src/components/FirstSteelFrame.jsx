@@ -455,6 +455,26 @@ export default function FirstSteelFrame() {
                 </Motion.div>
               ))}
             </Motion.div>
+
+            <Motion.div
+              className="mt-8"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <a
+                href="https://www.youtube.com/watch?v=8ob8MJEE_gg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-primary-fixed/8 hover:bg-primary-fixed/20 border border-primary-fixed-dim/15 hover:border-primary-fixed-dim/35 px-5 py-3 rounded-xl transition-all duration-500 backdrop-blur-md shadow-sm hover:shadow-[0_4px_22px_rgba(184,203,188,0.18)] hover:-translate-y-0.5 text-center text-primary-fixed hover:text-white font-bold text-xs tracking-wider uppercase group"
+              >
+                <span>VER NOTA</span>
+                <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform duration-300">
+                  play_circle
+                </span>
+              </a>
+            </Motion.div>
           </Motion.div>
 
           <Motion.div
