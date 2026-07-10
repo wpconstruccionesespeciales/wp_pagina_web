@@ -2,7 +2,7 @@ import useInView from '../hooks/useInView'
 
 const services = [
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYdd8Y8bNMQsVs_UGsSnMOjsPyVcMoyHhIlnNGJm7Pxx_684U9Lc5hvrX9YryGRNVNsIkkpqdcGQy-e0_fM_kAsCADy5eHB5wnoypiLWv0dIr3nWfirszhvc0TmAfgUnMn0WCG9cfwukYKjsIfQ9FppTtvE8Hz6DZB0R0o-nZdDA0My_MTMuddFzJ4Kjf62G__WQ0-2YNd02xBaC9tgT06xhZeowQu2cHe8vN0nYb-8W8zMeA-6PVmmQJPWYZX8uEYHOMH2xQSPP0',
+    img: '/wp/service-especial.webp',
     title: 'Construcciones Especiales',
     label: 'Solución a medida',
     desc: 'Proyectos únicos que desafían los límites de la construcción tradicional con estructuras de acero de alta resistencia.',
@@ -11,7 +11,7 @@ const services = [
     cta: 'Consultar Proyecto',
   },
   {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDWTiJX1Wnzh0nXXIA1n_5V4VWwhoky2_U3w2fkn34XgOKeqAKvOfjgKkYDS5lrLab2ln4Lue6xcIeNIRq4-7elFny4MYSyHwJKPA5iWBxdRpc9nlpWZPyIwg05Fcy6mbNIeCHcMvLZrkgqpL6D9B4Zhk4IUg-Kzvgyt_8t-yoJRxlbyRVKK0hPv9nRhSAQUP4UI9smeXcfaI1RbPx-3nxVxDQTQ0wRQu8PAKrXl_wrd-zEakJmHVPM6kCIJgmPaUvYTNfhU7V5G9k',
+    img: '/wp/Secuencia 01_1.jpg',
     title: 'Arquitectura Modular',
     label: 'Sistema industrializado',
     desc: 'Eficiencia industrializada para una ejecución rápida, limpia y con estándares de calidad superiores.',
@@ -47,7 +47,7 @@ export default function Services() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 stagger-children">
-          {services.map(({ img, title, label, desc, tags, stat, cta }) => (
+          {services.map(({ img, title, label, desc, stat, cta }) => (
             <div
               key={title}
               className={`group services-card relative overflow-hidden min-h-[440px] lg:min-h-[460px] animate-on-scroll scale-in ${visible ? 'visible' : ''}`}
@@ -56,6 +56,10 @@ export default function Services() {
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 src={img}
                 alt={title}
+                width="1400"
+                height="1050"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 services-card__image-overlay" />
               <div className="absolute inset-x-0 top-0 h-32 services-card__top-fade" />

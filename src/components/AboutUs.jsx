@@ -15,8 +15,12 @@ export default function AboutUs() {
           <div className="relative rounded-2xl overflow-hidden">
             <img
               className="w-full aspect-[4/5] object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYAtlNtXIgKOffkNRzZvNketgI15dc-jg3wnXa5q9GYxud4yJBOeZeiPq1XakDXW9iHBq4F2lk0U29EQwC3sZX3p9_E_6rOO3TJsuS-BhZ6HLU8EeAiHUO8xpJTQWebPgvuZ4LzeTagrTzcvXqVGjg62-kBi-bqdebnexYHl--NdNJ9aT-5NSdMJF8e0A3GAhh7G8kcchIBivqfrW9eCPpJBsC162-rRaa6rMf5wouNfgwnmcqNoSGppLBU1vQFOSJ32QvKgv2ogw"
-              alt="construction workers assembling a lightweight steel frame wall structure"
+              src="/wp/about-montaje.webp"
+              alt="Estructura de steel frame en montaje rodeada de vegetación"
+              width="800"
+              height="1000"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           {/* Floating counter */}

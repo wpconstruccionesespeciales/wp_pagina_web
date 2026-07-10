@@ -14,11 +14,12 @@ const BODY    = '"Nunito Sans", sans-serif'
 /* ── urls ── */
 const WA  = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_number&app_absent=0'
 
-/* parallax image URLs */
-const SKY_URL   = 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=2000&auto=format&fit=crop'
-const ARA10_URL = 'https://images.squarespace-cdn.com/content/67ffc8a20990bb5f40749245/43c9f557-3bde-4964-a050-aa7b927f4751/Ara10.jpg?content-type=image%2Fjpeg'
-const ALDEA_URL = 'https://images.squarespace-cdn.com/content/67ffc8a20990bb5f40749245/7098cb63-4f7b-46d9-b1de-188fac63b4f0/aldea%20%283%29.png?content-type=image%2Fpng'
-const HEX_IMG   = 'https://images.squarespace-cdn.com/content/67ffc8a20990bb5f40749245/7098cb63-4f7b-46d9-b1de-188fac63b4f0/aldea+%283%29.png?content-type=image%2Fpng'
+/* parallax image URLs (local) */
+const SKY_URL   = '/media/sky-hero.jpg'
+const ARA10_URL = '/wmu/Ara10.webp'
+const ALDEA_URL = '/wmu/aldea+(3).webp'
+const HEX_IMG   = '/wmu/aldea+(3).webp'
+const cssUrl = (url) => `url("${url}")`
 
 /* ── data ── */
 const MODELS = [
@@ -43,18 +44,24 @@ const SPECS = [
 ]
 
 const PRESS = [
-  { tag: 'Especialistas',             img: '/wmu/clarin.jpg',        title: 'Construcciones con Alma de Acero',     href: 'https://www.clarin.com/arq/especialistas-construcciones-alma-acero_0_1maFutEy6.html' },
-  { tag: 'Calidad y Compromiso',      img: '/wmu/arquitecturar.jpg', title: 'Proyectos innovadores de Steel Frame',  href: 'https://arquitecturar.com.ar/wp-construcciones-especiales-revoluciona-la-construccion-con-steel-frame-en-el-litoral-argentino' },
-  { tag: 'Más Eficiencia, Menos Precio', img: '/wmu/xmas.jpg',      title: 'Enfoque en eficiencia de producción',  href: 'https://oleinizak.com/matteoda-wp-construcciones-ahora-debemos-enfocarnos-en-ser-mas-eficientes-en-la-produccion-y-no-en-el-precio' },
+  { tag: 'Especialistas',             portal: 'Clarín',          img: '/wmu/clarin.jpg',        title: 'Construcciones con Alma de Acero',     href: 'https://www.clarin.com/arq/especialistas-construcciones-alma-acero_0_1maFutEy6.html' },
+  { tag: 'Calidad y Compromiso',      portal: 'Arquitectura R',  img: '/wmu/arquitecturar.jpg', title: 'Proyectos innovadores de Steel Frame',  href: 'https://arquitecturar.com.ar/wp-construcciones-especiales-revoluciona-la-construccion-con-steel-frame-en-el-litoral-argentino' },
+  { tag: 'Más Eficiencia, Menos Precio', portal: 'Oleinizak',     img: '/wmu/xmas.jpg',      title: 'Enfoque en eficiencia de producción',  href: 'https://oleinizak.com/matteoda-wp-construcciones-ahora-debemos-enfocarnos-en-ser-mas-eficientes-en-la-produccion-y-no-en-el-precio' },
 ]
 
 /* ── hook ── */
 function useFadeIn(threshold = 0.12) {
   const ref = useRef(null)
-  const [vis, setVis] = useState(false)
+  const [vis, setVis] = useState(() => typeof window === 'undefined' || !('IntersectionObserver' in window))
   useEffect(() => {
     const el = ref.current; if (!el) return
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVis(true); obs.disconnect() } }, { threshold })
+    if (!('IntersectionObserver' in window)) {
+      return
+    }
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVis(true); obs.disconnect() } },
+      { threshold: Math.min(threshold, 0.05), rootMargin: '0px 0px -48px 0px' }
+    )
     obs.observe(el)
     return () => obs.disconnect()
   }, [threshold])
@@ -81,7 +88,7 @@ function useCascadeReveal(itemCount) {
             obs.disconnect()
           }
         },
-        { threshold: [0.1, 0.25, 0.5][i] || 0.1, rootMargin: '0px 0px -10% 0px' }
+        { threshold: 0.04, rootMargin: '0px 0px -48px 0px' }
       )
       obs.observe(el)
       observers.push(obs)
@@ -191,7 +198,7 @@ function HeroSection() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', background: 'rgba(0,0,0,.45)', border: '1px solid rgba(255,255,255,.14)', padding: '10px 14px', borderRadius: 12, backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', width: 'max-content', maxWidth: '100%' }}>
             <span style={{ fontSize: '.85rem', fontFamily: BODY }}>Empezá hoy · financiación Banco Hipotecario</span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Banco_Hipotecario.png" alt="Banco Hipotecario" style={{ height: 21, width: 'auto', objectFit: 'contain', filter: 'contrast(1.05) brightness(1.2)', marginLeft: 'auto' }} />
+            <img src="/media/banco-hipotecario.png" alt="Banco Hipotecario" style={{ height: 21, width: 'auto', objectFit: 'contain', filter: 'contrast(1.05) brightness(1.2)', marginLeft: 'auto' }} />
           </div>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '15px 0 0' }}>
@@ -223,7 +230,7 @@ function HeroSection() {
 function ProcessSection() {
   const [ref, vis] = useFadeIn(0.05)
   return (
-    <section ref={ref} style={{
+    <section id="proceso-wmu" ref={ref} style={{
       position: 'relative', overflow: 'hidden', minHeight: '100vh',
       display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
     }}>
@@ -233,7 +240,7 @@ function ProcessSection() {
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,.72) 0%, rgba(0,0,0,.5) 28%, rgba(0,0,0,.12) 52%, transparent 70%)', pointerEvents: 'none' }} />
       <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 80, background: 'linear-gradient(to bottom, #000 0%, rgba(0,0,0,.6) 60%, transparent 100%)', zIndex: 1, pointerEvents: 'none' }} />
 
-      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: 'clamp(100px,14vw,170px) clamp(20px,5vw,80px) 0' }}>
+      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: 'clamp(60px,9vw,110px) clamp(20px,5vw,80px) 0' }}>
         <h2 style={{
           fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,5vw,41px)', color: TXT,
           lineHeight: 1.15, maxWidth: 900, margin: '0 auto 8px',
@@ -241,7 +248,7 @@ function ProcessSection() {
           opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(20px)',
           transition: 'opacity .75s ease, transform .75s ease',
         }}>
-          <span style={{ color: G }}>Disfrutá el proceso:</span> nosotros te entregamos<br/>tu casa sin complicaciones.
+          <span style={{ color: G }}>El proceso, en nuestras manos:</span> vos disfrutá<br/>el resultado.
         </h2>
         <p style={{
           fontFamily: BODY, color: SOFT, fontSize: 'clamp(16px,1.6vw,20px)',
@@ -249,7 +256,7 @@ function ProcessSection() {
           textShadow: '0 1px 10px rgba(0,0,0,.6)',
           opacity: vis ? 1 : 0, transition: 'opacity .75s ease .15s',
         }}>
-          Construir no tiene que ser un problema. Con el sistema en seco, todo es más rápido y simple. En poco tiempo, tu casa lista.
+          Construir no tiene que ser un problema. Con el sistema en seco, todo es más rápido y simple. En poco tiempo, tu proyecto listo.
         </p>
       </div>
     </section>
@@ -418,14 +425,16 @@ function ManifestoSection() {
         </p>
 
         <div className="manifiesto-declarations">
-          {MANIFESTO_LINES.map((line, i) => (
+          {MANIFESTO_LINES.map((line, i) => {
+            const delay = 0.1 + (i % 3) * 0.12 + (i * 0.07);
+            return (
             <div
               key={line.roman}
               ref={setRef(i)}
               className={`manifiesto-line${line.closing ? ' manifiesto-line--closing' : ''}${vis[i] ? ' is-visible' : ''}`}
             >
               <span className="manifiesto-roman" aria-hidden="true">{line.roman}</span>
-              <p className="manifiesto-text">
+              <p className="manifiesto-text" style={{ transitionDelay: `${delay.toFixed(2)}s` }}>
                 {line.text.map((seg, j) =>
                   typeof seg === 'string'
                     ? <span key={j}>{seg}</span>
@@ -444,7 +453,8 @@ function ManifestoSection() {
                 )}
               </p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <a href={WA} target="_blank" rel="noopener noreferrer" className="manifiesto-cta">
@@ -468,8 +478,8 @@ function ExpandSection() {
   const [ref, vis] = useFadeIn()
   return (
     <section id="extender" ref={ref} className="wmu-parallax" style={{
-      position: 'relative', padding: 'clamp(100px,12vw,180px) 0', overflow: 'hidden',
-      backgroundImage: `url(${ALDEA_URL})`, backgroundSize: 'cover', backgroundPosition: 'center',
+      position: 'relative', padding: 'clamp(30px,4vw,50px) 0', overflow: 'hidden',
+      backgroundImage: cssUrl(ALDEA_URL), backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
       {/* gradient overlay — more nuanced than flat */}
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(12,18,16,.75) 0%, rgba(30,30,30,.4) 50%, rgba(12,18,16,.65) 100%)', pointerEvents: 'none', zIndex: 1 }} />
@@ -480,28 +490,28 @@ function ExpandSection() {
         <div className="expand-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 'clamp(32px,5vw,72px)', alignItems: 'center' }}>
           {/* left — glassmorphism content panel */}
           <div style={{
-            padding: 'clamp(28px,4vw,44px)', borderRadius: 20,
+            padding: 'clamp(20px,3vw,32px)', borderRadius: 20,
             background: 'rgba(12,18,16,.55)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
             border: '1px solid rgba(255,255,255,.08)',
             boxShadow: '0 16px 48px rgba(0,0,0,.3)',
           }}>
             {/* vertical green accent bar */}
-            <div style={{ width: 3, height: 32, background: G, borderRadius: 4, marginBottom: 18, opacity: vis ? 1 : 0, transition: 'opacity .6s ease' }} />
-            <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(24px,3.5vw,44px)', color: TXT, textTransform: 'uppercase', marginBottom: 16, lineHeight: 1.1, opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(18px)', transition: 'opacity .7s ease .05s, transform .7s ease .05s' }}>
+            <div style={{ width: 3, height: 24, background: G, borderRadius: 4, marginBottom: 12, opacity: vis ? 1 : 0, transition: 'opacity .6s ease' }} />
+            <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(24px,3.5vw,44px)', color: TXT, textTransform: 'uppercase', marginBottom: 10, lineHeight: 1.1, opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(18px)', transition: 'opacity .7s ease .05s, transform .7s ease .05s' }}>
               ¿Necesitás<br/><span style={{ color: G }}>ampliar</span> tu espacio?
             </h2>
-            <p style={{ fontFamily: BODY, color: 'rgba(255,255,255,.75)', fontSize: 'clamp(13px,1.3vw,16px)', lineHeight: 1.75, marginBottom: 28, opacity: vis ? 1 : 0, transition: 'opacity .7s ease .12s' }}>
+            <p style={{ fontFamily: BODY, color: 'rgba(255,255,255,.75)', fontSize: 'clamp(13px,1.3vw,16px)', lineHeight: 1.75, marginBottom: 18, opacity: vis ? 1 : 0, transition: 'opacity .7s ease .12s' }}>
               Nos especializamos en ampliar tu espacio sobre estructuras existentes. Steel Frame para ejecución rápida y máxima solidez, sin demoler lo que ya construiste.
             </p>
 
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 28, opacity: vis ? 1 : 0, transition: 'opacity .7s ease .18s' }}>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 18, opacity: vis ? 1 : 0, transition: 'opacity .7s ease .18s' }}>
               {['Sin demolición', 'Montaje rápido', 'Garantía estructural'].map(t => (
                 <span key={t} style={{ fontSize: 10, padding: '5px 12px', borderRadius: 999, border: '1px solid rgba(53,195,107,.25)', background: 'rgba(53,195,107,.08)', color: G, fontFamily: BODY, fontWeight: 600 }}>{t}</span>
               ))}
             </div>
 
             <a href={WA} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 32px', borderRadius: 12, background: G, color: '#0a1f12', fontWeight: 800, textDecoration: 'none', fontSize: 14, fontFamily: BODY, boxShadow: '0 8px 28px rgba(53,195,107,.25)', opacity: vis ? 1 : 0, transition: 'opacity .7s ease .22s' }}>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 28px', borderRadius: 12, background: G, color: '#0a1f12', fontWeight: 800, textDecoration: 'none', fontSize: 14, fontFamily: BODY, boxShadow: '0 8px 28px rgba(53,195,107,.25)', opacity: vis ? 1 : 0, transition: 'opacity .7s ease .22s' }}>
               CONSULTANOS
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -523,7 +533,7 @@ function RecognitionSection() {
   const values = [
     { num: '01', title: 'Nuestra visión',  text: 'Seguir construyendo con la misma calidad y método que nos distingue, para que tu inversión sea sólida.' },
     { num: '02', title: 'Nuestra misión',  text: 'Calidad innegociable y máxima eficiencia, cumpliendo siempre el compromiso de entrega pactado.' },
-    { num: '03', title: 'Sustentabilidad', text: 'Casas más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
+    { num: '03', title: 'Sustentabilidad', text: 'Construcciones más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
   ]
   return (
     <section ref={ref} style={{
@@ -663,12 +673,12 @@ function PressSection() {
         </div>
 
         {/* press cards */}
-        <div className="press-grid-new" style={{ display: 'grid', gridTemplateColumns: '1.3fr 1fr 1fr', gap: 24 }}>
+        <div className="press-grid-new" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
           {PRESS.map((p, i) => (
             <a key={p.tag} href={p.href} target="_blank" rel="noopener noreferrer"
               className="press-card-new"
               style={{
-                display: 'block', textDecoration: 'none', borderRadius: 20, overflow: 'hidden',
+                display: 'flex', flexDirection: 'column', textDecoration: 'none', borderRadius: 20, overflow: 'hidden',
                 background: '#fff',
                 border: '1px solid rgba(42,122,74,.08)',
                 boxShadow: '0 4px 24px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.02)',
@@ -677,20 +687,24 @@ function PressSection() {
                 position: 'relative',
               }}>
               {/* image container */}
-              <div style={{ position: 'relative', aspectRatio: i === 0 ? '16/10' : '4/3', overflow: 'hidden' }}>
+              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', flexShrink: 0 }}>
                 <img src={p.img} alt={p.tag} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform .6s ease' }} className="press-card-img-new" />
                 {/* green gradient overlay on image */}
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(42,122,74,.15) 0%, transparent 40%)', pointerEvents: 'none' }} />
+                {/* portal name overlay */}
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,.3)', backdropFilter: 'blur(1px)', pointerEvents: 'none' }}>
+                  <span style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(20px,2.5vw,28px)', color: '#fff', textTransform: 'uppercase', letterSpacing: '.05em', opacity: .85, textShadow: '0 2px 12px rgba(0,0,0,.4)' }}>{p.portal}</span>
+                </div>
                 {/* tag badge */}
                 <div style={{ position: 'absolute', top: 14, left: 14, padding: '6px 14px', borderRadius: 8, background: 'rgba(255,255,255,.95)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: '1px solid rgba(53,195,107,.2)', boxShadow: '0 2px 8px rgba(0,0,0,.08)' }}>
                   <span style={{ color: '#2a7a4a', fontSize: 10, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', fontFamily: BODY }}>{p.tag}</span>
                 </div>
               </div>
               {/* content */}
-              <div style={{ padding: '20px 24px 24px', position: 'relative' }}>
+              <div style={{ padding: '20px 24px 24px', position: 'relative', flex: 1 }}>
                 {/* subtle green line at bottom of content */}
                 <div style={{ position: 'absolute', bottom: 0, left: 24, right: 24, height: 2, background: 'linear-gradient(90deg, #35C36B, transparent)', opacity: 0, transition: 'opacity .3s ease' }} className="press-card-line" />
-                <div style={{ fontWeight: 700, color: '#0e1a11', fontSize: i === 0 ? 18 : 15, fontFamily: BODY, lineHeight: 1.35, marginBottom: 12 }}>{p.title}</div>
+                <div style={{ fontWeight: 700, color: '#0e1a11', fontSize: 15, fontFamily: BODY, lineHeight: 1.35, marginBottom: 12 }}>{p.title}</div>
                 <span style={{ color: '#2a7a4a', fontSize: 13, fontWeight: 700, fontFamily: BODY, display: 'inline-flex', alignItems: 'center', gap: 6, transition: 'gap .3s ease' }} className="press-link-new">
                   Leer nota
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
@@ -709,11 +723,10 @@ function PressSection() {
 ═══════════════════════════════════════════════════════════════════════════ */
 function SpecsSection() {
   const [ref, vis] = useFadeIn()
-  const half = Math.ceil(SPECS.length / 2)
   return (
     <section ref={ref} className="wmu-parallax" style={{
       position: 'relative', padding: 'clamp(80px,10vw,140px) 0', overflow: 'hidden',
-      backgroundImage: `url(${ARA10_URL})`, backgroundSize: 'cover', backgroundPosition: 'center',
+      backgroundImage: cssUrl(ARA10_URL), backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
       {/* layered gradient overlay */}
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(12,18,16,.8) 0%, rgba(30,30,30,.45) 50%, rgba(12,18,16,.7) 100%)', pointerEvents: 'none', zIndex: 0 }} />
@@ -762,7 +775,7 @@ function SpecsSection() {
             </div>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', opacity: vis ? 1 : 0, transition: 'opacity .7s ease .4s' }}>
               <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-btn-primary" style={{ flex: 1, textAlign: 'center' }}>CONTÁCTANOS</a>
-              <a href="https://www.wpconstrucciones.com/wmu" target="_blank" rel="noopener noreferrer" className="wmu-btn-ghost" style={{ flex: 1, textAlign: 'center' }}>VER PLANES</a>
+              <Link to="/wmu-especificaciones" className="wmu-btn-ghost" style={{ flex: 1, textAlign: 'center', display: 'inline-block' }}>VER MÁS ESPECIFICACIONES</Link>
             </div>
           </div>
         </div>
@@ -810,6 +823,13 @@ function WMUFooter() {
 const CSS = `
   html { scroll-behavior: smooth; }
 
+  .wmu-page {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: clip;
+    background-color: #000;
+  }
+
   .wmu-btn-primary {
     padding: 14px 26px; border-radius: 12px; font-weight: 800;
     letter-spacing: .2px; text-decoration: none; display: inline-block;
@@ -826,6 +846,43 @@ const CSS = `
     transition: background .2s, border-color .2s;
   }
   .wmu-btn-ghost:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.22); }
+
+  .wmu-subnav {
+    position: sticky;
+    top: 94px;
+    z-index: 80;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 8px;
+    margin: -22px auto -22px;
+    width: max-content;
+    max-width: 90%;
+    background: rgba(12, 18, 16, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 99px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .wmu-subnav a {
+    padding: 8px 16px;
+    border-radius: 99px;
+    color: rgba(243, 245, 244, 0.72);
+    text-decoration: none;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    transition: color .2s ease, background-color .2s ease, transform .15s ease;
+  }
+  .wmu-subnav a:hover {
+    color: #F3F5F4;
+    background: rgba(53, 195, 107, 0.14);
+  }
+  .wmu-subnav a:active {
+    transform: scale(.96);
+  }
 
   /* WhatsApp float pulse */
   .wa-float {
@@ -886,6 +943,17 @@ const CSS = `
   }
   @media (max-width: 560px) {
     .models-grid { grid-template-columns: 1fr !important; }
+    .wmu-subnav {
+      justify-content: flex-start;
+      overflow-x: auto;
+      border-radius: 20px;
+      max-width: 92%;
+      padding: 6px;
+      margin: -16px auto -16px;
+    }
+    .wmu-subnav a {
+      white-space: nowrap;
+    }
   }
 
   /* ════════ MANIFIESTO ════════ */
@@ -1006,18 +1074,11 @@ const CSS = `
     letter-spacing: -.02em;
     max-width: 540px;
     margin: 0;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 30%, #000 100%);
-            mask-image: linear-gradient(to right, transparent 0%, #000 30%, #000 100%);
-    -webkit-mask-size: 0% 100%;
-            mask-size: 0% 100%;
-    -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-    transition: -webkit-mask-size .7s cubic-bezier(.22,.61,.36,1) .15s,
-                     mask-size .7s cubic-bezier(.22,.61,.36,1) .15s;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path .8s cubic-bezier(.22,.61,.36,1);
   }
   .manifiesto-line.is-visible .manifiesto-text {
-    -webkit-mask-size: 100% 100%;
-            mask-size: 100% 100%;
+    clip-path: inset(0 0 0 0);
   }
   .manifiesto-accent {
     color: #2a7a4a;
@@ -1119,14 +1180,20 @@ const CSS = `
 export default function WMU() {
   useEffect(() => { window.scrollTo(0, 0) }, [])
   return (
-    <div style={{ fontFamily: BODY }}>
+    <div className="wmu-page" style={{ fontFamily: BODY }}>
       <style>{CSS}</style>
       <WMUNav />
       <HeroSection />
+      <nav className="wmu-subnav" aria-label="Secciones de arquitectura modular">
+        <a href="#proceso-wmu">Proceso</a>
+        <a href="#models">Modelos</a>
+        <a href="#extender">Extensiones</a>
+        <a href="#manifiesto">Manifiesto</a>
+      </nav>
       <ProcessSection />
       <ModelsSection />
-      <ExpandSection />
       <RecognitionSection />
+      <ExpandSection />
       <PressSection />
       <SpecsSection />
       <ManifestoSection />

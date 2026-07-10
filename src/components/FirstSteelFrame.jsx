@@ -1,13 +1,13 @@
-import { motion } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
 
 function AnimatedText({ text, className, highlightWords = [] }) {
   const words = text.split(' ')
   return (
-    <motion.h2 className={className} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}>
+    <Motion.h2 className={className} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}>
       {words.map((word, i) => {
         const isHighlight = highlightWords.some(h => word.toLowerCase().includes(h.toLowerCase()))
         return (
-          <motion.span
+          <Motion.span
             key={i}
             className={`inline-block mr-[0.28em] ${isHighlight ? 'text-primary-fixed' : ''}`}
             variants={{
@@ -19,10 +19,10 @@ function AnimatedText({ text, className, highlightWords = [] }) {
             }}
           >
             {word}
-          </motion.span>
+          </Motion.span>
         )
       })}
-    </motion.h2>
+    </Motion.h2>
   )
 }
 
@@ -33,7 +33,7 @@ function BuildingBlueprint() {
   const ridgeY = 55
 
   return (
-    <motion.svg
+    <Motion.svg
       viewBox="0 0 520 620"
       className="w-full h-auto drop-shadow-2xl"
       fill="none"
@@ -239,7 +239,7 @@ function BuildingBlueprint() {
         <rect x="13" y="13" width="494" height="594" rx="2" />
         <rect x="24" y="24" width="472" height="572" rx="1.5" />
       </g>
-    </motion.svg>
+    </Motion.svg>
   )
 }
 
@@ -260,7 +260,7 @@ function Particles() {
         { x: '15%', y: '35%', s: 1.5, d: 3.5, dur: 6.5 },
         { x: '70%', y: '55%', s: 2.8, d: 2, dur: 3.2 },
       ].map((d, i) => (
-        <motion.div
+        <Motion.div
           key={i}
           className="absolute rounded-full bg-primary-fixed-dim"
           style={{ left: d.x, top: d.y, width: d.s, height: d.s }}
@@ -281,7 +281,7 @@ function Particles() {
         { x: '20%', y: '25%' }, { x: '22%', y: '23%' }, { x: '24%', y: '26%' },
         { x: '78%', y: '70%' }, { x: '80%', y: '72%' }, { x: '76%', y: '74%' },
       ].map((d, i) => (
-        <motion.div
+        <Motion.div
           key={`c-${i}`}
           className="absolute rounded-full bg-primary-fixed-dim"
           style={{ left: d.x, top: d.y, width: 1.2, height: 1.2 }}
@@ -296,7 +296,7 @@ function Particles() {
 }
 
 const statItems = [
-  { value: '2001', label: 'Fundación en Paraná', icon: 'calendar_month' },
+  { value: '2005', label: 'Fundación en Paraná', icon: 'calendar_month' },
   { value: '2014', label: '1er edificio Steel Frame de la región', icon: 'apartment' },
   { value: '+20', label: 'Años de trayectoria', icon: 'auto_graph' }
 ]
@@ -341,7 +341,7 @@ export default function FirstSteelFrame() {
       <Particles />
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-        <motion.span
+        <Motion.span
           className="font-headline font-black text-[clamp(8rem,25vw,20rem)] leading-none"
           style={{
             color: 'rgba(184,203,188,0.035)',
@@ -354,7 +354,7 @@ export default function FirstSteelFrame() {
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
         >
           2014
-        </motion.span>
+        </Motion.span>
       </div>
 
       {/* Corner decorative bracket - top right */}
@@ -372,14 +372,14 @@ export default function FirstSteelFrame() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-6 lg:gap-10 items-center">
 
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <motion.div
+            <Motion.div
               className="flex items-center gap-3 mb-6"
               initial={{ opacity: 0, x: -12 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -388,9 +388,9 @@ export default function FirstSteelFrame() {
             >
               <div className="w-10 h-px bg-gradient-to-r from-primary-fixed-dim/60 to-transparent" />
               <span className="text-primary-fixed-dim/60 text-[0.55rem] font-bold tracking-[0.25em] uppercase">
-                2001 &bull; Pioneros en Paraná
+                2005 &bull; Pioneros en Paraná
               </span>
-            </motion.div>
+            </Motion.div>
 
             <div className="relative">
               <AnimatedText
@@ -399,7 +399,7 @@ export default function FirstSteelFrame() {
                 highlightWords={['primeros', 'Steel', 'Frame']}
               />
               {/* Subtle underline accent */}
-              <motion.div
+              <Motion.div
                 className="absolute -bottom-1 left-0 h-px bg-gradient-to-r from-primary-fixed-dim/20 to-transparent"
                 initial={{ width: 0 }}
                 whileInView={{ width: '40%' }}
@@ -408,7 +408,7 @@ export default function FirstSteelFrame() {
               />
             </div>
 
-            <motion.p
+            <Motion.p
               className="text-white/40 text-sm lg:text-[0.95rem] leading-relaxed max-w-md mb-6 font-light"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -419,16 +419,16 @@ export default function FirstSteelFrame() {
               región realizado íntegramente en Steel Frame, en Paraná. Desde
               entonces, lideramos la innovación en construcción en altura con
               acero galvanizado.
-            </motion.p>
+            </Motion.p>
 
-            <motion.div
+            <Motion.div
               className="flex flex-wrap gap-x-5 gap-y-2"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-40px' }}
             >
               {statItems.map((stat, i) => (
-                <motion.div
+                <Motion.div
                   key={stat.label}
                   className="group cursor-default"
                   variants={{
@@ -452,12 +452,32 @@ export default function FirstSteelFrame() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </Motion.div>
               ))}
-            </motion.div>
-          </motion.div>
+            </Motion.div>
 
-          <motion.div
+            <Motion.div
+              className="mt-8"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <a
+                href="https://www.youtube.com/watch?v=8ob8MJEE_gg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-primary-fixed/8 hover:bg-primary-fixed/20 border border-primary-fixed-dim/15 hover:border-primary-fixed-dim/35 px-5 py-3 rounded-xl transition-all duration-500 backdrop-blur-md shadow-sm hover:shadow-[0_4px_22px_rgba(184,203,188,0.18)] hover:-translate-y-0.5 text-center text-primary-fixed hover:text-white font-bold text-xs tracking-wider uppercase group"
+              >
+                <span>VER NOTA</span>
+                <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform duration-300">
+                  play_circle
+                </span>
+              </a>
+            </Motion.div>
+          </Motion.div>
+
+          <Motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-50px' }}
@@ -474,7 +494,7 @@ export default function FirstSteelFrame() {
 
             <div className="absolute -inset-4 bg-gradient-to-t from-[#0e1a12] via-transparent to-transparent pointer-events-none z-10" />
             <BuildingBlueprint />
-          </motion.div>
+          </Motion.div>
 
         </div>
       </div>

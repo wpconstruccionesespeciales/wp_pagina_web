@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Hero from './components/Hero'
@@ -16,17 +16,27 @@ import FAQ from './components/FAQ'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
-import Nosotros from './pages/Nosotros'
-import WMU from './pages/WMU'
-import WmuCero from './pages/WmuCero'
-import WmuCero2 from './pages/WmuCero2'
-import WmuCampo from './pages/WmuCampo'
-import WmuAldea from './pages/WmuAldea'
-import WmuSauce from './pages/WmuSauce'
-import Privacidad from './pages/Privacidad'
-import Terminos from './pages/Terminos'
-import Sostenibilidad from './pages/Sostenibilidad'
-import Servicios from './pages/Servicios'
+
+const Nosotros = lazy(() => import('./pages/Nosotros'))
+const WMU = lazy(() => import('./pages/WMU'))
+const WmuEspecificaciones = lazy(() => import('./pages/WmuEspecificaciones'))
+const WmuCero = lazy(() => import('./pages/WmuCero'))
+const WmuCero2 = lazy(() => import('./pages/WmuCero2'))
+const WmuCampo = lazy(() => import('./pages/WmuCampo'))
+const WmuAldea = lazy(() => import('./pages/WmuAldea'))
+const WmuSauce = lazy(() => import('./pages/WmuSauce'))
+const Privacidad = lazy(() => import('./pages/Privacidad'))
+const Terminos = lazy(() => import('./pages/Terminos'))
+const Sostenibilidad = lazy(() => import('./pages/Sostenibilidad'))
+const Servicios = lazy(() => import('./pages/Servicios'))
+
+function RouteFallback() {
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center" role="status" aria-label="Cargando página">
+      <div className="h-9 w-9 rounded-full border-2 border-primary/15 border-t-primary animate-spin" />
+    </div>
+  )
+}
 
 function Home() {
   useEffect(() => {
@@ -65,19 +75,22 @@ function Home() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/nosotros" element={<Nosotros />} />
-      <Route path="/wmu" element={<WMU />} />
-      <Route path="/wmu-cero" element={<WmuCero />} />
-      <Route path="/wmu-cero-2" element={<WmuCero2 />} />
-      <Route path="/wmu-campo" element={<WmuCampo />} />
-      <Route path="/wmu-aldea" element={<WmuAldea />} />
-      <Route path="/wmu-sauce" element={<WmuSauce />} />
-      <Route path="/privacidad" element={<Privacidad />} />
-      <Route path="/terminos" element={<Terminos />} />
-      <Route path="/sostenibilidad" element={<Sostenibilidad />} />
-      <Route path="/servicios" element={<Servicios />} />
-    </Routes>
+    <Suspense fallback={<RouteFallback />}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/nosotros" element={<Nosotros />} />
+        <Route path="/wmu" element={<WMU />} />
+        <Route path="/wmu-especificaciones" element={<WmuEspecificaciones />} />
+        <Route path="/wmu-cero" element={<WmuCero />} />
+        <Route path="/wmu-cero-2" element={<WmuCero2 />} />
+        <Route path="/wmu-campo" element={<WmuCampo />} />
+        <Route path="/wmu-aldea" element={<WmuAldea />} />
+        <Route path="/wmu-sauce" element={<WmuSauce />} />
+        <Route path="/privacidad" element={<Privacidad />} />
+        <Route path="/terminos" element={<Terminos />} />
+        <Route path="/sostenibilidad" element={<Sostenibilidad />} />
+        <Route path="/servicios" element={<Servicios />} />
+      </Routes>
+    </Suspense>
   )
 }

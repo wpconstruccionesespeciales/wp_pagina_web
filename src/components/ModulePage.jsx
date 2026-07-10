@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion as Motion } from 'framer-motion'
 import NavBar from './NavBar'
 import Footer from './Footer'
 import WhatsAppButton from './WhatsAppButton'
@@ -24,13 +24,16 @@ const WA = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_n
 /* ───────────────────────── hooks ───────────────────────── */
 function useFadeIn(threshold = 0.12) {
   const ref = useRef(null)
-  const [vis, setVis] = useState(false)
+  const [vis, setVis] = useState(() => typeof window === 'undefined' || !('IntersectionObserver' in window))
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    if (!('IntersectionObserver' in window)) {
+      return
+    }
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVis(true); obs.disconnect() } },
-      { threshold }
+      { threshold: Math.min(threshold, 0.05), rootMargin: '0px 0px -48px 0px' }
     )
     obs.observe(el)
     return () => obs.disconnect()
@@ -40,11 +43,13 @@ function useFadeIn(threshold = 0.12) {
 
 /* ─────────────────────── helpers ───────────────────────── */
 function imgSrc(base, w) {
+  if (base.startsWith('/')) return base
   const sep = base.includes('?') ? '&' : '?'
   return `${base}${sep}format=${w}w`
 }
 
 function srcSet(base, widths) {
+  if (base.startsWith('/')) return undefined
   return widths.map(w => `${imgSrc(base, w)} ${w}w`).join(', ')
 }
 
@@ -184,7 +189,7 @@ function HeroSection({ data }) {
               >
                 {hasTabs ? (
                   <AnimatePresence mode="wait">
-                    <motion.img
+                    <Motion.img
                       key={current.src}
                       src={imgSrc(current.src, 1000)}
                       srcSet={srcSet(current.src, [500, 750, 1000, 1500])}
@@ -227,7 +232,7 @@ function HeroSection({ data }) {
       {/* MODAL */}
       <AnimatePresence>
         {modal && (
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={() => setModal(false)}
@@ -241,7 +246,7 @@ function HeroSection({ data }) {
             >
               <span className="material-symbols-outlined" style={{ fontSize: 24 }}>close</span>
             </button>
-            <motion.img
+            <Motion.img
               initial={{ scale: 0.94, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.96, opacity: 0 }}
@@ -251,7 +256,7 @@ function HeroSection({ data }) {
               alt="Imagen ampliada"
               style={{ maxWidth: 'min(94vw, 1400px)', maxHeight: 'min(90vh, 1100px)', width: '100%', height: 'auto', objectFit: 'contain', borderRadius: 10, boxShadow: '0 30px 80px rgba(0,0,0,.5)' }}
             />
-          </motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
     </section>
@@ -337,7 +342,7 @@ function GallerySection({ data }) {
       {/* LIGHTBOX */}
       <AnimatePresence>
         {active !== null && (
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             role="dialog" aria-modal="true" aria-label="Galería de imágenes"
@@ -368,7 +373,7 @@ function GallerySection({ data }) {
               <span className="material-symbols-outlined" style={{ fontSize: 28 }}>chevron_right</span>
             </button>
 
-            <motion.img
+            <Motion.img
               key={gallery[active].src}
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -383,7 +388,7 @@ function GallerySection({ data }) {
             <div aria-hidden="true" style={{ position: 'absolute', bottom: 22, left: '50%', transform: 'translateX(-50%)', color: 'rgba(255,255,255,.6)', fontFamily: BODY_F, fontSize: 12, letterSpacing: '.12em' }}>
               {String(active + 1).padStart(2, '0')} / {String(gallery.length).padStart(2, '0')}
             </div>
-          </motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
     </section>
@@ -610,6 +615,24 @@ const CSS = `
 
   .wc-contact-card:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(16,104,67,.30); }
 
+  .wc-subnav {
+    position: sticky; top: 80px; z-index: 35;
+    display: flex; justify-content: center; gap: 6px;
+    padding: 10px 16px;
+    background: rgba(255,255,255,.88);
+    border-block: 1px solid rgba(16,104,67,.10);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 10px 30px rgba(15,31,21,.05);
+  }
+  .wc-subnav a {
+    padding: 9px 14px; border-radius: 10px;
+    color: #3a5145; font-family: "Nunito Sans", sans-serif;
+    font-size: 12px; font-weight: 800; text-decoration: none;
+    transition: color .2s ease, background-color .2s ease, transform .15s ease;
+  }
+  .wc-subnav a:hover { color: ${G_DARK}; background: #e8f5ee; }
+  .wc-subnav a:active { transform: scale(.97); }
+
   .wc-thumb:hover { box-shadow: 0 16px 40px rgba(15,31,21,.16) !important; }
   .wc-thumb:hover .wc-thumb-img { transform: scale(1.06); }
   .wc-thumb:hover .wc-thumb-fade { opacity: 1 !important; }
@@ -628,6 +651,8 @@ const CSS = `
   }
   @media (max-width: 480px) {
     .wc-gallery-grid { grid-template-columns: 1fr !important; }
+    .wc-subnav { top: 72px; justify-content: flex-start; overflow-x: auto; }
+    .wc-subnav a { white-space: nowrap; }
   }
 `
 
@@ -646,6 +671,11 @@ export default function ModulePage({ data }) {
       <NavBar />
       <main>
         <HeroSection    data={data} />
+        <nav className="wc-subnav" aria-label={`Secciones de ${data.module.name}`}>
+          <a href="#galeria">Galería</a>
+          <a href="#ficha">Ficha técnica</a>
+          <a href="#que-incluye">Qué incluye</a>
+        </nav>
         <GallerySection data={data} />
         <FichaSection   data={data} />
         <QueIncluyeSection />
