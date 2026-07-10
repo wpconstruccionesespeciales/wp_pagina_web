@@ -717,7 +717,6 @@ function PressSection() {
 ═══════════════════════════════════════════════════════════════════════════ */
 function SpecsSection() {
   const [ref, vis] = useFadeIn()
-  const half = Math.ceil(SPECS.length / 2)
   return (
     <section ref={ref} className="wmu-parallax" style={{
       position: 'relative', padding: 'clamp(80px,10vw,140px) 0', overflow: 'hidden',

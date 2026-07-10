@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion as Motion } from 'framer-motion'
 import NavBar from './NavBar'
 import Footer from './Footer'
 import WhatsAppButton from './WhatsAppButton'
@@ -186,7 +186,7 @@ function HeroSection({ data }) {
               >
                 {hasTabs ? (
                   <AnimatePresence mode="wait">
-                    <motion.img
+                    <Motion.img
                       key={current.src}
                       src={imgSrc(current.src, 1000)}
                       srcSet={srcSet(current.src, [500, 750, 1000, 1500])}
@@ -229,7 +229,7 @@ function HeroSection({ data }) {
       {/* MODAL */}
       <AnimatePresence>
         {modal && (
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={() => setModal(false)}
@@ -243,7 +243,7 @@ function HeroSection({ data }) {
             >
               <span className="material-symbols-outlined" style={{ fontSize: 24 }}>close</span>
             </button>
-            <motion.img
+            <Motion.img
               initial={{ scale: 0.94, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.96, opacity: 0 }}
@@ -253,7 +253,7 @@ function HeroSection({ data }) {
               alt="Imagen ampliada"
               style={{ maxWidth: 'min(94vw, 1400px)', maxHeight: 'min(90vh, 1100px)', width: '100%', height: 'auto', objectFit: 'contain', borderRadius: 10, boxShadow: '0 30px 80px rgba(0,0,0,.5)' }}
             />
-          </motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
     </section>
@@ -339,7 +339,7 @@ function GallerySection({ data }) {
       {/* LIGHTBOX */}
       <AnimatePresence>
         {active !== null && (
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             role="dialog" aria-modal="true" aria-label="Galería de imágenes"
@@ -370,7 +370,7 @@ function GallerySection({ data }) {
               <span className="material-symbols-outlined" style={{ fontSize: 28 }}>chevron_right</span>
             </button>
 
-            <motion.img
+            <Motion.img
               key={gallery[active].src}
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -385,7 +385,7 @@ function GallerySection({ data }) {
             <div aria-hidden="true" style={{ position: 'absolute', bottom: 22, left: '50%', transform: 'translateX(-50%)', color: 'rgba(255,255,255,.6)', fontFamily: BODY_F, fontSize: 12, letterSpacing: '.12em' }}>
               {String(active + 1).padStart(2, '0')} / {String(gallery.length).padStart(2, '0')}
             </div>
-          </motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
     </section>
