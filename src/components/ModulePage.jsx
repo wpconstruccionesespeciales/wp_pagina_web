@@ -40,11 +40,13 @@ function useFadeIn(threshold = 0.12) {
 
 /* ─────────────────────── helpers ───────────────────────── */
 function imgSrc(base, w) {
+  if (base.startsWith('/')) return base
   const sep = base.includes('?') ? '&' : '?'
   return `${base}${sep}format=${w}w`
 }
 
 function srcSet(base, widths) {
+  if (base.startsWith('/')) return undefined
   return widths.map(w => `${imgSrc(base, w)} ${w}w`).join(', ')
 }
 

@@ -16,9 +16,10 @@ const WA  = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_
 
 /* parallax image URLs (local) */
 const SKY_URL   = '/media/sky-hero.jpg'
-const ARA10_URL = '/wmu/Ara10.jpg'
-const ALDEA_URL = '/wmu/aldea+(3).png'
-const HEX_IMG   = '/wmu/aldea+(3).png'
+const ARA10_URL = '/wmu/Ara10.webp'
+const ALDEA_URL = '/wmu/aldea+(3).webp'
+const HEX_IMG   = '/wmu/aldea+(3).webp'
+const cssUrl = (url) => `url("${url}")`
 
 /* ── data ── */
 const MODELS = [
@@ -43,9 +44,9 @@ const SPECS = [
 ]
 
 const PRESS = [
-  { tag: 'Especialistas',             img: '/wmu/clarin.jpg',        title: 'Construcciones con Alma de Acero',     href: 'https://www.clarin.com/arq/especialistas-construcciones-alma-acero_0_1maFutEy6.html' },
-  { tag: 'Calidad y Compromiso',      img: '/wmu/arquitecturar.jpg', title: 'Proyectos innovadores de Steel Frame',  href: 'https://arquitecturar.com.ar/wp-construcciones-especiales-revoluciona-la-construccion-con-steel-frame-en-el-litoral-argentino' },
-  { tag: 'Más Eficiencia, Menos Precio', img: '/wmu/xmas.jpg',      title: 'Enfoque en eficiencia de producción',  href: 'https://oleinizak.com/matteoda-wp-construcciones-ahora-debemos-enfocarnos-en-ser-mas-eficientes-en-la-produccion-y-no-en-el-precio' },
+  { tag: 'Especialistas',             portal: 'Clarín',          img: '/wmu/clarin.jpg',        title: 'Construcciones con Alma de Acero',     href: 'https://www.clarin.com/arq/especialistas-construcciones-alma-acero_0_1maFutEy6.html' },
+  { tag: 'Calidad y Compromiso',      portal: 'Arquitectura R',  img: '/wmu/arquitecturar.jpg', title: 'Proyectos innovadores de Steel Frame',  href: 'https://arquitecturar.com.ar/wp-construcciones-especiales-revoluciona-la-construccion-con-steel-frame-en-el-litoral-argentino' },
+  { tag: 'Más Eficiencia, Menos Precio', portal: 'Oleinizak',     img: '/wmu/xmas.jpg',      title: 'Enfoque en eficiencia de producción',  href: 'https://oleinizak.com/matteoda-wp-construcciones-ahora-debemos-enfocarnos-en-ser-mas-eficientes-en-la-produccion-y-no-en-el-precio' },
 ]
 
 /* ── hook ── */
@@ -418,14 +419,16 @@ function ManifestoSection() {
         </p>
 
         <div className="manifiesto-declarations">
-          {MANIFESTO_LINES.map((line, i) => (
+          {MANIFESTO_LINES.map((line, i) => {
+            const delay = 0.1 + (i % 3) * 0.12 + (i * 0.07);
+            return (
             <div
               key={line.roman}
               ref={setRef(i)}
               className={`manifiesto-line${line.closing ? ' manifiesto-line--closing' : ''}${vis[i] ? ' is-visible' : ''}`}
             >
               <span className="manifiesto-roman" aria-hidden="true">{line.roman}</span>
-              <p className="manifiesto-text">
+              <p className="manifiesto-text" style={{ transitionDelay: `${delay.toFixed(2)}s` }}>
                 {line.text.map((seg, j) =>
                   typeof seg === 'string'
                     ? <span key={j}>{seg}</span>
@@ -444,7 +447,8 @@ function ManifestoSection() {
                 )}
               </p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <a href={WA} target="_blank" rel="noopener noreferrer" className="manifiesto-cta">
@@ -468,8 +472,8 @@ function ExpandSection() {
   const [ref, vis] = useFadeIn()
   return (
     <section id="extender" ref={ref} className="wmu-parallax" style={{
-      position: 'relative', padding: 'clamp(100px,12vw,180px) 0', overflow: 'hidden',
-      backgroundImage: `url(${ALDEA_URL})`, backgroundSize: 'cover', backgroundPosition: 'center',
+      position: 'relative', padding: 'clamp(30px,4vw,50px) 0', overflow: 'hidden',
+      backgroundImage: cssUrl(ALDEA_URL), backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
       {/* gradient overlay — more nuanced than flat */}
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(12,18,16,.75) 0%, rgba(30,30,30,.4) 50%, rgba(12,18,16,.65) 100%)', pointerEvents: 'none', zIndex: 1 }} />
@@ -480,28 +484,28 @@ function ExpandSection() {
         <div className="expand-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 'clamp(32px,5vw,72px)', alignItems: 'center' }}>
           {/* left — glassmorphism content panel */}
           <div style={{
-            padding: 'clamp(28px,4vw,44px)', borderRadius: 20,
+            padding: 'clamp(20px,3vw,32px)', borderRadius: 20,
             background: 'rgba(12,18,16,.55)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
             border: '1px solid rgba(255,255,255,.08)',
             boxShadow: '0 16px 48px rgba(0,0,0,.3)',
           }}>
             {/* vertical green accent bar */}
-            <div style={{ width: 3, height: 32, background: G, borderRadius: 4, marginBottom: 18, opacity: vis ? 1 : 0, transition: 'opacity .6s ease' }} />
-            <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(24px,3.5vw,44px)', color: TXT, textTransform: 'uppercase', marginBottom: 16, lineHeight: 1.1, opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(18px)', transition: 'opacity .7s ease .05s, transform .7s ease .05s' }}>
+            <div style={{ width: 3, height: 24, background: G, borderRadius: 4, marginBottom: 12, opacity: vis ? 1 : 0, transition: 'opacity .6s ease' }} />
+            <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(24px,3.5vw,44px)', color: TXT, textTransform: 'uppercase', marginBottom: 10, lineHeight: 1.1, opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(18px)', transition: 'opacity .7s ease .05s, transform .7s ease .05s' }}>
               ¿Necesitás<br/><span style={{ color: G }}>ampliar</span> tu espacio?
             </h2>
-            <p style={{ fontFamily: BODY, color: 'rgba(255,255,255,.75)', fontSize: 'clamp(13px,1.3vw,16px)', lineHeight: 1.75, marginBottom: 28, opacity: vis ? 1 : 0, transition: 'opacity .7s ease .12s' }}>
+            <p style={{ fontFamily: BODY, color: 'rgba(255,255,255,.75)', fontSize: 'clamp(13px,1.3vw,16px)', lineHeight: 1.75, marginBottom: 18, opacity: vis ? 1 : 0, transition: 'opacity .7s ease .12s' }}>
               Nos especializamos en ampliar tu espacio sobre estructuras existentes. Steel Frame para ejecución rápida y máxima solidez, sin demoler lo que ya construiste.
             </p>
 
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 28, opacity: vis ? 1 : 0, transition: 'opacity .7s ease .18s' }}>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 18, opacity: vis ? 1 : 0, transition: 'opacity .7s ease .18s' }}>
               {['Sin demolición', 'Montaje rápido', 'Garantía estructural'].map(t => (
                 <span key={t} style={{ fontSize: 10, padding: '5px 12px', borderRadius: 999, border: '1px solid rgba(53,195,107,.25)', background: 'rgba(53,195,107,.08)', color: G, fontFamily: BODY, fontWeight: 600 }}>{t}</span>
               ))}
             </div>
 
             <a href={WA} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 32px', borderRadius: 12, background: G, color: '#0a1f12', fontWeight: 800, textDecoration: 'none', fontSize: 14, fontFamily: BODY, boxShadow: '0 8px 28px rgba(53,195,107,.25)', opacity: vis ? 1 : 0, transition: 'opacity .7s ease .22s' }}>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 28px', borderRadius: 12, background: G, color: '#0a1f12', fontWeight: 800, textDecoration: 'none', fontSize: 14, fontFamily: BODY, boxShadow: '0 8px 28px rgba(53,195,107,.25)', opacity: vis ? 1 : 0, transition: 'opacity .7s ease .22s' }}>
               CONSULTANOS
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -663,12 +667,12 @@ function PressSection() {
         </div>
 
         {/* press cards */}
-        <div className="press-grid-new" style={{ display: 'grid', gridTemplateColumns: '1.3fr 1fr 1fr', gap: 24 }}>
+        <div className="press-grid-new" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
           {PRESS.map((p, i) => (
             <a key={p.tag} href={p.href} target="_blank" rel="noopener noreferrer"
               className="press-card-new"
               style={{
-                display: 'block', textDecoration: 'none', borderRadius: 20, overflow: 'hidden',
+                display: 'flex', flexDirection: 'column', textDecoration: 'none', borderRadius: 20, overflow: 'hidden',
                 background: '#fff',
                 border: '1px solid rgba(42,122,74,.08)',
                 boxShadow: '0 4px 24px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.02)',
@@ -677,20 +681,24 @@ function PressSection() {
                 position: 'relative',
               }}>
               {/* image container */}
-              <div style={{ position: 'relative', aspectRatio: i === 0 ? '16/10' : '4/3', overflow: 'hidden' }}>
+              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', flexShrink: 0 }}>
                 <img src={p.img} alt={p.tag} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform .6s ease' }} className="press-card-img-new" />
                 {/* green gradient overlay on image */}
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(42,122,74,.15) 0%, transparent 40%)', pointerEvents: 'none' }} />
+                {/* portal name overlay */}
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,.3)', backdropFilter: 'blur(1px)', pointerEvents: 'none' }}>
+                  <span style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(20px,2.5vw,28px)', color: '#fff', textTransform: 'uppercase', letterSpacing: '.05em', opacity: .85, textShadow: '0 2px 12px rgba(0,0,0,.4)' }}>{p.portal}</span>
+                </div>
                 {/* tag badge */}
                 <div style={{ position: 'absolute', top: 14, left: 14, padding: '6px 14px', borderRadius: 8, background: 'rgba(255,255,255,.95)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: '1px solid rgba(53,195,107,.2)', boxShadow: '0 2px 8px rgba(0,0,0,.08)' }}>
                   <span style={{ color: '#2a7a4a', fontSize: 10, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', fontFamily: BODY }}>{p.tag}</span>
                 </div>
               </div>
               {/* content */}
-              <div style={{ padding: '20px 24px 24px', position: 'relative' }}>
+              <div style={{ padding: '20px 24px 24px', position: 'relative', flex: 1 }}>
                 {/* subtle green line at bottom of content */}
                 <div style={{ position: 'absolute', bottom: 0, left: 24, right: 24, height: 2, background: 'linear-gradient(90deg, #35C36B, transparent)', opacity: 0, transition: 'opacity .3s ease' }} className="press-card-line" />
-                <div style={{ fontWeight: 700, color: '#0e1a11', fontSize: i === 0 ? 18 : 15, fontFamily: BODY, lineHeight: 1.35, marginBottom: 12 }}>{p.title}</div>
+                <div style={{ fontWeight: 700, color: '#0e1a11', fontSize: 15, fontFamily: BODY, lineHeight: 1.35, marginBottom: 12 }}>{p.title}</div>
                 <span style={{ color: '#2a7a4a', fontSize: 13, fontWeight: 700, fontFamily: BODY, display: 'inline-flex', alignItems: 'center', gap: 6, transition: 'gap .3s ease' }} className="press-link-new">
                   Leer nota
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
@@ -713,7 +721,7 @@ function SpecsSection() {
   return (
     <section ref={ref} className="wmu-parallax" style={{
       position: 'relative', padding: 'clamp(80px,10vw,140px) 0', overflow: 'hidden',
-      backgroundImage: `url(${ARA10_URL})`, backgroundSize: 'cover', backgroundPosition: 'center',
+      backgroundImage: cssUrl(ARA10_URL), backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
       {/* layered gradient overlay */}
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(12,18,16,.8) 0%, rgba(30,30,30,.45) 50%, rgba(12,18,16,.7) 100%)', pointerEvents: 'none', zIndex: 0 }} />
@@ -1006,18 +1014,11 @@ const CSS = `
     letter-spacing: -.02em;
     max-width: 540px;
     margin: 0;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 30%, #000 100%);
-            mask-image: linear-gradient(to right, transparent 0%, #000 30%, #000 100%);
-    -webkit-mask-size: 0% 100%;
-            mask-size: 0% 100%;
-    -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-    transition: -webkit-mask-size .7s cubic-bezier(.22,.61,.36,1) .15s,
-                     mask-size .7s cubic-bezier(.22,.61,.36,1) .15s;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path .8s cubic-bezier(.22,.61,.36,1);
   }
   .manifiesto-line.is-visible .manifiesto-text {
-    -webkit-mask-size: 100% 100%;
-            mask-size: 100% 100%;
+    clip-path: inset(0 0 0 0);
   }
   .manifiesto-accent {
     color: #2a7a4a;
@@ -1125,8 +1126,8 @@ export default function WMU() {
       <HeroSection />
       <ProcessSection />
       <ModelsSection />
-      <ExpandSection />
       <RecognitionSection />
+      <ExpandSection />
       <PressSection />
       <SpecsSection />
       <ManifestoSection />
