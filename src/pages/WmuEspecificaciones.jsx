@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import SEO from '../components/SEO'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import wpWhite from '../assets/wpblanco.webp'
@@ -144,11 +145,15 @@ function Footer() {
 export default function WmuEspecificaciones() {
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = "Especificaciones Técnicas | Módulos WMU"
   }, [])
 
   return (
     <div style={{ background: BG, color: TXT, minHeight: '100vh', fontFamily: BODY, overflowX: 'hidden' }}>
+      <SEO 
+        title="Especificaciones Técnicas | Módulos WMU · Steel Frame"
+        description="Ficha técnica detallada del equipamiento estándar e ingeniería de los módulos habitacionales WMU. Detalles de estructura de steel frame y aberturas."
+        keywords="especificaciones tecnicas wmu, ficha tecnica steel frame, equipamiento modulo habitable, construccion industrializada, wp construcciones"
+      />
       <Nav />
 
       {/* Hero Section Imersiva */}

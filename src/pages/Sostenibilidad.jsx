@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
@@ -110,11 +111,15 @@ export default function Sostenibilidad() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = "Sostenibilidad | STEEL CORE - WP Construcciones Especiales"
   }, [])
 
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
+      <SEO 
+        title="Construcción Sostenible y Eficiencia Energética | WP"
+        description="Edificaciones de steel frame sustentables con alma de acero y máxima aislación térmica (celulosa y poliuretano). Ahorro energético y respeto ambiental en Argentina."
+        keywords="construccion sostenible, eficiencia energetica, steel frame ecologico, aislacion termica, poliuretano proyectado, celulosa insuflada, huella de carbono argentina"
+      />
       <NavBar />
 
       <main className="pt-20">

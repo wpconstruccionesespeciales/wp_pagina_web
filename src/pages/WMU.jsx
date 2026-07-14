@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import SEO from '../components/SEO'
 import { Link } from 'react-router-dom'
 import wpWhite from '../assets/wpblanco.webp'
 
@@ -1181,6 +1182,12 @@ export default function WMU() {
   useEffect(() => { window.scrollTo(0, 0) }, [])
   return (
     <div className="wmu-page" style={{ fontFamily: BODY }}>
+      <SEO 
+        title="WMU Arquitectura Modular | Módulos Habitacionales Steel Frame"
+        description="Descubrí la línea WMU de casas modulares premium llave en mano. Construcción rápida con estructura de steel frame y excelente aislación térmica en Argentina."
+        keywords="wmu, arquitectura modular, modulos habitacionales, casas modulares argentina, viviendas industrializadas, modulo cero, steel frame modular"
+        ogImage="/wmu/wmu-financing.webp"
+      />
       <style>{CSS}</style>
       <WMUNav />
       <HeroSection />

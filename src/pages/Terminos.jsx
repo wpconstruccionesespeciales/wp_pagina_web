@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
@@ -52,11 +53,15 @@ export default function Terminos() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = 'Términos de Servicio | STEEL CORE - WP Construcciones Especiales'
   }, [])
 
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
+      <SEO 
+        title="Términos de Servicio | STEEL CORE - WP Construcciones Especiales"
+        description="Leé nuestros Términos de Servicio. Detalles sobre plazos de obra, formas de pago, garantías y compromisos técnicos en WP."
+        keywords="terminos de servicio, condiciones de contratacion, garantia steel frame, presupuesto construccion"
+      />
       <NavBar />
 
       <main className="pt-20">
