@@ -228,6 +228,27 @@ export default function SteelFrameParana() {
   const [faqRef, faqVisible] = useInView()
   const [contactRef, contactVisible] = useInView()
 
+  // Parallax magnético para la columna editorial izquierda
+  const leftRef = useRef(null)
+  const leftMouseX = useMotionValue(0)
+  const leftMouseY = useMotionValue(0)
+  const leftSpringX = useSpring(leftMouseX, { stiffness: 100, damping: 25, mass: 0.8 })
+  const leftSpringY = useSpring(leftMouseY, { stiffness: 100, damping: 25, mass: 0.8 })
+  const leftX = useTransform(leftSpringX, [-0.5, 0.5], [-6, 6])
+  const leftY = useTransform(leftSpringY, [-0.5, 0.5], [-4, 4])
+
+  const handleLeftMouseMove = (e) => {
+    const rect = leftRef.current?.getBoundingClientRect()
+    if (!rect) return
+    leftMouseX.set((e.clientX - rect.left) / rect.width - 0.5)
+    leftMouseY.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
+
+  const handleLeftMouseLeave = () => {
+    leftMouseX.set(0)
+    leftMouseY.set(0)
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -378,92 +399,152 @@ export default function SteelFrameParana() {
 
           <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
             
-            {/* Columna Editorial */}
-            <Motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={heroVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            {/* Columna Editorial con parallax sutil + decoración */}
+            <div
+              ref={leftRef}
+              onMouseMove={handleLeftMouseMove}
+              onMouseLeave={handleLeftMouseLeave}
+              className="relative"
             >
-              {/* Eyebrow con línea animada */}
-              <div className="flex items-center gap-3 mb-6">
+              {/* Gran marca de agua "2005" editorial */}
+              <div className="absolute -top-8 -left-4 select-none pointer-events-none overflow-hidden">
                 <Motion.span
+                  initial={{ y: '100%', opacity: 0 }}
+                  animate={heroVisible ? { y: 0, opacity: 1 } : {}}
+                  transition={{ duration: 1.2, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  className="block font-headline text-[10rem] sm:text-[14rem] lg:text-[18rem] font-black text-[#15251b]/[0.035] leading-[0.75] tracking-[-0.06em]"
+                >
+                  2005
+                </Motion.span>
+              </div>
+
+              {/* Corchetes arquitectónicos esquina superior izquierda */}
+              <div className="absolute -left-5 -top-3 w-10 h-10 pointer-events-none hidden sm:block">
+                <Motion.div
                   initial={{ scaleX: 0 }}
                   animate={heroVisible ? { scaleX: 1 } : {}}
-                  transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                  className="h-px w-8 bg-[#15251b]/45 origin-left"
+                  transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute top-0 left-0 w-8 h-px bg-[#15251b]/15 origin-left"
                 />
-                <span className="text-[#15251b]/70 text-[0.65rem] sm:text-xs font-bold tracking-[0.3em] uppercase font-headline">
-                  Arquitectura & Construcción de Alta Gama
-                </span>
+                <Motion.div
+                  initial={{ scaleY: 0 }}
+                  animate={heroVisible ? { scaleY: 1 } : {}}
+                  transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute top-0 left-0 w-px h-8 bg-[#15251b]/15 origin-top"
+                />
               </div>
 
-              {/* H1 con stagger reveal por línea */}
-              <h1 className="font-headline text-4xl sm:text-5xl lg:text-[4.2rem] font-bold text-[#15251b] leading-[1.05] tracking-[-0.04em] mb-6 overflow-hidden">
-                <span className="block overflow-hidden">
-                  <Motion.span
-                    initial={{ y: '110%' }}
-                    animate={heroVisible ? { y: 0 } : {}}
-                    transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="block"
-                  >
-                    Steel Frame en{' '}
-                    <span className="bg-gradient-to-r from-[#15251b] via-[#4d6c56] to-[#15251b] bg-clip-text text-transparent">
-                      Paraná
-                    </span>
-                    :
-                  </Motion.span>
-                </span>
-                <span className="block overflow-hidden">
-                  <Motion.span
-                    initial={{ y: '110%' }}
-                    animate={heroVisible ? { y: 0 } : {}}
-                    transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="block"
-                  >
-                    Habitar el Litoral
-                  </Motion.span>
-                </span>
-              </h1>
+              {/* Corchetes esquina inferior derecha */}
+              <div className="absolute -right-5 -bottom-5 w-10 h-10 pointer-events-none hidden sm:block">
+                <Motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={heroVisible ? { scaleX: 1 } : {}}
+                  transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute bottom-0 right-0 w-8 h-px bg-[#15251b]/15 origin-right"
+                />
+                <Motion.div
+                  initial={{ scaleY: 0 }}
+                  animate={heroVisible ? { scaleY: 1 } : {}}
+                  transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute bottom-0 right-0 w-px h-8 bg-[#15251b]/15 origin-bottom"
+                />
+              </div>
 
-              {/* Subtítulo */}
-              <Motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={heroVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                className="text-on-surface-variant text-base sm:text-lg leading-relaxed mb-6 font-light max-w-2xl"
-              >
-                Desde el año 2005 diseñamos y edificamos residencias de alta precisión estructural y confort termoacústico, optimizadas para integrarse en la geografía y el clima del litoral entrerriano.
-              </Motion.p>
-
-              {/* Stat pill flotante - Trayectoria local */}
               <Motion.div
-                initial={{ opacity: 0, y: 15 }}
+                style={{ x: leftX, y: leftY }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={heroVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/70 backdrop-blur-sm border border-[#15251b]/10 rounded-full shadow-sm mb-8"
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                <span className="material-symbols-outlined text-[#15251b]/60 text-[15px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
-                <span className="text-[#15251b]/70 text-[0.6rem] font-bold tracking-[0.15em] font-headline uppercase whitespace-nowrap">
-                  21 años · 100+ proyectos · Entre Ríos
-                </span>
-              </Motion.div>
+                {/* Eyebrow con línea animada */}
+                <div className="flex items-center gap-3 mb-6">
+                  <Motion.span
+                    initial={{ scaleX: 0 }}
+                    animate={heroVisible ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                    className="h-px w-8 bg-[#15251b]/45 origin-left"
+                  />
+                  <span className="text-[#15251b]/70 text-[0.65rem] sm:text-xs font-bold tracking-[0.3em] uppercase font-headline">
+                    Arquitectura & Construcción de Alta Gama
+                  </span>
+                </div>
 
-              {/* CTAs con hover mejorado */}
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href="#cotizar"
-                  className="px-8 py-4 bg-[#15251b] text-white hover:bg-[#344a3c] hover:-translate-y-0.5 rounded-xl font-semibold text-xs tracking-widest transition-all duration-300 font-headline uppercase shadow-md hover:shadow-xl"
+                {/* H1 con stagger reveal por línea */}
+                <h1 className="font-headline text-4xl sm:text-5xl lg:text-[4.2rem] font-bold text-[#15251b] leading-[1.05] tracking-[-0.04em] overflow-hidden">
+                  <span className="block overflow-hidden">
+                    <Motion.span
+                      initial={{ y: '110%' }}
+                      animate={heroVisible ? { y: 0 } : {}}
+                      transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="block"
+                    >
+                      Steel Frame en{' '}
+                      <span className="bg-gradient-to-r from-[#15251b] via-[#4d6c56] to-[#15251b] bg-clip-text text-transparent">
+                        Paraná
+                      </span>
+                      :
+                    </Motion.span>
+                  </span>
+                  <span className="block overflow-hidden">
+                    <Motion.span
+                      initial={{ y: '110%' }}
+                      animate={heroVisible ? { y: 0 } : {}}
+                      transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className="block"
+                    >
+                      Habitar el Litoral
+                    </Motion.span>
+                  </span>
+                </h1>
+
+                {/* Línea de acento decorativa bajo el H1 */}
+                <Motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={heroVisible ? { scaleX: 1 } : {}}
+                  transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="h-[2px] bg-gradient-to-r from-[#15251b]/25 via-[#4d6c56]/35 to-transparent origin-left mb-6 mt-4"
+                />
+
+                {/* Subtítulo */}
+                <Motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={heroVisible ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-on-surface-variant text-base sm:text-lg leading-relaxed mb-6 font-light max-w-2xl"
                 >
-                  Cotizar mi Proyecto
-                </a>
-                <a
-                  href="#ventajas"
-                  className="px-8 py-4 border border-[#15251b]/20 hover:border-[#15251b] hover:-translate-y-0.5 text-[#15251b] hover:bg-[#15251b]/5 rounded-xl font-medium text-xs tracking-widest transition-all duration-300 font-headline uppercase"
+                  Desde el año 2005 diseñamos y edificamos residencias de alta precisión estructural y confort termoacústico, optimizadas para integrarse en la geografía y el clima del litoral entrerriano.
+                </Motion.p>
+
+                {/* Stat pill flotante - Trayectoria local */}
+                <Motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={heroVisible ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/70 backdrop-blur-sm border border-[#15251b]/10 rounded-full shadow-sm mb-8"
                 >
-                  Ver ventajas locales
-                </a>
-              </div>
-            </Motion.div>
+                  <span className="material-symbols-outlined text-[#15251b]/60 text-[15px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                  <span className="text-[#15251b]/70 text-[0.6rem] font-bold tracking-[0.15em] font-headline uppercase whitespace-nowrap">
+                    21 años · 100+ proyectos · Entre Ríos
+                  </span>
+                </Motion.div>
+
+                {/* CTAs con hover mejorado */}
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href="#cotizar"
+                    className="px-8 py-4 bg-[#15251b] text-white hover:bg-[#344a3c] hover:-translate-y-0.5 rounded-xl font-semibold text-xs tracking-widest transition-all duration-300 font-headline uppercase shadow-md hover:shadow-xl"
+                  >
+                    Cotizar mi Proyecto
+                  </a>
+                  <a
+                    href="#ventajas"
+                    className="px-8 py-4 border border-[#15251b]/20 hover:border-[#15251b] hover:-translate-y-0.5 text-[#15251b] hover:bg-[#15251b]/5 rounded-xl font-medium text-xs tracking-widest transition-all duration-300 font-headline uppercase"
+                  >
+                    Ver ventajas locales
+                  </a>
+                </div>
+              </Motion.div>
+            </div>
 
             {/* Interactive Editorial Mosaic con parallax */}
             <Motion.div
