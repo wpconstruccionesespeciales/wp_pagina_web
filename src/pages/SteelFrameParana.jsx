@@ -515,7 +515,7 @@ export default function SteelFrameParana() {
                   Desde el año 2005 diseñamos y edificamos residencias de alta precisión estructural y confort termoacústico, optimizadas para integrarse en la geografía y el clima del litoral entrerriano.
                 </Motion.p>
 
-                {/* Cobertura geográfica - localidades del litoral */}
+                {/* Cobertura nacional con presencia destacada en el litoral */}
                 <Motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={heroVisible ? { opacity: 1, y: 0 } : {}}
@@ -523,6 +523,8 @@ export default function SteelFrameParana() {
                   className="flex flex-wrap items-center gap-1.5 text-[0.5rem] sm:text-[0.55rem] text-[#15251b]/35 font-bold tracking-[0.12em] uppercase font-headline mb-5"
                 >
                   <span className="material-symbols-outlined text-[11px] text-[#15251b]/25" style={{ fontVariationSettings: "'FILL' 1" }}>near_me</span>
+                  <span>Cobertura nacional</span>
+                  <span className="w-1 h-1 rounded-full bg-[#15251b]/15" />
                   <span>Paraná</span>
                   <span className="w-1 h-1 rounded-full bg-[#15251b]/15" />
                   <span>Oro Verde</span>
