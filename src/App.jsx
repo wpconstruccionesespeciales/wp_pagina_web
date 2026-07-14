@@ -31,6 +31,7 @@ const Privacidad = lazy(() => import('./pages/Privacidad'))
 const Terminos = lazy(() => import('./pages/Terminos'))
 const Sostenibilidad = lazy(() => import('./pages/Sostenibilidad'))
 const Servicios = lazy(() => import('./pages/Servicios'))
+const SteelFrameParana = lazy(() => import('./pages/SteelFrameParana'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 function RouteFallback() {
@@ -147,6 +148,7 @@ export default function App() {
         <Route path="/terminos" element={<Terminos />} />
         <Route path="/sostenibilidad" element={<Sostenibilidad />} />
         <Route path="/servicios" element={<Servicios />} />
+        <Route path="/steel-frame-parana" element={<SteelFrameParana />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

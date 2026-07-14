@@ -63,14 +63,14 @@ export default function Footer({ showCTA = true }) {
             <h5 className="font-bold mb-6 text-sm uppercase tracking-widest text-white/80">Navegación</h5>
             <ul className="space-y-3">
               {[
-                { label: 'Proyectos', href: '#projects' },
-                { label: 'Servicios', href: '#services' },
-                { label: 'Proceso', href: '#process' },
-                { label: 'Comparativa', href: '#comparison' },
-                { label: 'Contacto', href: '#contact' },
+                { label: 'Inicio', href: '/' },
+                { label: 'Nosotros', href: '/nosotros' },
+                { label: 'Servicios', href: '/servicios' },
+                { label: 'Steel Frame Paraná', href: '/steel-frame-parana' },
+                { label: 'Arquitectura Modular', href: '/wmu' },
               ].map(({ label, href }) => (
                 <li key={label}>
-                  <a href={href} className="text-white/40 hover:text-white transition-colors text-sm">{label}</a>
+                  <Link to={href} className="text-white/40 hover:text-white transition-colors text-sm">{label}</Link>
                 </li>
               ))}
             </ul>
