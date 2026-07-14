@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { motion as Motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
+import { motion as Motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
@@ -80,36 +80,94 @@ const faqsParana = [
   }
 ]
 
-// ─── Componente del Hero: Mosaico Editorial Interactivo de Obras Reales en Paraná ───
+// ─── Tarjeta individual con efecto tilt 3D y label conceptual ───
+function ImageCard({ src, alt, label, motionStyle, className }) {
+  const [isHovered, setIsHovered] = useState(false)
+  const tiltX = useMotionValue(0)
+  const tiltY = useMotionValue(0)
+  const springTiltX = useSpring(tiltX, { stiffness: 200, damping: 15 })
+  const springTiltY = useSpring(tiltY, { stiffness: 200, damping: 15 })
+  const hoverScale = useSpring(1.05, { stiffness: 200, damping: 20 })
+
+  useEffect(() => {
+    hoverScale.set(isHovered ? 1 : 1.05)
+  }, [isHovered, hoverScale])
+
+  const handleMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width
+    const y = (e.clientY - rect.top) / rect.height
+    tiltX.set((y - 0.5) * 8)
+    tiltY.set((x - 0.5) * -8)
+  }
+
+  const handleLeave = () => {
+    tiltX.set(0)
+    tiltY.set(0)
+    setIsHovered(false)
+  }
+
+  return (
+    <Motion.div
+      onMouseMove={handleMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleLeave}
+      style={{
+        ...motionStyle,
+        rotateX: springTiltX,
+        rotateY: springTiltY,
+        scale: hoverScale,
+        transformStyle: 'preserve-3d',
+        perspective: 800,
+      }}
+      className={`rounded-3xl overflow-hidden shadow-2xl border border-white/40 cursor-pointer ${className}`}
+    >
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover"
+      />
+      <Motion.div
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end p-5"
+      >
+        <span className="text-white text-xs font-headline uppercase tracking-wider font-semibold drop-shadow-sm">{label}</span>
+      </Motion.div>
+    </Motion.div>
+  )
+}
+
+// ─── Mosaico con Parallax Magnético 3D ───
 function EditorialMosaic() {
   const containerRef = useRef(null)
-  const x = useMotionValue(200)
-  const y = useMotionValue(200)
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
 
-  // Tres niveles de parallax elástico (Muelles para amortiguar)
-  const springX = useSpring(x, { stiffness: 60, damping: 15 })
-  const springY = useSpring(y, { stiffness: 60, damping: 15 })
+  const springConfig = { stiffness: 120, damping: 20, mass: 0.5 }
+  const springX = useSpring(mouseX, springConfig)
+  const springY = useSpring(mouseY, springConfig)
 
-  // Transformaciones independientes para cada capa del mosaico para efecto de profundidad
-  const layer1X = useTransform(springX, [0, 400], [-12, 12])
-  const layer1Y = useTransform(springY, [0, 400], [-12, 12])
-
-  const layer2X = useTransform(springX, [0, 400], [18, -18])
-  const layer2Y = useTransform(springY, [0, 400], [-18, 18])
-
-  const layer3X = useTransform(springX, [0, 400], [-10, 10])
-  const layer3Y = useTransform(springY, [0, 400], [24, -24])
+  // Capas con distinta profundidad y dirección de paralaje
+  const img1X = useTransform(springX, [-0.5, 0.5], [10, -10])
+  const img1Y = useTransform(springY, [-0.5, 0.5], [8, -8])
+  const img2X = useTransform(springX, [-0.5, 0.5], [-15, 15])
+  const img2Y = useTransform(springY, [-0.5, 0.5], [-12, 12])
+  const img3X = useTransform(springX, [-0.5, 0.5], [18, -18])
+  const img3Y = useTransform(springY, [-0.5, 0.5], [15, -15])
 
   const handleMouseMove = (e) => {
-    if (!containerRef.current) return
-    const rect = containerRef.current.getBoundingClientRect()
-    x.set(e.clientX - rect.left)
-    y.set(e.clientY - rect.top)
+    const rect = containerRef.current?.getBoundingClientRect()
+    if (!rect) return
+    const x = (e.clientX - rect.left) / rect.width - 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5
+    mouseX.set(x)
+    mouseY.set(y)
   }
 
   const handleMouseLeave = () => {
-    x.set(200)
-    y.set(200)
+    mouseX.set(0)
+    mouseY.set(0)
   }
 
   return (
@@ -119,58 +177,40 @@ function EditorialMosaic() {
       onMouseLeave={handleMouseLeave}
       className="relative w-full h-[450px] lg:h-[550px] flex items-center justify-center select-none"
     >
-      {/* Capa de fondo decorativa: Retícula geométrica abstracta fina de arquitectura */}
-      <div 
+      {/* Retícula decorativa de fondo */}
+      <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'1\' fill=\'%2315251b\'/%3E%3C/svg%3E")',
         }}
       />
 
-      {/* Imagen Principal: Casa Unifamiliar */}
-      <Motion.div
-        style={{ x: layer1X, y: layer1Y }}
-        className="absolute w-[60%] h-[55%] left-[5%] top-[18%] rounded-3xl overflow-hidden shadow-2xl border border-white/40 group/img z-10"
-      >
-        <img
-          src="/wp/wp imagen.jpg"
-          alt="Obra Steel Frame Residencial en Paraná"
-          className="w-full h-full object-cover grayscale group-hover/img:grayscale-0 transition-all duration-700 ease-out scale-105 group-hover/img:scale-100"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end p-5">
-          <span className="text-white text-xs font-headline uppercase tracking-wider font-semibold">Residencial Paraná</span>
-        </div>
-      </Motion.div>
+      {/* Imagen Principal - "El Espacio" */}
+      <ImageCard
+        src="/wp/wp imagen.jpg"
+        alt="Obra Steel Frame Residencial en Paraná"
+        label="El Espacio"
+        motionStyle={{ x: img1X, y: img1Y }}
+        className="absolute w-[60%] h-[55%] left-[5%] top-[18%] z-10"
+      />
 
-      {/* Imagen Secundaria: Edificio en Altura */}
-      <Motion.div
-        style={{ x: layer2X, y: layer2Y }}
-        className="absolute w-[45%] h-[40%] right-[5%] top-[5%] rounded-3xl overflow-hidden shadow-xl border border-white/40 group/img z-20"
-      >
-        <img
-          src="/wp/IMG_9133.webp"
-          alt="Edificio de Steel Frame en Paraná por WP"
-          className="w-full h-full object-cover grayscale group-hover/img:grayscale-0 transition-all duration-700 ease-out scale-105 group-hover/img:scale-100"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end p-4">
-          <span className="text-white text-xs font-headline uppercase tracking-wider font-semibold">Pioneros en Altura</span>
-        </div>
-      </Motion.div>
+      {/* Imagen Secundaria - "La Luz" */}
+      <ImageCard
+        src="/wp/IMG_9133.webp"
+        alt="Edificio de Steel Frame en Paraná por WP"
+        label="La Luz"
+        motionStyle={{ x: img2X, y: img2Y }}
+        className="absolute w-[45%] h-[40%] right-[5%] top-[5%] z-20"
+      />
 
-      {/* Imagen Terciaria: Ampliación / Estructura */}
-      <Motion.div
-        style={{ x: layer3X, y: layer3Y }}
-        className="absolute w-[40%] h-[35%] right-[15%] bottom-[8%] rounded-3xl overflow-hidden shadow-xl border border-white/40 group/img z-30"
-      >
-        <img
-          src="/wp/after.jpg"
-          alt="Ingeniería y montaje de Steel Frame en Entre Ríos"
-          className="w-full h-full object-cover grayscale group-hover/img:grayscale-0 transition-all duration-700 ease-out scale-105 group-hover/img:scale-100"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end p-4">
-          <span className="text-white text-xs font-headline uppercase tracking-wider font-semibold">Precisión Estructural</span>
-        </div>
-      </Motion.div>
+      {/* Imagen Terciaria - "El Acero" */}
+      <ImageCard
+        src="/wp/after.jpg"
+        alt="Ingeniería y montaje de Steel Frame en Entre Ríos"
+        label="El Acero"
+        motionStyle={{ x: img3X, y: img3Y }}
+        className="absolute w-[40%] h-[35%] right-[15%] bottom-[8%] z-30"
+      />
     </div>
   )
 }
@@ -251,15 +291,34 @@ export default function SteelFrameParana() {
       <main className="relative z-10 pt-16">
         
         {/* ═══════════════════════════════════════════════════════
-            1. HERO — "El Espacio Arquitectónico Flotante" (Premium Light Liquid Hero)
+            1. HERO — "Arquitectura Flotante" (Cinético-Editorial con Parallax 3D)
             ═══════════════════════════════════════════════════════ */}
         <section
           ref={heroRef}
           className="relative min-h-[92vh] flex items-center justify-center py-20 px-6 lg:px-16 overflow-hidden bg-[#fafaf9] text-on-surface"
         >
-          {/* Fondo Líquido Difuso Interactuando (Auroras Claras) */}
+          {/* Animaciones del hero */}
+          <style>{`
+            @keyframes parana-grid-fade { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes parana-line-draw { from { stroke-dashoffset: 200; } to { stroke-dashoffset: 0; } }
+            .parana-grid { animation: parana-grid-fade 1.8s ease-out 0.2s forwards; opacity: 0; }
+            .parana-line-anim { stroke-dasharray: 200; stroke-dashoffset: 200; animation: parana-line-draw 2s ease-out 0.6s forwards; }
+          `}</style>
+
+          {/* Retícula arquitectónica animada */}
+          <div
+            className="absolute inset-0 pointer-events-none z-0 parana-grid"
+            style={{
+              backgroundImage:
+                'linear-gradient(rgba(21,37,27,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(21,37,27,0.04) 1px, transparent 1px)',
+              backgroundSize: '48px 48px',
+              maskImage: 'radial-gradient(ellipse at 60% 50%, black 30%, transparent 70%)',
+              WebkitMaskImage: 'radial-gradient(ellipse at 60% 50%, black 30%, transparent 70%)',
+            }}
+          />
+
+          {/* Auroras claras */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-            {/* Esfera Verde Salvia */}
             <div
               className="absolute rounded-full w-[35rem] h-[35rem] opacity-35 blur-[120px]"
               style={{
@@ -267,7 +326,6 @@ export default function SteelFrameParana() {
                 background: 'radial-gradient(circle, rgba(184,203,188,0.55) 0%, transparent 70%)',
               }}
             />
-            {/* Esfera Crema/Dorado */}
             <div
               className="absolute rounded-full w-[40rem] h-[40rem] opacity-40 blur-[130px]"
               style={{
@@ -275,7 +333,6 @@ export default function SteelFrameParana() {
                 background: 'radial-gradient(circle, rgba(212,231,216,0.6) 0%, transparent 70%)',
               }}
             />
-            {/* Esfera Dorada sutil central */}
             <div
               className="absolute rounded-full w-[25rem] h-[25rem] opacity-25 blur-[100px] left-[40%] top-[30%]"
               style={{
@@ -284,7 +341,7 @@ export default function SteelFrameParana() {
             />
           </div>
 
-          {/* Noise texture overlay */}
+          {/* Noise texture */}
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.015] mix-blend-overlay z-0"
             style={{
@@ -293,55 +350,145 @@ export default function SteelFrameParana() {
             }}
           />
 
+          {/* SVG decorativo - Perfil de acero estructural animado */}
+          <svg
+            className="absolute bottom-12 left-12 w-28 h-28 opacity-[0.07] pointer-events-none z-0 hidden lg:block"
+            viewBox="0 0 120 120"
+            fill="none"
+          >
+            <path
+              d="M35,100 L35,20 L85,20"
+              stroke="#15251b"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="parana-line-anim"
+            />
+            <path
+              d="M35,30 L35,38 M35,38 L85,38 M35,46 L35,54 M35,54 L85,54"
+              stroke="#15251b"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              className="parana-line-anim"
+              style={{ animationDelay: '1s' }}
+            />
+            <circle cx="35" cy="20" r="2" fill="#15251b" className="parana-line-anim" style={{ animationDelay: '1.4s' }} />
+            <circle cx="85" cy="20" r="2" fill="#15251b" className="parana-line-anim" style={{ animationDelay: '1.4s' }} />
+          </svg>
+
           <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
             
-            {/* Editorial Content Layout */}
+            {/* Columna Editorial */}
             <Motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={heroVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
+              {/* Eyebrow con línea animada */}
               <div className="flex items-center gap-3 mb-6">
-                <span className="h-px w-8 bg-[#15251b]/45" />
+                <Motion.span
+                  initial={{ scaleX: 0 }}
+                  animate={heroVisible ? { scaleX: 1 } : {}}
+                  transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  className="h-px w-8 bg-[#15251b]/45 origin-left"
+                />
                 <span className="text-[#15251b]/70 text-[0.65rem] sm:text-xs font-bold tracking-[0.3em] uppercase font-headline">
                   Arquitectura & Construcción de Alta Gama
                 </span>
               </div>
 
-              <h1 className="font-headline text-4xl sm:text-5xl lg:text-[4.2rem] font-bold text-[#15251b] leading-[1.05] tracking-[-0.04em] mb-6">
-                Steel Frame en <span className="bg-gradient-to-r from-[#15251b] via-[#4d6c56] to-[#15251b] bg-clip-text text-transparent">Paraná</span>:<br />Habitar el Litoral
+              {/* H1 con stagger reveal por línea */}
+              <h1 className="font-headline text-4xl sm:text-5xl lg:text-[4.2rem] font-bold text-[#15251b] leading-[1.05] tracking-[-0.04em] mb-6 overflow-hidden">
+                <span className="block overflow-hidden">
+                  <Motion.span
+                    initial={{ y: '110%' }}
+                    animate={heroVisible ? { y: 0 } : {}}
+                    transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="block"
+                  >
+                    Steel Frame en{' '}
+                    <span className="bg-gradient-to-r from-[#15251b] via-[#4d6c56] to-[#15251b] bg-clip-text text-transparent">
+                      Paraná
+                    </span>
+                    :
+                  </Motion.span>
+                </span>
+                <span className="block overflow-hidden">
+                  <Motion.span
+                    initial={{ y: '110%' }}
+                    animate={heroVisible ? { y: 0 } : {}}
+                    transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="block"
+                  >
+                    Habitar el Litoral
+                  </Motion.span>
+                </span>
               </h1>
 
-              <p className="text-on-surface-variant text-base sm:text-lg leading-relaxed mb-8 font-light max-w-2xl">
+              {/* Subtítulo */}
+              <Motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={heroVisible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                className="text-on-surface-variant text-base sm:text-lg leading-relaxed mb-6 font-light max-w-2xl"
+              >
                 Desde el año 2005 diseñamos y edificamos residencias de alta precisión estructural y confort termoacústico, optimizadas para integrarse en la geografía y el clima del litoral entrerriano.
-              </p>
+              </Motion.p>
 
+              {/* Stat pill flotante - Trayectoria local */}
+              <Motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={heroVisible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/70 backdrop-blur-sm border border-[#15251b]/10 rounded-full shadow-sm mb-8"
+              >
+                <span className="material-symbols-outlined text-[#15251b]/60 text-[15px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                <span className="text-[#15251b]/70 text-[0.6rem] font-bold tracking-[0.15em] font-headline uppercase whitespace-nowrap">
+                  21 años · 100+ proyectos · Entre Ríos
+                </span>
+              </Motion.div>
+
+              {/* CTAs con hover mejorado */}
               <div className="flex flex-wrap gap-4">
                 <a
                   href="#cotizar"
-                  className="px-8 py-4 bg-[#15251b] text-white hover:bg-[#344a3c] rounded-xl font-semibold text-xs tracking-widest transition-all duration-300 font-headline uppercase shadow-md hover:shadow-lg"
+                  className="px-8 py-4 bg-[#15251b] text-white hover:bg-[#344a3c] hover:-translate-y-0.5 rounded-xl font-semibold text-xs tracking-widest transition-all duration-300 font-headline uppercase shadow-md hover:shadow-xl"
                 >
                   Cotizar mi Proyecto
                 </a>
                 <a
                   href="#ventajas"
-                  className="px-8 py-4 border border-[#15251b]/20 hover:border-[#15251b] text-[#15251b] hover:bg-[#15251b]/5 rounded-xl font-medium text-xs tracking-widest transition-all duration-300 font-headline uppercase"
+                  className="px-8 py-4 border border-[#15251b]/20 hover:border-[#15251b] hover:-translate-y-0.5 text-[#15251b] hover:bg-[#15251b]/5 rounded-xl font-medium text-xs tracking-widest transition-all duration-300 font-headline uppercase"
                 >
                   Ver ventajas locales
                 </a>
               </div>
             </Motion.div>
 
-            {/* Interactive Editorial Mosaic */}
+            {/* Interactive Editorial Mosaic con parallax */}
             <Motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 0, scale: 0.94 }}
               animate={heroVisible ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="w-full"
             >
               <EditorialMosaic />
             </Motion.div>
           </div>
+
+          {/* Indicador de scroll creativo */}
+          <Motion.div
+            initial={{ opacity: 0 }}
+            animate={heroVisible ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 1.2 }}
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+          >
+            <span className="text-[#15251b]/30 text-[0.5rem] tracking-[0.25em] uppercase font-headline font-bold">Explorar</span>
+            <svg width="18" height="28" viewBox="0 0 18 28" fill="none" className="animate-bounce">
+              <rect x="1" y="1" width="16" height="26" rx="8" stroke="#15251b" strokeOpacity="0.2" strokeWidth="1.5" />
+              <circle cx="9" cy="9" r="2" fill="#15251b" fillOpacity="0.25" />
+            </svg>
+          </Motion.div>
         </section>
 
         {/* ═══════════════════════════════════════════════════════
