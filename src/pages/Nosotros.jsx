@@ -39,7 +39,7 @@ function BeforeAfterSlider() {
     >
       {/* DESPUÉS — full size, clipped from left */}
       <img
-        src="/wp/after.jpg"
+        src="/wp/after.webp"
         alt="Resultado final Steel Frame"
         className="before-after-image before-after-image--after absolute inset-0 w-full h-full object-cover"
         draggable={false}
@@ -48,7 +48,7 @@ function BeforeAfterSlider() {
       {/* ANTES — full size, clipped from right */}
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
         <img
-          src="/wp/before.jpg"
+          src="/wp/before.webp"
           alt="Estado original antes de obra"
           className="before-after-image before-after-image--before w-full h-full object-cover"
           draggable={false}
@@ -402,7 +402,7 @@ export default function Nosotros() {
                   <img
                     alt="Ingeniería estructural de precisión"
                     className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
-                    src="/wp/wp imagen.jpg"
+                    src="/wp/wp imagen.webp"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
 

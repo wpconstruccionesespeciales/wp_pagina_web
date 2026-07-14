@@ -16,7 +16,7 @@ const BODY    = '"Nunito Sans", sans-serif'
 const WA  = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_number&app_absent=0'
 
 /* parallax image URLs (local) */
-const SKY_URL   = '/media/sky-hero.jpg'
+const SKY_URL   = '/media/sky-hero.webp'
 const ARA10_URL = '/wmu/Ara10.webp'
 const ALDEA_URL = '/wmu/aldea+(3).webp'
 const HEX_IMG   = '/wmu/aldea+(3).webp'
@@ -235,7 +235,7 @@ function ProcessSection() {
       position: 'relative', overflow: 'hidden', minHeight: '100vh',
       display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
     }}>
-      <img src="/wmu/wmu-process-bg.jpg" alt="" aria-hidden="true"
+      <img src="/wmu/wmu-process-bg.webp" alt="" aria-hidden="true"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center bottom' }} />
 
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,.72) 0%, rgba(0,0,0,.5) 28%, rgba(0,0,0,.12) 52%, transparent 70%)', pointerEvents: 'none' }} />
