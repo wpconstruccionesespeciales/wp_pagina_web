@@ -80,22 +80,28 @@ const faqsParana = [
   }
 ]
 
-// ─── Componente del Hero: Maqueta de Cristal 3D con Paralaje ───
+// ─── Componente del Hero: Maqueta de Cristal 3D Detallada con Sombras Dinámicas ───
 function ArchitecturalModel() {
   const [hoveredConcept, setHoveredConcept] = useState(null)
   const containerRef = useRef(null)
 
-  // Motion values de Framer Motion para paralaje 3D fluido sin forzar re-renders masivos
+  // Motion values de Framer Motion para paralaje 3D fluido
   const x = useMotionValue(200)
   const y = useMotionValue(200)
 
   // Mapeo del movimiento del cursor a rotación en grados
-  const rotateX = useTransform(y, [0, 400], [12, -12])
-  const rotateY = useTransform(x, [0, 400], [-12, 12])
+  const rotateX = useTransform(y, [0, 400], [15, -15])
+  const rotateY = useTransform(x, [0, 400], [-15, 15])
+
+  // Desplazamiento opuesto de la sombra proyectada en el suelo
+  const shadowTranslateX = useTransform(x, [0, 400], [12, -12])
+  const shadowTranslateY = useTransform(y, [0, 400], [12, -12])
 
   // Muelles suaves (springs) para amortiguar el movimiento
-  const springX = useSpring(rotateY, { stiffness: 90, damping: 18 })
-  const springY = useSpring(rotateX, { stiffness: 90, damping: 18 })
+  const springX = useSpring(rotateY, { stiffness: 80, damping: 20 })
+  const springY = useSpring(rotateX, { stiffness: 80, damping: 20 })
+  const springShadowX = useSpring(shadowTranslateX, { stiffness: 80, damping: 20 })
+  const springShadowY = useSpring(shadowTranslateY, { stiffness: 80, damping: 20 })
 
   const handleMouseMove = (e) => {
     if (!containerRef.current) return
@@ -106,7 +112,6 @@ function ArchitecturalModel() {
   }
 
   const handleMouseLeave = () => {
-    // Retornar suavemente al origen/centro
     x.set(200)
     y.set(200)
     setHoveredConcept(null)
@@ -115,21 +120,21 @@ function ArchitecturalModel() {
   const concepts = [
     {
       id: 0,
-      title: 'Diseño y Confort Litoral',
-      desc: 'Adaptación funcional y térmica a las condiciones específicas del entorno y el clima del litoral entrerriano.',
-      x: 120, y: 150
+      title: 'Diseño Adaptativo Litoral',
+      desc: 'Adaptación funcional y térmica a las condiciones climáticas del Río Paraná.',
+      x: 140, y: 130
     },
     {
       id: 1,
-      title: 'Precisión de Ingeniería',
-      desc: 'Cálculo de ingeniería de detalle con precisión milimétrica para una optimización total de materiales.',
-      x: 220, y: 200
+      title: 'Ingeniería Estructural',
+      desc: 'Cálculo de precisión milimétrica para terrenos con relieve y lomas expansivas.',
+      x: 230, y: 190
     },
     {
       id: 2,
-      title: 'Arquitectura Sostenible',
-      desc: 'Construcción limpia en seco con baja huella de carbono y máximo ahorro de energía certificado.',
-      x: 160, y: 280
+      title: 'Sostenibilidad Activa',
+      desc: 'Construcción limpia en seco con baja huella de carbono y alto aislamiento térmico.',
+      x: 180, y: 270
     }
   ]
 
@@ -138,15 +143,18 @@ function ArchitecturalModel() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full h-[400px] lg:h-[480px] bg-white/20 border border-white/40 rounded-3xl overflow-hidden shadow-xl backdrop-blur-sm select-none flex items-center justify-center cursor-pointer group"
+      className="relative w-full h-[450px] lg:h-[520px] bg-white/20 border border-white/50 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-md select-none flex items-center justify-center cursor-pointer group"
     >
-      {/* Retícula sutil CAD de fondo */}
+      {/* Retícula sutil CAD e Identidad WP en fondo */}
       <div 
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        className="absolute inset-0 opacity-[0.06] pointer-events-none"
         style={{
           backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M 24 0 L 0 0 0 24\' fill=\'none\' stroke=\'%23000\' stroke-width=\'0.75\'/%3E%3C/svg%3E")',
         }}
       />
+      <div className="absolute top-4 left-6 font-mono text-[9px] text-[#15251b]/20 pointer-events-none">
+        [ WP MODELING LAB // PARANÁ ]
+      </div>
 
       {/* Contenedor 3D Rotativo con Framer Motion */}
       <Motion.div
@@ -155,58 +163,101 @@ function ArchitecturalModel() {
           rotateX: springY,
           transformStyle: 'preserve-3d',
         }}
-        className="relative w-[320px] h-[320px] flex items-center justify-center"
+        className="relative w-[340px] h-[340px] flex items-center justify-center"
       >
         <svg
           viewBox="0 0 400 400"
-          className="w-full h-full drop-shadow-lg"
+          className="w-full h-full drop-shadow-2xl"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
+          {/* Sombra Proyectada Dinámica en el Suelo */}
+          <Motion.polygon
+            points="70,300 200,245 330,300 200,355"
+            fill="rgba(21,37,27,0.08)"
+            style={{
+              x: springShadowX,
+              y: springShadowY,
+            }}
+          />
+
           {/* Plano de suelo conceptual (Rombo) */}
           <polygon
-            points="60,280 200,210 340,280 200,350"
-            fill="rgba(21,37,27,0.03)"
-            stroke="rgba(21,37,27,0.15)"
-            strokeWidth="1"
+            points="60,290 200,220 340,290 200,360"
+            fill="rgba(21,37,27,0.02)"
+            stroke="rgba(21,37,27,0.12)"
+            strokeWidth="0.75"
+          />
+
+          {/* Base de Hormigón Isométrica con Espesor y Detalle Técnico */}
+          {/* Cara Superior */}
+          <polygon
+            points="90,290 200,245 310,290 200,335"
+            fill="rgba(21,37,27,0.06)"
+            stroke="rgba(21,37,27,0.18)"
+            strokeWidth="0.75"
+          />
+          {/* Cara Lateral Izquierda (Espesor) */}
+          <polygon
+            points="90,290 200,335 200,345 90,300"
+            fill="rgba(21,37,27,0.12)"
+            stroke="rgba(21,37,27,0.18)"
+            strokeWidth="0.75"
+          />
+          {/* Cara Lateral Derecha (Espesor) */}
+          <polygon
+            points="200,335 310,290 310,300 200,345"
+            fill="rgba(21,37,27,0.09)"
+            stroke="rgba(21,37,27,0.18)"
+            strokeWidth="0.75"
           />
 
           {/* Líneas de cota arquitectónicas sutiles */}
-          <line x1="200" y1="210" x2="200" y2="350" stroke="rgba(21,37,27,0.08)" strokeDasharray="3 3" />
-          <line x1="60" y1="280" x2="340" y2="280" stroke="rgba(21,37,27,0.08)" strokeDasharray="3 3" />
+          <line x1="200" y1="220" x2="200" y2="360" stroke="rgba(21,37,27,0.06)" strokeDasharray="3 3" />
+          <line x1="60" y1="290" x2="340" y2="290" stroke="rgba(21,37,27,0.06)" strokeDasharray="3 3" />
 
-          {/* Geometría 3D de la Casa Abstracta (Planos translúcidos de vidrio) */}
+          {/* Geometría 3D de la Casa Abstracta Detallada */}
           
-          {/* Muro posterior izquierdo */}
+          {/* Cristal Interior Salvia (Pared Posterior) */}
           <polygon
-            points="100,160 200,110 200,250 100,300"
-            fill="rgba(184,203,188,0.12)"
-            stroke="rgba(21,37,27,0.2)"
+            points="120,160 200,120 200,265 120,305"
+            fill="rgba(184,203,188,0.2)"
+            stroke="rgba(21,37,27,0.25)"
             strokeWidth="0.75"
           />
           
-          {/* Muro posterior derecho */}
+          {/* Cristal Interior Azul/Gris (Pared Posterior Derecha) */}
           <polygon
-            points="200,110 300,160 300,300 200,250"
-            fill="rgba(184,203,188,0.08)"
+            points="200,120 280,160 280,305 200,265"
+            fill="rgba(146,165,151,0.12)"
             stroke="rgba(21,37,27,0.2)"
             strokeWidth="0.75"
           />
 
-          {/* Plano de cubierta flotante (Techo) */}
+          {/* Estructura Metálica Central (Pilares e Intersecciones) */}
+          <line x1="120" y1="160" x2="120" y2="305" stroke="rgba(21,37,27,0.5)" strokeWidth="1" />
+          <line x1="200" y1="120" x2="200" y2="265" stroke="rgba(21,37,27,0.5)" strokeWidth="1" />
+          <line x1="280" y1="160" x2="280" y2="305" stroke="rgba(21,37,27,0.5)" strokeWidth="1" />
+
+          {/* Vidrio Frontal Esmerilado Flotante (Representa Ventanales de Alta Gama) */}
           <polygon
-            points="80,140 200,80 320,140 200,200"
-            fill="rgba(21,37,27,0.04)"
+            points="140,190 200,160 200,285 140,315"
+            fill="rgba(255,255,255,0.15)"
             stroke="rgba(21,37,27,0.3)"
             strokeWidth="1"
           />
+          {/* Reflejo oblicuo en el vidrio */}
+          <line x1="150" y1="210" x2="190" y2="290" stroke="rgba(255,255,255,0.3)" strokeWidth="0.75" />
 
-          {/* Columnas estructurales (Líneas finas de acero) */}
-          <line x1="100" y1="160" x2="100" y2="300" stroke="rgba(21,37,27,0.4)" strokeWidth="1" />
-          <line x1="200" y1="200" x2="200" y2="330" stroke="rgba(21,37,27,0.4)" strokeWidth="1" />
-          <line x1="300" y1="160" x2="300" y2="300" stroke="rgba(21,37,27,0.4)" strokeWidth="1" />
+          {/* Plano de techo flotante en ángulo asimétrico */}
+          <polygon
+            points="100,140 200,90 300,140 200,190"
+            fill="rgba(21,37,27,0.05)"
+            stroke="rgba(21,37,27,0.4)"
+            strokeWidth="1.25"
+          />
 
-          {/* Planos Interactivos (Hotspots Conceptuales) */}
+          {/* Hotspots Conceptuales */}
           {concepts.map((concept) => {
             const isHovered = hoveredConcept === concept.id
             return (
@@ -215,19 +266,16 @@ function ArchitecturalModel() {
                 onMouseEnter={() => setHoveredConcept(concept.id)}
                 className="cursor-pointer"
               >
-                {/* Plano flotante esmerilado */}
                 <circle
-                  cx={concept.x} cy={concept.y} r="14"
-                  fill={isHovered ? "rgba(184,203,188,0.6)" : "rgba(21,37,27,0.05)"}
-                  stroke="rgba(21,37,27,0.3)"
+                  cx={concept.x} cy={concept.y} r="15"
+                  fill={isHovered ? "rgba(184,203,188,0.55)" : "rgba(21,37,27,0.04)"}
+                  stroke="rgba(21,37,27,0.25)"
                   strokeWidth="0.75"
                   className="transition-colors duration-300"
                 />
-                {/* Punto central */}
                 <circle
                   cx={concept.x} cy={concept.y} r="4"
                   fill="rgba(21,37,27,0.7)"
-                  className="transition-transform duration-300"
                 />
               </g>
             )
@@ -249,7 +297,7 @@ function ArchitecturalModel() {
             <h4 className="font-headline font-bold text-[#15251b] text-sm uppercase tracking-wide">
               {concepts[hoveredConcept].title}
             </h4>
-            <p className="text-xs text-on-surface-variant leading-relaxed mt-0.5">
+            <p className="text-xs text-on-surface-variant leading-relaxed mt-0.5 font-light">
               {concepts[hoveredConcept].desc}
             </p>
           </div>
@@ -339,13 +387,13 @@ export default function SteelFrameParana() {
             ═══════════════════════════════════════════════════════ */}
         <section
           ref={heroRef}
-          className="relative min-h-[92vh] flex items-center justify-center py-20 px-6 lg:px-16 overflow-hidden bg-[#fafaf9] text-on-surface"
+          className="relative min-h-[95vh] flex items-center justify-center py-24 px-6 lg:px-16 overflow-hidden bg-[#fafaf9] text-on-surface"
         >
           {/* Fondo Líquido Difuso Interactuando (Auroras Claras) */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
             {/* Esfera Verde Salvia */}
             <div
-              className="absolute rounded-full w-[35rem] h-[35rem] opacity-35 blur-[120px] transition-transform duration-1000"
+              className="absolute rounded-full w-[35rem] h-[35rem] opacity-35 blur-[120px]"
               style={{
                 left: '-10%', top: '10%',
                 background: 'radial-gradient(circle, rgba(184,203,188,0.55) 0%, transparent 70%)',
@@ -368,6 +416,19 @@ export default function SteelFrameParana() {
             />
           </div>
 
+          {/* Curvas Topográficas de las Barrancas de Paraná en SVG */}
+          <div className="absolute inset-0 pointer-events-none opacity-10 z-0">
+            <svg className="w-full h-full stroke-[#15251b]" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M-100,200 C300,180 500,250 900,220 C1100,200 1300,280 1600,240" strokeWidth="0.75" />
+              <path d="M-100,300 C350,260 600,350 1000,310 C1200,290 1400,380 1700,340" strokeWidth="0.75" strokeDasharray="4 4" />
+              <path d="M-100,400 C400,340 700,450 1100,400 C1300,380 1500,480 1800,440" strokeWidth="0.75" />
+              <path d="M-100,500 C450,420 800,550 1200,490 C1400,470 1600,580 1900,540" strokeWidth="0.75" strokeDasharray="4 4" />
+              <text x="120" y="190" className="fill-[#15251b] font-mono text-[8px] tracking-[0.25em] opacity-40">+15m ELEV. BARRANCAS</text>
+              <text x="650" y="290" className="fill-[#15251b] font-mono text-[8px] tracking-[0.25em] opacity-40">+30m TOPOGRAFÍA LOCAL</text>
+              <text x="1100" y="390" className="fill-[#15251b] font-mono text-[8px] tracking-[0.25em] opacity-40">+45m COTA PARANÁ</text>
+            </svg>
+          </div>
+
           {/* Noise texture overlay */}
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.015] mix-blend-overlay z-0"
@@ -386,6 +447,18 @@ export default function SteelFrameParana() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="bg-white/40 backdrop-blur-md border border-white/70 shadow-xl rounded-3xl p-8 lg:p-12 relative overflow-hidden"
             >
+              {/* Ficha Técnica de Coordenadas e Ingeniería en Tipografía Mono */}
+              <div className="flex justify-between items-start border-b border-[#15251b]/15 pb-4 mb-6 font-mono text-[10px] text-[#15251b]/60 leading-normal tracking-wide">
+                <div>
+                  <div className="font-bold text-[#15251b]">[WP SPEC-DOC_v2.0]</div>
+                  <div>LOC: PARANÁ, ENTRE RÍOS (ARG)</div>
+                </div>
+                <div className="text-right">
+                  <div>COORD: 31°44'00"S 60°31'00"W</div>
+                  <div>ALTITUD: ~50m S.N.M.</div>
+                </div>
+              </div>
+
               <div className="flex items-center gap-3 mb-6">
                 <span className="h-px w-8 bg-[#15251b]/45" />
                 <span className="text-[#15251b]/70 text-[0.65rem] sm:text-xs font-bold tracking-[0.3em] uppercase font-headline">
