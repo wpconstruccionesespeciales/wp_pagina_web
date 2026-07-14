@@ -300,8 +300,8 @@ export default function SteelFrameParana() {
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
       <SEO 
         title="Steel Frame en Paraná | WP Construcciones Especiales"
-        description="Líderes en construcción en seco, steel frame de alta gama y arquitectura modular en Paraná, Entre Ríos. Proyectos llave en mano con precisión milimétrica."
-        keywords="steel frame parana, construccion en seco parana, casas steel frame parana, constructora parana, steel framing entre rios, wp construcciones"
+        description="Líderes en construcción en seco, steel frame de alta gama y arquitectura modular en Paraná, Oro Verde, Crespo y toda la región de Entre Ríos. Proyectos llave en mano con precisión milimétrica."
+        keywords="steel frame parana, construccion en seco parana, casas steel frame parana, constructora parana, steel framing entre rios, wp construcciones, steel frame oro verde, construccion en seco crespo"
       />
       <script type="application/ld+json">
         {JSON.stringify(schemaData)}
@@ -510,10 +510,29 @@ export default function SteelFrameParana() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={heroVisible ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-on-surface-variant text-base sm:text-lg leading-relaxed mb-6 font-light max-w-2xl"
+                  className="text-on-surface-variant text-base sm:text-lg leading-relaxed mb-4 font-light max-w-2xl"
                 >
                   Desde el año 2005 diseñamos y edificamos residencias de alta precisión estructural y confort termoacústico, optimizadas para integrarse en la geografía y el clima del litoral entrerriano.
                 </Motion.p>
+
+                {/* Cobertura geográfica - localidades del litoral */}
+                <Motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={heroVisible ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-wrap items-center gap-1.5 text-[0.5rem] sm:text-[0.55rem] text-[#15251b]/35 font-bold tracking-[0.12em] uppercase font-headline mb-5"
+                >
+                  <span className="material-symbols-outlined text-[11px] text-[#15251b]/25" style={{ fontVariationSettings: "'FILL' 1" }}>near_me</span>
+                  <span>Paraná</span>
+                  <span className="w-1 h-1 rounded-full bg-[#15251b]/15" />
+                  <span>Oro Verde</span>
+                  <span className="w-1 h-1 rounded-full bg-[#15251b]/15" />
+                  <span>Crespo</span>
+                  <span className="w-1 h-1 rounded-full bg-[#15251b]/15" />
+                  <span>Diamante</span>
+                  <span className="w-1 h-1 rounded-full bg-[#15251b]/15" />
+                  <span>Santa Fe</span>
+                </Motion.div>
 
                 {/* Stat pill flotante - Trayectoria local */}
                 <Motion.div
@@ -524,7 +543,7 @@ export default function SteelFrameParana() {
                 >
                   <span className="material-symbols-outlined text-[#15251b]/60 text-[15px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
                   <span className="text-[#15251b]/70 text-[0.6rem] font-bold tracking-[0.15em] font-headline uppercase whitespace-nowrap">
-                    21 años · 100+ proyectos · Entre Ríos
+                    21 años · Paraná, Oro Verde, Crespo · Entre Ríos
                   </span>
                 </Motion.div>
 
