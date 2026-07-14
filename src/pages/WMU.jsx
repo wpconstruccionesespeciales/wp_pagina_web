@@ -24,11 +24,11 @@ const cssUrl = (url) => `url("${url}")`
 
 /* ── data ── */
 const MODELS = [
-  { name: 'WMU CERO',   size: '36 m²',  img: '/wmu/wmu-cero.png',  href: '/wmu-cero', internal: true },
-  { name: 'WMU CERO 2', size: '55 m²',  img: '/wmu/wmu-cero2.png', href: '/wmu-cero-2', internal: true },
-  { name: 'WMU CAMPO',  size: '94 m²',  img: '/wmu/wmu-campo.jpg', href: '/wmu-campo', internal: true },
-  { name: 'WMU ALDEA',  size: '120 m²', img: '/wmu/wmu-aldea.png', href: '/wmu-aldea', internal: true },
-  { name: 'WMU SAUCE',  size: '86 m²',  img: '/wmu/wmu-sauce.png', href: '/wmu-sauce', internal: true },
+  { name: 'WMU CERO',   size: '36 m²',  img: '/wmu/wmu-cero.webp',  href: '/wmu-cero', internal: true },
+  { name: 'WMU CERO 2', size: '55 m²',  img: '/wmu/wmu-cero2.webp', href: '/wmu-cero-2', internal: true },
+  { name: 'WMU CAMPO',  size: '94 m²',  img: '/wmu/wmu-campo.webp', href: '/wmu-campo', internal: true },
+  { name: 'WMU ALDEA',  size: '120 m²', img: '/wmu/wmu-aldea.webp', href: '/wmu-aldea', internal: true },
+  { name: 'WMU SAUCE',  size: '86 m²',  img: '/wmu/wmu-sauce.webp', href: '/wmu-sauce', internal: true },
 ]
 
 const SPECS = [
@@ -772,7 +772,7 @@ function SpecsSection() {
           {/* right — CTA card + image */}
           <div>
             <div className="specs-img" style={{ borderRadius: 20, overflow: 'hidden', boxShadow: '0 20px 56px rgba(0,0,0,.4)', marginBottom: 20, opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateX(24px)', transition: 'opacity .8s ease .2s, transform .8s ease .2s' }}>
-              <img src="/wmu/wmu-aldea.png" alt="Modelo WMU Aldea" style={{ width: '100%', display: 'block', objectFit: 'cover' }} />
+              <img src="/wmu/wmu-aldea.webp" alt="Modelo WMU Aldea" style={{ width: '100%', display: 'block', objectFit: 'cover' }} />
             </div>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', opacity: vis ? 1 : 0, transition: 'opacity .7s ease .4s' }}>
               <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-btn-primary" style={{ flex: 1, textAlign: 'center' }}>CONTÁCTANOS</a>

@@ -308,6 +308,39 @@ export default function Nosotros() {
     return () => window.removeEventListener('resize', updateLine)
   }, [historyVisible, updateLine])
 
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://wpconstrucciones.com/nosotros#webpage",
+        "url": "https://wpconstrucciones.com/nosotros",
+        "name": "Nosotros | WP Construcciones Especiales",
+        "description": "Conocé la trayectoria de WP Construcciones Especiales en Paraná, Entre Ríos. Desde 2005 diseñando y construyendo estructuras duraderas en Steel Frame.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://wpconstrucciones.com/#website",
+          "url": "https://wpconstrucciones.com/",
+          "name": "WP Construcciones Especiales"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://wpconstrucciones.com/#organization",
+        "name": "WP Construcciones Especiales",
+        "url": "https://wpconstrucciones.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wpconstrucciones.com/assets/WP.png"
+        },
+        "sameAs": [
+          "https://www.facebook.com/WPConstruccionesEspeciales",
+          "https://www.instagram.com/wpconstruccionesespeciales/?hl=en"
+        ]
+      }
+    ]
+  }
+
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
       <SEO 
@@ -315,6 +348,9 @@ export default function Nosotros() {
         description="Conocé la trayectoria de WP Construcciones Especiales en Paraná, Entre Ríos. Desde 2005 diseñando y construyendo estructuras duraderas en Steel Frame con precisión industrial."
         keywords="nosotros, trayectoria, guillermo matteoda, steel frame parana, construccion en seco entre rios, fabrica de aberturas, historia steel frame, argentina"
       />
+      <script type="application/ld+json">
+        {JSON.stringify(aboutSchema)}
+      </script>
       <NavBar />
 
       <main className="pt-20">
@@ -543,7 +579,7 @@ export default function Nosotros() {
                 <div className="aspect-[4/5] overflow-hidden rounded-3xl">
                   <img
                     className="w-full h-full object-cover hover:grayscale transition-all duration-700"
-                    src="/wp/IMG_9158.jpg"
+                    src="/wp/IMG_9158.webp"
                     alt="Maquinaria roll-forming"
                   />
                 </div>
@@ -551,7 +587,7 @@ export default function Nosotros() {
                   <div className="aspect-video overflow-hidden rounded-3xl">
                     <img
                       className="w-full h-full object-cover"
-                      src="/wp/IMG_9135.jpg"
+                      src="/wp/IMG_9135.webp"
                       alt="Ensamblaje estructura"
                     />
                   </div>

@@ -31,7 +31,7 @@ const coreServices = [
 
 const projectTypes = [
   {
-    img: '/wp/IMG_9133.jpg',
+    img: '/wp/IMG_9133.webp',
     title: 'Edificios de mediana altura',
     desc: 'Implementamos ingeniería de precisión para proyectos de desarrollo vertical. Optimizamos la operación de la estructura y la logística, asegurando un proceso eficiente.',
     tag: 'Desarrollo Vertical',
@@ -80,6 +80,52 @@ export default function Servicios() {
     window.scrollTo(0, 0)
   }, [])
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Construcción en Steel Frame y Arquitectura Modular",
+    "provider": {
+      "@type": "HomeAndConstructionBusiness",
+      "name": "WP Construcciones Especiales",
+      "url": "https://wpconstrucciones.com/"
+    },
+    "areaServed": [
+      { "@type": "State", "name": "Entre Ríos" },
+      { "@type": "State", "name": "Santa Fe" },
+      { "@type": "Country", "name": "Argentina" }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Servicios de Construcción en Seco",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Arquitectura y Diseño",
+            "description": "Planificación y diseño personalizado de planos adaptados al sistema constructivo Steel Frame."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Ingeniería Estructural y Cálculo",
+            "description": "Cálculo estructural de ingeniería de detalle para garantizar la máxima seguridad y eficiencia."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Construcción en Seco y Montaje",
+            "description": "Dirección y ejecución de obras residenciales, comerciales e industriales bajo el sistema Steel Frame."
+          }
+        }
+      ]
+    }
+  }
+
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
       <SEO 
@@ -87,6 +133,9 @@ export default function Servicios() {
         description="Ofrecemos servicios de cálculo de ingeniería estructural de detalle, montaje de estructuras steel frame, aberturas de aluminio a medida y dirección de obra llave en mano."
         keywords="servicios steel frame, calculo estructural, aberturas de aluminio, reformas en seco, ampliaciones planta alta, construccion steel frame argentina"
       />
+      <script type="application/ld+json">
+        {JSON.stringify(serviceSchema)}
+      </script>
       <NavBar />
 
       <main className="pt-20">

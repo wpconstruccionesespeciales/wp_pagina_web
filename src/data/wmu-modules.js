@@ -66,8 +66,8 @@ export const WMU_CERO = {
   },
   renderTabs: [
     { label: 'Clara',       src: local('WMU+10.webp') },
-    { label: 'Oscura',      src: local('Captura+de+pantalla+2025-06-23+094411.png') },
-    { label: 'Sin Galería', src: local('op_oscura_noGalery.png') },
+    { label: 'Oscura',      src: local('Captura+de+pantalla+2025-06-23+094411.webp') },
+    { label: 'Sin Galería', src: local('op_oscura_noGalery.webp') },
   ],
   gallery: [
     { src: local('WMU+10.webp'), alt: 'Render módulo WMU CERO — vista 10' },
@@ -112,8 +112,8 @@ export const WMU_CERO_2 = {
   },
   renderTabs: [
     { label: 'Clara',       src: local('wmu+enhaced.webp') },
-    { label: 'Oscura',      src: local('enhanced_wmp+prototipo+cero+con+lavadero+y+dormitorio.png') },
-    { label: 'Sin galería', src: local('prototipo+wpmu+cero+con+lavadero+y+un+dormitorio+mas+chapa+trapezoidal+sin+galeeeria.jpg') },
+    { label: 'Oscura',      src: local('enhanced_wmp+prototipo+cero+con+lavadero+y+dormitorio.webp') },
+    { label: 'Sin galería', src: local('prototipo+wpmu+cero+con+lavadero+y+un+dormitorio+mas+chapa+trapezoidal+sin+galeeeria.webp') },
   ],
   gallery: [
     { src: local('wmu+enhaced.webp'),                                                             alt: 'Render módulo WMU CERO 2 — vista exterior' },

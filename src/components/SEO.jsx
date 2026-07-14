@@ -48,6 +48,7 @@ export default function SEO({ title, description, keywords, ogImage, ogType = 'w
     updateOG('og:title', title || 'STEEL CORE | WP Construcciones Especiales')
     updateOG('og:description', description || 'Líderes en construcción en seco y steel framing de alta gama.')
     updateOG('og:type', ogType)
+    updateOG('og:url', canonicalUrl || window.location.href)
     
     let finalImage = `${window.location.origin}/wmu/wmu-financing.webp`
     if (ogImage) {

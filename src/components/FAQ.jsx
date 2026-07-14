@@ -76,8 +76,24 @@ export default function FAQ() {
   const [ref, visible] = useInView()
   const [openIndex, setOpenIndex] = useState(-1)
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": items.map(item => ({
+      "@type": "Question",
+      "name": item.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.a
+      }
+    }))
+  }
+
   return (
     <section className="py-28 bg-white px-6 lg:px-10" ref={ref}>
+      <script type="application/ld+json">
+        {JSON.stringify(faqSchema)}
+      </script>
       <div className="max-w-3xl mx-auto">
         <div className={`text-center mb-16 animate-on-scroll ${visible ? 'visible' : ''}`}>
           <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">FAQ</p>

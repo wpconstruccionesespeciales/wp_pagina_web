@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import wpWhite from '../assets/wpblanco.webp'
 
 export default function Footer({ showCTA = true }) {
@@ -80,7 +81,7 @@ export default function Footer({ showCTA = true }) {
             <ul className="space-y-3">
               {['Política de Privacidad', 'Términos de Servicio', 'Reporte de Sostenibilidad'].map((item) => (
                 <li key={item}>
-                  <a href={item === 'Política de Privacidad' ? '/privacidad' : item === 'Términos de Servicio' ? '/terminos' : '/sostenibilidad'} className="text-white/40 hover:text-white transition-colors text-sm">{item}</a>
+                  <Link to={item === 'Política de Privacidad' ? '/privacidad' : item === 'Términos de Servicio' ? '/terminos' : '/sostenibilidad'} className="text-white/40 hover:text-white transition-colors text-sm">{item}</Link>
                 </li>
               ))}
             </ul>
