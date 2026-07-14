@@ -37,7 +37,6 @@ export default function NavBar() {
     { href: isHome ? '#prensa' : '/#prensa', label: 'Prensa', external: !isHome },
     { href: '/nosotros', label: 'Nosotros', router: true },
     { href: '/servicios', label: 'Servicios', router: true },
-    { href: '/steel-frame-parana', label: 'Steel Frame Paraná', router: true },
   ]
 
   return (
