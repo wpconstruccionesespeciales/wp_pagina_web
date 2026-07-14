@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { motion as Motion } from 'framer-motion'
 
 function AnimatedText({ text, className, highlightWords = [] }) {
@@ -457,7 +458,7 @@ export default function FirstSteelFrame() {
             </Motion.div>
 
             <Motion.div
-              className="mt-8"
+              className="mt-8 flex flex-wrap gap-4"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
@@ -474,6 +475,16 @@ export default function FirstSteelFrame() {
                   play_circle
                 </span>
               </a>
+
+              <Link
+                to="/steel-frame-parana"
+                className="inline-flex items-center gap-2.5 bg-primary-fixed text-[#0f1f15] hover:bg-white hover:text-primary px-5 py-3 rounded-xl transition-all duration-500 backdrop-blur-md shadow-sm hover:shadow-[0_4px_22px_rgba(184,203,188,0.18)] hover:-translate-y-0.5 text-center font-bold text-xs tracking-wider uppercase group"
+              >
+                <span>Steel Frame en Paraná</span>
+                <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform duration-300">
+                  location_on
+                </span>
+              </Link>
             </Motion.div>
           </Motion.div>
 
