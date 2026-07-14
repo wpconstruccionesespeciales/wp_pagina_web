@@ -606,8 +606,8 @@ export default function SteelFrameParana() {
               <h2 className="font-headline text-3xl sm:text-4xl font-bold text-[#15251b] leading-tight mt-3 mb-6">
                 Pioneros en Construcción en Seco
               </h2>
-              <p className="text-on-surface-variant text-sm sm:text-base leading-relaxed font-light">
-                Nuestra historia en Paraná avala el profesionalismo y el compromiso con cada obra que ejecutamos.
+              <p className="text-on-surface-variant text-sm sm:text-base leading-relaxed font-light max-w-2xl mx-auto">
+                Nuestra historia en Paraná, Oro Verde, Crespo y toda la región avala el profesionalismo y el compromiso con cada obra que ejecutamos en todo el país.
               </p>
             </div>
 
@@ -679,6 +679,12 @@ export default function SteelFrameParana() {
                   <span className="material-symbols-outlined text-primary-fixed-dim text-2xl shrink-0">info</span>
                   <p className="text-xs text-white/70 leading-relaxed font-light">
                     <strong>Evaluación Higrotérmica:</strong> Todas nuestras envolventes son validadas contra condensaciones para responder a los altos índices de humedad del Río Paraná, asegurando el confort interior.
+                  </p>
+                </div>
+                <div className="p-5 border border-[#b8cbbc]/15 rounded bg-white/[0.03] flex gap-4 items-start mt-4">
+                  <span className="material-symbols-outlined text-primary-fixed-dim text-2xl shrink-0">globe</span>
+                  <p className="text-xs text-white/70 leading-relaxed font-light">
+                    <strong>Cobertura nacional:</strong> Ejecutamos proyectos en todo el país con presencia destacada en <strong>Paraná, Oro Verde, Crespo, Diamante y Santa Fe</strong>.
                   </p>
                 </div>
               </Motion.div>
