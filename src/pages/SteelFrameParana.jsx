@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { motion as Motion } from 'framer-motion'
 import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
@@ -99,6 +99,234 @@ const faqsParana = [
   }
 ]
 
+// Componente interactivo premium del Hero: Plano CAD y Pórtico 3D con Hotspots
+function PreciseBlueprint() {
+  const [mouse, setMouse] = useState({ x: 0, y: 0 })
+  const [hoveredHotspot, setHoveredHotspot] = useState(null)
+  const containerRef = useRef(null)
+
+  const handleMouseMove = (e) => {
+    if (!containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    // Posición relativa al contenedor
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    setMouse({ x, y })
+  }
+
+  const handleMouseLeave = () => {
+    setMouse({ x: -1000, y: -1000 })
+  }
+
+  // Conversión técnica a milímetros dinámicos (factor de escala)
+  const mmX = Math.round(mouse.x * 3.5)
+  const mmY = Math.round(mouse.y * 2.8)
+
+  const hotspots = [
+    {
+      id: 0,
+      cx: 140, cy: 180,
+      title: 'Montante Portante PGC',
+      desc: 'Perfil estructural de acero galvanizado pesado Z275 de 100mm. Soporta las cargas verticales del edificio.',
+      spec: 'PGC 100 x 0.9 mm'
+    },
+    {
+      id: 1,
+      cx: 200, cy: 220,
+      title: 'Arriostramiento San Andrés',
+      desc: 'Flejes de acero galvanizado en cruz que rigidizan la estructura frente a los fuertes vientos laterales de la sudestada.',
+      spec: 'Fleje de 0.9 mm tensionado'
+    },
+    {
+      id: 2,
+      cx: 140, cy: 360,
+      title: 'Anclaje Químico Estructural',
+      desc: 'Fijación de alta tracción y adherencia química a la platea de hormigón, diseñada para resistir tracciones de viento y sismo.',
+      spec: 'Varilla roscada Hilti HIT-RE 500'
+    }
+  ]
+
+  return (
+    <div
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative w-full h-[450px] lg:h-[500px] bg-[#0c140f] border border-primary-fixed-dim/15 rounded-xl overflow-hidden cursor-crosshair group/blueprint shadow-2xl select-none"
+    >
+      {/* 1. Cuadrícula CAD Parallax */}
+      <div
+        className="absolute inset-0 opacity-15 pointer-events-none transition-transform duration-300 ease-out"
+        style={{
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'30\' height=\'30\' viewBox=\'0 0 30 30\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M 30 0 L 0 0 0 30\' fill=\'none\' stroke=\'%23b8cbbc\' stroke-width=\'0.5\'/%3E%3C/svg%3E")',
+          transform: `translate(${-(mouse.x - 200) * 0.05}px, ${-(mouse.y - 250) * 0.05}px)`,
+        }}
+      />
+
+      {/* 2. Ejes de Cota Dinámicos (Solo si el cursor está adentro) */}
+      {mouse.x > 0 && (
+        <>
+          {/* Línea horizontal */}
+          <div
+            className="absolute left-0 right-0 h-px border-t border-dashed border-primary-fixed-dim/20 pointer-events-none animate-fade-in"
+            style={{ top: mouse.y }}
+          />
+          {/* Línea vertical */}
+          <div
+            className="absolute top-0 bottom-0 w-px border-l border-dashed border-primary-fixed-dim/20 pointer-events-none animate-fade-in"
+            style={{ left: mouse.x }}
+          />
+          {/* Cota digital flotante al lado del mouse */}
+          <div
+            className="absolute bg-[#111c15]/95 border border-primary-fixed-dim/30 px-2.5 py-1 rounded text-[0.6rem] font-mono text-primary-fixed-dim pointer-events-none shadow-lg flex gap-2"
+            style={{ left: mouse.x + 15, top: mouse.y + 15 }}
+          >
+            <span>X: {mmX} mm</span>
+            <span className="text-white/20">|</span>
+            <span>Y: {mmY} mm</span>
+          </div>
+        </>
+      )}
+
+      {/* 3. Pórtico estructural SVG en perspectiva */}
+      <svg
+        className="w-full h-full p-8 select-none"
+        viewBox="0 0 400 400"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g style={{ transform: 'translate(20px, 0px)' }}>
+          {/* Platea base de hormigón (rombo) */}
+          <polygon
+            points="60,370 200,310 340,370 200,430"
+            fill="rgba(184,203,188,0.05)"
+            stroke="rgba(184,203,188,0.2)"
+            strokeWidth="1"
+          />
+          <text x="250" y="380" className="fill-white/25 font-mono text-[9px]">PLATEA HORMIGÓN AR</text>
+
+          {/* Anclajes de base */}
+          <circle cx="140" cy="360" r="4" fill="rgba(184,203,188,0.4)" stroke="rgba(184,203,188,0.8)" />
+          <circle cx="260" cy="360" r="4" fill="rgba(184,203,188,0.4)" stroke="rgba(184,203,188,0.8)" />
+
+          {/* Perfil PGC Columna Izquierda (3D con volumen de bridas) */}
+          <polygon
+            points="135,120 145,120 145,360 135,360"
+            fill={hoveredHotspot === 0 ? 'rgba(184,203,188,0.25)' : 'rgba(184,203,188,0.05)'}
+            stroke={hoveredHotspot === 0 ? '#b8cbbc' : 'rgba(184,203,188,0.4)'}
+            strokeWidth={hoveredHotspot === 0 ? '2' : '1'}
+            className="transition-all duration-300"
+          />
+          <line
+            x1="140" y1="120" x2="140" y2="360"
+            stroke="rgba(184,203,188,0.6)"
+            strokeWidth="0.5"
+          />
+
+          {/* Perfil PGC Columna Derecha */}
+          <polygon
+            points="255,120 265,120 265,360 255,360"
+            fill="rgba(184,203,188,0.05)"
+            stroke="rgba(184,203,188,0.4)"
+            strokeWidth="1"
+          />
+          <line
+            x1="260" y1="120" x2="260" y2="360"
+            stroke="rgba(184,203,188,0.6)"
+            strokeWidth="0.5"
+          />
+
+          {/* Viga superior dintel */}
+          <polygon
+            points="135,115 265,115 265,125 135,125"
+            fill="rgba(184,203,188,0.05)"
+            stroke="rgba(184,203,188,0.4)"
+            strokeWidth="1"
+          />
+
+          {/* Cruces de San Andrés (Diagonales de viento) */}
+          <line
+            x1="140" y1="120" x2="260" y2="360"
+            stroke={hoveredHotspot === 1 ? '#b8cbbc' : 'rgba(184,203,188,0.2)'}
+            strokeWidth={hoveredHotspot === 1 ? '2.5' : '1.5'}
+            strokeDasharray={hoveredHotspot === 1 ? 'none' : '4 4'}
+            className="transition-all duration-300"
+          />
+          <line
+            x1="260" y1="120" x2="140" y2="360"
+            stroke={hoveredHotspot === 1 ? '#b8cbbc' : 'rgba(184,203,188,0.2)'}
+            strokeWidth={hoveredHotspot === 1 ? '2.5' : '1.5'}
+            strokeDasharray={hoveredHotspot === 1 ? 'none' : '4 4'}
+            className="transition-all duration-300"
+          />
+
+          {/* Cotas técnicas estáticas sutiles */}
+          <line x1="110" y1="120" x2="110" y2="360" stroke="rgba(184,203,188,0.2)" strokeWidth="0.75" />
+          <line x1="105" y1="120" x2="115" y2="120" stroke="rgba(184,203,188,0.2)" strokeWidth="0.75" />
+          <line x1="105" y1="360" x2="115" y2="360" stroke="rgba(184,203,188,0.2)" strokeWidth="0.75" />
+          <text x="70" y="245" className="fill-white/35 font-mono text-[9px]">H: 3000 mm</text>
+
+          <line x1="140" y1="95" x2="260" y2="95" stroke="rgba(184,203,188,0.2)" strokeWidth="0.75" />
+          <line x1="140" y1="90" x2="140" y2="100" stroke="rgba(184,203,188,0.2)" strokeWidth="0.75" />
+          <line x1="260" y1="90" x2="260" y2="100" stroke="rgba(184,203,188,0.2)" strokeWidth="0.75" />
+          <text x="175" y="85" className="fill-white/35 font-mono text-[9px]">W: 1500 mm</text>
+
+          {/* Hotspots interactivos */}
+          {hotspots.map((h) => {
+            const isSelected = hoveredHotspot === h.id
+            return (
+              <g
+                key={h.id}
+                onMouseEnter={() => setHoveredHotspot(h.id)}
+                onMouseLeave={() => setHoveredHotspot(null)}
+                className="cursor-pointer"
+              >
+                <circle
+                  cx={h.cx} cy={h.cy} r="12"
+                  fill="rgba(184,203,188,0.15)"
+                  className={`${isSelected ? 'animate-ping' : ''} transition-all duration-300`}
+                />
+                <circle
+                  cx={h.cx} cy={h.cy} r="5"
+                  fill={isSelected ? '#b8cbbc' : 'rgba(184,203,188,0.6)'}
+                  stroke="#111c15"
+                  strokeWidth="1"
+                  className="transition-colors duration-300 shadow-md"
+                />
+              </g>
+            )
+          })}
+        </g>
+      </svg>
+
+      {/* 5. Tooltip flotante interactivo de Hotspots */}
+      {hoveredHotspot !== null && (
+        <Motion.div
+          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          className="absolute left-4 right-4 bottom-4 bg-[#111c15]/95 border border-primary-fixed-dim/30 rounded-xl p-4 backdrop-blur-md shadow-2xl flex gap-3 items-center z-30"
+        >
+          <div className="w-8 h-8 rounded-lg bg-primary-fixed/10 border border-primary-fixed-dim/20 flex items-center justify-center text-primary-fixed-dim shrink-0">
+            <span className="material-symbols-outlined text-sm">settings_suggest</span>
+          </div>
+          <div>
+            <div className="flex justify-between items-baseline gap-2 mb-0.5">
+              <h4 className="font-headline font-bold text-white text-[11px] sm:text-xs uppercase tracking-wide">
+                {hotspots[hoveredHotspot].title}
+              </h4>
+              <span className="font-mono text-[8px] text-primary-fixed-dim uppercase bg-primary-container px-1.5 py-0.5 rounded">
+                {hotspots[hoveredHotspot].spec}
+              </span>
+            </div>
+            <p className="text-[10px] sm:text-[11px] text-white/60 leading-relaxed font-light">
+              {hotspots[hoveredHotspot].desc}
+            </p>
+          </div>
+        </Motion.div>
+      )}
+    </div>
+  )
+}
+
 export default function SteelFrameParana() {
   const [activeCapamuro, setActiveCapamuro] = useState(0)
   const [formStatus, setFormStatus] = useState('idle')
@@ -182,43 +410,6 @@ export default function SteelFrameParana() {
           ref={heroRef}
           className="relative min-h-[90vh] flex items-center justify-center py-20 px-6 lg:px-16 overflow-hidden bg-gradient-to-br from-[#070e0a] via-[#0d1611] to-[#09100b] text-white"
         >
-          {/* SVG Structural grid drawing animation in background */}
-          <div className="absolute inset-0 pointer-events-none opacity-20 z-0">
-            <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(184,203,188,0.15)" strokeWidth="0.5" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-              
-              {/* Animated Blueprint CAD vectors */}
-              <Motion.path
-                d="M 50 150 L 350 150 L 350 450 L 50 450 Z M 50 250 L 350 250 M 200 150 L 200 450"
-                fill="none"
-                stroke="rgba(184,203,188,0.3)"
-                strokeWidth="1"
-                strokeDasharray="400"
-                initial={{ strokeDashoffset: 400 }}
-                animate={{ strokeDashoffset: 0 }}
-                transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
-                className="hidden md:block"
-                style={{ transform: 'translate(10%, 10%) scale(1.2)' }}
-              />
-              <Motion.circle
-                cx="200" cy="250" r="10"
-                fill="none"
-                stroke="#b8cbbc"
-                strokeWidth="1.5"
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: [1, 2, 1], opacity: [0.2, 0.8, 0.2] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="hidden md:block"
-                style={{ transform: 'translate(10%, 10%) scale(1.2)' }}
-              />
-            </svg>
-          </div>
-
           {/* Noise texture overlay */}
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-overlay z-0"
@@ -228,7 +419,7 @@ export default function SteelFrameParana() {
             }}
           />
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+          <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
             <Motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={heroVisible ? { opacity: 1, y: 0 } : {}}
@@ -265,55 +456,14 @@ export default function SteelFrameParana() {
               </div>
             </Motion.div>
 
-            {/* Floating UI Spec Panel */}
+            {/* Blueprint CAD and isometric frame panel */}
             <Motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={heroVisible ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative hidden lg:block"
+              className="relative w-full"
             >
-              <div className="bg-[#111c15]/90 border border-primary-fixed-dim/20 rounded-xl p-8 backdrop-blur-xl shadow-2xl">
-                <div className="flex justify-between items-center border-b border-primary-fixed-dim/15 pb-4 mb-6">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-primary-fixed animate-pulse" />
-                    <span className="font-headline font-bold text-xs uppercase tracking-widest text-primary-fixed-dim">WP SYSTEM SPEC v2.0</span>
-                  </div>
-                  <span className="text-[0.65rem] text-white/40 tracking-wider">E. RÍOS, AR</span>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex justify-between text-xs py-1 border-b border-white/5">
-                    <span className="text-white/55">Material Estructural</span>
-                    <span className="font-semibold text-white/90">Acero Galvanizado pesado Z275</span>
-                  </div>
-                  <div className="flex justify-between text-xs py-1 border-b border-white/5">
-                    <span className="text-white/55">Cálculo de Ingeniería</span>
-                    <span className="font-semibold text-white/90">Precisión Milimétrica (CAD/BIM)</span>
-                  </div>
-                  <div className="flex justify-between text-xs py-1 border-b border-white/5">
-                    <span className="text-white/55">Comportamiento en Arcillas</span>
-                    <span className="font-semibold text-primary-fixed-dim">Flexibilidad estructural activa</span>
-                  </div>
-                  <div className="flex justify-between text-xs py-1 border-b border-white/5">
-                    <span className="text-white/55">Aislamiento Térmico</span>
-                    <span className="font-semibold text-white/90">Coeficiente R 4x vs Tradicional</span>
-                  </div>
-                  <div className="flex justify-between text-xs py-1">
-                    <span className="text-white/55">Vida útil certificada</span>
-                    <span className="font-semibold text-white/90">+100 años</span>
-                  </div>
-                </div>
-
-                <div className="mt-8 pt-4 border-t border-primary-fixed-dim/15 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded bg-primary-fixed/10 border border-primary-fixed-dim/20 flex items-center justify-center text-primary-fixed">
-                    <span className="material-symbols-outlined text-lg">verified</span>
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-headline font-bold text-white uppercase">Aptitud Técnica</h4>
-                    <p className="text-[0.65rem] text-white/40">Certificado CAT nacional homologado</p>
-                  </div>
-                </div>
-              </div>
+              <PreciseBlueprint />
             </Motion.div>
           </div>
         </section>
