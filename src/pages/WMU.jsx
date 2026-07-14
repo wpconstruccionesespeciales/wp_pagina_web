@@ -270,10 +270,13 @@ function ProcessSection() {
    diagonal grid overlay, glassmorphism cards with green accents
 ═══════════════════════════════════════════════════════════════════════════ */
 function CardLink({ model, className, style, children }) {
+  const ariaLabel = model.internal 
+    ? `Ver detalles y especificaciones del modelo modular ${model.name}`
+    : `Ver ficha técnica externa del modelo modular ${model.name}`
   if (model.internal) {
-    return <Link to={model.href} className={className} style={style}>{children}</Link>
+    return <Link to={model.href} className={className} style={style} aria-label={ariaLabel}>{children}</Link>
   }
-  return <a href={model.href} target="_blank" rel="noopener noreferrer" className={className} style={style}>{children}</a>
+  return <a href={model.href} target="_blank" rel="noopener noreferrer" className={className} style={style} aria-label={ariaLabel}>{children}</a>
 }
 
 function ModelCard({ model, delay, vis, featured }) {

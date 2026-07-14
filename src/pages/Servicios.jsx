@@ -379,6 +379,7 @@ export default function Servicios() {
                       <a
                         href="/#contact"
                         className="inline-flex items-center gap-2 text-white font-bold text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:gap-3"
+                        aria-label={`Ver más detalles sobre nuestro servicio de ${title}`}
                       >
                         Ver más
                         <span className="material-symbols-outlined text-primary-fixed-dim text-base">arrow_forward</span>
@@ -417,6 +418,7 @@ export default function Servicios() {
                       <a
                         href="/#contact"
                         className="inline-flex items-center gap-2 text-white font-bold text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:gap-3"
+                        aria-label={`Ver más detalles sobre nuestro servicio de ${title}`}
                       >
                         Ver más
                         <span className="material-symbols-outlined text-primary-fixed-dim text-base">arrow_forward</span>
