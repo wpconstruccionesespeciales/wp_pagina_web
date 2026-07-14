@@ -2,6 +2,8 @@ import { useRef, useState, useCallback, useEffect } from 'react'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
+import SEO from '../components/SEO'
+
 
 /* ──────────────── BEFORE / AFTER SLIDER ──────────────── */
 function BeforeAfterSlider() {
@@ -297,7 +299,6 @@ export default function Nosotros() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = 'Nosotros | STEEL CORE - WP Construcciones Especiales'
   }, [])
 
   useEffect(() => {
@@ -309,6 +310,11 @@ export default function Nosotros() {
 
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
+      <SEO 
+        title="Nosotros | Líderes en Steel Framing y Construcción en Seco · WP"
+        description="Conocé la trayectoria de WP Construcciones Especiales en Paraná, Entre Ríos. Desde 2005 diseñando y construyendo estructuras duraderas en Steel Frame con precisión industrial."
+        keywords="nosotros, trayectoria, guillermo matteoda, steel frame parana, construccion en seco entre rios, fabrica de aberturas, historia steel frame, argentina"
+      />
       <NavBar />
 
       <main className="pt-20">

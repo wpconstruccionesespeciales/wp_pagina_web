@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
@@ -52,11 +53,15 @@ export default function Privacidad() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = 'Política de Privacidad | STEEL CORE - WP Construcciones Especiales'
   }, [])
 
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
+      <SEO 
+        title="Política de Privacidad | STEEL CORE - WP Construcciones Especiales"
+        description="Leé nuestra Política de Privacidad. Conocé cómo protegemos tus datos personales y del proyecto en WP Construcciones Especiales."
+        keywords="politica de privacidad, proteccion de datos, wp construcciones, steel core"
+      />
       <NavBar />
 
       <main className="pt-20">

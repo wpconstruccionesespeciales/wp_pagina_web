@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { AnimatePresence, motion as Motion } from 'framer-motion'
+import SEO from './SEO'
 import NavBar from './NavBar'
 import Footer from './Footer'
 import WhatsAppButton from './WhatsAppButton'
@@ -662,11 +663,39 @@ const CSS = `
 export default function ModulePage({ data }) {
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = data.title
-  }, [data.title])
+  }, [])
+
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": data.module.name,
+    "image": data.renderTabs && data.renderTabs.length > 0 
+      ? `${window.location.origin}${data.renderTabs[0].src}`
+      : (data.gallery && data.gallery.length > 0 ? `${window.location.origin}${data.gallery[0].src}` : ""),
+    "description": data.module.description,
+    "brand": {
+      "@type": "Brand",
+      "name": "WP Construcciones Especiales"
+    },
+    "category": "SingleFamilyResidence",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/PreOrder"
+    }
+  }
 
   return (
     <div className="font-body" style={{ background: '#ffffff', color: INK, fontFamily: BODY_F }}>
+      <SEO 
+        title={data.title}
+        description={data.module.description}
+        keywords={`wmu, ${data.module.name.toLowerCase()}, casa modular ${data.module.name.toLowerCase()}, steel frame modulo, construccion en seco argentina`}
+        ogImage={data.renderTabs && data.renderTabs.length > 0 ? data.renderTabs[0].src : (data.gallery && data.gallery.length > 0 ? data.gallery[0].src : "")}
+      />
+      <script type="application/ld+json">
+        {JSON.stringify(schemaMarkup)}
+      </script>
       <style>{CSS}</style>
       <NavBar />
       <main>

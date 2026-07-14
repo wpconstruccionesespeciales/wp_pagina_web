@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
@@ -77,11 +78,15 @@ export default function Servicios() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = 'Servicios | STEEL CORE - WP Construcciones Especiales'
   }, [])
 
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
+      <SEO 
+        title="Servicios de Steel Frame y Construcción en Seco | WP"
+        description="Ofrecemos servicios de cálculo de ingeniería estructural de detalle, montaje de estructuras steel frame, aberturas de aluminio a medida y dirección de obra llave en mano."
+        keywords="servicios steel frame, calculo estructural, aberturas de aluminio, reformas en seco, ampliaciones planta alta, construccion steel frame argentina"
+      />
       <NavBar />
 
       <main className="pt-20">

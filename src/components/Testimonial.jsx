@@ -67,7 +67,7 @@ export default function Prensa() {
                   <img
                     className="h-full w-full object-cover"
                     src={`/prensa/${videos[active].id}.jpg`}
-                    alt=""
+                    alt={`Miniatura de video: ${videos[active].title}`}
                     width="480"
                     height="360"
                     loading="lazy"
