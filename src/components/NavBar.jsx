@@ -40,14 +40,14 @@ export default function NavBar() {
   ]
 
   return (
-    <nav
+    <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 ease-out ${
         (scrolled || !isHome)
           ? 'bg-white shadow-sm border-b border-black/5 py-1'
           : 'bg-transparent py-3'
       }`}
     >
-      <div className="flex items-center px-6 lg:px-10 max-w-7xl mx-auto py-2 relative">
+      <nav className="flex items-center px-6 lg:px-10 max-w-7xl mx-auto py-2 relative" aria-label="Navegación principal">
 
         {/* Nav links — izquierda */}
         <div className="hidden lg:flex items-center gap-2 font-headline tracking-tight flex-1">
@@ -134,7 +134,7 @@ export default function NavBar() {
         >
           <span className="material-symbols-outlined">{mobileOpen ? 'close' : 'menu'}</span>
         </button>
-      </div>
+      </nav>
 
       {/* Mobile menu */}
       <div
@@ -167,6 +167,6 @@ export default function NavBar() {
         className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-primary-fixed-dim via-primary to-primary-fixed-dim motion-reduce:hidden"
         aria-hidden="true"
       />
-    </nav>
+    </header>
   )
 }
