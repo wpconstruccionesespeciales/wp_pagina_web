@@ -58,7 +58,7 @@ export default function Privacidad() {
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
       <SEO 
-        title="Política de Privacidad | STEEL CORE - WP Construcciones Especiales"
+        title="Política de Privacidad | WP Construcciones Especiales"
         description="Leé nuestra Política de Privacidad. Conocé cómo protegemos tus datos personales y del proyecto en WP Construcciones Especiales."
         keywords="politica de privacidad, proteccion de datos, wp construcciones, steel core"
       />

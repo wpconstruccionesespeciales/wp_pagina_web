@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { motion as Motion } from 'framer-motion'
 
 function AnimatedText({ text, className, highlightWords = [] }) {
@@ -228,7 +229,7 @@ function BuildingBlueprint() {
       <g className="text-primary-fixed-dim" stroke="currentColor">
         <rect x="335" y="585" width="160" height="28" rx="1.5" strokeWidth="0.8" fill="currentColor" fillOpacity="0.04" />
         <line x1="335" y1="598" x2="495" y2="598" strokeWidth="0.4" opacity="0.3" />
-        <text x="345" y="594" fill="currentColor" fontSize="5.5" fontFamily="Space Grotesk, sans-serif" fontWeight="700" opacity="0.6">STEEL CORE · WP</text>
+        <text x="345" y="594" fill="currentColor" fontSize="5.5" fontFamily="Space Grotesk, sans-serif" fontWeight="700" opacity="0.6">STEEL FRAME · PARANÁ · ARGENTINA</text>
         <text x="345" y="607" fill="currentColor" fontSize="4.5" fontFamily="Manrope, sans-serif" opacity="0.3">VISTA ELEVACIÓN · ESC 1:100</text>
         <text x="475" y="594" fill="currentColor" fontSize="4.5" fontFamily="Manrope, sans-serif" textAnchor="end" opacity="0.25">01-2025</text>
         <text x="475" y="607" fill="currentColor" fontSize="4.5" fontFamily="Manrope, sans-serif" textAnchor="end" opacity="0.25">REV A</text>
@@ -413,7 +414,7 @@ export default function FirstSteelFrame() {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
               En 2014 marcamos un hito: construimos el primer edificio de la
               región realizado íntegramente en Steel Frame, en Paraná. Desde
@@ -435,7 +436,7 @@ export default function FirstSteelFrame() {
                     hidden: { opacity: 0, y: 20 },
                     visible: {
                       opacity: 1, y: 0,
-                      transition: { duration: 0.5, delay: 1.2 + i * 0.15, ease: [0.16, 1, 0.3, 1] }
+                      transition: { duration: 0.5, delay: 0.6 + i * 0.12, ease: [0.16, 1, 0.3, 1] }
                     }
                   }}
                 >
@@ -457,11 +458,11 @@ export default function FirstSteelFrame() {
             </Motion.div>
 
             <Motion.div
-              className="mt-8"
+              className="mt-8 flex flex-wrap gap-4"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, margin: '-10px' }}
+              transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
               <a
                 href="https://www.youtube.com/watch?v=8ob8MJEE_gg"
@@ -474,6 +475,16 @@ export default function FirstSteelFrame() {
                   play_circle
                 </span>
               </a>
+
+              <Link
+                to="/steel-frame-parana"
+                className="inline-flex items-center gap-2.5 bg-primary-fixed text-[#0f1f15] hover:bg-white hover:text-primary px-5 py-3 rounded-xl transition-all duration-500 backdrop-blur-md shadow-sm hover:shadow-[0_4px_22px_rgba(184,203,188,0.18)] hover:-translate-y-0.5 text-center font-bold text-xs tracking-wider uppercase group"
+              >
+                <span>Steel Frame en Paraná</span>
+                <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform duration-300">
+                  location_on
+                </span>
+              </Link>
             </Motion.div>
           </Motion.div>
 

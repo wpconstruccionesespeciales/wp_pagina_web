@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import SEO from '../components/SEO'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
 import wpWhite from '../assets/wpblanco.webp'
 import { WMU_INCLUDES } from '../data/wmu-modules'
 
@@ -71,7 +71,7 @@ function Nav() {
           Volver a WMU
         </Link>
         <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={wpWhite} alt="WP Construcciones" style={{ height: 'clamp(42px, 5vw, 54px)', objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: .96 }} />
+          <img src={wpWhite} alt="WP Construcciones" width="256" height="72" style={{ height: 'clamp(42px, 5vw, 54px)', width: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: .96 }} />
         </Link>
       </div>
     </nav>
@@ -80,7 +80,7 @@ function Nav() {
 
 function SpecCard({ text }) {
   return (
-    <motion.div
+    <Motion.div
       whileHover={{ y: -5, scale: 1.01, borderColor: G, backgroundColor: 'rgba(53, 195, 107, 0.06)' }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       style={{
@@ -108,7 +108,7 @@ function SpecCard({ text }) {
       <span style={{ color: TXT, fontSize: '14px', lineHeight: '1.6', fontFamily: BODY, fontWeight: '500', opacity: 0.9 }}>
         {text}
       </span>
-    </motion.div>
+    </Motion.div>
   )
 }
 
@@ -134,7 +134,7 @@ function Footer() {
           </div>
         </div>
         <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-          <span style={{ color: SAGE, fontSize: 12, fontFamily: BODY }}>© 2025 WP Construcciones Especiales. Todos los derechos reservados.</span>
+          <span style={{ color: SAGE, fontSize: 12, fontFamily: BODY }}>© 2025 WP Construcciones Especiales. Todos los derechos reservados. — Sitio web desarrollado por <a href="https://tomygiorgi.vercel.app/" target="_blank" rel="noopener noreferrer" style={{ color: G, textDecoration: 'none', fontWeight: 600 }}>Tomás Giorgi</a></span>
           <Link to="/wmu" style={{ color: G, fontSize: 12, textDecoration: 'none', fontWeight: 600, fontFamily: BODY, transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = G}>← Volver a WMU</Link>
         </div>
       </div>
@@ -153,6 +153,11 @@ export default function WmuEspecificaciones() {
         title="Especificaciones Técnicas | Módulos WMU · Steel Frame"
         description="Ficha técnica detallada del equipamiento estándar e ingeniería de los módulos habitacionales WMU. Detalles de estructura de steel frame y aberturas."
         keywords="especificaciones tecnicas wmu, ficha tecnica steel frame, equipamiento modulo habitable, construccion industrializada, wp construcciones"
+        breadcrumbs={[
+          { name: 'Inicio', url: '/' },
+          { name: 'WMU Arquitectura Modular', url: '/wmu' },
+          { name: 'Especificaciones Técnicas', url: '/wmu-especificaciones' },
+        ]}
       />
       <Nav />
 
@@ -178,7 +183,7 @@ export default function WmuEspecificaciones() {
         }} />
         
         <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 24px', maxWidth: 800, marginTop: '80px' }}>
-          <motion.span
+          <Motion.span
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -194,8 +199,8 @@ export default function WmuEspecificaciones() {
             }}
           >
             Ficha Técnica Detallada
-          </motion.span>
-          <motion.h1
+          </Motion.span>
+          <Motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
@@ -212,8 +217,8 @@ export default function WmuEspecificaciones() {
             }}
           >
             Lo que incluimos en módulos WMU
-          </motion.h1>
-          <motion.p
+          </Motion.h1>
+          <Motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -227,10 +232,10 @@ export default function WmuEspecificaciones() {
             }}
           >
             Explorá en detalle la memoria descriptiva y los estándares constructivos premium que componen cada espacio llave en mano.
-          </motion.p>
+          </Motion.p>
 
           {/* Indicador de scroll animado */}
-          <motion.div
+          <Motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
             style={{ marginTop: '48px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', cursor: 'default' }}
@@ -240,7 +245,7 @@ export default function WmuEspecificaciones() {
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <polyline points="19 12 12 19 5 12"></polyline>
             </svg>
-          </motion.div>
+          </Motion.div>
         </div>
       </section>
 
@@ -254,7 +259,7 @@ export default function WmuEspecificaciones() {
           {WMU_INCLUDES.map((category, index) => {
             const numStr = String(index + 1).padStart(2, '0')
             return (
-              <motion.div
+              <Motion.div
                 key={category.title}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -322,7 +327,7 @@ export default function WmuEspecificaciones() {
                     <SpecCard key={specIdx} text={item} />
                   ))}
                 </div>
-              </motion.div>
+              </Motion.div>
             )
           })}
 
@@ -333,7 +338,7 @@ export default function WmuEspecificaciones() {
       <section style={{ padding: '80px 0', background: '#060a07', position: 'relative' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px, 4vw, 40px)' }}>
           
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -358,7 +363,7 @@ export default function WmuEspecificaciones() {
             }}>
               Exclusiones de Obra
             </h2>
-          </motion.div>
+          </Motion.div>
 
           {/* Grilla de Exclusiones de Alta Gama */}
           <div style={{
@@ -367,7 +372,7 @@ export default function WmuEspecificaciones() {
             gap: '24px'
           }}>
             {EXCLUSIONES_DETAILS.map((ex, index) => (
-              <motion.div
+              <Motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -411,7 +416,7 @@ export default function WmuEspecificaciones() {
                 }}>
                   {ex.desc}
                 </p>
-              </motion.div>
+              </Motion.div>
             ))}
           </div>
 
@@ -447,7 +452,7 @@ export default function WmuEspecificaciones() {
             Ponete en contacto con nuestro equipo de ingeniería para profundizar en detalles de obra, planos estructurales y factibilidad de terreno.
           </p>
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <motion.a
+            <Motion.a
               whileHover={{ y: -3, boxShadow: '0 12px 30px rgba(53, 195, 107, 0.25)' }}
               href={WA}
               target="_blank"
@@ -467,8 +472,8 @@ export default function WmuEspecificaciones() {
               }}
             >
               Consultar por WhatsApp
-            </motion.a>
-            <motion.a
+            </Motion.a>
+            <Motion.a
               whileHover={{ y: -3, borderColor: '#fff', backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
               href="https://www.wpconstrucciones.com/wmu"
               target="_blank"
@@ -489,7 +494,7 @@ export default function WmuEspecificaciones() {
               }}
             >
               Ver Catálogo Completo
-            </motion.a>
+            </Motion.a>
           </div>
         </div>
       </section>

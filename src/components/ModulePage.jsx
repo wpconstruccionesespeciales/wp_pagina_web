@@ -692,6 +692,11 @@ export default function ModulePage({ data }) {
         description={data.module.description}
         keywords={`wmu, ${data.module.name.toLowerCase()}, casa modular ${data.module.name.toLowerCase()}, steel frame modulo, construccion en seco argentina`}
         ogImage={data.renderTabs && data.renderTabs.length > 0 ? data.renderTabs[0].src : (data.gallery && data.gallery.length > 0 ? data.gallery[0].src : "")}
+        breadcrumbs={[
+          { name: 'Inicio', url: '/' },
+          { name: 'WMU Arquitectura Modular', url: '/wmu' },
+          { name: data.module.name, url: `/${data.id}` },
+        ]}
       />
       <script type="application/ld+json">
         {JSON.stringify(schemaMarkup)}

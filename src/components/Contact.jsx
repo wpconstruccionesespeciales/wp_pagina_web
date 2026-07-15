@@ -9,6 +9,7 @@ function FloatingInput({ label, type = 'text', name }) {
   return (
     <div className="relative">
       <label
+        htmlFor={name}
         className={`absolute left-0 transition-all duration-300 pointer-events-none ${
           active
             ? 'text-[10px] -top-2 font-bold tracking-widest uppercase text-primary'
@@ -18,6 +19,7 @@ function FloatingInput({ label, type = 'text', name }) {
         {label}
       </label>
       <input
+        id={name}
         type={type}
         name={name}
         value={value}
@@ -40,6 +42,7 @@ function FloatingTextarea({ label, name }) {
   return (
     <div className="relative">
       <label
+        htmlFor={name}
         className={`absolute left-0 transition-all duration-300 pointer-events-none ${
           active
             ? 'text-[10px] -top-2 font-bold tracking-widest uppercase text-primary'
@@ -49,6 +52,7 @@ function FloatingTextarea({ label, name }) {
         {label}
       </label>
       <textarea
+        id={name}
         name={name}
         value={value}
         onChange={(e) => setValue(e.target.value)}

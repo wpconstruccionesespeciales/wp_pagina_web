@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import wpWhite from '../assets/wpblanco.webp'
 
 export default function Footer({ showCTA = true }) {
@@ -62,14 +63,14 @@ export default function Footer({ showCTA = true }) {
             <h5 className="font-bold mb-6 text-sm uppercase tracking-widest text-white/80">Navegación</h5>
             <ul className="space-y-3">
               {[
-                { label: 'Proyectos', href: '#projects' },
-                { label: 'Servicios', href: '#services' },
-                { label: 'Proceso', href: '#process' },
-                { label: 'Comparativa', href: '#comparison' },
-                { label: 'Contacto', href: '#contact' },
+                { label: 'Inicio', href: '/' },
+                { label: 'Nosotros', href: '/nosotros' },
+                { label: 'Servicios', href: '/servicios' },
+                { label: 'Steel Frame Paraná', href: '/steel-frame-parana' },
+                { label: 'Arquitectura Modular', href: '/wmu' },
               ].map(({ label, href }) => (
                 <li key={label}>
-                  <a href={href} className="text-white/40 hover:text-white transition-colors text-sm">{label}</a>
+                  <Link to={href} className="text-white/40 hover:text-white transition-colors text-sm">{label}</Link>
                 </li>
               ))}
             </ul>
@@ -80,7 +81,7 @@ export default function Footer({ showCTA = true }) {
             <ul className="space-y-3">
               {['Política de Privacidad', 'Términos de Servicio', 'Reporte de Sostenibilidad'].map((item) => (
                 <li key={item}>
-                  <a href={item === 'Política de Privacidad' ? '/privacidad' : item === 'Términos de Servicio' ? '/terminos' : '/sostenibilidad'} className="text-white/40 hover:text-white transition-colors text-sm">{item}</a>
+                  <Link to={item === 'Política de Privacidad' ? '/privacidad' : item === 'Términos de Servicio' ? '/terminos' : '/sostenibilidad'} className="text-white/40 hover:text-white transition-colors text-sm">{item}</Link>
                 </li>
               ))}
             </ul>
@@ -106,8 +107,7 @@ export default function Footer({ showCTA = true }) {
 
         {/* Bottom */}
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-white/25 text-xs">
-          <p>© 2026 WP Construcciones Especiales.</p>
-          <p>Hecho con precisión milimétrica.</p>
+          <p>© 2026 WP Construcciones Especiales. Hecho con precisión milimétrica. — Sitio web desarrollado por <a href="https://tomygiorgi.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">Tomás Giorgi</a></p>
         </div>
       </div>
     </footer>

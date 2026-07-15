@@ -24,6 +24,14 @@
     <priority>0.80</priority>
   </url>
 
+  <!-- Steel Frame Paraná (SEO Local) -->
+  <url>
+    <loc>https://wpconstrucciones.com/steel-frame-parana</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
   <!-- Sostenibilidad -->
   <url>
     <loc>https://wpconstrucciones.com/sostenibilidad</loc>

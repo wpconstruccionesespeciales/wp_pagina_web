@@ -1,6 +1,45 @@
 import { useEffect } from 'react'
 
-export default function SEO({ title, description, keywords, ogImage, ogType = 'website', canonicalUrl, robots = 'index, follow' }) {
+const SITE_URL = 'https://wpconstrucciones.com'
+
+function normalizeUrl(url) {
+  if (!url) return `${SITE_URL}/`
+  if (url.startsWith('http')) return url
+  return `${SITE_URL}${url.startsWith('/') ? url : `/${url}`}`
+}
+
+function updateLink(selector, attributes) {
+  let link = document.querySelector(selector)
+  if (!link) {
+    link = document.createElement('link')
+    document.head.appendChild(link)
+  }
+  Object.entries(attributes).forEach(([key, value]) => link.setAttribute(key, value))
+}
+
+function buildBreadcrumbSchema(items) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: normalizeUrl(item.url),
+    })),
+  }
+}
+
+export default function SEO({
+  title,
+  description,
+  keywords,
+  ogImage,
+  ogType = 'website',
+  canonicalUrl,
+  robots = 'index, follow',
+  breadcrumbs = [],
+}) {
   useEffect(() => {
     // 0. Robots Directives
     let metaRobots = document.querySelector('meta[name="robots"]')
@@ -45,13 +84,15 @@ export default function SEO({ title, description, keywords, ogImage, ogType = 'w
       ogMeta.setAttribute('content', content)
     }
 
-    updateOG('og:title', title || 'STEEL CORE | WP Construcciones Especiales')
+    updateOG('og:title', title || 'WP Construcciones Especiales')
     updateOG('og:description', description || 'Líderes en construcción en seco y steel framing de alta gama.')
     updateOG('og:type', ogType)
+    const cleanUrl = canonicalUrl || normalizeUrl(window.location.pathname)
+    updateOG('og:url', cleanUrl)
     
-    let finalImage = `${window.location.origin}/wmu/wmu-financing.webp`
+    let finalImage = `${SITE_URL}/wmu/wmu-financing.webp`
     if (ogImage) {
-      finalImage = ogImage.startsWith('http') ? ogImage : `${window.location.origin}${ogImage}`
+      finalImage = normalizeUrl(ogImage)
     }
     updateOG('og:image', finalImage)
 
@@ -67,19 +108,28 @@ export default function SEO({ title, description, keywords, ogImage, ogType = 'w
     }
 
     updateTwitter('twitter:card', 'summary_large_image')
-    updateTwitter('twitter:title', title || 'STEEL CORE | WP Construcciones Especiales')
+    updateTwitter('twitter:title', title || 'WP Construcciones Especiales')
     updateTwitter('twitter:description', description || 'Líderes en construcción en seco y steel framing de alta gama.')
     updateTwitter('twitter:image', finalImage)
 
-    // 6. Canonical URL
-    let linkCanonical = document.querySelector('link[rel="canonical"]')
-    if (!linkCanonical) {
-      linkCanonical = document.createElement('link')
-      linkCanonical.setAttribute('rel', 'canonical')
-      document.head.appendChild(linkCanonical)
+    // 6. Canonical and language alternates
+    updateLink('link[rel="canonical"]', { rel: 'canonical', href: cleanUrl })
+    updateLink('link[rel="alternate"][hreflang="es-AR"]', { rel: 'alternate', hreflang: 'es-AR', href: cleanUrl })
+    updateLink('link[rel="alternate"][hreflang="x-default"]', { rel: 'alternate', hreflang: 'x-default', href: cleanUrl })
+
+    // 7. Breadcrumb structured data
+    const breadcrumbId = 'seo-breadcrumb-jsonld'
+    const existingBreadcrumb = document.getElementById(breadcrumbId)
+    if (breadcrumbs.length > 0) {
+      const script = existingBreadcrumb || document.createElement('script')
+      script.id = breadcrumbId
+      script.type = 'application/ld+json'
+      script.textContent = JSON.stringify(buildBreadcrumbSchema(breadcrumbs))
+      if (!existingBreadcrumb) document.head.appendChild(script)
+    } else if (existingBreadcrumb) {
+      existingBreadcrumb.remove()
     }
-    linkCanonical.setAttribute('href', canonicalUrl || window.location.href)
-  }, [title, description, keywords, ogImage, ogType, canonicalUrl, robots])
+  }, [title, description, keywords, ogImage, ogType, canonicalUrl, robots, breadcrumbs])
 
   return null
 }

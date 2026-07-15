@@ -39,8 +39,10 @@ function BeforeAfterSlider() {
     >
       {/* DESPUÉS — full size, clipped from left */}
       <img
-        src="/wp/after.jpg"
+        src="/wp/after.webp"
         alt="Resultado final Steel Frame"
+        width="935"
+        height="457"
         className="before-after-image before-after-image--after absolute inset-0 w-full h-full object-cover"
         draggable={false}
       />
@@ -48,8 +50,10 @@ function BeforeAfterSlider() {
       {/* ANTES — full size, clipped from right */}
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
         <img
-          src="/wp/before.jpg"
+          src="/wp/before.webp"
           alt="Estado original antes de obra"
+          width="906"
+          height="448"
           className="before-after-image before-after-image--before w-full h-full object-cover"
           draggable={false}
         />
@@ -148,7 +152,7 @@ const bentoCards = [
   {
     span: 'md:col-span-4 md:row-span-1',
     type: 'image-light',
-    img: '/wp/ECF_5848.jpg',
+    img: '/wp/service-especial.webp',
     title: 'Industriales | Locales comerciales',
   },
   {
@@ -308,13 +312,53 @@ export default function Nosotros() {
     return () => window.removeEventListener('resize', updateLine)
   }, [historyVisible, updateLine])
 
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://wpconstrucciones.com/nosotros#webpage",
+        "url": "https://wpconstrucciones.com/nosotros",
+        "name": "Nosotros | WP Construcciones Especiales",
+        "description": "Conocé la trayectoria de WP Construcciones Especiales en Paraná, Entre Ríos. Desde 2005 diseñando y construyendo estructuras duraderas en Steel Frame.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://wpconstrucciones.com/#website",
+          "url": "https://wpconstrucciones.com/",
+          "name": "WP Construcciones Especiales"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://wpconstrucciones.com/#organization",
+        "name": "WP Construcciones Especiales",
+        "url": "https://wpconstrucciones.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wpconstrucciones.com/assets/WP.png"
+        },
+        "sameAs": [
+          "https://www.facebook.com/WPConstruccionesEspeciales",
+          "https://www.instagram.com/wpconstruccionesespeciales/?hl=en"
+        ]
+      }
+    ]
+  }
+
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
       <SEO 
         title="Nosotros | Líderes en Steel Framing y Construcción en Seco · WP"
         description="Conocé la trayectoria de WP Construcciones Especiales en Paraná, Entre Ríos. Desde 2005 diseñando y construyendo estructuras duraderas en Steel Frame con precisión industrial."
         keywords="nosotros, trayectoria, guillermo matteoda, steel frame parana, construccion en seco entre rios, fabrica de aberturas, historia steel frame, argentina"
+        breadcrumbs={[
+          { name: 'Inicio', url: '/' },
+          { name: 'Nosotros', url: '/nosotros' },
+        ]}
       />
+      <script type="application/ld+json">
+        {JSON.stringify(aboutSchema)}
+      </script>
       <NavBar />
 
       <main className="pt-20">
@@ -365,8 +409,10 @@ export default function Nosotros() {
                 <div className="relative rounded-[2rem] overflow-hidden group border border-outline/10 shadow-2xl shadow-primary/5">
                   <img
                     alt="Ingeniería estructural de precisión"
+                    width="800"
+                    height="1080"
                     className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
-                    src="/wp/wp imagen.jpg"
+                    src="/wp/wp imagen.webp"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
 
@@ -543,16 +589,20 @@ export default function Nosotros() {
                 <div className="aspect-[4/5] overflow-hidden rounded-3xl">
                   <img
                     className="w-full h-full object-cover hover:grayscale transition-all duration-700"
-                    src="/wp/IMG_9158.jpg"
+                    src="/wp/IMG_9158.webp"
                     alt="Maquinaria roll-forming"
+                    width="1600"
+                    height="2845"
                   />
                 </div>
                 <div className="grid-rows-2 grid gap-4">
                   <div className="aspect-video overflow-hidden rounded-3xl">
                     <img
                       className="w-full h-full object-cover"
-                      src="/wp/IMG_9135.jpg"
+                      src="/wp/IMG_9135.webp"
                       alt="Ensamblaje estructura"
+                      width="1600"
+                      height="2844"
                     />
                   </div>
                   <div className="bg-primary p-8 flex flex-col justify-end text-white rounded-3xl relative overflow-hidden">

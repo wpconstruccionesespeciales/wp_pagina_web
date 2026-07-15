@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WP Construcciones — Plan estratégico SEO local y captación</title>
+  <style>
+    :root {
+      --ink: #172333;
+      --muted: #5d6977;
+      --navy: #102a43;
+      --blue: #167d9a;
+      --light-blue: #e9f4f7;
+      --orange: #d87832;
+      --light-orange: #fff2e8;
+      --line: #d7dee5;
+      --paper: #ffffff;
+      --soft: #f5f7f9;
+    }
+
+    * { box-sizing: border-box; }
+
+    @page {
+      size: A4;
+      margin: 17mm 15mm 18mm;
+      @bottom-left {
+        content: "WP Construcciones Especiales · Plan estratégico";
+        color: #77818b;
+        font: 8pt Arial, sans-serif;
+      }
+      @bottom-right {
+        content: "Página " counter(page) " de " counter(pages);
+        color: #77818b;
+        font: 8pt Arial, sans-serif;
+      }
+    }
+
+    @page:first {
+      margin: 0;
+      @bottom-left { content: none; }
+      @bottom-right { content: none; }
+    }
+
+    html { background: #dfe4e8; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.2pt;
+      line-height: 1.48;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    p { margin: 0 0 9px; }
+    ul, ol { margin: 7px 0 11px 20px; padding: 0; }
+    li { margin: 0 0 5px; }
+
+    h1, h2, h3, h4 { color: var(--navy); margin: 0; line-height: 1.18; }
+    h1 { font-size: 30pt; letter-spacing: -0.7px; }
+    h2 {
+      font-size: 18pt;
+      margin: 25px 0 11px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--blue);
+      break-after: avoid;
+    }
+    h3 { font-size: 12.5pt; margin: 17px 0 7px; break-after: avoid; }
+    h4 { font-size: 10.5pt; margin: 13px 0 5px; break-after: avoid; }
+
+    .cover {
+      height: 297mm;
+      padding: 23mm 18mm 18mm;
+      color: white;
+      background:
+        linear-gradient(155deg, rgba(16,42,67,.98) 0%, rgba(16,42,67,.94) 53%, rgba(22,125,154,.92) 100%);
+      position: relative;
+      page-break-after: always;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: "";
+      position: absolute;
+      width: 170mm;
+      height: 170mm;
+      border: 1px solid rgba(255,255,255,.14);
+      transform: rotate(35deg);
+      right: -86mm;
+      top: -28mm;
+    }
+
+    .cover::after {
+      content: "";
+      position: absolute;
+      width: 110mm;
+      height: 110mm;
+      background: rgba(216,120,50,.14);
+      transform: rotate(35deg);
+      left: -75mm;
+      bottom: -45mm;
+    }
+
+    .mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 19mm;
+      height: 19mm;
+      border: 2px solid rgba(255,255,255,.9);
+      font-size: 18pt;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .cover-kicker {
+      margin-top: 42mm;
+      color: #b8e0ea;
+      font-size: 10pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+    }
+
+    .cover h1 { color: white; margin-top: 6mm; max-width: 165mm; }
+    .cover-subtitle {
+      margin-top: 8mm;
+      max-width: 145mm;
+      font-size: 14pt;
+      line-height: 1.45;
+      color: #e6f1f5;
+    }
+
+    .cover-meta {
+      position: absolute;
+      left: 18mm;
+      right: 18mm;
+      bottom: 20mm;
+      padding-top: 6mm;
+      border-top: 1px solid rgba(255,255,255,.35);
+      display: flex;
+      justify-content: space-between;
+      color: #d7e8ee;
+      font-size: 9.5pt;
+    }
+
+    .content { padding: 0; }
+
+    .intro-band {
+      margin: 0 0 18px;
+      padding: 14px 16px;
+      background: var(--navy);
+      color: white;
+      border-left: 5px solid var(--orange);
+    }
+
+    .intro-band strong { color: #cfeaf1; }
+
+    .callout {
+      margin: 13px 0;
+      padding: 12px 14px;
+      background: var(--light-blue);
+      border-left: 4px solid var(--blue);
+      break-inside: avoid;
+    }
+
+    .callout.warning {
+      background: var(--light-orange);
+      border-left-color: var(--orange);
+    }
+
+    .callout p:last-child { margin-bottom: 0; }
+
+    .eyebrow {
+      color: var(--blue);
+      font-size: 8.5pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      margin-bottom: 4px;
+    }
+
+    .lead { font-size: 12pt; line-height: 1.5; color: #34475a; }
+    .small { font-size: 8.7pt; color: var(--muted); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 15px;
+      font-size: 8.9pt;
+      break-inside: auto;
+    }
+    thead { display: table-header-group; }
+    tr { break-inside: avoid; }
+    th {
+      padding: 8px 7px;
+      color: white;
+      background: var(--navy);
+      text-align: left;
+      vertical-align: top;
+    }
+    td {
+      padding: 7px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    tbody tr:nth-child(even) td { background: var(--soft); }
+
+    .priority-high { color: #a84413; font-weight: 700; }
+    .priority-med { color: #8b6b00; font-weight: 700; }
+
+    .phase {
+      margin: 12px 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      break-inside: avoid;
+    }
+    .phase h3 { margin-top: 0; }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 5px 0;
+      padding: 3px 7px;
+      border-radius: 12px;
+      color: var(--navy);
+      background: #e5eef3;
+      font-size: 8.2pt;
+      font-weight: 700;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 10px 0 15px;
+    }
+    .kpi-card {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--blue);
+      break-inside: avoid;
+    }
+    .kpi-card h3 { margin-top: 0; }
+
+    .toc {
+      margin: 7px 0 18px;
+      padding: 0;
+      list-style: none;
+      columns: 2;
+      column-gap: 25px;
+    }
+    .toc li {
+      padding: 5px 0;
+      border-bottom: 1px dotted #bcc6ce;
+      break-inside: avoid;
+    }
+
+    .page-break { page-break-before: always; }
+    .avoid-break { break-inside: avoid; }
+
+    .source-list li { margin-bottom: 8px; }
+
+    .closing {
+      margin-top: 22px;
+      padding: 18px;
+      color: white;
+      background: linear-gradient(120deg, var(--navy), var(--blue));
+      break-inside: avoid;
+    }
+    .closing h2 { color: white; border-color: rgba(255,255,255,.45); margin-top: 0; }
+
+    @media print {
+      html, body { background: white; }
+      .content { width: auto; }
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div class="mark">WP</div>
+    <div class="cover-kicker">Planificación estratégica · 90 días</div>
+    <h1>SEO local, posicionamiento premium y captación digital</h1>
+    <p class="cover-subtitle">Plan de ataque para mejorar la presencia orgánica y local de WP Construcciones Especiales en Paraná, Entre Ríos.</p>
+    <div class="cover-meta">
+      <span>Documento estratégico · No incluye implementación</span>
+      <span>15 de julio de 2026</span>
+    </div>
+  </section>
+
+  <main class="content">
+    <div class="intro-band">
+      <strong>Alcance:</strong> este documento define el problema, ordena hipótesis, prioriza oportunidades y establece un roadmap. No contiene piezas finales para publicar ni supone que las hipótesis iniciales estén demostradas.
+    </div>
+
+    <div class="eyebrow">Lectura rápida</div>
+    <h2 style="margin-top:0">Conclusión ejecutiva</h2>
+    <p class="lead">El problema más probable no es una simple “falta de contenido”. WP enfrenta una combinación de entidad local todavía incompleta, propuesta semántica ambigua, evidencia comercial poco estructurada y captación insuficientemente medible.</p>
+    <p>La prioridad no debería ser publicar artículos ni multiplicar páginas para ciudades. Primero debe resolverse qué entidad quiere consolidar WP, qué servicio quiere dominar, cuál es su mercado geográfico prioritario y cómo se conecta cada búsqueda con una oportunidad comercial real.</p>
+
+    <div class="callout">
+      <div class="eyebrow">Tesis central</div>
+      <p><strong>WP debe convertirse, para Google y para el comprador, en una empresa inequívocamente asociada con Steel Frame, Paraná, ejecución confiable y experiencia demostrable.</strong></p>
+    </div>
+
+    <h2>Índice</h2>
+    <ol class="toc">
+      <li>Definición del problema</li>
+      <li>Hipótesis estratégicas</li>
+      <li>Objetivos prioritarios</li>
+      <li>Frentes de trabajo</li>
+      <li>Decisiones clave</li>
+      <li>Plan por fases</li>
+      <li>Quick wins</li>
+      <li>Iniciativas estructurales</li>
+      <li>Riesgos y trade-offs</li>
+      <li>Roadmap de 90 días</li>
+      <li>Métricas</li>
+      <li>Fuentes y supuestos</li>
+    </ol>
+
+    <h2>1. Definición del problema</h2>
+    <p>WP necesita ser percibida simultáneamente por Google y por el comprador como una empresa real, reconocible y confiable, con base en Paraná, especializada en proyectar y ejecutar obras en Steel Frame, con experiencia demostrable y una propuesta comercial claramente diferenciada.</p>
+    <p>La evidencia pública revisada sugiere que esa definición todavía no está consolidada:</p>
+    <ul>
+      <li>La home indexada alterna títulos asociados a <strong>STEEL CORE</strong> con la marca WP.</li>
+      <li>La propuesta principal enfatiza “Steel Frame a nivel nacional”, mientras Paraná tiene un papel secundario.</li>
+      <li>El sitio comunica construcción integral, estructuras, casas modulares, ampliaciones, ingeniería y terminaciones sin una jerarquía comercial totalmente evidente.</li>
+      <li>Las versiones rastreadas muestran teléfonos y correos que deben verificarse antes de consolidar la entidad.</li>
+    </ul>
+
+    <div class="callout warning">
+      <div class="eyebrow">No confundir síntoma con causa</div>
+      <p>No aparecer en una búsqueda puntual no demuestra una penalización ni un problema técnico. Los resultados del mapa varían por ubicación. La primera decisión debe apoyarse en una medición geolocalizada estable, no en búsquedas manuales aisladas.</p>
+    </div>
+
+    <p>Google declara que la visibilidad local depende principalmente de <strong>relevancia, distancia y prominencia</strong>. La información completa, las reseñas, los enlaces, las menciones y el rendimiento orgánico ayudan a construir esas señales. La distancia, en cambio, no puede “optimizarse” artificialmente.</p>
+
+    <h3>Problema de negocio subyacente</h3>
+    <p>El desafío no consiste solo en atraer tráfico. Consiste en generar más conversaciones con personas que tengan un proyecto viable, en una zona atendible, con alcance compatible con la propuesta y suficiente intención de avanzar hacia una reunión o presupuesto.</p>
+
+    <h2>2. Hipótesis estratégicas</h2>
+    <table>
+      <thead>
+        <tr><th>Hipótesis</th><th>Probabilidad</th><th>Impacto</th><th>Cómo validarla</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>H1. Entidad local inconsistente o incompleta.</strong> Nombre, teléfono, dominio, correo y futura ficha podrían no reforzarse mutuamente.</td><td class="priority-high">Alta</td><td class="priority-high">Alto</td><td>Inventario NAP en sitio, redes, directorios, documentos comerciales y Perfil de Empresa.</td></tr>
+        <tr><td><strong>H2. La home no prioriza suficientemente la intención local.</strong> El alcance nacional puede diluir la asociación con Paraná.</td><td class="priority-high">Alta</td><td class="priority-high">Alto</td><td>Comparar consultas, SERP, contenido principal y conversión de tráfico local.</td></tr>
+        <tr><td><strong>H3. Varias intenciones compiten dentro de pocas páginas.</strong></td><td class="priority-high">Media-alta</td><td class="priority-high">Alto</td><td>Mapa de palabras clave, servicios rentables y destinos actuales.</td></tr>
+        <tr><td><strong>H4. STEEL CORE ocupa un lugar mayor que su reconocimiento real.</strong></td><td class="priority-med">Media</td><td class="priority-high">Alto</td><td>Consultas de marca, entrevistas de clientes, activos comerciales y estrategia futura.</td></tr>
+        <tr><td><strong>H5. Las obras existen pero no funcionan como autoridad SEO y comercial.</strong></td><td class="priority-high">Alta</td><td class="priority-high">Alto</td><td>Inventario de proyectos documentables, testimonios, ubicaciones y material propio.</td></tr>
+        <tr><td><strong>H6. El conjunto de competidores mezcla intenciones distintas.</strong> EDICI, por ejemplo, parece competir más por cálculo e ingeniería que por construcción integral.</td><td class="priority-high">Alta</td><td class="priority-med">Medio-alto</td><td>Clasificar competidores por cada SERP y servicio, no como una lista única.</td></tr>
+        <tr><td><strong>H7. La captación pierde trazabilidad entre Google, web y WhatsApp.</strong></td><td class="priority-high">Media-alta</td><td class="priority-high">Alto</td><td>Auditar eventos, UTMs, formularios y registro comercial.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Orden de validación</h3>
+    <ol>
+      <li>Entidad y datos de contacto.</li>
+      <li>Demanda, rentabilidad y alcance geográfico.</li>
+      <li>Arquitectura de marca WP / STEEL CORE.</li>
+      <li>Intenciones y arquitectura web.</li>
+      <li>Prueba social, autoridad y conversión.</li>
+    </ol>
+
+    <h2>3. Objetivos prioritarios</h2>
+    <ol>
+      <li><strong>Consolidar una entidad inequívoca:</strong> WP + Steel Frame + Paraná + área real de servicio.</li>
+      <li><strong>Capturar demanda transaccional:</strong> priorizar búsquedas con posibilidad inmediata de consulta o presupuesto.</li>
+      <li><strong>Diferenciar una oferta premium:</strong> vender certidumbre técnica, proceso y ejecución, no solo rapidez o precio.</li>
+      <li><strong>Convertir obras en autoridad:</strong> cada proyecto debe aportar relevancia local, evidencia técnica y reducción de riesgo.</li>
+      <li><strong>Conectar visibilidad con negocio:</strong> medir lead, calificación, presupuesto, cierre y valor de pipeline.</li>
+      <li><strong>Construir prominencia local:</strong> reseñas, menciones, alianzas y enlaces legítimos.</li>
+      <li><strong>Escalar contenido después de validar demanda y arquitectura.</strong></li>
+    </ol>
+
+    <div class="page-break"></div>
+    <h2>4. Frentes de trabajo</h2>
+
+    <h3>4.1 Inteligencia de demanda y competencia</h3>
+    <p>Construir un mapa de intención organizado por categoría, solución, tipo de proveedor, etapa de decisión, marca y geografía.</p>
+    <table>
+      <thead><tr><th>Grupo</th><th>Ejemplos conceptuales</th><th>Valor</th></tr></thead>
+      <tbody>
+        <tr><td>Categoría</td><td>Steel Frame Paraná; construcción en seco Paraná</td><td>Descubrimiento con intención comercial directa.</td></tr>
+        <tr><td>Solución</td><td>Viviendas; ampliaciones; planta alta; locales; oficinas</td><td>Permite separar ofertas y conversiones.</td></tr>
+        <tr><td>Proveedor</td><td>Empresa; constructora; arquitecto; proyecto y ejecución</td><td>Revela el modelo de proveedor esperado.</td></tr>
+        <tr><td>Evaluación</td><td>Precio; tiempos; financiación; aislación; mantenimiento</td><td>Reduce objeciones antes del contacto.</td></tr>
+        <tr><td>Geografía</td><td>Paraná y localidades con capacidad y evidencia real</td><td>Evita expansión artificial o páginas puerta.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>4.2 SEO local y Perfil de Empresa</h3>
+    <ul>
+      <li>Usar el nombre real, sin añadir palabras clave artificiales.</li>
+      <li>Elegir la categoría primaria según el negocio que WP quiere dominar.</li>
+      <li>Configurar correctamente dirección o área de servicio según la operación real.</li>
+      <li>Unificar teléfono, dominio, horarios, servicios y área operativa.</li>
+      <li>Usar fotos propias, servicios detallados y un enlace web con UTM.</li>
+      <li>Establecer rutinas para reseñas, respuestas, fotografías y control de cambios.</li>
+    </ul>
+
+    <h3>4.3 Branding y claridad de marca</h3>
+    <p>Modelo recomendado: <strong>WP Construcciones Especiales como marca maestra</strong> y <strong>STEEL CORE como sistema, metodología o línea respaldada por WP</strong>. Este modelo conserva el activo sin obligar al usuario a interpretar dos empresas.</p>
+    <p>Solo convendría elevar STEEL CORE a marca principal si existe demanda, reconocimiento, una propuesta propietaria defendible y presupuesto para construir una entidad independiente.</p>
+
+    <h3>4.4 Arquitectura del sitio</h3>
+    <ul>
+      <li>Home: categoría principal, Paraná, diferencial, prueba y caminos de decisión.</li>
+      <li>Destino transaccional principal para Steel Frame en Paraná.</li>
+      <li>Viviendas en Steel Frame.</li>
+      <li>Ampliaciones y plantas altas.</li>
+      <li>Locales, oficinas u obras comerciales.</li>
+      <li>Proyecto, cálculo o ingeniería únicamente si se vende por separado.</li>
+      <li>Obras y casos de estudio.</li>
+      <li>Proceso de trabajo, equipo, credenciales, preguntas y contacto.</li>
+    </ul>
+    <div class="callout warning">
+      <p><strong>Regla geográfica:</strong> no abrir páginas para múltiples ciudades hasta disponer de capacidad operativa, evidencia o una propuesta realmente diferenciada para cada zona.</p>
+    </div>
+
+    <h3>4.5 Prueba social y portafolio</h3>
+    <p>Cada caso prioritario debería documentar tipo de cliente, localidad o zona, alcance, superficie, responsabilidad de WP, desafío, solución, etapa, imágenes propias, resultado y testimonio verificable. El portafolio debe demostrar capacidad de ejecución, no solo familiaridad con el sistema.</p>
+
+    <h3>4.6 Autoridad y menciones locales</h3>
+    <ul>
+      <li>Proveedores y fabricantes con relación comercial real.</li>
+      <li>Estudios de arquitectura e ingeniería asociados.</li>
+      <li>Cámaras empresarias y sectoriales.</li>
+      <li>Medios locales cuando exista una historia o proyecto noticiable.</li>
+      <li>Directorios institucionales relevantes.</li>
+      <li>Casos colaborativos enlazados desde ambas organizaciones.</li>
+    </ul>
+    <p>No utilizar paquetes masivos de directorios o enlaces.</p>
+
+    <h3>4.7 Contenidos</h3>
+    <ol>
+      <li>Páginas comerciales.</li>
+      <li>Casos de obra.</li>
+      <li>Comparativas y objeciones de compra.</li>
+      <li>Preguntas surgidas de ventas.</li>
+      <li>Contenido editorial amplio.</li>
+    </ol>
+    <p>La frecuencia de publicación es secundaria. La prioridad es resolver decisiones que acerquen a un presupuesto: alcance, costos, etapas, permisos, financiación, aislación, mantenimiento y responsabilidades.</p>
+
+    <h3>4.8 Conversión y atribución</h3>
+    <p>Flujo objetivo: <strong>Google o Maps → página alineada → prueba y proceso → WhatsApp, llamada o formulario → calificación → reunión → presupuesto → venta.</strong></p>
+    <ul>
+      <li>Medir clics a WhatsApp por página y fuente.</li>
+      <li>Ofrecer un formulario breve como alternativa.</li>
+      <li>Registrar servicio, localidad, plazo y calidad.</li>
+      <li>Conservar el número canónico en todos los activos públicos.</li>
+      <li>Relacionar la fuente con reunión, presupuesto y cierre.</li>
+    </ul>
+
+    <h2>5. Decisiones clave a tomar</h2>
+
+    <h3>5.1 Posicionamiento geográfico</h3>
+    <p><strong>Recomendación:</strong> liderazgo local desde Paraná, capacidad selectiva en Entre Ríos y proyectos nacionales cuando corresponda. El alcance debe coincidir con margen, logística y prueba disponible.</p>
+
+    <h3>5.2 Posicionamiento comercial</h3>
+    <p>WP debe elegir una oferta conductora entre: ejecución integral premium; proyecto + ingeniería + ejecución; soluciones modulares financiables; o estructuras y servicios parciales. Puede ofrecer varias, pero una debe conducir la adquisición.</p>
+
+    <h3>5.3 Arquitectura de marca</h3>
+    <table>
+      <thead><tr><th>Alternativa</th><th>Ventaja</th><th>Riesgo</th><th>Evaluación</th></tr></thead>
+      <tbody>
+        <tr><td>WP como marca maestra; Steel Core como sistema</td><td>Claridad y aprovechamiento de trayectoria</td><td>Steel Core queda subordinada</td><td><strong>Recomendada</strong>, sujeta a validación.</td></tr>
+        <tr><td>Co-branding equivalente</td><td>Conserva ambos activos</td><td>Mayor confusión y costo comunicacional</td><td>Solo con funciones claramente diferenciadas.</td></tr>
+        <tr><td>Steel Core como marca principal</td><td>Posible diferenciación propietaria</td><td>Alto costo de reconocimiento</td><td>No recomendada sin evidencia fuerte.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>5.4 Oferta de entrada</h3>
+    <p>Definir una acción comercial sostenible: evaluación inicial, revisión de anteproyecto, estimación preliminar, reunión técnica o presupuesto sujeto a requisitos mínimos. La oferta debe filtrar sin generar una barrera innecesaria.</p>
+
+    <h3>5.5 Tipo de ficha local</h3>
+    <p>La decisión entre local físico y área de servicio debe representar la operación real. No conviene arriesgar la ficha intentando alterar artificialmente el factor distancia.</p>
+
+    <h2>6. Plan por fases</h2>
+
+    <section class="phase">
+      <div class="eyebrow">Días 1–14</div>
+      <h3>Fase 0 — Evidencia y decisiones</h3>
+      <p><span class="tag">Diagnóstico acotado</span><span class="tag">Baseline</span><span class="tag">Marca</span></p>
+      <ul>
+        <li>Medición geolocalizada de 8–12 búsquedas prioritarias.</li>
+        <li>Search Console, analítica e inventario de URLs indexadas.</li>
+        <li>Revisión comercial de consultas y ventas de 6–12 meses.</li>
+        <li>Definición propuesta de nombre, teléfono, correo y dominio.</li>
+        <li>Competidores clasificados por intención.</li>
+        <li>Servicios rentables, zonas atendibles y obras documentables.</li>
+      </ul>
+      <p><strong>Puerta de salida:</strong> no definir arquitectura final sin saber qué servicios generan margen y cuáles tienen evidencia.</p>
+    </section>
+
+    <section class="phase">
+      <div class="eyebrow">Días 15–30</div>
+      <h3>Fase 1 — Fundamentos y quick wins</h3>
+      <ul>
+        <li>Normalizar entidad y datos de contacto.</li>
+        <li>Completar la ficha cuando esté disponible.</li>
+        <li>Corregir jerarquía de marca, servicio y ubicación.</li>
+        <li>Optimizar títulos, encabezados y enlaces prioritarios.</li>
+        <li>Implementar medición de WhatsApp, formularios, llamadas y UTMs.</li>
+        <li>Activar protocolo ético de reseñas.</li>
+      </ul>
+    </section>
+
+    <section class="phase">
+      <div class="eyebrow">Días 31–60</div>
+      <h3>Fase 2 — Activos transaccionales y confianza</h3>
+      <ul>
+        <li>Desarrollar las páginas comerciales prioritarias.</li>
+        <li>Reorganizar navegación y enlaces internos.</li>
+        <li>Publicar los primeros casos de obra completos.</li>
+        <li>Incorporar proceso, credenciales, garantías y responsabilidades.</li>
+        <li>Conectar ficha, reseñas y páginas relevantes.</li>
+        <li>Aplicar datos estructurados válidos cuando corresponda.</li>
+      </ul>
+    </section>
+
+    <section class="phase">
+      <div class="eyebrow">Días 61–90</div>
+      <h3>Fase 3 — Prominencia y aprendizaje</h3>
+      <ul>
+        <li>Conseguir menciones y enlaces locales legítimos.</li>
+        <li>Ampliar casos de estudio.</li>
+        <li>Publicar contenidos basados en objeciones reales.</li>
+        <li>Comparar visibilidad, leads y calidad comercial contra el baseline.</li>
+        <li>Ajustar páginas según consultas e impresiones reales.</li>
+        <li>Decidir si conviene expandir localidades o verticales.</li>
+      </ul>
+    </section>
+
+    <h2>7. Quick wins</h2>
+    <table>
+      <thead><tr><th>Prioridad</th><th>Acción</th><th>Impacto esperado</th><th>Dependencia</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Verificar el teléfono correcto y eliminar inconsistencias.</td><td>Entidad y prevención de pérdida de leads.</td><td>Decisión interna.</td></tr>
+        <tr><td>2</td><td>Unificar nombre comercial, dominio, correo y datos públicos.</td><td>Relevancia y confianza.</td><td>Gobernanza de marca.</td></tr>
+        <tr><td>3</td><td>Resolver la relación visible WP / STEEL CORE.</td><td>Claridad de marca.</td><td>Validación comercial.</td></tr>
+        <tr><td>4</td><td>Reforzar servicio principal y Paraná en la home.</td><td>Relevancia local y conversión.</td><td>Posicionamiento definido.</td></tr>
+        <tr><td>5</td><td>Etiquetar el enlace web de la ficha con UTM.</td><td>Atribución.</td><td>Ficha disponible.</td></tr>
+        <tr><td>6</td><td>Medir WhatsApp, formulario y llamada.</td><td>Lectura real del funnel.</td><td>Analítica.</td></tr>
+        <tr><td>7</td><td>Activar reseñas de clientes reales recientes.</td><td>Prominencia y confianza.</td><td>Ficha verificada.</td></tr>
+        <tr><td>8</td><td>Convertir 2–3 obras de Paraná en casos completos.</td><td>Autoridad local y comercial.</td><td>Material y permisos.</td></tr>
+        <tr><td>9</td><td>Corregir títulos genéricos o duplicados.</td><td>Relevancia orgánica.</td><td>Mapa de intención.</td></tr>
+        <tr><td>10</td><td>Revisar datos en redes y directorios importantes.</td><td>Consistencia de entidad.</td><td>NAP definitivo.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>8. Iniciativas estructurales</h2>
+    <ul>
+      <li>Clúster comercial por servicio e intención.</li>
+      <li>Sistema continuo de documentación de obras.</li>
+      <li>Posicionamiento premium basado en previsibilidad, capacidad técnica y ejecución.</li>
+      <li>Programa de reseñas integrado al cierre de obra y a hitos positivos.</li>
+      <li>Red de autoridad con proveedores, profesionales y medios.</li>
+      <li>CRM mínimo que conecte fuente, servicio, presupuesto y venta.</li>
+      <li>Biblioteca de respuestas a objeciones reales.</li>
+      <li>Expansión geográfica basada en evidencia.</li>
+      <li>Gobernanza de marca para impedir nuevas inconsistencias.</li>
+    </ul>
+
+    <h2>9. Riesgos y trade-offs</h2>
+    <table>
+      <thead><tr><th>Riesgo</th><th>Trade-off</th><th>Mitigación</th></tr></thead>
+      <tbody>
+        <tr><td>Sobrelocalizar la marca</td><td>Mejor relevancia local, menor percepción nacional</td><td>Distinguir sede, prioridad comercial y cobertura.</td></tr>
+        <tr><td>STEEL CORE demasiado dominante</td><td>Diferenciación frente a confusión</td><td>Arquitectura respaldada por WP.</td></tr>
+        <tr><td>Eliminar STEEL CORE pronto</td><td>Claridad frente a pérdida de activo</td><td>Validar reconocimiento antes de decidir.</td></tr>
+        <tr><td>Páginas para muchas ciudades</td><td>Cobertura frente a duplicación</td><td>Exigir evidencia y propuesta local real.</td></tr>
+        <tr><td>Competir por precio</td><td>Volumen frente a margen</td><td>Vender certidumbre y valor total.</td></tr>
+        <tr><td>Depender solo de WhatsApp</td><td>Menor fricción frente a menor trazabilidad</td><td>Eventos, formulario alternativo y CRM.</td></tr>
+        <tr><td>Reseñas agresivas</td><td>Velocidad frente a riesgo y baja calidad</td><td>Proceso genuino, sin incentivos ni filtrado.</td></tr>
+        <tr><td>Cambiar marca, URLs y oferta a la vez</td><td>Velocidad frente a incertidumbre</td><td>Implementación secuencial con baseline.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>10. Roadmap de 90 días</h2>
+    <table>
+      <thead><tr><th>Período</th><th>Resultado esperado</th><th>Entregable o decisión</th></tr></thead>
+      <tbody>
+        <tr><td>Días 1–7</td><td>Línea de base</td><td>Grilla local, consultas, leads, URLs y competidores por intención.</td></tr>
+        <tr><td>Días 8–14</td><td>Foco estratégico</td><td>Servicio prioritario, área rentable, NAP y arquitectura de marca.</td></tr>
+        <tr><td>Días 15–21</td><td>Entidad consistente</td><td>Sitio, redes y ficha alineados; tracking definido.</td></tr>
+        <tr><td>Días 22–30</td><td>Relevancia esencial</td><td>Home y destinos principales alineados; reseñas activas.</td></tr>
+        <tr><td>Días 31–45</td><td>Cobertura transaccional</td><td>Páginas de servicio y primeros casos.</td></tr>
+        <tr><td>Días 46–60</td><td>Confianza comercial</td><td>Proceso, credenciales, prueba, preguntas y conversión.</td></tr>
+        <tr><td>Días 61–75</td><td>Prominencia</td><td>Alianzas, menciones y nuevos casos locales.</td></tr>
+        <tr><td>Días 76–90</td><td>Aprendizaje</td><td>Comparativa y decisión de escalar, corregir o especializar.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Puertas de decisión</h3>
+    <ul>
+      <li><strong>Día 14:</strong> aprobar servicio, geografía, NAP y arquitectura de marca.</li>
+      <li><strong>Día 30:</strong> confirmar que la medición funciona antes de expandir activos.</li>
+      <li><strong>Día 60:</strong> evaluar indexación, primeras impresiones y calidad de leads.</li>
+      <li><strong>Día 90:</strong> escalar lo que genera demanda calificada; detener lo que solo genera tráfico.</li>
+    </ul>
+
+    <h2>11. Métricas para medir si funciona</h2>
+    <div class="kpi-grid">
+      <section class="kpi-card">
+        <h3>Visibilidad local</h3>
+        <ul>
+          <li>Presencia en top 3, 10 y 20.</li>
+          <li>Share of Voice en grilla fija.</li>
+          <li>Evolución por consulta y zona.</li>
+          <li>Interacciones de la ficha.</li>
+        </ul>
+      </section>
+      <section class="kpi-card">
+        <h3>SEO orgánico</h3>
+        <ul>
+          <li>Impresiones y clics no-branded.</li>
+          <li>Consultas de servicio + ubicación.</li>
+          <li>CTR por página y consulta.</li>
+          <li>Indexación prioritaria.</li>
+        </ul>
+      </section>
+      <section class="kpi-card">
+        <h3>Conversión</h3>
+        <ul>
+          <li>Clics a WhatsApp por fuente.</li>
+          <li>Formularios y llamadas.</li>
+          <li>Tasa visita → contacto.</li>
+          <li>Tiempo de primera respuesta.</li>
+        </ul>
+      </section>
+      <section class="kpi-card">
+        <h3>Calidad de negocio</h3>
+        <ul>
+          <li>Leads calificados.</li>
+          <li>Reuniones y presupuestos.</li>
+          <li>Tasas lead → presupuesto → obra.</li>
+          <li>Valor y margen del pipeline.</li>
+        </ul>
+      </section>
+      <section class="kpi-card">
+        <h3>Autoridad y confianza</h3>
+        <ul>
+          <li>Ritmo y calidad de reseñas.</li>
+          <li>Casos completos publicados.</li>
+          <li>Menciones y enlaces locales.</li>
+          <li>Activos con prueba reutilizable.</li>
+        </ul>
+      </section>
+      <section class="kpi-card">
+        <h3>Métrica principal</h3>
+        <p><strong>Oportunidades comerciales calificadas originadas en Google orgánico y Maps.</strong></p>
+        <p class="small">Los rankings son indicadores; el pipeline es el resultado.</p>
+      </section>
+    </div>
+
+    <div class="callout">
+      <p><strong>Objetivos numéricos:</strong> deben fijarse después de los primeros 14 días. Sin línea de base, prometer top 3 o porcentajes arbitrarios sería metodológicamente débil.</p>
+    </div>
+
+    <h2>12. Fuentes, evidencia y supuestos</h2>
+    <h3>Fuentes consultadas</h3>
+    <ul class="source-list">
+      <li><a href="https://www.wpconstrucciones.com/">WP Construcciones Especiales — sitio actual</a>.</li>
+      <li><a href="https://support.google.com/business/answer/7091?hl=es-ES">Google Business Profile — cómo determina Google el posicionamiento local</a>.</li>
+      <li><a href="https://support.google.com/business/answer/3038177?hl=es">Google Business Profile — directrices para representar una empresa</a>.</li>
+      <li><a href="https://developers.google.com/search/docs/appearance/structured-data/local-business">Google Search Central — datos estructurados LocalBusiness</a>.</li>
+      <li><a href="https://paranasteel.com.ar/">Paraná Steel — referencia competitiva</a>.</li>
+      <li><a href="https://steelholding.com.ar/project/proyecto-al-casa-santa-candida-parana/">Steel Holding — caso de proyecto en Paraná</a>.</li>
+      <li><a href="https://edici.com.ar/">EDICI Ingeniería — referencia de ingeniería, prueba y conversión</a>.</li>
+    </ul>
+
+    <h3>Supuestos que deben validarse</h3>
+    <ul>
+      <li>Paraná es el mercado prioritario por margen y capacidad, no solo por sede.</li>
+      <li>WP desea priorizar proyectos integrales sobre servicios parciales.</li>
+      <li>Existen obras, fotografías y clientes que autorizan casos y testimonios.</li>
+      <li>El Perfil de Empresa podrá verificarse bajo una configuración compatible con la operación real.</li>
+      <li>La empresa dispone de capacidad de respuesta comercial para absorber más consultas.</li>
+      <li>STEEL CORE es un activo subordinable y no una marca independiente ya consolidada.</li>
+    </ul>
+
+    <section class="closing">
+      <h2>Prioridad estratégica final</h2>
+      <p>Primero consolidar qué es WP, dónde opera, qué servicio quiere dominar y cómo se mide una oportunidad. Después construir páginas, prueba social y autoridad alrededor de esa definición.</p>
+      <p><strong>El orden correcto es: entidad → foco → arquitectura → prueba → prominencia → escala.</strong></p>
+    </section>
+  </main>
+</body>
+</html>
