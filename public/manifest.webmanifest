@@ -1,0 +1,18 @@
+{
+  "name": "WP Construcciones Especiales",
+  "short_name": "WP Construcciones",
+  "description": "Construcción en seco, steel framing de alta gama y arquitectura modular en Argentina.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#15251b",
+  "lang": "es-AR",
+  "icons": [
+    {
+      "src": "/favicon.ico?v=2",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
