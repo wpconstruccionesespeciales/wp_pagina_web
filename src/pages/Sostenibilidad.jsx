@@ -119,6 +119,10 @@ export default function Sostenibilidad() {
         title="Construcción Sostenible y Eficiencia Energética | WP"
         description="Edificaciones de steel frame sustentables con alma de acero y máxima aislación térmica (celulosa y poliuretano). Ahorro energético y respeto ambiental en Argentina."
         keywords="construccion sostenible, eficiencia energetica, steel frame ecologico, aislacion termica, poliuretano proyectado, celulosa insuflada, huella de carbono argentina"
+        breadcrumbs={[
+          { name: 'Inicio', url: '/' },
+          { name: 'Sostenibilidad', url: '/sostenibilidad' },
+        ]}
       />
       <NavBar />
 
@@ -178,8 +182,10 @@ export default function Sostenibilidad() {
                 <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl shadow-primary/5 border border-primary/5">
                   <img
                     alt="Construcción sostenible Steel Frame"
+                    width="1200"
+                    height="900"
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                    src="/wp/ECF_5821.jpg"
+                    src="/wp/project-comercial.webp"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6">

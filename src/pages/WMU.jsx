@@ -175,7 +175,7 @@ function HeroSection() {
       display: 'grid', placeItems: 'center', overflow: 'hidden', background: BG, color: TXT,
     }}>
       <div style={{ position: 'absolute', inset: 0, zIndex: -2, overflow: 'hidden' }}>
-        <img src={SKY_URL} alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(.55) contrast(1.05) saturate(1.05)' }} />
+        <img src={SKY_URL} alt="" aria-hidden="true" width="2000" height="2576" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(.55) contrast(1.05) saturate(1.05)' }} />
       </div>
 
       <div aria-hidden="true" style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 90, background: 'linear-gradient(to top,rgba(0,0,0,0) 0%,rgba(0,0,0,.65) 65%,#000 100%)', pointerEvents: 'none', zIndex: 0 }} />
@@ -199,7 +199,7 @@ function HeroSection() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', background: 'rgba(0,0,0,.45)', border: '1px solid rgba(255,255,255,.14)', padding: '10px 14px', borderRadius: 12, backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', width: 'max-content', maxWidth: '100%' }}>
             <span style={{ fontSize: '.85rem', fontFamily: BODY }}>Empezá hoy · financiación Banco Hipotecario</span>
-            <img src="/media/banco-hipotecario.png" alt="Banco Hipotecario" style={{ height: 21, width: 'auto', objectFit: 'contain', filter: 'contrast(1.05) brightness(1.2)', marginLeft: 'auto' }} />
+            <img src="/media/banco-hipotecario.png" alt="Banco Hipotecario" width="100" height="190" style={{ height: 21, width: 'auto', objectFit: 'contain', filter: 'contrast(1.05) brightness(1.2)', marginLeft: 'auto' }} />
           </div>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '15px 0 0' }}>
@@ -216,7 +216,7 @@ function HeroSection() {
 
         <figure aria-label="Render módulo WMU" style={{ margin: 0 }} className="hero-hex">
           <div style={{ position: 'relative', width: 'clamp(260px,34vw,510px)', aspectRatio: '1', marginInline: 'auto', clipPath: 'polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,.55)' }}>
-            <img src={HEX_IMG} alt="Módulo WMU" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src={HEX_IMG} alt="Módulo WMU" width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(200deg,rgba(53,195,107,.15),transparent 60%)', mixBlendMode: 'overlay', pointerEvents: 'none' }} />
           </div>
         </figure>
@@ -235,7 +235,7 @@ function ProcessSection() {
       position: 'relative', overflow: 'hidden', minHeight: '100vh',
       display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
     }}>
-      <img src="/wmu/wmu-process-bg.webp" alt="" aria-hidden="true"
+      <img src="/wmu/wmu-process-bg.webp" alt="" aria-hidden="true" width="1366" height="768"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center bottom' }} />
 
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,.72) 0%, rgba(0,0,0,.5) 28%, rgba(0,0,0,.12) 52%, transparent 70%)', pointerEvents: 'none' }} />
@@ -302,7 +302,7 @@ function ModelCard({ model, delay, vis, featured }) {
           marginBottom: 20,
         }}>
         <div style={{ overflow: 'hidden', minHeight: 320 }}>
-          <img src={model.img} alt={model.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hov ? 'scale(1.04)' : 'scale(1)', transition: 'transform .6s ease' }} />
+          <img src={model.img} alt={model.name} width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hov ? 'scale(1.04)' : 'scale(1)', transition: 'transform .6s ease' }} />
         </div>
         <div style={{ padding: 'clamp(28px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <span style={{ color: G, fontWeight: 700, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', fontFamily: BODY, marginBottom: 10 }}>Modelo destacado</span>
@@ -337,7 +337,7 @@ function ModelCard({ model, delay, vis, featured }) {
         transition: `opacity .55s ease ${delay}s, transform .35s ease, box-shadow .35s ease`,
       }}>
       <div style={{ aspectRatio: '4/3', overflow: 'hidden', position: 'relative' }}>
-        <img src={model.img} alt={model.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hov ? 'scale(1.06)' : 'scale(1)', transition: 'transform .5s ease' }} />
+        <img src={model.img} alt={model.name} width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hov ? 'scale(1.06)' : 'scale(1)', transition: 'transform .5s ease' }} />
         {/* green glow on hover */}
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 100%, rgba(53,195,107,.15), transparent 70%)', opacity: hov ? 1 : 0, transition: 'opacity .4s ease', pointerEvents: 'none' }} />
         {/* size badge */}
@@ -692,7 +692,7 @@ function PressSection() {
               }}>
               {/* image container */}
               <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', flexShrink: 0 }}>
-                <img src={p.img} alt={p.tag} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform .6s ease' }} className="press-card-img-new" />
+                <img src={p.img} alt={p.tag} width="500" height="500" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform .6s ease' }} className="press-card-img-new" />
                 {/* green gradient overlay on image */}
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(42,122,74,.15) 0%, transparent 40%)', pointerEvents: 'none' }} />
                 {/* portal name overlay */}
@@ -775,7 +775,7 @@ function SpecsSection() {
           {/* right — CTA card + image */}
           <div>
             <div className="specs-img" style={{ borderRadius: 20, overflow: 'hidden', boxShadow: '0 20px 56px rgba(0,0,0,.4)', marginBottom: 20, opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateX(24px)', transition: 'opacity .8s ease .2s, transform .8s ease .2s' }}>
-              <img src="/wmu/wmu-aldea.webp" alt="Modelo WMU Aldea" style={{ width: '100%', display: 'block', objectFit: 'cover' }} />
+              <img src="/wmu/wmu-aldea.webp" alt="Modelo WMU Aldea" width="2048" height="1152" style={{ width: '100%', display: 'block', objectFit: 'cover' }} />
             </div>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', opacity: vis ? 1 : 0, transition: 'opacity .7s ease .4s' }}>
               <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-btn-primary" style={{ flex: 1, textAlign: 'center' }}>CONTÁCTANOS</a>
@@ -813,7 +813,7 @@ function WMUFooter() {
           </div>
         </div>
         <div style={{ borderTop: '1px solid rgba(255,255,255,.07)', paddingTop: 22, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-          <span style={{ color: SOFT, fontSize: 12, fontFamily: BODY }}>© 2025 WP Construcciones Especiales. Todos los derechos reservados.</span>
+          <span style={{ color: SOFT, fontSize: 12, fontFamily: BODY }}>© 2025 WP Construcciones Especiales. Todos los derechos reservados. — Sitio web desarrollado por <a href="https://tomygiorgi.vercel.app/" target="_blank" rel="noopener noreferrer" style={{ color: G, textDecoration: 'none', fontWeight: 600 }}>Tomás Giorgi</a></span>
           <Link to="/" style={{ color: G, fontSize: 12, textDecoration: 'none', fontWeight: 600, fontFamily: BODY }}>← Volver al inicio</Link>
         </div>
       </div>
@@ -1190,6 +1190,10 @@ export default function WMU() {
         description="Descubrí la línea WMU de casas modulares premium llave en mano. Construcción rápida con estructura de steel frame y excelente aislación térmica en Argentina."
         keywords="wmu, arquitectura modular, modulos habitacionales, casas modulares argentina, viviendas industrializadas, modulo cero, steel frame modular"
         ogImage="/wmu/wmu-financing.webp"
+        breadcrumbs={[
+          { name: 'Inicio', url: '/' },
+          { name: 'WMU Arquitectura Modular', url: '/wmu' },
+        ]}
       />
       <style>{CSS}</style>
       <WMUNav />

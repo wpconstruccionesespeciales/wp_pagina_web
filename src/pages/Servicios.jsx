@@ -32,30 +32,40 @@ const coreServices = [
 const projectTypes = [
   {
     img: '/wp/IMG_9133.webp',
+    width: 1600,
+    height: 2844,
     title: 'Edificios de mediana altura',
     desc: 'Implementamos ingeniería de precisión para proyectos de desarrollo vertical. Optimizamos la operación de la estructura y la logística, asegurando un proceso eficiente.',
     tag: 'Desarrollo Vertical',
   },
   {
     img: '/wp/wp imagen.jpg',
+    width: 800,
+    height: 1080,
     title: 'Viviendas unifamiliares',
     desc: 'Construcción residencial de calidad superior. Ofrecemos hogares de habitabilidad excepcional que articulen confort térmico y acústico, con alta durabilidad garantizada a largo plazo.',
     tag: 'Residencial',
   },
   {
-    img: '/wp/ECF_5821.jpg',
+    img: '/wp/project-comercial.webp',
+    width: 1200,
+    height: 900,
     title: 'Industriales | Locales comerciales',
     desc: 'Desarrollamos infraestructura industrial y comercial de alto rendimiento. Aseguramos máxima funcionalidad y adaptabilidad, facilitando la rentabilidad económica de cualquier proyecto privado o público.',
     tag: 'Comercial / Industrial',
   },
   {
     img: '/wp/after.jpg',
+    width: 935,
+    height: 457,
     title: 'Reformas y Ampliaciones',
     desc: 'Reconfiguramos y potenciamos tus ambientes existentes. Realizamos intervenciones estructurales con mínima interferencia, potenciando la funcionalidad y el valor patrimonial de tu propiedad.',
     tag: 'Renovación',
   },
   {
-    img: '/wp/ECF_5848.jpg',
+    img: '/wp/service-especial.webp',
+    width: 1400,
+    height: 1050,
     title: 'Clínicas | Consultorios',
     desc: 'Desarrollamos espacios de salud con foco en la higiene y la funcionalidad. Proyectamos clínicas bajo estricto cumplimiento normativo, creando ambientes óptimos para la atención médica especializada.',
     tag: 'Salud',
@@ -132,6 +142,10 @@ export default function Servicios() {
         title="Servicios de Steel Frame y Construcción en Seco | WP"
         description="Ofrecemos servicios de cálculo de ingeniería estructural de detalle, montaje de estructuras steel frame, aberturas de aluminio a medida y dirección de obra llave en mano."
         keywords="servicios steel frame, calculo estructural, aberturas de aluminio, reformas en seco, ampliaciones planta alta, construccion steel frame argentina"
+        breadcrumbs={[
+          { name: 'Inicio', url: '/' },
+          { name: 'Servicios', url: '/servicios' },
+        ]}
       />
       <script type="application/ld+json">
         {JSON.stringify(serviceSchema)}
@@ -348,7 +362,7 @@ export default function Servicios() {
             {/* Creative grid: 3 top + 2 bottom centered */}
             <div className={`animate-on-scroll ${projectsVisible ? 'visible' : ''}`}>
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">
-                {projectTypes.slice(0, 3).map(({ img, title, desc, tag }, i) => (
+                {projectTypes.slice(0, 3).map(({ img, width, height, title, desc, tag }, i) => (
                   <div
                     key={title}
                     className={`page-card group relative rounded-3xl overflow-hidden min-h-[390px] lg:min-h-[460px] cursor-pointer ${i === 0 ? 'md:col-span-6' : 'md:col-span-3'}`}
@@ -357,6 +371,8 @@ export default function Servicios() {
                     <img
                       src={img}
                       alt={title}
+                      width={width}
+                      height={height}
                       loading="lazy"
                       decoding="async"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -390,7 +406,7 @@ export default function Servicios() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                {projectTypes.slice(3).map(({ img, title, desc, tag }, i) => (
+                {projectTypes.slice(3).map(({ img, width, height, title, desc, tag }, i) => (
                   <div
                     key={title}
                     className="page-card group relative rounded-3xl overflow-hidden min-h-[390px] lg:min-h-[460px] cursor-pointer"
@@ -399,6 +415,8 @@ export default function Servicios() {
                     <img
                       src={img}
                       alt={title}
+                      width={width}
+                      height={height}
                       loading="lazy"
                       decoding="async"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"

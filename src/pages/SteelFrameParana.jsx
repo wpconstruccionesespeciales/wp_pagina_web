@@ -81,7 +81,7 @@ const faqsParana = [
 ]
 
 // ─── Tarjeta individual con efecto tilt 3D y label conceptual ───
-function ImageCard({ src, alt, label, motionStyle, className }) {
+function ImageCard({ src, alt, label, motionStyle, className, width, height }) {
   const [isHovered, setIsHovered] = useState(false)
   const tiltX = useMotionValue(0)
   const tiltY = useMotionValue(0)
@@ -125,6 +125,8 @@ function ImageCard({ src, alt, label, motionStyle, className }) {
       <img
         src={src}
         alt={alt}
+        width={width}
+        height={height}
         className="w-full h-full object-cover"
       />
       <Motion.div
@@ -190,6 +192,8 @@ function EditorialMosaic() {
         src="/wp/wp imagen.jpg"
         alt="Obra Steel Frame Residencial en Paraná"
         label="El Espacio"
+        width="800"
+        height="1080"
         motionStyle={{ x: img1X, y: img1Y }}
         className="absolute w-[60%] h-[55%] left-[5%] top-[18%] z-10"
       />
@@ -199,6 +203,8 @@ function EditorialMosaic() {
         src="/wp/IMG_9133.webp"
         alt="Edificio de Steel Frame en Paraná por WP"
         label="La Luz"
+        width="1600"
+        height="2844"
         motionStyle={{ x: img2X, y: img2Y }}
         className="absolute w-[45%] h-[40%] right-[5%] top-[5%] z-20"
       />
@@ -208,6 +214,8 @@ function EditorialMosaic() {
         src="/wp/after.jpg"
         alt="Ingeniería y montaje de Steel Frame en Entre Ríos"
         label="El Acero"
+        width="935"
+        height="457"
         motionStyle={{ x: img3X, y: img3Y }}
         className="absolute w-[40%] h-[35%] right-[15%] bottom-[8%] z-30"
       />
@@ -224,9 +232,9 @@ export default function SteelFrameParana() {
   const [heroRef, heroVisible] = useInView()
   const [hitosRef, hitosVisible] = useInView()
   const [ventajasRef, ventajasVisible] = useInView()
-  const [muroRef, muroVisible] = useInView()
+  const [muroRef] = useInView()
   const [faqRef, faqVisible] = useInView()
-  const [contactRef, contactVisible] = useInView()
+  const [contactRef] = useInView()
 
   // Parallax magnético para la columna editorial izquierda
   const leftRef = useRef(null)
@@ -302,6 +310,10 @@ export default function SteelFrameParana() {
         title="Steel Frame en Paraná | WP Construcciones Especiales"
         description="Líderes en construcción en seco, steel frame de alta gama y arquitectura modular en Paraná, Oro Verde, Crespo y toda la región de Entre Ríos. Proyectos llave en mano con precisión milimétrica."
         keywords="steel frame parana, construccion en seco parana, casas steel frame parana, constructora parana, steel framing entre rios, wp construcciones, steel frame oro verde, construccion en seco crespo"
+        breadcrumbs={[
+          { name: 'Inicio', url: '/' },
+          { name: 'Steel Frame en Paraná', url: '/steel-frame-parana' },
+        ]}
       />
       <script type="application/ld+json">
         {JSON.stringify(schemaData)}
@@ -545,7 +557,7 @@ export default function SteelFrameParana() {
                 >
                   <span className="material-symbols-outlined text-[#15251b]/60 text-[15px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
                   <span className="text-[#15251b]/70 text-[0.6rem] font-bold tracking-[0.15em] font-headline uppercase whitespace-nowrap">
-                    21 años · Paraná, Oro Verde, Crespo · Entre Ríos
+                    21 años · Paraná · Entre Ríos
                   </span>
                 </Motion.div>
 

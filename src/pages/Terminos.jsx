@@ -58,7 +58,7 @@ export default function Terminos() {
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
       <SEO 
-        title="Términos de Servicio | STEEL CORE - WP Construcciones Especiales"
+        title="Términos de Servicio | WP Construcciones Especiales"
         description="Leé nuestros Términos de Servicio. Detalles sobre plazos de obra, formas de pago, garantías y compromisos técnicos en WP."
         keywords="terminos de servicio, condiciones de contratacion, garantia steel frame, presupuesto construccion"
       />

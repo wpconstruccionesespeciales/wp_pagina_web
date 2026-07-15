@@ -41,6 +41,8 @@ function BeforeAfterSlider() {
       <img
         src="/wp/after.webp"
         alt="Resultado final Steel Frame"
+        width="935"
+        height="457"
         className="before-after-image before-after-image--after absolute inset-0 w-full h-full object-cover"
         draggable={false}
       />
@@ -50,6 +52,8 @@ function BeforeAfterSlider() {
         <img
           src="/wp/before.webp"
           alt="Estado original antes de obra"
+          width="906"
+          height="448"
           className="before-after-image before-after-image--before w-full h-full object-cover"
           draggable={false}
         />
@@ -148,7 +152,7 @@ const bentoCards = [
   {
     span: 'md:col-span-4 md:row-span-1',
     type: 'image-light',
-    img: '/wp/ECF_5848.jpg',
+    img: '/wp/service-especial.webp',
     title: 'Industriales | Locales comerciales',
   },
   {
@@ -347,6 +351,10 @@ export default function Nosotros() {
         title="Nosotros | Líderes en Steel Framing y Construcción en Seco · WP"
         description="Conocé la trayectoria de WP Construcciones Especiales en Paraná, Entre Ríos. Desde 2005 diseñando y construyendo estructuras duraderas en Steel Frame con precisión industrial."
         keywords="nosotros, trayectoria, guillermo matteoda, steel frame parana, construccion en seco entre rios, fabrica de aberturas, historia steel frame, argentina"
+        breadcrumbs={[
+          { name: 'Inicio', url: '/' },
+          { name: 'Nosotros', url: '/nosotros' },
+        ]}
       />
       <script type="application/ld+json">
         {JSON.stringify(aboutSchema)}
@@ -401,6 +409,8 @@ export default function Nosotros() {
                 <div className="relative rounded-[2rem] overflow-hidden group border border-outline/10 shadow-2xl shadow-primary/5">
                   <img
                     alt="Ingeniería estructural de precisión"
+                    width="800"
+                    height="1080"
                     className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
                     src="/wp/wp imagen.webp"
                   />
@@ -581,6 +591,8 @@ export default function Nosotros() {
                     className="w-full h-full object-cover hover:grayscale transition-all duration-700"
                     src="/wp/IMG_9158.webp"
                     alt="Maquinaria roll-forming"
+                    width="1600"
+                    height="2845"
                   />
                 </div>
                 <div className="grid-rows-2 grid gap-4">
@@ -589,6 +601,8 @@ export default function Nosotros() {
                       className="w-full h-full object-cover"
                       src="/wp/IMG_9135.webp"
                       alt="Ensamblaje estructura"
+                      width="1600"
+                      height="2844"
                     />
                   </div>
                   <div className="bg-primary p-8 flex flex-col justify-end text-white rounded-3xl relative overflow-hidden">
