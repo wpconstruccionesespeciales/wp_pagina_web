@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Hero from './components/Hero'
 import WhyUs from './components/WhyUs'
@@ -96,7 +96,7 @@ function Home() {
   return (
     <div className="relative overflow-hidden bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
       <SEO 
-        title="STEEL CORE | WP Construcciones Especiales · Steel Frame Argentina"
+        title="WP Construcciones Especiales"
         description="Líderes en construcción en seco, steel framing de alta gama y arquitectura modular en Argentina. Diseños sostenibles con cálculo estructural de precisión milimétrica."
         keywords="steel frame, construccion en seco, arquitectura modular, casas modulares, wp construcciones, steel core, argentina, parana entre rios, de alta gama"
       />
@@ -132,6 +132,12 @@ function Home() {
 }
 
 export default function App() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   return (
     <Suspense fallback={<RouteFallback />}>
       <Routes>

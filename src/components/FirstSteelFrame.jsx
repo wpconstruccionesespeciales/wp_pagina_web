@@ -229,7 +229,7 @@ function BuildingBlueprint() {
       <g className="text-primary-fixed-dim" stroke="currentColor">
         <rect x="335" y="585" width="160" height="28" rx="1.5" strokeWidth="0.8" fill="currentColor" fillOpacity="0.04" />
         <line x1="335" y1="598" x2="495" y2="598" strokeWidth="0.4" opacity="0.3" />
-        <text x="345" y="594" fill="currentColor" fontSize="5.5" fontFamily="Space Grotesk, sans-serif" fontWeight="700" opacity="0.6">STEEL CORE · WP</text>
+        <text x="345" y="594" fill="currentColor" fontSize="5.5" fontFamily="Space Grotesk, sans-serif" fontWeight="700" opacity="0.6">STEEL FRAME · PARANÁ · ARGENTINA</text>
         <text x="345" y="607" fill="currentColor" fontSize="4.5" fontFamily="Manrope, sans-serif" opacity="0.3">VISTA ELEVACIÓN · ESC 1:100</text>
         <text x="475" y="594" fill="currentColor" fontSize="4.5" fontFamily="Manrope, sans-serif" textAnchor="end" opacity="0.25">01-2025</text>
         <text x="475" y="607" fill="currentColor" fontSize="4.5" fontFamily="Manrope, sans-serif" textAnchor="end" opacity="0.25">REV A</text>
@@ -414,7 +414,7 @@ export default function FirstSteelFrame() {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
               En 2014 marcamos un hito: construimos el primer edificio de la
               región realizado íntegramente en Steel Frame, en Paraná. Desde
@@ -436,7 +436,7 @@ export default function FirstSteelFrame() {
                     hidden: { opacity: 0, y: 20 },
                     visible: {
                       opacity: 1, y: 0,
-                      transition: { duration: 0.5, delay: 1.2 + i * 0.15, ease: [0.16, 1, 0.3, 1] }
+                      transition: { duration: 0.5, delay: 0.6 + i * 0.12, ease: [0.16, 1, 0.3, 1] }
                     }
                   }}
                 >
@@ -461,8 +461,8 @@ export default function FirstSteelFrame() {
               className="mt-8 flex flex-wrap gap-4"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, margin: '-10px' }}
+              transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
               <a
                 href="https://www.youtube.com/watch?v=8ob8MJEE_gg"
