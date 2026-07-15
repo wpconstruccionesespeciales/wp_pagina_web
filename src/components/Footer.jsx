@@ -107,8 +107,7 @@ export default function Footer({ showCTA = true }) {
 
         {/* Bottom */}
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-white/25 text-xs">
-          <p>© 2026 WP Construcciones Especiales.</p>
-          <p>Hecho con precisión milimétrica.</p>
+          <p>© 2026 WP Construcciones Especiales. Hecho con precisión milimétrica. — Sitio web desarrollado por <a href="https://tomygiorgi.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">Tomás Giorgi</a></p>
         </div>
       </div>
     </footer>
