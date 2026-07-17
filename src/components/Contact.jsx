@@ -110,7 +110,7 @@ export default function Contact() {
             <FloatingTextarea label="Mensaje / Detalles del Proyecto" name="message" />
             <button
               type="submit"
-              className="group w-full bg-primary text-white py-4 font-bold rounded-xl hover:bg-primary-container hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+              className="group w-full bg-primary text-white py-4 font-bold rounded-xl hover:bg-primary-container hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2"
             >
               Enviar Solicitud
               <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>

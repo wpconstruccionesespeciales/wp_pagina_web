@@ -238,6 +238,11 @@ details summary::-webkit-details-marker {
   left: 10%;
 }
 
+@keyframes blueprintFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .hero-blueprint {
   position: absolute;
   border: 1px solid rgba(255,255,255,0.12);
@@ -247,6 +252,9 @@ details summary::-webkit-details-marker {
     rgba(255,255,255,0.02);
   backdrop-filter: blur(4px);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  opacity: 0;
+  animation: blueprintFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.4s;
 }
 
 .hero-blueprint::before,

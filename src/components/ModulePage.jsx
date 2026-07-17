@@ -360,6 +360,7 @@ function GallerySection({ data }) {
 
             <button
               onClick={(e) => { e.stopPropagation(); prev() }}
+              className="wc-lightbox-btn"
               aria-label="Imagen anterior"
               style={{ position: 'absolute', left: 'clamp(8px, 2vw, 28px)', top: '50%', transform: 'translateY(-50%)', width: 48, height: 48, borderRadius: 999, border: '1px solid rgba(255,255,255,.18)', background: 'rgba(255,255,255,.06)', color: '#f1f1f1', cursor: 'pointer', display: 'grid', placeItems: 'center' }}
             >
@@ -368,6 +369,7 @@ function GallerySection({ data }) {
 
             <button
               onClick={(e) => { e.stopPropagation(); next() }}
+              className="wc-lightbox-btn"
               aria-label="Siguiente imagen"
               style={{ position: 'absolute', right: 'clamp(8px, 2vw, 28px)', top: '50%', transform: 'translateY(-50%)', width: 48, height: 48, borderRadius: 999, border: '1px solid rgba(255,255,255,.18)', background: 'rgba(255,255,255,.06)', color: '#f1f1f1', cursor: 'pointer', display: 'grid', placeItems: 'center' }}
             >
@@ -633,6 +635,23 @@ const CSS = `
   }
   .wc-subnav a:hover { color: ${G_DARK}; background: #e8f5ee; }
   .wc-subnav a:active { transform: scale(.97); }
+
+  .wc-btn-primary:active { transform: scale(0.97) translateY(0); }
+  .wc-btn-dark:active { transform: scale(0.97) translateY(0); }
+  .wc-btn-ghost-dark:active { transform: scale(0.97); }
+  .wc-btn-light:active { transform: scale(0.97) translateY(0); }
+  .wc-btn-ghost-light:active { transform: scale(0.97); }
+
+  .wc-lightbox-btn {
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .wc-lightbox-btn:hover {
+    background: rgba(255,255,255,.12) !important;
+    border-color: rgba(255,255,255,.3) !important;
+  }
+  .wc-lightbox-btn:active {
+    transform: translateY(-50%) scale(0.9) !important;
+  }
 
   .wc-thumb:hover { box-shadow: 0 16px 40px rgba(15,31,21,.16) !important; }
   .wc-thumb:hover .wc-thumb-img { transform: scale(1.06); }

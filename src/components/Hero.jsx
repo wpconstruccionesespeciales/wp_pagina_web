@@ -121,14 +121,14 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="#contact"
-              className="group inline-flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:shadow-white/10 hover:-translate-y-0.5 transition-all duration-300"
+              className="group inline-flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:shadow-white/10 hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0 transition-all duration-300"
             >
               Iniciar Proyecto
               <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </a>
             <a
               href="#services"
-              className="inline-flex items-center justify-center gap-3 border border-white/20 text-white backdrop-blur-md px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 hover:border-white/30 transition-all duration-300"
+              className="inline-flex items-center justify-center gap-3 border border-white/20 text-white backdrop-blur-md px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 hover:border-white/30 active:scale-[0.97] transition-all duration-300"
             >
               Nuestros Servicios
             </a>
