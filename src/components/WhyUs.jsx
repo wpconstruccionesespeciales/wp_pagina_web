@@ -59,7 +59,7 @@ export default function WhyUs() {
           </div>
 
           {/* Full-width versatility banner */}
-          <div className={`md:col-span-12 bg-primary rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 relative overflow-hidden animate-on-scroll ${visible ? 'visible' : ''}`} style={{ transitionDelay: '300ms' }}>
+          <div className={`md:col-span-12 bg-primary rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 relative overflow-hidden animate-on-scroll from-right-full ${visible ? 'visible' : ''}`} style={{ transitionDelay: '300ms' }}>
             {/* Decorative background shapes */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
             <div className="absolute bottom-0 left-1/3 w-24 h-24 bg-white/3 rounded-full translate-y-1/2 pointer-events-none" />
