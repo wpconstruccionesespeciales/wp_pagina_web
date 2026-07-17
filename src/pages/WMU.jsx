@@ -389,7 +389,7 @@ function ModelsSection() {
         {/* remaining 4 in a grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 16 }} className="models-grid">
           {MODELS.filter((_,i) => i !== 3).map((m,i) => (
-            <ModelCard key={m.name} model={m} delay={.1 + i*.08} vis={vis} />
+            <ModelCard key={m.name} model={m} delay={.12 + i*.15} vis={vis} />
           ))}
         </div>
       </div>
@@ -874,7 +874,7 @@ const CSS = `
     transform-style: preserve-3d;
     transform: perspective(1000px) rotateX(14deg) translateY(32px) scale(0.96);
     opacity: 0;
-    transition: transform 950ms cubic-bezier(0.16, 1, 0.3, 1), opacity 950ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 1400ms cubic-bezier(0.16, 1, 0.3, 1), opacity 1400ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .wmu-3d-card-reveal.visible {
     transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
@@ -891,7 +891,7 @@ const CSS = `
   /* Clip-path sweep reveal for images */
   .wmu-card-clip-sweep {
     clip-path: inset(0 100% 0 0);
-    transition: clip-path 1.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: clip-path 1600ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .visible .wmu-card-clip-sweep,
   .visible.wmu-card-clip-sweep {
