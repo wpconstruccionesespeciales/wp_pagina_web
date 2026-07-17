@@ -41,7 +41,7 @@ export default function NavBar() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ease-out ${
+      className={`fixed top-0 w-full z-50 transition-[background-color,padding,box-shadow,border-color] duration-500 ease-out ${
         (scrolled || !isHome)
           ? 'bg-white shadow-sm border-b border-black/5 py-1'
           : 'bg-transparent py-3'
@@ -53,7 +53,7 @@ export default function NavBar() {
         <div className="hidden lg:flex items-center gap-2 font-headline tracking-tight flex-1">
           {links.map(({ href, label, router }) => {
             const active = router && location.pathname === href
-            const cls = `px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300 ${
+            const cls = `px-4 py-2 text-sm font-semibold rounded-lg transition-[color,background-color,transform] duration-200 active:scale-[0.97] ${
               (scrolled || !isHome)
                 ? active
                   ? 'text-primary bg-primary/8'
@@ -113,7 +113,7 @@ export default function NavBar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`lg:hidden ml-4 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
+            className={`lg:hidden ml-4 w-10 h-10 rounded-lg flex items-center justify-center transition-[color,background-color,transform] duration-200 active:scale-95 ${
               (scrolled || !isHome) ? 'text-primary hover:bg-primary/5' : 'text-white hover:bg-white/10'
             }`}
             aria-label="Menu"
@@ -126,7 +126,7 @@ export default function NavBar() {
         {/* Mobile-only hamburger (when sm hidden) */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className={`sm:hidden w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
+          className={`sm:hidden w-10 h-10 rounded-lg flex items-center justify-center transition-[color,background-color,transform] duration-200 active:scale-95 ${
             (scrolled || !isHome) ? 'text-primary hover:bg-primary/5' : 'text-white hover:bg-white/10'
           }`}
           aria-label="Menu"
@@ -138,14 +138,14 @@ export default function NavBar() {
 
       {/* Mobile menu */}
       <div
-        className={`lg:hidden absolute top-full left-0 w-full bg-white/96 backdrop-blur-2xl shadow-xl border-t border-black/5 transition-all duration-300 ${
+        className={`lg:hidden absolute top-full left-0 w-full bg-white/96 backdrop-blur-2xl shadow-xl border-t border-black/5 transition-[opacity,transform] duration-300 ${
           mobileOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-3 pointer-events-none'
         }`}
       >
         <div className="p-5 space-y-1">
           {links.map(({ href, label, router }) => {
             const active = router && location.pathname === href
-            const cls = `block py-3 px-4 font-medium rounded-lg transition-colors ${
+            const cls = `block py-3 px-4 font-medium rounded-lg transition-[color,background-color,transform] duration-200 active:scale-[0.98] ${
               active ? 'bg-primary/8 text-primary' : 'text-on-surface hover:bg-primary/5 hover:text-primary'
             }`
             return router
@@ -155,7 +155,7 @@ export default function NavBar() {
           <Link
             to="/wmu"
             onClick={() => setMobileOpen(false)}
-            className="flex items-center gap-3 mt-3 px-4 py-3 rounded-lg hover:bg-primary/5 transition-colors"
+            className="flex items-center gap-3 mt-3 px-4 py-3 rounded-lg hover:bg-primary/5 transition-[background-color,transform] duration-200 active:scale-[0.98]"
           >
             <img src={gaudiIcon} alt="WMU" width="40" height="40" decoding="async" style={{ height: '40px', width: 'auto' }} className="object-contain" />
             <span className="font-headline font-bold text-primary">Arquitectura Modular</span>

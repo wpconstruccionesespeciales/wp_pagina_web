@@ -111,7 +111,7 @@ export default function Prensa() {
                   setActive(i)
                   setPlaying(false)
                 }}
-                className={`relative rounded-xl overflow-hidden transition-all duration-300 ${
+                className={`relative rounded-xl overflow-hidden transition-[opacity,transform,box-shadow,ring] duration-200 active:scale-95 ${
                   i === active
                     ? 'ring-2 ring-primary shadow-lg'
                     : 'opacity-60 hover:opacity-100'
