@@ -870,22 +870,23 @@ const CSS = `
 
   /* Model cards 3D entrance and orbit hover */
   .wmu-3d-card-reveal {
-    perspective: 1000px;
+    perspective: 800px;
     transform-style: preserve-3d;
-    transform: perspective(1000px) rotateX(14deg) translateY(32px) scale(0.96);
+    transform-origin: bottom center;
+    transform: perspective(800px) rotateX(24deg) translateY(40px) scale(0.96);
     opacity: 0;
     transition: transform 1400ms cubic-bezier(0.16, 1, 0.3, 1), opacity 1400ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .wmu-3d-card-reveal.visible {
-    transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+    transform: perspective(800px) rotateX(0deg) translateY(0) scale(1);
     opacity: 1;
   }
   .wmu-3d-card-reveal:hover {
-    transform: perspective(1000px) rotateX(-2deg) translateY(-8px) scale(1.02) !important;
+    transform: perspective(800px) rotateX(-2deg) translateY(-8px) scale(1.02) !important;
     box-shadow: 0 20px 48px rgba(59,183,126,.15), 0 4px 20px rgba(0,0,0,.25) !important;
   }
   .wmu-3d-card-reveal:active {
-    transform: perspective(1000px) rotateX(0deg) translateY(0) scale(0.985) !important;
+    transform: perspective(800px) rotateX(0deg) translateY(0) scale(0.985) !important;
   }
 
   /* Clip-path sweep reveal for images */
