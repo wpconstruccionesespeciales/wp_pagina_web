@@ -19,7 +19,7 @@ export default function useInView(options = {}) {
           observer.unobserve(el)
         }
       },
-      { threshold: options.threshold ?? 0.01, rootMargin: options.rootMargin ?? '0px 0px -20% 0px' }
+      { threshold: options.threshold ?? 0.01, rootMargin: options.rootMargin ?? '0px 0px -32% 0px' }
     )
 
     observer.observe(el)
