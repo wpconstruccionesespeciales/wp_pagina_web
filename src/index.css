@@ -1284,3 +1284,17 @@ details[open] summary ~ * {
   transform: translateX(0);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .text-mask-reveal-line,
+  .image-clip-reveal,
+  .timeline-draw-line,
+  .animate-on-scroll.from-left-full,
+  .animate-on-scroll.from-right-full {
+    transform: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+

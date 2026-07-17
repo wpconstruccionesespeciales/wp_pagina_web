@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { motion as Motion } from 'framer-motion'
+import { motion as Motion, MotionConfig } from 'framer-motion'
 
 function AnimatedText({ text, className, highlightWords = [] }) {
   const words = text.split(' ')
@@ -304,7 +304,8 @@ const statItems = [
 
 export default function FirstSteelFrame() {
   return (
-    <section className="relative bg-[#0e1a12] overflow-hidden py-8 lg:py-10">
+    <MotionConfig reducedMotion="user">
+      <section className="relative bg-[#0e1a12] overflow-hidden py-8 lg:py-10">
       {/* Noise texture */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay"
@@ -510,5 +511,6 @@ export default function FirstSteelFrame() {
         </div>
       </div>
     </section>
+    </MotionConfig>
   )
 }

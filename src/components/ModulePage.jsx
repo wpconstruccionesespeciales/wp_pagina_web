@@ -352,6 +352,7 @@ function GallerySection({ data }) {
           >
             <button
               onClick={(e) => { e.stopPropagation(); close() }}
+              className="wc-lightbox-btn-close"
               aria-label="Cerrar"
               style={{ position: 'absolute', top: 22, right: 22, width: 44, height: 44, borderRadius: 999, border: '1px solid rgba(255,255,255,.18)', background: 'rgba(255,255,255,.06)', color: '#f1f1f1', cursor: 'pointer', display: 'grid', placeItems: 'center' }}
             >
@@ -651,6 +652,17 @@ const CSS = `
   }
   .wc-lightbox-btn:active {
     transform: translateY(-50%) scale(0.9) !important;
+  }
+
+  .wc-lightbox-btn-close {
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .wc-lightbox-btn-close:hover {
+    background: rgba(255,255,255,.12) !important;
+    border-color: rgba(255,255,255,.3) !important;
+  }
+  .wc-lightbox-btn-close:active {
+    transform: scale(0.9) !important;
   }
 
   .wc-thumb:hover { box-shadow: 0 16px 40px rgba(15,31,21,.16) !important; }
