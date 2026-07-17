@@ -177,7 +177,7 @@ export default function SustainabilityBanner() {
 
       {/* Main Content Area */}
       <div className="relative max-w-7xl mx-auto px-6 lg:px-12 z-10">
-        <div className={`flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12 animate-on-scroll from-left-full ${visible ? 'visible' : ''}`}>
+        <div className={`flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12 animate-on-scroll from-right-full ${visible ? 'visible' : ''}`}>
           
           {/* Left Block: Icon & Main Message */}
           <div className="flex items-center gap-5 sm:gap-6 w-full lg:w-auto">
