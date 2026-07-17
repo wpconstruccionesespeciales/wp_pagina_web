@@ -117,7 +117,7 @@ function WMUNav() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
   return (
-    <nav style={{
+    <nav className="wmu-nav" style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
       background: sc ? 'rgba(12,18,16,.93)' : 'transparent',
       backdropFilter: sc ? 'blur(14px)' : 'none',
@@ -125,16 +125,19 @@ function WMUNav() {
       borderBottom: sc ? '1px solid rgba(255,255,255,.07)' : 'none',
       transition: 'background .35s, border-color .35s',
     }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+      <div className="wmu-nav-inner" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
         {/* back link — left */}
         <Link to="/" style={{ position: 'absolute', left: 24, color: 'rgba(255,255,255,.7)', textDecoration: 'none', fontSize: 13, fontWeight: 600, fontFamily: BODY, display: 'flex', alignItems: 'center', gap: 6 }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
-          Volver
+          <span className="wmu-back-label">Volver</span>
         </Link>
         {/* centered logo — proper size */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
           <img src={wpWhite} alt="WP Construcciones" style={{ height: 'clamp(42px, 5vw, 54px)', objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: .96 }} />
         </Link>
+        <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-nav-wa" aria-label="Contactar por WhatsApp">
+          <svg viewBox="0 0 32 32" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M16.004 3.2C9.054 3.2 3.404 8.85 3.404 15.8c0 2.22.58 4.39 1.684 6.3L3.2 28.8l6.9-1.81a12.55 12.55 0 006.004 1.53h.005c6.95 0 12.6-5.65 12.6-12.6-.003-3.37-1.314-6.53-3.69-8.91A12.53 12.53 0 0016.004 3.2zm0 23.1a10.45 10.45 0 01-5.33-1.46l-.38-.23-3.95 1.04 1.06-3.87-.25-.4A10.42 10.42 0 015.5 15.8c0-5.79 4.71-10.5 10.51-10.5 2.81 0 5.45 1.09 7.43 3.08a10.44 10.44 0 013.07 7.43c-.003 5.79-4.713 10.5-10.503 10.5zm5.76-7.87c-.32-.16-1.87-.92-2.16-1.03-.29-.1-.5-.16-.71.16-.21.31-.82 1.03-1.01 1.24-.18.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.77-2.2-.18-.31-.02-.48.14-.64.14-.14.32-.37.47-.55.16-.18.21-.31.32-.53.1-.21.05-.39-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.22 3.39 5.38 4.76.75.33 1.34.52 1.8.67.75.24 1.44.21 1.98.13.6-.09 1.87-.77 2.13-1.5.27-.74.27-1.37.19-1.5-.08-.14-.29-.22-.61-.37z"/></svg>
+        </a>
       </div>
     </nav>
   )
@@ -190,8 +193,8 @@ function HeroSection() {
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: -1, background: 'radial-gradient(120% 120% at 70% 20%,rgba(53,195,107,.18),transparent 60%),linear-gradient(0deg,rgba(0,0,0,.35),rgba(0,0,0,.35))' }} />
       <div aria-hidden="true" style={{ position: 'absolute', inset: '-40% -10% -10% -40%', zIndex: -1, opacity: .15, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.25) 0 1px,transparent 1px 32px),repeating-linear-gradient(-60deg,rgba(255,255,255,.25) 0 1px,transparent 1px 32px)', transform: 'skewY(-6deg)' }} />
 
-      <div className="hero-inner" style={{ width: 'min(1200px,92vw)', display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 'clamp(24px,4vw,48px)', alignItems: 'center', zIndex: 1, paddingTop: 80 }}>
-        <div>
+      <div className="hero-inner wmu-hero-inner" style={{ width: 'min(1200px,92vw)', display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 'clamp(24px,4vw,48px)', alignItems: 'center', zIndex: 1, paddingTop: 80 }}>
+        <div className="wmu-hero-copy">
           <span style={{ display: 'inline-block', marginBottom: 10, fontWeight: 800, letterSpacing: '.12em', textTransform: 'uppercase', color: G, fontSize: '.82rem', fontFamily: BODY }}>
             Plan WMU + financiación
           </span>
@@ -203,12 +206,12 @@ function HeroSection() {
             Arquitectura modular en steel frame: precisión industrial, obra limpia y montaje rápido. Elegí el modelo, ajustá el plan, lo instalamos.
           </p>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', background: 'rgba(0,0,0,.45)', border: '1px solid rgba(255,255,255,.14)', padding: '10px 14px', borderRadius: 12, backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', width: 'max-content', maxWidth: '100%' }}>
+          <div className="wmu-financing-cue" style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', background: 'rgba(0,0,0,.45)', border: '1px solid rgba(255,255,255,.14)', padding: '10px 14px', borderRadius: 12, backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', width: 'max-content', maxWidth: '100%' }}>
             <span style={{ fontSize: '.85rem', fontFamily: BODY }}>Empezá hoy · financiación Banco Hipotecario</span>
             <img src="/media/banco-hipotecario.png" alt="Banco Hipotecario" width="100" height="190" style={{ height: 21, width: 'auto', objectFit: 'contain', filter: 'contrast(1.05) brightness(1.2)', marginLeft: 'auto' }} />
           </div>
 
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '15px 0 0' }}>
+          <div className="wmu-actions" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '15px 0 0' }}>
             <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-btn-primary">CONTÁCTANOS</a>
             <a href="#models" className="wmu-btn-ghost">VER MODELOS</a>
           </div>
@@ -220,7 +223,7 @@ function HeroSection() {
           </div>
         </div>
 
-        <figure aria-label="Render módulo WMU" style={{ margin: 0 }} className="hero-hex">
+        <figure aria-label="Render módulo WMU" style={{ margin: 0 }} className="hero-hex wmu-hero-media">
           <div style={{ position: 'relative', width: 'clamp(260px,34vw,510px)', aspectRatio: '1', marginInline: 'auto', clipPath: 'polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,.55)' }}>
             <img src={HEX_IMG} alt="Módulo WMU" width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(200deg,rgba(53,195,107,.15),transparent 60%)', mixBlendMode: 'overlay', pointerEvents: 'none' }} />
@@ -835,6 +838,15 @@ function WMUFooter() {
   )
 }
 
+function MobileContactBar() {
+  return (
+    <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-mobile-contact" aria-label="Contactar por WhatsApp">
+      <svg viewBox="0 0 32 32" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M16.004 3.2C9.054 3.2 3.404 8.85 3.404 15.8c0 2.22.58 4.39 1.684 6.3L3.2 28.8l6.9-1.81a12.55 12.55 0 006.004 1.53h.005c6.95 0 12.6-5.65 12.6-12.6-.003-3.37-1.314-6.53-3.69-8.91A12.53 12.53 0 0016.004 3.2zm0 23.1a10.45 10.45 0 01-5.33-1.46l-.38-.23-3.95 1.04 1.06-3.87-.25-.4A10.42 10.42 0 015.5 15.8c0-5.79 4.71-10.5 10.51-10.5 2.81 0 5.45 1.09 7.43 3.08a10.44 10.44 0 013.07 7.43c-.003 5.79-4.713 10.5-10.503 10.5zm5.76-7.87c-.32-.16-1.87-.92-2.16-1.03-.29-.1-.5-.16-.71.16-.21.31-.82 1.03-1.01 1.24-.18.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.77-2.2-.18-.31-.02-.48.14-.64.14-.14.32-.37.47-.55.16-.18.21-.31.32-.53.1-.21.05-.39-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.22 3.39 5.38 4.76.75.33 1.34.52 1.8.67.75.24 1.44.21 1.98.13.6-.09 1.87-.77 2.13-1.5.27-.74.27-1.37.19-1.5-.08-.14-.29-.22-.61-.37z"/></svg>
+      <span>CONTACTANOS POR WHATSAPP</span>
+    </a>
+  )
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    GLOBAL CSS
 ═══════════════════════════════════════════════════════════════════════════ */
@@ -853,11 +865,34 @@ const CSS = `
   .wmu-section { min-width: 0; }
   .wmu-actions { display: flex; flex-wrap: wrap; gap: 12px; }
   .wmu-mobile-only { display: none; }
+  .wmu-nav-wa {
+    position: absolute; right: 24px; display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 50%; color: #25D366;
+    text-decoration: none; transition: background-color .2s ease, transform .2s ease;
+  }
+  .wmu-nav-wa:hover { background: rgba(37,211,102,.12); transform: scale(1.06); }
+  .wmu-mobile-contact { display: none; }
 
   @media (max-width: 768px) {
+    .wmu-shell { padding-bottom: calc(72px + env(safe-area-inset-bottom)) !important; }
+    .wmu-nav-inner { height: 68px !important; padding-inline: 16px !important; }
+    .wmu-nav a:first-child { left: 16px !important; }
+    .wmu-nav-wa { right: 16px; }
+    .wmu-mobile-contact {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 48px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      background: #25D366; color: #07130D; font: 800 13px/1.2 "Space Grotesk", sans-serif;
+      letter-spacing: .03em; text-decoration: none; box-shadow: 0 -6px 24px rgba(0,0,0,.26);
+    }
     .wmu-actions > a { min-height: 48px; }
   }
   @media (max-width: 560px) {
+    .wmu-back-label { display: none; }
+    .wmu-nav img { max-width: 132px; }
+    .wmu-hero-inner { width: 100% !important; min-height: auto !important; padding: 112px 16px 56px !important; }
+    .wmu-hero-media > div { width: min(82vw, 360px) !important; }
+    .wmu-financing-cue { width: 100% !important; }
     .wmu-container { width: min(100% - 32px, 520px); }
     .wmu-mobile-only { display: block; }
     .wmu-actions { flex-direction: column; }
@@ -1009,7 +1044,8 @@ const CSS = `
   /* ── responsive ── */
   @media (max-width: 900px) {
     .hero-inner { grid-template-columns: 1fr !important; gap: 28px !important; }
-    .hero-hex   { order: -1; }
+    .wmu-hero-copy { order: 1; }
+    .wmu-hero-media { order: 2; }
     .model-featured { grid-template-columns: 1fr !important; }
     .expand-layout { grid-template-columns: 1fr !important; }
     .expand-spacer { display: none; }
@@ -1300,6 +1336,7 @@ export default function WMU() {
       <SpecsSection />
       <ManifestoSection />
       <WMUFooter />
+      <MobileContactBar />
       <FloatingWhatsApp />
     </div>
   )
