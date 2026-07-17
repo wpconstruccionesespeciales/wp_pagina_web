@@ -21,6 +21,7 @@ import wpLogo from './assets/WP.png'
 
 const Nosotros = lazy(() => import('./pages/Nosotros'))
 const WMU = lazy(() => import('./pages/WMU'))
+const WMU2 = lazy(() => import('./pages/WMU2'))
 const WmuEspecificaciones = lazy(() => import('./pages/WmuEspecificaciones'))
 const WmuCero = lazy(() => import('./pages/WmuCero'))
 const WmuCero2 = lazy(() => import('./pages/WmuCero2'))
@@ -144,6 +145,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/wmu" element={<WMU />} />
+        <Route path="/wmu2" element={<WMU2 />} />
         <Route path="/wmu-especificaciones" element={<WmuEspecificaciones />} />
         <Route path="/wmu-cero" element={<WmuCero />} />
         <Route path="/wmu-cero-2" element={<WmuCero2 />} />
