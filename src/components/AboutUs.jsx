@@ -12,7 +12,7 @@ export default function AboutUs() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
         {/* Image */}
         <div className={`relative animate-on-scroll from-left ${visible ? 'visible' : ''}`}>
-          <div className="relative rounded-2xl overflow-hidden">
+          <div className="relative rounded-2xl overflow-hidden image-clip-reveal">
             <img
               className="w-full aspect-[4/5] object-cover"
               src="/wp/about-montaje.webp"
@@ -36,8 +36,12 @@ export default function AboutUs() {
         <div className={`animate-on-scroll from-right ${visible ? 'visible' : ''}`}>
           <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Sobre Nosotros</p>
           <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-[-0.03em] mb-8">
-            <span className="gradient-text">Precisión técnica</span>
-            <br />desde el año 2005
+            <span className="text-mask-reveal-wrapper">
+              <span className="text-mask-reveal-line gradient-text">Precisión técnica</span>
+            </span>
+            <span className="text-mask-reveal-wrapper">
+              <span className="text-mask-reveal-line" style={{ transitionDelay: '100ms' }}>desde el año 2005</span>
+            </span>
           </h2>
           <div className="space-y-5 text-lg text-on-surface-variant leading-relaxed">
             <p>

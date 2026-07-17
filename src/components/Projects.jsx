@@ -31,7 +31,11 @@ export default function Projects() {
         <div className={`flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-16 animate-on-scroll ${visible ? 'visible' : ''}`}>
           <div>
             <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Trabajos</p>
-            <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tight">Lo que hacemos</h2>
+            <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tight">
+              <span className="text-mask-reveal-wrapper">
+                <span className="text-mask-reveal-line">Lo que hacemos</span>
+              </span>
+            </h2>
           </div>
           <p className="text-on-surface-variant max-w-sm">
             Soluciones versátiles para cada necesidad de espacio y funcionalidad.

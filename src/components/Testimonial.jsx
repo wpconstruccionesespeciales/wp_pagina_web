@@ -37,7 +37,11 @@ export default function Prensa() {
         <div className={`flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-14 animate-on-scroll ${visible ? 'visible' : ''}`}>
           <div>
             <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Prensa</p>
-            <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary tracking-tight">Nuestra labor en los medios</h2>
+            <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary tracking-tight">
+              <span className="text-mask-reveal-wrapper">
+                <span className="text-mask-reveal-line">Nuestra labor en los medios</span>
+              </span>
+            </h2>
           </div>
           <p className="text-on-surface-variant max-w-sm lg:text-right">
             Cobertura mediática que respalda nuestra trayectoria y compromiso con la excelencia constructiva.

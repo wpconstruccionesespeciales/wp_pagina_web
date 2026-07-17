@@ -34,7 +34,9 @@ export default function Services() {
           <div className="max-w-2xl">
             <p className="text-xs font-bold tracking-[0.24em] uppercase text-on-surface-variant mb-4">Soluciones Estructurales</p>
             <h2 className="font-headline text-4xl lg:text-[2.8rem] font-bold text-primary tracking-[-0.03em] mb-4">
-              Dos enfoques, un mismo compromiso con tu proyecto
+              <span className="text-mask-reveal-wrapper">
+                <span className="text-mask-reveal-line">Dos enfoques, un mismo compromiso con tu proyecto</span>
+              </span>
             </h2>
             <p className="text-on-surface-variant text-base lg:text-lg leading-relaxed max-w-xl">
               Diseñamos sistemas constructivos que combinan ingeniería, velocidad de ejecución y una estética contemporánea adaptada a cada proyecto.
@@ -53,7 +55,7 @@ export default function Services() {
               className={`group services-card relative overflow-hidden min-h-[440px] lg:min-h-[460px] animate-on-scroll scale-in ${visible ? 'visible' : ''}`}
             >
               <img
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 image-clip-reveal"
                 src={img}
                 alt={title}
                 width="1400"

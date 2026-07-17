@@ -35,7 +35,11 @@ export default function Features() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className={`text-center mb-16 animate-on-scroll ${visible ? 'visible' : ''}`}>
           <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Beneficios Clave</p>
-          <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tight">Ventajas del Steel Frame</h2>
+          <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tight">
+            <span className="text-mask-reveal-wrapper">
+              <span className="text-mask-reveal-line">Ventajas del Steel Frame</span>
+            </span>
+          </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-children">
           {features.map(({ icon, title, desc, stat, statLabel }) => (

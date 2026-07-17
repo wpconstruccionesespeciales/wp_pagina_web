@@ -14,7 +14,11 @@ export default function WhyUs() {
           <div className={`md:col-span-8 bg-surface-container-low rounded-2xl p-10 lg:p-14 flex flex-col justify-between animate-on-scroll from-left ${visible ? 'visible' : ''}`}>
             <div>
               <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Nuestras Ventajas</p>
-              <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary mb-6 tracking-tight">¿Por qué elegir Steel Frame?</h2>
+              <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary mb-6 tracking-tight">
+                <span className="text-mask-reveal-wrapper">
+                  <span className="text-mask-reveal-line">¿Por qué elegir Steel Frame?</span>
+                </span>
+              </h2>
               <p className="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
                 Elevamos el estándar de la construcción tradicional con una metodología que prioriza la eficiencia y la durabilidad extrema.
               </p>

@@ -76,7 +76,11 @@ export default function Contact() {
         {/* Info */}
         <div className={`animate-on-scroll from-left ${visible ? 'visible' : ''}`}>
           <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Contacto</p>
-          <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary tracking-tight mb-6">Inicie su construcción</h2>
+          <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary tracking-tight mb-6">
+            <span className="text-mask-reveal-wrapper">
+              <span className="text-mask-reveal-line">Inicie su construcción</span>
+            </span>
+          </h2>
           <p className="text-on-surface-variant text-lg mb-12 leading-relaxed">
             Estamos listos para materializar su visión. Complete el formulario y un asesor técnico se contactará en menos de 24 horas.
           </p>

@@ -97,7 +97,11 @@ export default function FAQ() {
       <div className="max-w-3xl mx-auto">
         <div className={`text-center mb-16 animate-on-scroll ${visible ? 'visible' : ''}`}>
           <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">FAQ</p>
-          <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tight">Preguntas Frecuentes</h2>
+          <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tight">
+            <span className="text-mask-reveal-wrapper">
+              <span className="text-mask-reveal-line">Preguntas Frecuentes</span>
+            </span>
+          </h2>
           <p className="text-on-surface-variant text-lg mt-4">Todo lo que necesitás saber antes de dar el primer paso.</p>
         </div>
         <div className="space-y-3 stagger-children">
