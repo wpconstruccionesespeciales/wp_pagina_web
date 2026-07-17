@@ -854,8 +854,14 @@ const CSS = `
   .wmu-actions { display: flex; flex-wrap: wrap; gap: 12px; }
   .wmu-mobile-only { display: none; }
 
+  @media (max-width: 768px) {
+    .wmu-actions > a { min-height: 48px; }
+  }
   @media (max-width: 560px) {
+    .wmu-container { width: min(100% - 32px, 520px); }
     .wmu-mobile-only { display: block; }
+    .wmu-actions { flex-direction: column; }
+    .wmu-actions > a { width: 100%; text-align: center; }
   }
 
   .wmu-btn-primary {
