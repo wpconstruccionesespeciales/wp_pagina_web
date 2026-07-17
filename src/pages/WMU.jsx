@@ -854,16 +854,8 @@ const CSS = `
   .wmu-actions { display: flex; flex-wrap: wrap; gap: 12px; }
   .wmu-mobile-only { display: none; }
 
-  @media (max-width: 768px) {
-    .wmu-shell { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
-    .wmu-section { padding-block: 64px !important; }
-    .wmu-actions > a { min-height: 48px; }
-  }
   @media (max-width: 560px) {
-    .wmu-container { width: min(100% - 32px, 520px); }
-    .wmu-mobile-only { display: flex; }
-    .wmu-actions { flex-direction: column; }
-    .wmu-actions > a { width: 100%; text-align: center; }
+    .wmu-mobile-only { display: block; }
   }
 
   .wmu-btn-primary {
