@@ -4,13 +4,19 @@ import { Link } from 'react-router-dom'
 import wpWhite from '../assets/wpblanco.webp'
 
 /* ── tokens ── */
-const G    = '#35C36B'
-const BG   = '#0C1210'
-const TXT  = '#F3F5F4'
-const SOFT = '#B7C0BB'
+const G     = '#3BB77E' // Moss Green (organic, elegant)
+const BG    = '#0A0F0D' // Deep Pine Slate
+const TXT   = '#F3F5F4'
+const SOFT  = '#B7C0BB'
+const SAND  = '#E6DED4' // Cedar / Warm Sand highlight
+const STEEL = '#2F363F' // Industrial Slate
 
-const HEADING = '"Manrope", sans-serif'
-const BODY    = '"Nunito Sans", sans-serif'
+/* Fuentes anteriores (guardadas para referencia):
+   const HEADING = '"Manrope", sans-serif'
+   const BODY    = '"Nunito Sans", sans-serif'
+*/
+const HEADING = '"Space Grotesk", sans-serif'
+const BODY    = '"Manrope", sans-serif'
 
 /* ── urls ── */
 const WA  = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_number&app_absent=0'
@@ -413,7 +419,6 @@ function ManifestoSection() {
       ref={containerRef}
       className={`manifiesto-section${containerVis ? ' is-revealed' : ''}`}
       style={{
-        background: '#EDE9E3',
         position: 'relative', overflow: 'hidden',
       }}
     >
@@ -535,9 +540,9 @@ function ExpandSection() {
 function RecognitionSection() {
   const [ref, vis] = useFadeIn()
   const values = [
-    { num: '01', title: 'Nuestra visión',  text: 'Seguir construyendo con la misma calidad y método que nos distingue, para que tu inversión sea sólida.' },
-    { num: '02', title: 'Nuestra misión',  text: 'Calidad innegociable y máxima eficiencia, cumpliendo siempre el compromiso de entrega pactado.' },
-    { num: '03', title: 'Sustentabilidad', text: 'Construcciones más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
+    { num: '[MOD-3.6m]', title: 'Nuestra visión',  text: 'Seguir construyendo con la misma calidad y método que nos distingue, para que tu inversión sea sólida.' },
+    { num: '[MOD-6.0m]', title: 'Nuestra misión',  text: 'Calidad innegociable y máxima eficiencia, cumpliendo siempre el compromiso de entrega pactado.' },
+    { num: '[MOD-12.0m]', title: 'Sustentabilidad', text: 'Construcciones más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
   ]
   return (
     <section ref={ref} style={{
@@ -545,12 +550,12 @@ function RecognitionSection() {
       padding: 'clamp(56px,7vw,80px) 0', position: 'relative', overflow: 'hidden'
     }}>
       {/* large green watermark */}
-      <div aria-hidden="true" style={{ position: 'absolute', top: 'clamp(10px,2vw,30px)', right: 'clamp(16px,3vw,40px)', fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(140px,20vw,240px)', lineHeight: 1, color: '#35C36B', opacity: .04, pointerEvents: 'none', userSelect: 'none' }}>W</div>
+      <div aria-hidden="true" style={{ position: 'absolute', top: 'clamp(10px,2vw,30px)', right: 'clamp(16px,3vw,40px)', fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(140px,20vw,240px)', lineHeight: 1, color: G, opacity: .04, pointerEvents: 'none', userSelect: 'none' }}>W</div>
       {/* organic green glows */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 50% 80% at 80% 50%, rgba(53,195,107,.06), transparent)' }} />
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 60% at 10% 80%, rgba(53,195,107,.04), transparent)' }} />
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: `radial-gradient(ellipse 50% 80% at 80% 50%, rgba(59,183,126,.06), transparent)` }} />
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: `radial-gradient(ellipse 40% 60% at 10% 80%, rgba(59,183,126,.04), transparent)` }} />
       {/* diagonal grid DNA */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .03, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(42,122,74,.4) 0 1px,transparent 1px 48px),repeating-linear-gradient(-60deg,rgba(42,122,74,.4) 0 1px,transparent 1px 48px)', transform: 'skewY(-4deg)' }} />
+      <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .03, pointerEvents: 'none', background: `repeating-linear-gradient(60deg,rgba(42,122,74,.4) 0 1px,transparent 1px 48px),repeating-linear-gradient(-60deg,rgba(42,122,74,.4) 0 1px,transparent 1px 48px)`, transform: 'skewY(-4deg)' }} />
       {/* horizontal decorative line */}
       <div aria-hidden="true" style={{ position: 'absolute', top: '50%', left: '5%', right: '5%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(42,122,74,.12) 20%, rgba(42,122,74,.12) 80%, transparent)', pointerEvents: 'none' }} />
       {/* corner accents */}
@@ -563,27 +568,27 @@ function RecognitionSection() {
           <div style={{ opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateX(-20px)', transition: 'opacity .7s ease, transform .7s ease' }}>
             {/* small caps label with dot */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-              <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#35C36B' }} />
-              <span style={{ color: '#2a7a4a', fontWeight: 600, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', fontFamily: BODY }}>Trayectoria</span>
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: G }} />
+              <span style={{ color: '#2e7d53', fontWeight: 600, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', fontFamily: BODY }}>Trayectoria</span>
             </div>
             {/* title with italic word */}
             <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,4vw,52px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.05, margin: 0 }}>
               Reconocidos
             </h2>
-            <h2 style={{ fontFamily: HEADING, fontWeight: 300, fontStyle: 'italic', fontSize: 'clamp(28px,4vw,52px)', color: '#2a7a4a', lineHeight: 1.05, margin: '2px 0 0' }}>
+            <h2 style={{ fontFamily: HEADING, fontWeight: 300, fontStyle: 'italic', fontSize: 'clamp(28px,4vw,52px)', color: '#2e7d53', lineHeight: 1.05, margin: '2px 0 0' }}>
               por la calidad
             </h2>
             <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,4vw,52px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.05, margin: '2px 0 0' }}>
-              y la <span style={{ color: '#2a7a4a' }}>eficiencia</span>
+              y la <span style={{ color: '#2e7d53' }}>eficiencia</span>
             </h2>
             {/* decorative line under title */}
-            <div style={{ marginTop: 24, width: 60, height: 2, background: 'linear-gradient(90deg, #35C36B, transparent)' }} />
+            <div style={{ marginTop: 24, width: 60, height: 2, background: `linear-gradient(90deg, ${G}, transparent)` }} />
           </div>
 
           {/* RIGHT — value cards with timeline */}
           <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 16 }}>
             {/* timeline vertical line */}
-            <div aria-hidden="true" style={{ position: 'absolute', left: 23, top: 28, bottom: 28, width: 1, background: 'linear-gradient(to bottom, rgba(53,195,107,.3), rgba(53,195,107,.1))', pointerEvents: 'none' }} />
+            <div aria-hidden="true" style={{ position: 'absolute', left: 23, top: 28, bottom: 28, width: 1, background: `linear-gradient(to bottom, rgba(59,183,126,.3), rgba(59,183,126,.1))`, pointerEvents: 'none' }} />
             
             {values.map((v, i) => (
               <div key={v.title} style={{
@@ -597,18 +602,18 @@ function RecognitionSection() {
                 position: 'relative',
               }} className="recognition-card">
                 {/* number background */}
-                <div aria-hidden="true" className="recognition-num" style={{ position: 'absolute', top: 8, right: 16, fontFamily: HEADING, fontWeight: 800, fontSize: 48, color: '#35C36B', opacity: .06, lineHeight: 1, pointerEvents: 'none', userSelect: 'none', transition: 'opacity .3s ease' }}>{v.num}</div>
+                <div aria-hidden="true" className="recognition-num" style={{ position: 'absolute', top: 14, right: 20, fontFamily: HEADING, fontWeight: 700, fontSize: 14, color: G, opacity: .2, letterSpacing: '.05em', lineHeight: 1, pointerEvents: 'none', userSelect: 'none', transition: 'opacity .3s ease' }}>{v.num}</div>
                 {/* timeline dot */}
-                <div aria-hidden="true" className="recognition-dot" style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', width: 10, height: 10, borderRadius: '50%', background: '#fff', border: '2px solid #35C36B', boxShadow: '0 0 0 4px rgba(53,195,107,.1)', zIndex: 1, transition: 'background .3s ease, border-color .3s ease, box-shadow .3s ease' }} />
+                <div aria-hidden="true" className="recognition-dot" style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', width: 10, height: 10, borderRadius: '50%', background: '#fff', border: `2px solid ${G}`, boxShadow: `0 0 0 4px rgba(59,183,126,.1)`, zIndex: 1, transition: 'background .3s ease, border-color .3s ease, box-shadow .3s ease' }} />
                 {/* left accent bar */}
-                <div style={{ position: 'absolute', top: 12, bottom: 12, left: 0, width: 2, background: 'linear-gradient(to bottom, #35C36B, #2a7a4a)', opacity: .3, borderRadius: 2 }} />
+                <div style={{ position: 'absolute', top: 12, bottom: 12, left: 0, width: 2, background: `linear-gradient(to bottom, ${G}, #2e7d53)`, opacity: .3, borderRadius: 2 }} />
                 {/* content */}
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
                   <div style={{ flexShrink: 0, marginTop: 2 }}>
-                    <span style={{ color: '#2a7a4a', fontSize: 24, lineHeight: 1 }}>{v.icon}</span>
+                    <span style={{ color: '#2e7d53', fontSize: 24, lineHeight: 1 }}>{v.icon}</span>
                   </div>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontWeight: 700, color: '#0e1a11', fontSize: 'clamp(15px,1.5vw,18px)', fontFamily: BODY, marginBottom: 6, letterSpacing: '.01em' }}>{v.title}</div>
+                    <div style={{ fontWeight: 700, color: '#0e1a11', fontSize: 'clamp(15px,1.5vw,18px)', fontFamily: HEADING, marginBottom: 6, letterSpacing: '.01em' }}>{v.title}</div>
                     <div style={{ color: '#5a6e60', fontSize: 'clamp(13px,1.3vw,16px)', lineHeight: 1.6, fontFamily: BODY }}>{v.text}</div>
                   </div>
                 </div>
@@ -831,21 +836,21 @@ const CSS = `
     width: 100%;
     max-width: 100vw;
     overflow-x: clip;
-    background-color: #000;
+    background-color: #0A0F0D;
   }
 
   .wmu-btn-primary {
     padding: 14px 26px; border-radius: 12px; font-weight: 800;
     letter-spacing: .2px; text-decoration: none; display: inline-block;
-    background: #337F57; color: #F3F5F4; font-family: "Nunito Sans", sans-serif;
-    box-shadow: 0 10px 26px rgba(53,195,107,.2); white-space: nowrap;
+    background: #3BB77E; color: #F3F5F4; font-family: "Space Grotesk", sans-serif;
+    box-shadow: 0 10px 26px rgba(59,183,126,.2); white-space: nowrap;
     transition: transform .15s ease, box-shadow .25s ease;
   }
-  .wmu-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(53,195,107,.3); }
+  .wmu-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(59,183,126,.3); }
   .wmu-btn-ghost {
     padding: 14px 26px; border-radius: 12px; font-weight: 800;
     letter-spacing: .2px; text-decoration: none; display: inline-block;
-    background: transparent; color: #F3F5F4; font-family: "Nunito Sans", sans-serif;
+    background: transparent; color: #F3F5F4; font-family: "Space Grotesk", sans-serif;
     border: 1px solid rgba(255,255,255,.14); white-space: nowrap;
     transition: background .2s, border-color .2s;
   }
@@ -862,7 +867,7 @@ const CSS = `
     margin: -22px auto -22px;
     width: max-content;
     max-width: 90%;
-    background: rgba(12, 18, 16, 0.65);
+    background: rgba(10, 15, 13, 0.65);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 99px;
     backdrop-filter: blur(16px);
@@ -875,14 +880,14 @@ const CSS = `
     border-radius: 99px;
     color: rgba(243, 245, 244, 0.72);
     text-decoration: none;
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-size: 12px;
     font-weight: 800;
     transition: color .2s ease, background-color .2s ease, transform .15s ease;
   }
   .wmu-subnav a:hover {
     color: #F3F5F4;
-    background: rgba(53, 195, 107, 0.14);
+    background: rgba(59, 183, 126, 0.14);
   }
   .wmu-subnav a:active {
     transform: scale(.96);
@@ -903,14 +908,14 @@ const CSS = `
   }
 
   /* press card hover */
-  .press-card-new:hover { box-shadow: 0 12px 40px rgba(0,0,0,.1) !important; border-color: rgba(42,122,74,.2) !important; transform: translateY(-6px); }
+  .press-card-new:hover { box-shadow: 0 12px 40px rgba(0,0,0,.1) !important; border-color: rgba(59,183,126,.2) !important; transform: translateY(-6px); }
   .press-card-new:hover .press-card-img-new { transform: scale(1.06); }
   .press-card-new:hover .press-link-new { gap: 12px; }
   .press-card-new:hover .press-card-line { opacity: 1 !important; }
 
   /* recognition card hover */
-  .recognition-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08) !important; border-color: rgba(42,122,74,.15) !important; }
-  .recognition-card:hover .recognition-dot { background: #35C36B !important; border-color: #35C36B !important; box-shadow: 0 0 0 6px rgba(53,195,107,.15) !important; }
+  .recognition-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08) !important; border-color: rgba(59,183,126,.15) !important; }
+  .recognition-card:hover .recognition-dot { background: #3BB77E !important; border-color: #3BB77E !important; box-shadow: 0 0 0 6px rgba(59,183,126,.15) !important; }
   .recognition-card:hover .recognition-num { opacity: .12 !important; }
 
   /* parallax — only on desktop */
@@ -964,9 +969,14 @@ const CSS = `
   .manifiesto-section {
     padding: clamp(64px, 9vw, 110px) 0 clamp(48px, 6vw, 80px);
     isolation: isolate;
+    background-color: #F2EFE9;
+    background-image: 
+      linear-gradient(rgba(59, 183, 126, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 183, 126, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
   .manifiesto-grain {
-    position: absolute; inset: 0; pointer-events: none; opacity: .045;
+    position: absolute; inset: 0; pointer-events: none; opacity: .04;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
     background-size: 220px 220px;
     mix-blend-mode: multiply;
@@ -986,7 +996,7 @@ const CSS = `
     top: clamp(110px, 15vw, 190px);
     bottom: clamp(90px, 11vw, 150px);
     width: 2px;
-    background: #35C36B;
+    background: #3BB77E;
     transform-origin: top;
     transform: scaleY(0);
     transition: transform 1.6s cubic-bezier(.22,.61,.36,1);
@@ -996,12 +1006,12 @@ const CSS = `
     position: absolute;
     top: clamp(20px, 4vw, 60px);
     left: clamp(16px, 3vw, 40px);
-    font-family: "Manrope", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 800;
     font-size: clamp(180px, 26vw, 320px);
     line-height: 1;
-    color: #35C36B;
-    opacity: .045;
+    color: #3BB77E;
+    opacity: .05;
     pointer-events: none;
     user-select: none;
   }
@@ -1013,7 +1023,7 @@ const CSS = `
   }
   .manifiesto-eyebrow {
     display: block;
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Manrope", sans-serif;
     font-weight: 700;
     font-size: 11px;
     letter-spacing: .18em;
@@ -1023,7 +1033,7 @@ const CSS = `
     margin-bottom: 20px;
   }
   .manifiesto-opening {
-    font-family: "Manrope", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 800;
     font-size: clamp(18px, 2vw, 26px);
     color: #0e1a11;
@@ -1050,7 +1060,7 @@ const CSS = `
     position: absolute;
     top: -.05em;
     right: 0;
-    font-family: "Manrope", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 800;
     font-size: clamp(90px, 14vw, 160px);
     line-height: .9;
@@ -1070,7 +1080,7 @@ const CSS = `
   .manifiesto-text {
     position: relative;
     z-index: 1;
-    font-family: "Manrope", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 800;
     font-size: clamp(28px, 4vw, 52px);
     color: #0e1a11;
@@ -1129,7 +1139,7 @@ const CSS = `
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: "Manrope", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 700;
     font-size: clamp(15px, 1.3vw, 17px);
     color: #0e1a11;
@@ -1169,7 +1179,7 @@ const CSS = `
     opacity: .55;
   }
   .manifiesto-signature {
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Manrope", sans-serif;
     font-style: italic;
     font-size: 12px;
     color: #0e1a11;
