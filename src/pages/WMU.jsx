@@ -176,7 +176,7 @@ function FloatingWhatsApp() {
 ═══════════════════════════════════════════════════════════════════════════ */
 function HeroSection() {
   return (
-    <section id="financiacion" aria-label="Financiación WMU" style={{
+    <section id="financiacion" aria-label="Financiación WMU" className="wmu-section" style={{
       position: 'relative', isolation: 'isolate', minHeight: '100svh',
       display: 'grid', placeItems: 'center', overflow: 'hidden', background: BG, color: TXT,
     }}>
@@ -237,7 +237,7 @@ function HeroSection() {
 function ProcessSection() {
   const [ref, vis] = useFadeIn(0.05)
   return (
-    <section id="proceso-wmu" ref={ref} style={{
+    <section id="proceso-wmu" ref={ref} className="wmu-section" style={{
       position: 'relative', overflow: 'hidden', minHeight: '100vh',
       display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
     }}>
@@ -362,7 +362,7 @@ function ModelCard({ model, delay, vis, featured }) {
 function ModelsSection() {
   const [ref, vis] = useFadeIn(0.05)
   return (
-    <section id="models" ref={ref} className="wmu-parallax" style={{
+    <section id="models" ref={ref} className="wmu-section wmu-parallax" style={{
       position: 'relative', padding: 'clamp(80px,10vw,140px) 0', scrollMarginTop: '-20px',
       backgroundImage: `url(${SKY_URL})`, backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
@@ -416,7 +416,7 @@ function ManifestoSection() {
     <section
       id="manifiesto"
       ref={containerRef}
-      className={`manifiesto-section${containerVis ? ' is-revealed' : ''}`}
+      className={`wmu-section manifiesto-section${containerVis ? ' is-revealed' : ''}`}
       style={{
         position: 'relative', overflow: 'hidden',
       }}
@@ -485,7 +485,7 @@ function ManifestoSection() {
 function ExpandSection() {
   const [ref, vis] = useFadeIn()
   return (
-    <section id="extender" ref={ref} className="wmu-parallax" style={{
+    <section id="extender" ref={ref} className="wmu-section wmu-parallax" style={{
       position: 'relative', padding: 'clamp(30px,4vw,50px) 0', overflow: 'hidden',
       backgroundImage: cssUrl(ALDEA_URL), backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
@@ -544,7 +544,7 @@ function RecognitionSection() {
     { num: '[MOD-12.0m]', title: 'Sustentabilidad', text: 'Construcciones más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
   ]
   return (
-    <section ref={ref} style={{
+    <section ref={ref} className="wmu-section" style={{
       background: '#EDE9E3',
       padding: 'clamp(56px,7vw,80px) 0', position: 'relative', overflow: 'hidden'
     }}>
@@ -637,7 +637,7 @@ function RecognitionSection() {
 function PressSection() {
   const [ref, vis] = useFadeIn()
   return (
-    <section ref={ref} style={{
+    <section ref={ref} className="wmu-section" style={{
       position: 'relative', padding: 'clamp(100px,12vw,160px) 0', overflow: 'hidden',
       background: '#F5F3F0',
     }}>
@@ -740,7 +740,7 @@ function PressSection() {
 function SpecsSection() {
   const [ref, vis] = useFadeIn()
   return (
-    <section ref={ref} className="wmu-parallax" style={{
+    <section ref={ref} className="wmu-section wmu-parallax" style={{
       position: 'relative', padding: 'clamp(80px,10vw,140px) 0', overflow: 'hidden',
       backgroundImage: cssUrl(ARA10_URL), backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
@@ -846,6 +846,24 @@ const CSS = `
     max-width: 100vw;
     overflow-x: clip;
     background-color: #0A0F0D;
+  }
+
+  .wmu-shell { width: 100%; min-width: 0; overflow-x: clip; }
+  .wmu-container { width: min(1200px, calc(100% - 32px)); margin-inline: auto; }
+  .wmu-section { min-width: 0; }
+  .wmu-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .wmu-mobile-only { display: none; }
+
+  @media (max-width: 768px) {
+    .wmu-shell { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+    .wmu-section { padding-block: 64px !important; }
+    .wmu-actions > a { min-height: 48px; }
+  }
+  @media (max-width: 560px) {
+    .wmu-container { width: min(100% - 32px, 520px); }
+    .wmu-mobile-only { display: flex; }
+    .wmu-actions { flex-direction: column; }
+    .wmu-actions > a { width: 100%; text-align: center; }
   }
 
   .wmu-btn-primary {
@@ -1256,7 +1274,7 @@ const CSS = `
 export default function WMU() {
   useEffect(() => { window.scrollTo(0, 0) }, [])
   return (
-    <div className="wmu-page" style={{ fontFamily: BODY }}>
+    <div className="wmu-page wmu-shell" style={{ fontFamily: BODY }}>
       <SEO 
         title="WMU Arquitectura Modular | Módulos Habitacionales Steel Frame"
         description="Descubrí la línea WMU de casas modulares premium llave en mano. Construcción rápida con estructura de steel frame y excelente aislación térmica en Argentina."
