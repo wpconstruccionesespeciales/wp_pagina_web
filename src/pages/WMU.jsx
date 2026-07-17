@@ -248,15 +248,15 @@ function ProcessSection() {
       <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 80, background: 'linear-gradient(to bottom, #000 0%, rgba(0,0,0,.6) 60%, transparent 100%)', zIndex: 1, pointerEvents: 'none' }} />
 
       <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: 'clamp(60px,9vw,110px) clamp(20px,5vw,80px) 0' }}>
-        <h2 style={{
-          fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,5vw,41px)', color: TXT,
-          lineHeight: 1.15, maxWidth: 900, margin: '0 auto 8px',
-          textShadow: '0 3px 24px rgba(0,0,0,.5)',
-          opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(20px)',
-          transition: 'opacity .75s ease, transform .75s ease',
-        }}>
-          <span style={{ color: G }}>El proceso, en nuestras manos:</span> vos disfrutá<br/>el resultado.
-        </h2>
+        <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+          <h2 className="text-mask-reveal-line" style={{
+            fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,5vw,41px)', color: TXT,
+            lineHeight: 1.15, maxWidth: 900, margin: '0 auto 8px',
+            textShadow: '0 3px 24px rgba(0,0,0,.5)',
+          }}>
+            <span style={{ color: G }}>El proceso, en nuestras manos:</span> vos disfrutá<br/>el resultado.
+          </h2>
+        </div>
         <p style={{
           fontFamily: BODY, color: SOFT, fontSize: 'clamp(16px,1.6vw,20px)',
           lineHeight: 1.3, maxWidth: 600, margin: '0 auto', fontWeight: 400,
@@ -304,7 +304,7 @@ function ModelCard({ model, delay, vis, featured }) {
           backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
           boxShadow: hov ? '0 28px 64px rgba(0,0,0,.5)' : '0 8px 32px rgba(0,0,0,.35)',
           opacity: vis ? 1 : 0, transform: vis ? (hov ? 'translateY(-3px)' : 'none') : 'translateY(30px)',
-          transition: 'opacity .7s ease, transform .4s ease, box-shadow .4s ease',
+          transition: 'opacity .7s ease, transform 250ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 250ms ease',
           marginBottom: 20,
         }}>
         <div style={{ overflow: 'hidden', minHeight: 320 }}>
@@ -340,7 +340,7 @@ function ModelCard({ model, delay, vis, featured }) {
         backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
         boxShadow: hov ? '0 20px 48px rgba(0,0,0,.45)' : '0 4px 20px rgba(0,0,0,.25)',
         opacity: vis ? 1 : 0, transform: vis ? (hov ? 'translateY(-4px)' : 'none') : 'translateY(24px)',
-        transition: `opacity .55s ease ${delay}s, transform .35s ease, box-shadow .35s ease`,
+        transition: `opacity .55s ease ${delay}s, transform 250ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 250ms ease`,
       }}>
       <div style={{ aspectRatio: '4/3', overflow: 'hidden', position: 'relative' }}>
         <img src={model.img} alt={model.name} width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hov ? 'scale(1.06)' : 'scale(1)', transition: 'transform .5s ease' }} />
@@ -379,9 +379,11 @@ function ModelsSection() {
       <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px,4vw,48px)' }}>
         <div style={{ textAlign: 'center', marginBottom: 'clamp(36px,5vw,64px)' }}>
           <span style={{ color: G, fontWeight: 700, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', fontFamily: BODY, display: 'block', marginBottom: 10, opacity: vis ? 1 : 0, transition: 'opacity .6s ease' }}>Catálogo WMU</span>
-          <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(30px,4.5vw,56px)', color: TXT, textTransform: 'uppercase', textShadow: '0 2px 16px rgba(0,0,0,.5)', opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(20px)', transition: 'opacity .7s ease .05s, transform .7s ease .05s', margin: 0 }}>
-            Nuestros Modelos
-          </h2>
+          <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+            <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(30px,4.5vw,56px)', color: TXT, textTransform: 'uppercase', textShadow: '0 2px 16px rgba(0,0,0,.5)', margin: 0 }}>
+              Nuestros Modelos
+            </h2>
+          </div>
         </div>
 
         {/* featured model — ALDEA (biggest) */}
@@ -572,15 +574,21 @@ function RecognitionSection() {
               <span style={{ color: '#2e7d53', fontWeight: 600, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', fontFamily: BODY }}>Trayectoria</span>
             </div>
             {/* title with italic word */}
-            <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,4vw,52px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.05, margin: 0 }}>
-              Reconocidos
-            </h2>
-            <h2 style={{ fontFamily: HEADING, fontWeight: 300, fontStyle: 'italic', fontSize: 'clamp(28px,4vw,52px)', color: '#2e7d53', lineHeight: 1.05, margin: '2px 0 0' }}>
-              por la calidad
-            </h2>
-            <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,4vw,52px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.05, margin: '2px 0 0' }}>
-              y la <span style={{ color: '#2e7d53' }}>eficiencia</span>
-            </h2>
+            <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+              <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,4vw,52px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.05, margin: 0 }}>
+                Reconocidos
+              </h2>
+            </div>
+            <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+              <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 300, fontStyle: 'italic', fontSize: 'clamp(28px,4vw,52px)', color: '#2e7d53', lineHeight: 1.05, margin: '2px 0 0', transitionDelay: '0.08s' }}>
+                por la calidad
+              </h2>
+            </div>
+            <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+              <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,4vw,52px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.05, margin: '2px 0 0', transitionDelay: '0.16s' }}>
+                y la <span style={{ color: '#2e7d53' }}>eficiencia</span>
+              </h2>
+            </div>
             {/* decorative line under title */}
             <div style={{ marginTop: 24, width: 60, height: 2, background: `linear-gradient(90deg, ${G}, transparent)` }} />
           </div>
@@ -673,9 +681,11 @@ function PressSection() {
             <div style={{ width: 40, height: 2, background: 'linear-gradient(90deg, #35C36B, #2a7a4a)', borderRadius: 2 }} />
             <span style={{ color: '#2a7a4a', fontWeight: 700, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', fontFamily: BODY }}>Prensa y Medios</span>
           </div>
-          <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(32px,5vw,56px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.1, margin: 0, maxWidth: 600 }}>
-            Nuestra labor en los <span style={{ color: '#2a7a4a' }}>medios</span>
-          </h2>
+          <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+            <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(32px,5vw,56px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.1, margin: 0, maxWidth: 600 }}>
+              Nuestra labor en los <span style={{ color: '#2e7d53' }}>medios</span>
+            </h2>
+          </div>
           <p style={{ fontFamily: BODY, color: '#5a6e60', fontSize: 'clamp(14px,1.4vw,17px)', lineHeight: 1.7, marginTop: 16, maxWidth: 520 }}>
             Cobertura mediática que respalda nuestra trayectoria y compromiso con la excelencia constructiva.
           </p>
@@ -746,9 +756,11 @@ function SpecsSection() {
         {/* top header */}
         <div style={{ textAlign: 'center', marginBottom: 'clamp(36px,5vw,64px)' }}>
           <span style={{ color: G, fontWeight: 700, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', fontFamily: BODY, display: 'block', marginBottom: 10, opacity: vis ? 1 : 0, transition: 'opacity .6s ease' }}>Todo incluido</span>
-          <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(26px,4vw,52px)', color: TXT, margin: 0, textTransform: 'uppercase', textShadow: '0 2px 16px rgba(0,0,0,.5)', opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(18px)', transition: 'opacity .7s ease .05s, transform .7s ease .05s' }}>
-            ¿Qué incluye el modelo estándar?
-          </h2>
+          <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+            <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(26px,4vw,52px)', color: TXT, margin: 0, textTransform: 'uppercase', textShadow: '0 2px 16px rgba(0,0,0,.5)' }}>
+              ¿Qué incluye el modelo estándar?
+            </h2>
+          </div>
         </div>
 
         <div className="specs-layout" style={{ display: 'grid', gridTemplateColumns: '1.1fr .9fr', gap: 'clamp(24px,4vw,48px)', alignItems: 'start' }}>
@@ -779,7 +791,7 @@ function SpecsSection() {
 
           {/* right — CTA card + image */}
           <div>
-            <div className="specs-img" style={{ borderRadius: 20, overflow: 'hidden', boxShadow: '0 20px 56px rgba(0,0,0,.4)', marginBottom: 20, opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateX(24px)', transition: 'opacity .8s ease .2s, transform .8s ease .2s' }}>
+            <div className={`specs-img image-clip-reveal ${vis ? 'visible' : ''}`} style={{ borderRadius: 20, overflow: 'hidden', boxShadow: '0 20px 56px rgba(0,0,0,.4)', marginBottom: 20 }}>
               <img src="/wmu/wmu-aldea.webp" alt="Modelo WMU Aldea" width="2048" height="1152" style={{ width: '100%', display: 'block', objectFit: 'cover' }} />
             </div>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', opacity: vis ? 1 : 0, transition: 'opacity .7s ease .4s' }}>
@@ -844,17 +856,24 @@ const CSS = `
     letter-spacing: .2px; text-decoration: none; display: inline-block;
     background: #3BB77E; color: #F3F5F4; font-family: "Space Grotesk", sans-serif;
     box-shadow: 0 10px 26px rgba(59,183,126,.2); white-space: nowrap;
-    transition: transform .15s ease, box-shadow .25s ease;
+    transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow .25s ease;
   }
   .wmu-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(59,183,126,.3); }
+  .wmu-btn-primary:active { transform: translateY(0) scale(0.97) !important; }
+
   .wmu-btn-ghost {
     padding: 14px 26px; border-radius: 12px; font-weight: 800;
     letter-spacing: .2px; text-decoration: none; display: inline-block;
     background: transparent; color: #F3F5F4; font-family: "Space Grotesk", sans-serif;
     border: 1px solid rgba(255,255,255,.14); white-space: nowrap;
-    transition: background .2s, border-color .2s;
+    transition: background .2s, border-color .2s, transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
   }
   .wmu-btn-ghost:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.22); }
+  .wmu-btn-ghost:active { transform: scale(0.97) !important; }
+
+  /* Model cards click feedback scale */
+  .model-featured:active { transform: translateY(0) scale(0.985) !important; }
+  .models-grid a:active { transform: translateY(0) scale(0.98) !important; }
 
   .wmu-subnav {
     position: sticky;
@@ -908,7 +927,15 @@ const CSS = `
   }
 
   /* press card hover */
-  .press-card-new:hover { box-shadow: 0 12px 40px rgba(0,0,0,.1) !important; border-color: rgba(59,183,126,.2) !important; transform: translateY(-6px); }
+  .press-card-new {
+    transition: transform 250ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 250ms ease, border-color 250ms ease;
+  }
+  .press-card-new:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,.1) !important;
+    border-color: rgba(59,183,126,.2) !important;
+    transform: translateY(-6px);
+  }
+  .press-card-new:active { transform: translateY(-2px) scale(0.98) !important; }
   .press-card-new:hover .press-card-img-new { transform: scale(1.06); }
   .press-card-new:hover .press-link-new { gap: 12px; }
   .press-card-new:hover .press-card-line { opacity: 1 !important; }
