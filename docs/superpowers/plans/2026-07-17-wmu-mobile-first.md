@@ -17,7 +17,7 @@
 
 - [ ] **Step 1: Add reusable responsive classes to the WMU CSS block**
 
-Add classes for `wmu-shell`, `wmu-container`, `wmu-section`, `wmu-actions`, and `wmu-mobile-only`, then add a narrow-screen reset that removes negative section margins, limits horizontal padding to 16–20px, and adds bottom padding for the future fixed CTA bar:
+Add classes for `wmu-shell`, `wmu-container`, `wmu-section`, `wmu-actions`, and `wmu-mobile-only`. Keep this foundation neutral: the fixed CTA's bottom clearance belongs to Task 2, and section-specific spacing belongs to Task 3.
 
 ```css
 .wmu-shell { width: 100%; min-width: 0; overflow-x: clip; }
@@ -27,14 +27,12 @@ Add classes for `wmu-shell`, `wmu-container`, `wmu-section`, `wmu-actions`, and 
 .wmu-mobile-only { display: none; }
 
 @media (max-width: 768px) {
-  .wmu-shell { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
-  .wmu-section { padding-block: 64px !important; }
   .wmu-actions > a { min-height: 48px; }
 }
 
 @media (max-width: 560px) {
   .wmu-container { width: min(100% - 32px, 520px); }
-  .wmu-mobile-only { display: flex; }
+  .wmu-mobile-only { display: block; }
   .wmu-actions { flex-direction: column; }
   .wmu-actions > a { width: 100%; text-align: center; }
 }
@@ -42,7 +40,7 @@ Add classes for `wmu-shell`, `wmu-container`, `wmu-section`, `wmu-actions`, and 
 
 - [ ] **Step 2: Apply the shell and section classes without changing content**
 
-Add `className="wmu-shell"` to the page root and add `wmu-section` to the top-level WMU sections. Keep existing inline styles as desktop defaults until the later tasks replace the specific mobile conflicts.
+Add `className="wmu-shell"` to the page root and add `wmu-section` to the top-level WMU sections. Keep existing inline styles and vertical rhythm as defaults until Tasks 2–4 add the component-specific mobile behavior.
 
 - [ ] **Step 3: Run the existing static checks**
 
