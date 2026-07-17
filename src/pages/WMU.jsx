@@ -295,19 +295,17 @@ function ModelCard({ model, delay, vis, featured }) {
     return (
       <CardLink
         model={model}
-        className="model-featured"
+        className={`model-featured wmu-3d-card-reveal ${vis ? 'visible' : ''}`}
         {...hoverHandlers}
         style={{
           display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 0, textDecoration: 'none',
           borderRadius: 20, overflow: 'hidden',
           background: 'rgba(12,18,16,.65)', border: '1px solid rgba(255,255,255,.1)',
           backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
-          boxShadow: hov ? '0 28px 64px rgba(0,0,0,.5)' : '0 8px 32px rgba(0,0,0,.35)',
-          opacity: vis ? 1 : 0, transform: vis ? (hov ? 'translateY(-3px)' : 'none') : 'translateY(30px)',
-          transition: 'opacity .7s ease, transform 250ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 250ms ease',
           marginBottom: 20,
+          transitionDelay: vis ? '0s' : `${delay}s`,
         }}>
-        <div style={{ overflow: 'hidden', minHeight: 320 }}>
+        <div className={`wmu-card-clip-sweep ${vis ? 'visible' : ''}`} style={{ overflow: 'hidden', minHeight: 320, transitionDelay: vis ? '0s' : `${delay}s` }}>
           <img src={model.img} alt={model.name} width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hov ? 'scale(1.04)' : 'scale(1)', transition: 'transform .6s ease' }} />
         </div>
         <div style={{ padding: 'clamp(28px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -333,16 +331,15 @@ function ModelCard({ model, delay, vis, featured }) {
   return (
     <CardLink
       model={model}
+      className={`wmu-3d-card-reveal ${vis ? 'visible' : ''}`}
       {...hoverHandlers}
       style={{
         display: 'block', textDecoration: 'none', borderRadius: 16, overflow: 'hidden',
         background: 'rgba(12,18,16,.6)', border: '1px solid rgba(255,255,255,.1)',
         backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-        boxShadow: hov ? '0 20px 48px rgba(0,0,0,.45)' : '0 4px 20px rgba(0,0,0,.25)',
-        opacity: vis ? 1 : 0, transform: vis ? (hov ? 'translateY(-4px)' : 'none') : 'translateY(24px)',
-        transition: `opacity .55s ease ${delay}s, transform 250ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 250ms ease`,
+        transitionDelay: vis ? '0s' : `${delay}s`,
       }}>
-      <div style={{ aspectRatio: '4/3', overflow: 'hidden', position: 'relative' }}>
+      <div className={`wmu-card-clip-sweep ${vis ? 'visible' : ''}`} style={{ aspectRatio: '4/3', overflow: 'hidden', position: 'relative', transitionDelay: vis ? '0s' : `${delay}s` }}>
         <img src={model.img} alt={model.name} width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hov ? 'scale(1.06)' : 'scale(1)', transition: 'transform .5s ease' }} />
         {/* green glow on hover */}
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 100%, rgba(53,195,107,.15), transparent 70%)', opacity: hov ? 1 : 0, transition: 'opacity .4s ease', pointerEvents: 'none' }} />
@@ -871,9 +868,46 @@ const CSS = `
   .wmu-btn-ghost:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.22); }
   .wmu-btn-ghost:active { transform: scale(0.97) !important; }
 
-  /* Model cards click feedback scale */
-  .model-featured:active { transform: translateY(0) scale(0.985) !important; }
-  .models-grid a:active { transform: translateY(0) scale(0.98) !important; }
+  /* Model cards 3D entrance and orbit hover */
+  .wmu-3d-card-reveal {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(14deg) translateY(32px) scale(0.96);
+    opacity: 0;
+    transition: transform 950ms cubic-bezier(0.16, 1, 0.3, 1), opacity 950ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .wmu-3d-card-reveal.visible {
+    transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+    opacity: 1;
+  }
+  .wmu-3d-card-reveal:hover {
+    transform: perspective(1000px) rotateX(-2deg) translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 20px 48px rgba(59,183,126,.15), 0 4px 20px rgba(0,0,0,.25) !important;
+  }
+  .wmu-3d-card-reveal:active {
+    transform: perspective(1000px) rotateX(0deg) translateY(0) scale(0.985) !important;
+  }
+
+  /* Clip-path sweep reveal for images */
+  .wmu-card-clip-sweep {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .visible .wmu-card-clip-sweep,
+  .visible.wmu-card-clip-sweep {
+    clip-path: inset(0 0 0 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wmu-3d-card-reveal {
+      transform: none !important;
+      transition: opacity 300ms ease !important;
+    }
+    .wmu-card-clip-sweep {
+      clip-path: none !important;
+      transition: none !important;
+    }
+  }
 
   .wmu-subnav {
     position: sticky;
