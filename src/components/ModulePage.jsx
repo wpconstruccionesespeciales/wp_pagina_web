@@ -21,6 +21,7 @@ const HEADING_F = '"Manrope", sans-serif'
 const BODY_F    = '"Nunito Sans", sans-serif'
 
 const WA = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_number&app_absent=0'
+const SITE_URL = 'https://wpconstrucciones.com'
 
 /* ───────────────────────── hooks ───────────────────────── */
 function useFadeIn(threshold = 0.12) {
@@ -701,8 +702,8 @@ export default function ModulePage({ data }) {
     "@type": "Product",
     "name": data.module.name,
     "image": data.renderTabs && data.renderTabs.length > 0 
-      ? `${window.location.origin}${data.renderTabs[0].src}`
-      : (data.gallery && data.gallery.length > 0 ? `${window.location.origin}${data.gallery[0].src}` : ""),
+      ? `${SITE_URL}${data.renderTabs[0].src}`
+      : (data.gallery && data.gallery.length > 0 ? `${SITE_URL}${data.gallery[0].src}` : ""),
     "description": data.module.description,
     "brand": {
       "@type": "Brand",
