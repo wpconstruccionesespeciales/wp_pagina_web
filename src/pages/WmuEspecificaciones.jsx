@@ -3,7 +3,8 @@ import SEO from '../components/SEO'
 import { Link } from 'react-router-dom'
 import { motion as Motion } from 'framer-motion'
 import wpWhite from '../assets/wpblanco.webp'
-import { WMU_INCLUDES } from '../data/wmu-modules'
+import { WMU_INCLUDES, WMU_MODELS } from '../data/wmu-modules'
+import { BUSINESS, whatsappUrl } from '../config/site'
 
 // Paleta de colores de lujo: verdes profundos, gris salvia y acento esmeralda
 const G       = '#35C36B' // Verde esmeralda de la marca
@@ -14,7 +15,7 @@ const TXT     = '#ffffff' // Texto principal
 const SAGE    = '#a0b5a5' // Gris salvia para descripciones secundarias
 const HEADING = '"Manrope", sans-serif'
 const BODY    = '"Nunito Sans", sans-serif'
-const WA      = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_number&app_absent=0'
+const WA      = whatsappUrl()
 
 // Textos editoriales introductorios para cada categoría de la ficha técnica
 const CATEGORY_DESC = {
@@ -119,7 +120,11 @@ function Footer() {
         <div className="footer-cols" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 48, marginBottom: 56 }}>
           <div>
             <div style={{ fontWeight: 800, fontSize: 16, color: TXT, marginBottom: 16, fontFamily: BODY, letterSpacing: '0.02em' }}>WP construcciones especiales</div>
-            <div style={{ color: SAGE, fontSize: 13, lineHeight: 1.8, fontFamily: BODY }}>PARANÁ, E.RÍOS ARGENTINA CP3100<br/>contacto@wpconstrucciones.com.ar<br/>Cel: +54 9 3434 05-6918</div>
+            <div style={{ color: SAGE, fontSize: 13, lineHeight: 1.8, fontFamily: BODY }}>
+              {BUSINESS.locality.toUpperCase()}, E.RÍOS ARGENTINA CP3100<br/>
+              <a href={BUSINESS.mailtoHref} style={{ color: 'inherit' }}>{BUSINESS.email}</a><br/>
+              Cel: <a href={BUSINESS.telHref} style={{ color: 'inherit' }}>{BUSINESS.phoneDisplay}</a>
+            </div>
           </div>
           <div>
             <div style={{ fontWeight: 700, fontSize: 14, color: TXT, marginBottom: 16, fontFamily: BODY, letterSpacing: '0.04em' }}>Horario</div>
@@ -128,8 +133,8 @@ function Footer() {
           <div>
             <div style={{ fontWeight: 700, fontSize: 14, color: TXT, marginBottom: 16, fontFamily: BODY, letterSpacing: '0.04em' }}>Seguinos</div>
             <div style={{ display: 'flex', gap: 20 }}>
-              <a href="https://www.facebook.com/wpconstruccionesespeciales" target="_blank" rel="noopener noreferrer" style={{ color: SAGE, textDecoration: 'none', fontSize: 13, fontWeight: 600, fontFamily: BODY, transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = SAGE}>Facebook</a>
-              <a href="https://www.instagram.com/wpconstrucciones.especiales" target="_blank" rel="noopener noreferrer" style={{ color: SAGE, textDecoration: 'none', fontSize: 13, fontWeight: 600, fontFamily: BODY, transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = SAGE}>Instagram</a>
+              <a href={BUSINESS.social.facebook} target="_blank" rel="noopener noreferrer" style={{ color: SAGE, textDecoration: 'none', fontSize: 13, fontWeight: 600, fontFamily: BODY, transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = SAGE}>Facebook</a>
+              <a href={BUSINESS.social.instagram} target="_blank" rel="noopener noreferrer" style={{ color: SAGE, textDecoration: 'none', fontSize: 13, fontWeight: 600, fontFamily: BODY, transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = SAGE}>Instagram</a>
             </div>
           </div>
         </div>
@@ -248,6 +253,17 @@ export default function WmuEspecificaciones() {
           </Motion.div>
         </div>
       </section>
+
+      <nav aria-label="Modelos WMU" style={{ background: BG, borderBottom: '1px solid rgba(255,255,255,.08)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '20px clamp(16px,4vw,40px)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, flexWrap: 'wrap' }}>
+          <Link to="/wmu" style={{ color: TXT, fontFamily: BODY, fontSize: 13, fontWeight: 800, textDecoration: 'none', padding: '10px 14px' }}>Catálogo WMU</Link>
+          {WMU_MODELS.map((model) => (
+            <Link key={model.id} to={`/${model.id}`} style={{ color: G, fontFamily: BODY, fontSize: 13, fontWeight: 800, textDecoration: 'none', padding: '10px 14px', border: '1px solid rgba(53,195,107,.28)', borderRadius: 8 }}>
+              {model.module.name}
+            </Link>
+          ))}
+        </div>
+      </nav>
 
       {/* Bloques de Categorías Técnicas */}
       <section style={{ padding: '80px 0 60px 0', background: BG, position: 'relative' }}>
@@ -475,9 +491,7 @@ export default function WmuEspecificaciones() {
             </Motion.a>
             <Motion.a
               whileHover={{ y: -3, borderColor: '#fff', backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
-              href="https://www.wpconstrucciones.com/wmu"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/wmu#models"
               style={{
                 background: 'transparent',
                 color: '#fff',
