@@ -1,20 +1,13 @@
-import { useEffect } from 'react'
+import { useLocation } from 'react-router'
+import { canonicalUrl as createCanonicalUrl, SITE_NAME, SITE_URL } from '../config/site'
 
-const SITE_URL = 'https://wpconstrucciones.com'
+const DEFAULT_DESCRIPTION = 'WP Construcciones Especiales - Líderes en Steel Frame de alta gama y arquitectura modular.'
+const DEFAULT_SOCIAL_DESCRIPTION = 'Líderes en construcción en seco y steel framing de alta gama.'
+const DEFAULT_SOCIAL_IMAGE = `${SITE_URL}/wmu/wmu-financing.webp`
 
-function normalizeUrl(url) {
-  if (!url) return `${SITE_URL}/`
-  if (url.startsWith('http')) return url
-  return `${SITE_URL}${url.startsWith('/') ? url : `/${url}`}`
-}
-
-function updateLink(selector, attributes) {
-  let link = document.querySelector(selector)
-  if (!link) {
-    link = document.createElement('link')
-    document.head.appendChild(link)
-  }
-  Object.entries(attributes).forEach(([key, value]) => link.setAttribute(key, value))
+function absoluteUrl(url) {
+  if (!url) return DEFAULT_SOCIAL_IMAGE
+  return new URL(url, `${SITE_URL}/`).href
 }
 
 function buildBreadcrumbSchema(items) {
@@ -25,7 +18,7 @@ function buildBreadcrumbSchema(items) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: normalizeUrl(item.url),
+      item: createCanonicalUrl(item.url),
     })),
   }
 }
@@ -33,103 +26,48 @@ function buildBreadcrumbSchema(items) {
 export default function SEO({
   title,
   description,
-  keywords,
   ogImage,
   ogType = 'website',
-  canonicalUrl,
+  canonicalUrl: canonicalOverride,
   robots = 'index, follow',
   breadcrumbs = [],
 }) {
-  useEffect(() => {
-    // 0. Robots Directives
-    let metaRobots = document.querySelector('meta[name="robots"]')
-    if (!metaRobots) {
-      metaRobots = document.createElement('meta')
-      metaRobots.setAttribute('name', 'robots')
-      document.head.appendChild(metaRobots)
-    }
-    metaRobots.setAttribute('content', robots)
+  const { pathname } = useLocation()
+  const canonical = createCanonicalUrl(canonicalOverride || pathname)
+  const resolvedTitle = title || SITE_NAME
+  const resolvedDescription = description || DEFAULT_DESCRIPTION
+  const socialDescription = description || DEFAULT_SOCIAL_DESCRIPTION
+  const socialImage = absoluteUrl(ogImage)
+  const breadcrumbJson = breadcrumbs.length > 0
+    ? JSON.stringify(buildBreadcrumbSchema(breadcrumbs)).replace(/</g, '\\u003c')
+    : null
 
-    // 1. Title
-    if (title) {
-      document.title = title
-    }
-
-    // 2. Meta Description
-    let metaDesc = document.querySelector('meta[name="description"]')
-    if (!metaDesc) {
-      metaDesc = document.createElement('meta')
-      metaDesc.setAttribute('name', 'description')
-      document.head.appendChild(metaDesc)
-    }
-    metaDesc.setAttribute('content', description || 'WP Construcciones Especiales - Líderes en Steel Frame de alta gama y arquitectura modular.')
-
-    // 3. Meta Keywords
-    let metaKey = document.querySelector('meta[name="keywords"]')
-    if (!metaKey) {
-      metaKey = document.createElement('meta')
-      metaKey.setAttribute('name', 'keywords')
-      document.head.appendChild(metaKey)
-    }
-    metaKey.setAttribute('content', keywords || 'steel frame, construccion en seco, arquitectura modular, casas modulares, argentina')
-
-    // 4. Open Graph Metas (WhatsApp, Facebook, LinkedIn, etc.)
-    const updateOG = (property, content) => {
-      let ogMeta = document.querySelector(`meta[property="${property}"]`)
-      if (!ogMeta) {
-        ogMeta = document.createElement('meta')
-        ogMeta.setAttribute('property', property)
-        document.head.appendChild(ogMeta)
-      }
-      ogMeta.setAttribute('content', content)
-    }
-
-    updateOG('og:title', title || 'WP Construcciones Especiales')
-    updateOG('og:description', description || 'Líderes en construcción en seco y steel framing de alta gama.')
-    updateOG('og:type', ogType)
-    const cleanUrl = canonicalUrl || normalizeUrl(window.location.pathname)
-    updateOG('og:url', cleanUrl)
-    
-    let finalImage = `${SITE_URL}/wmu/wmu-financing.webp`
-    if (ogImage) {
-      finalImage = normalizeUrl(ogImage)
-    }
-    updateOG('og:image', finalImage)
-
-    // 5. Twitter Cards
-    const updateTwitter = (name, content) => {
-      let twMeta = document.querySelector(`meta[name="${name}"]`)
-      if (!twMeta) {
-        twMeta = document.createElement('meta')
-        twMeta.setAttribute('name', name)
-        document.head.appendChild(twMeta)
-      }
-      twMeta.setAttribute('content', content)
-    }
-
-    updateTwitter('twitter:card', 'summary_large_image')
-    updateTwitter('twitter:title', title || 'WP Construcciones Especiales')
-    updateTwitter('twitter:description', description || 'Líderes en construcción en seco y steel framing de alta gama.')
-    updateTwitter('twitter:image', finalImage)
-
-    // 6. Canonical and language alternates
-    updateLink('link[rel="canonical"]', { rel: 'canonical', href: cleanUrl })
-    updateLink('link[rel="alternate"][hreflang="es-AR"]', { rel: 'alternate', hreflang: 'es-AR', href: cleanUrl })
-    updateLink('link[rel="alternate"][hreflang="x-default"]', { rel: 'alternate', hreflang: 'x-default', href: cleanUrl })
-
-    // 7. Breadcrumb structured data
-    const breadcrumbId = 'seo-breadcrumb-jsonld'
-    const existingBreadcrumb = document.getElementById(breadcrumbId)
-    if (breadcrumbs.length > 0) {
-      const script = existingBreadcrumb || document.createElement('script')
-      script.id = breadcrumbId
-      script.type = 'application/ld+json'
-      script.textContent = JSON.stringify(buildBreadcrumbSchema(breadcrumbs))
-      if (!existingBreadcrumb) document.head.appendChild(script)
-    } else if (existingBreadcrumb) {
-      existingBreadcrumb.remove()
-    }
-  }, [title, description, keywords, ogImage, ogType, canonicalUrl, robots, breadcrumbs])
-
-  return null
+  return (
+    <>
+      <title>{resolvedTitle}</title>
+      <meta name="description" content={resolvedDescription} />
+      <meta name="robots" content={robots} />
+      <link rel="canonical" href={canonical} />
+      <link rel="alternate" hrefLang="es-AR" href={canonical} />
+      <link rel="alternate" hrefLang="x-default" href={canonical} />
+      <meta property="og:locale" content="es_AR" />
+      <meta property="og:site_name" content={SITE_NAME} />
+      <meta property="og:title" content={resolvedTitle} />
+      <meta property="og:description" content={socialDescription} />
+      <meta property="og:type" content={ogType} />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:image" content={socialImage} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={resolvedTitle} />
+      <meta name="twitter:description" content={socialDescription} />
+      <meta name="twitter:image" content={socialImage} />
+      {breadcrumbJson && (
+        <script
+          id="seo-breadcrumb-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: breadcrumbJson }}
+        />
+      )}
+    </>
+  )
 }

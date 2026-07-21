@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
-    "build": "react-router build",
+    "build": "npm run build:site && npm run audit:seo",
+    "build:site": "react-router build && node scripts/finalize-static-build.mjs",
+    "audit:seo": "node scripts/audit-seo-build.mjs",
     "lint": "eslint . --ignore-pattern build --ignore-pattern .react-router",
     "preview": "vite preview --outDir build/client"
   },
