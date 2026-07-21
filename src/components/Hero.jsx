@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Hero() {
-  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
   const videoRef = useRef(null)
   const sectionRef = useRef(null)
   const gridRef = useRef(null)
@@ -9,6 +9,16 @@ export default function Hero() {
   const accentRef = useRef(null)
   const panelLeftRef = useRef(null)
   const panelRightRef = useRef(null)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches)
+
+    updatePreference()
+    mediaQuery.addEventListener('change', updatePreference)
+
+    return () => mediaQuery.removeEventListener('change', updatePreference)
+  }, [])
 
   useEffect(() => {
     let ticking = false
@@ -40,6 +50,7 @@ export default function Hero() {
 
     const video = videoRef.current
     const section = sectionRef.current
+    if (video && prefersReducedMotion) video.pause()
     if (video && section && !prefersReducedMotion && 'IntersectionObserver' in window) {
       io = new IntersectionObserver(
         (entries) => {
