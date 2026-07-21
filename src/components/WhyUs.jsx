@@ -14,7 +14,11 @@ export default function WhyUs() {
           <div className={`md:col-span-8 bg-surface-container-low rounded-2xl p-10 lg:p-14 flex flex-col justify-between animate-on-scroll from-left ${visible ? 'visible' : ''}`}>
             <div>
               <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Nuestras Ventajas</p>
-              <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary mb-6 tracking-tight">¿Por qué elegir Steel Frame?</h2>
+              <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary mb-6 tracking-tight">
+                <span className="text-mask-reveal-wrapper">
+                  <span className="text-mask-reveal-line">¿Por qué elegir Steel Frame?</span>
+                </span>
+              </h2>
               <p className="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
                 Elevamos el estándar de la construcción tradicional con una metodología que prioriza la eficiencia y la durabilidad extrema.
               </p>
@@ -55,7 +59,7 @@ export default function WhyUs() {
           </div>
 
           {/* Full-width versatility banner */}
-          <div className={`md:col-span-12 bg-primary rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 relative overflow-hidden animate-on-scroll ${visible ? 'visible' : ''}`} style={{ transitionDelay: '300ms' }}>
+          <div className={`md:col-span-12 bg-primary rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 relative overflow-hidden animate-on-scroll from-right-full ${visible ? 'visible' : ''}`} style={{ transitionDelay: '300ms' }}>
             {/* Decorative background shapes */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
             <div className="absolute bottom-0 left-1/3 w-24 h-24 bg-white/3 rounded-full translate-y-1/2 pointer-events-none" />

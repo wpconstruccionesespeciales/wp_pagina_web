@@ -19,7 +19,11 @@ export default function Comparison() {
       <div className="max-w-5xl mx-auto relative z-10">
         <div className={`text-center mb-16 animate-on-scroll ${visible ? 'visible' : ''}`}>
           <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Comparativa</p>
-          <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tight">Steel Frame vs. Tradicional</h2>
+          <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tight">
+            <span className="text-mask-reveal-wrapper">
+              <span className="text-mask-reveal-line">Steel Frame vs. Tradicional</span>
+            </span>
+          </h2>
           <p className="text-on-surface-variant text-lg mt-4 max-w-md mx-auto">Datos reales que demuestran la superioridad del sistema constructivo en seco.</p>
         </div>
 

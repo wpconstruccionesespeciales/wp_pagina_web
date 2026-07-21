@@ -4,13 +4,19 @@ import { Link } from 'react-router-dom'
 import wpWhite from '../assets/wpblanco.webp'
 
 /* ── tokens ── */
-const G    = '#35C36B'
-const BG   = '#0C1210'
-const TXT  = '#F3F5F4'
-const SOFT = '#B7C0BB'
+const G     = '#3BB77E' // Moss Green (organic, elegant)
+const BG    = '#0A0F0D' // Deep Pine Slate
+const TXT   = '#F3F5F4'
+const SOFT  = '#B7C0BB'
+const SAND  = '#E6DED4' // Cedar / Warm Sand highlight
+const STEEL = '#2F363F' // Industrial Slate
 
-const HEADING = '"Manrope", sans-serif'
-const BODY    = '"Nunito Sans", sans-serif'
+/* Fuentes anteriores (guardadas para referencia):
+   const HEADING = '"Manrope", sans-serif'
+   const BODY    = '"Nunito Sans", sans-serif'
+*/
+const HEADING = '"Space Grotesk", sans-serif'
+const BODY    = '"Manrope", sans-serif'
 
 /* ── urls ── */
 const WA  = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_number&app_absent=0'
@@ -111,7 +117,7 @@ function WMUNav() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
   return (
-    <nav style={{
+    <nav className="wmu-nav" style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
       background: sc ? 'rgba(12,18,16,.93)' : 'transparent',
       backdropFilter: sc ? 'blur(14px)' : 'none',
@@ -119,16 +125,19 @@ function WMUNav() {
       borderBottom: sc ? '1px solid rgba(255,255,255,.07)' : 'none',
       transition: 'background .35s, border-color .35s',
     }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+      <div className="wmu-nav-inner" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
         {/* back link — left */}
         <Link to="/" style={{ position: 'absolute', left: 24, color: 'rgba(255,255,255,.7)', textDecoration: 'none', fontSize: 13, fontWeight: 600, fontFamily: BODY, display: 'flex', alignItems: 'center', gap: 6 }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
-          Volver
+          <span className="wmu-back-label">Volver</span>
         </Link>
         {/* centered logo — proper size */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
           <img src={wpWhite} alt="WP Construcciones" style={{ height: 'clamp(42px, 5vw, 54px)', objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: .96 }} />
         </Link>
+        <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-nav-wa" aria-label="Contactar por WhatsApp">
+          <svg viewBox="0 0 32 32" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M16.004 3.2C9.054 3.2 3.404 8.85 3.404 15.8c0 2.22.58 4.39 1.684 6.3L3.2 28.8l6.9-1.81a12.55 12.55 0 006.004 1.53h.005c6.95 0 12.6-5.65 12.6-12.6-.003-3.37-1.314-6.53-3.69-8.91A12.53 12.53 0 0016.004 3.2zm0 23.1a10.45 10.45 0 01-5.33-1.46l-.38-.23-3.95 1.04 1.06-3.87-.25-.4A10.42 10.42 0 015.5 15.8c0-5.79 4.71-10.5 10.51-10.5 2.81 0 5.45 1.09 7.43 3.08a10.44 10.44 0 013.07 7.43c-.003 5.79-4.713 10.5-10.503 10.5zm5.76-7.87c-.32-.16-1.87-.92-2.16-1.03-.29-.1-.5-.16-.71.16-.21.31-.82 1.03-1.01 1.24-.18.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.77-2.2-.18-.31-.02-.48.14-.64.14-.14.32-.37.47-.55.16-.18.21-.31.32-.53.1-.21.05-.39-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.22 3.39 5.38 4.76.75.33 1.34.52 1.8.67.75.24 1.44.21 1.98.13.6-.09 1.87-.77 2.13-1.5.27-.74.27-1.37.19-1.5-.08-.14-.29-.22-.61-.37z"/></svg>
+        </a>
       </div>
     </nav>
   )
@@ -170,7 +179,7 @@ function FloatingWhatsApp() {
 ═══════════════════════════════════════════════════════════════════════════ */
 function HeroSection() {
   return (
-    <section id="financiacion" aria-label="Financiación WMU" style={{
+    <section id="financiacion" aria-label="Financiación WMU" className="wmu-section" style={{
       position: 'relative', isolation: 'isolate', minHeight: '100svh',
       display: 'grid', placeItems: 'center', overflow: 'hidden', background: BG, color: TXT,
     }}>
@@ -184,8 +193,8 @@ function HeroSection() {
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: -1, background: 'radial-gradient(120% 120% at 70% 20%,rgba(53,195,107,.18),transparent 60%),linear-gradient(0deg,rgba(0,0,0,.35),rgba(0,0,0,.35))' }} />
       <div aria-hidden="true" style={{ position: 'absolute', inset: '-40% -10% -10% -40%', zIndex: -1, opacity: .15, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.25) 0 1px,transparent 1px 32px),repeating-linear-gradient(-60deg,rgba(255,255,255,.25) 0 1px,transparent 1px 32px)', transform: 'skewY(-6deg)' }} />
 
-      <div className="hero-inner" style={{ width: 'min(1200px,92vw)', display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 'clamp(24px,4vw,48px)', alignItems: 'center', zIndex: 1, paddingTop: 80 }}>
-        <div>
+      <div className="hero-inner wmu-hero-inner" style={{ width: 'min(1200px,92vw)', display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 'clamp(24px,4vw,48px)', alignItems: 'center', zIndex: 1, paddingTop: 80 }}>
+        <div className="wmu-hero-copy">
           <span style={{ display: 'inline-block', marginBottom: 10, fontWeight: 800, letterSpacing: '.12em', textTransform: 'uppercase', color: G, fontSize: '.82rem', fontFamily: BODY }}>
             Plan WMU + financiación
           </span>
@@ -197,12 +206,12 @@ function HeroSection() {
             Arquitectura modular en steel frame: precisión industrial, obra limpia y montaje rápido. Elegí el modelo, ajustá el plan, lo instalamos.
           </p>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', background: 'rgba(0,0,0,.45)', border: '1px solid rgba(255,255,255,.14)', padding: '10px 14px', borderRadius: 12, backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', width: 'max-content', maxWidth: '100%' }}>
+          <div className="wmu-financing-cue" style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', background: 'rgba(0,0,0,.45)', border: '1px solid rgba(255,255,255,.14)', padding: '10px 14px', borderRadius: 12, backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', width: 'max-content', maxWidth: '100%' }}>
             <span style={{ fontSize: '.85rem', fontFamily: BODY }}>Empezá hoy · financiación Banco Hipotecario</span>
             <img src="/media/banco-hipotecario.png" alt="Banco Hipotecario" width="100" height="190" style={{ height: 21, width: 'auto', objectFit: 'contain', filter: 'contrast(1.05) brightness(1.2)', marginLeft: 'auto' }} />
           </div>
 
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '15px 0 0' }}>
+          <div className="wmu-actions" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '15px 0 0' }}>
             <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-btn-primary">CONTÁCTANOS</a>
             <a href="#models" className="wmu-btn-ghost">VER MODELOS</a>
           </div>
@@ -214,7 +223,7 @@ function HeroSection() {
           </div>
         </div>
 
-        <figure aria-label="Render módulo WMU" style={{ margin: 0 }} className="hero-hex">
+        <figure aria-label="Render módulo WMU" style={{ margin: 0 }} className="hero-hex wmu-hero-media">
           <div style={{ position: 'relative', width: 'clamp(260px,34vw,510px)', aspectRatio: '1', marginInline: 'auto', clipPath: 'polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,.55)' }}>
             <img src={HEX_IMG} alt="Módulo WMU" width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(200deg,rgba(53,195,107,.15),transparent 60%)', mixBlendMode: 'overlay', pointerEvents: 'none' }} />
@@ -231,7 +240,7 @@ function HeroSection() {
 function ProcessSection() {
   const [ref, vis] = useFadeIn(0.05)
   return (
-    <section id="proceso-wmu" ref={ref} style={{
+    <section id="proceso-wmu" ref={ref} className="wmu-section" style={{
       position: 'relative', overflow: 'hidden', minHeight: '100vh',
       display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
     }}>
@@ -242,15 +251,15 @@ function ProcessSection() {
       <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 80, background: 'linear-gradient(to bottom, #000 0%, rgba(0,0,0,.6) 60%, transparent 100%)', zIndex: 1, pointerEvents: 'none' }} />
 
       <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: 'clamp(60px,9vw,110px) clamp(20px,5vw,80px) 0' }}>
-        <h2 style={{
-          fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,5vw,41px)', color: TXT,
-          lineHeight: 1.15, maxWidth: 900, margin: '0 auto 8px',
-          textShadow: '0 3px 24px rgba(0,0,0,.5)',
-          opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(20px)',
-          transition: 'opacity .75s ease, transform .75s ease',
-        }}>
-          <span style={{ color: G }}>El proceso, en nuestras manos:</span> vos disfrutá<br/>el resultado.
-        </h2>
+        <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+          <h2 className="text-mask-reveal-line" style={{
+            fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,5vw,41px)', color: TXT,
+            lineHeight: 1.15, maxWidth: 900, margin: '0 auto 8px',
+            textShadow: '0 3px 24px rgba(0,0,0,.5)',
+          }}>
+            <span style={{ color: G }}>El proceso, en nuestras manos:</span> vos disfrutá<br/>el resultado.
+          </h2>
+        </div>
         <p style={{
           fontFamily: BODY, color: SOFT, fontSize: 'clamp(16px,1.6vw,20px)',
           lineHeight: 1.3, maxWidth: 600, margin: '0 auto', fontWeight: 400,
@@ -289,19 +298,17 @@ function ModelCard({ model, delay, vis, featured }) {
     return (
       <CardLink
         model={model}
-        className="model-featured"
+        className={`model-featured wmu-3d-card-reveal ${vis ? 'visible' : ''}`}
         {...hoverHandlers}
         style={{
           display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 0, textDecoration: 'none',
           borderRadius: 20, overflow: 'hidden',
           background: 'rgba(12,18,16,.65)', border: '1px solid rgba(255,255,255,.1)',
           backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
-          boxShadow: hov ? '0 28px 64px rgba(0,0,0,.5)' : '0 8px 32px rgba(0,0,0,.35)',
-          opacity: vis ? 1 : 0, transform: vis ? (hov ? 'translateY(-3px)' : 'none') : 'translateY(30px)',
-          transition: 'opacity .7s ease, transform .4s ease, box-shadow .4s ease',
           marginBottom: 20,
+          transitionDelay: vis ? '0s' : `${delay}s`,
         }}>
-        <div style={{ overflow: 'hidden', minHeight: 320 }}>
+        <div className={`wmu-card-clip-sweep ${vis ? 'visible' : ''}`} style={{ overflow: 'hidden', minHeight: 320, transitionDelay: vis ? '0s' : `${delay}s` }}>
           <img src={model.img} alt={model.name} width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hov ? 'scale(1.04)' : 'scale(1)', transition: 'transform .6s ease' }} />
         </div>
         <div style={{ padding: 'clamp(28px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -327,16 +334,15 @@ function ModelCard({ model, delay, vis, featured }) {
   return (
     <CardLink
       model={model}
+      className={`wmu-3d-card-reveal ${vis ? 'visible' : ''}`}
       {...hoverHandlers}
       style={{
         display: 'block', textDecoration: 'none', borderRadius: 16, overflow: 'hidden',
         background: 'rgba(12,18,16,.6)', border: '1px solid rgba(255,255,255,.1)',
         backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-        boxShadow: hov ? '0 20px 48px rgba(0,0,0,.45)' : '0 4px 20px rgba(0,0,0,.25)',
-        opacity: vis ? 1 : 0, transform: vis ? (hov ? 'translateY(-4px)' : 'none') : 'translateY(24px)',
-        transition: `opacity .55s ease ${delay}s, transform .35s ease, box-shadow .35s ease`,
+        transitionDelay: vis ? '0s' : `${delay}s`,
       }}>
-      <div style={{ aspectRatio: '4/3', overflow: 'hidden', position: 'relative' }}>
+      <div className={`wmu-card-clip-sweep ${vis ? 'visible' : ''}`} style={{ aspectRatio: '4/3', overflow: 'hidden', position: 'relative', transitionDelay: vis ? '0s' : `${delay}s` }}>
         <img src={model.img} alt={model.name} width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hov ? 'scale(1.06)' : 'scale(1)', transition: 'transform .5s ease' }} />
         {/* green glow on hover */}
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 100%, rgba(53,195,107,.15), transparent 70%)', opacity: hov ? 1 : 0, transition: 'opacity .4s ease', pointerEvents: 'none' }} />
@@ -359,7 +365,7 @@ function ModelCard({ model, delay, vis, featured }) {
 function ModelsSection() {
   const [ref, vis] = useFadeIn(0.05)
   return (
-    <section id="models" ref={ref} className="wmu-parallax" style={{
+    <section id="models" ref={ref} className="wmu-section wmu-parallax" style={{
       position: 'relative', padding: 'clamp(80px,10vw,140px) 0', scrollMarginTop: '-20px',
       backgroundImage: `url(${SKY_URL})`, backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
@@ -373,9 +379,11 @@ function ModelsSection() {
       <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px,4vw,48px)' }}>
         <div style={{ textAlign: 'center', marginBottom: 'clamp(36px,5vw,64px)' }}>
           <span style={{ color: G, fontWeight: 700, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', fontFamily: BODY, display: 'block', marginBottom: 10, opacity: vis ? 1 : 0, transition: 'opacity .6s ease' }}>Catálogo WMU</span>
-          <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(30px,4.5vw,56px)', color: TXT, textTransform: 'uppercase', textShadow: '0 2px 16px rgba(0,0,0,.5)', opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(20px)', transition: 'opacity .7s ease .05s, transform .7s ease .05s', margin: 0 }}>
-            Nuestros Modelos
-          </h2>
+          <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+            <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(30px,4.5vw,56px)', color: TXT, textTransform: 'uppercase', textShadow: '0 2px 16px rgba(0,0,0,.5)', margin: 0 }}>
+              Nuestros Modelos
+            </h2>
+          </div>
         </div>
 
         {/* featured model — ALDEA (biggest) */}
@@ -384,7 +392,7 @@ function ModelsSection() {
         {/* remaining 4 in a grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 16 }} className="models-grid">
           {MODELS.filter((_,i) => i !== 3).map((m,i) => (
-            <ModelCard key={m.name} model={m} delay={.1 + i*.08} vis={vis} />
+            <ModelCard key={m.name} model={m} delay={.12 + i*.15} vis={vis} />
           ))}
         </div>
       </div>
@@ -411,9 +419,8 @@ function ManifestoSection() {
     <section
       id="manifiesto"
       ref={containerRef}
-      className={`manifiesto-section${containerVis ? ' is-revealed' : ''}`}
+      className={`wmu-section manifiesto-section${containerVis ? ' is-revealed' : ''}`}
       style={{
-        background: '#EDE9E3',
         position: 'relative', overflow: 'hidden',
       }}
     >
@@ -481,7 +488,7 @@ function ManifestoSection() {
 function ExpandSection() {
   const [ref, vis] = useFadeIn()
   return (
-    <section id="extender" ref={ref} className="wmu-parallax" style={{
+    <section id="extender" ref={ref} className="wmu-section wmu-parallax" style={{
       position: 'relative', padding: 'clamp(30px,4vw,50px) 0', overflow: 'hidden',
       backgroundImage: cssUrl(ALDEA_URL), backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
@@ -535,22 +542,22 @@ function ExpandSection() {
 function RecognitionSection() {
   const [ref, vis] = useFadeIn()
   const values = [
-    { num: '01', title: 'Nuestra visión',  text: 'Seguir construyendo con la misma calidad y método que nos distingue, para que tu inversión sea sólida.' },
-    { num: '02', title: 'Nuestra misión',  text: 'Calidad innegociable y máxima eficiencia, cumpliendo siempre el compromiso de entrega pactado.' },
-    { num: '03', title: 'Sustentabilidad', text: 'Construcciones más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
+    { num: '[MOD-3.6m]', title: 'Nuestra visión',  text: 'Seguir construyendo con la misma calidad y método que nos distingue, para que tu inversión sea sólida.' },
+    { num: '[MOD-6.0m]', title: 'Nuestra misión',  text: 'Calidad innegociable y máxima eficiencia, cumpliendo siempre el compromiso de entrega pactado.' },
+    { num: '[MOD-12.0m]', title: 'Sustentabilidad', text: 'Construcciones más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
   ]
   return (
-    <section ref={ref} style={{
+    <section ref={ref} className="wmu-section" style={{
       background: '#EDE9E3',
       padding: 'clamp(56px,7vw,80px) 0', position: 'relative', overflow: 'hidden'
     }}>
       {/* large green watermark */}
-      <div aria-hidden="true" style={{ position: 'absolute', top: 'clamp(10px,2vw,30px)', right: 'clamp(16px,3vw,40px)', fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(140px,20vw,240px)', lineHeight: 1, color: '#35C36B', opacity: .04, pointerEvents: 'none', userSelect: 'none' }}>W</div>
+      <div aria-hidden="true" style={{ position: 'absolute', top: 'clamp(10px,2vw,30px)', right: 'clamp(16px,3vw,40px)', fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(140px,20vw,240px)', lineHeight: 1, color: G, opacity: .04, pointerEvents: 'none', userSelect: 'none' }}>W</div>
       {/* organic green glows */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 50% 80% at 80% 50%, rgba(53,195,107,.06), transparent)' }} />
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 60% at 10% 80%, rgba(53,195,107,.04), transparent)' }} />
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: `radial-gradient(ellipse 50% 80% at 80% 50%, rgba(59,183,126,.06), transparent)` }} />
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: `radial-gradient(ellipse 40% 60% at 10% 80%, rgba(59,183,126,.04), transparent)` }} />
       {/* diagonal grid DNA */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .03, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(42,122,74,.4) 0 1px,transparent 1px 48px),repeating-linear-gradient(-60deg,rgba(42,122,74,.4) 0 1px,transparent 1px 48px)', transform: 'skewY(-4deg)' }} />
+      <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .03, pointerEvents: 'none', background: `repeating-linear-gradient(60deg,rgba(42,122,74,.4) 0 1px,transparent 1px 48px),repeating-linear-gradient(-60deg,rgba(42,122,74,.4) 0 1px,transparent 1px 48px)`, transform: 'skewY(-4deg)' }} />
       {/* horizontal decorative line */}
       <div aria-hidden="true" style={{ position: 'absolute', top: '50%', left: '5%', right: '5%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(42,122,74,.12) 20%, rgba(42,122,74,.12) 80%, transparent)', pointerEvents: 'none' }} />
       {/* corner accents */}
@@ -563,27 +570,33 @@ function RecognitionSection() {
           <div style={{ opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateX(-20px)', transition: 'opacity .7s ease, transform .7s ease' }}>
             {/* small caps label with dot */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-              <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#35C36B' }} />
-              <span style={{ color: '#2a7a4a', fontWeight: 600, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', fontFamily: BODY }}>Trayectoria</span>
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: G }} />
+              <span style={{ color: '#2e7d53', fontWeight: 600, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', fontFamily: BODY }}>Trayectoria</span>
             </div>
             {/* title with italic word */}
-            <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,4vw,52px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.05, margin: 0 }}>
-              Reconocidos
-            </h2>
-            <h2 style={{ fontFamily: HEADING, fontWeight: 300, fontStyle: 'italic', fontSize: 'clamp(28px,4vw,52px)', color: '#2a7a4a', lineHeight: 1.05, margin: '2px 0 0' }}>
-              por la calidad
-            </h2>
-            <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,4vw,52px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.05, margin: '2px 0 0' }}>
-              y la <span style={{ color: '#2a7a4a' }}>eficiencia</span>
-            </h2>
+            <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+              <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,4vw,52px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.05, margin: 0 }}>
+                Reconocidos
+              </h2>
+            </div>
+            <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+              <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 300, fontStyle: 'italic', fontSize: 'clamp(28px,4vw,52px)', color: '#2e7d53', lineHeight: 1.05, margin: '2px 0 0', transitionDelay: '0.08s' }}>
+                por la calidad
+              </h2>
+            </div>
+            <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+              <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(28px,4vw,52px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.05, margin: '2px 0 0', transitionDelay: '0.16s' }}>
+                y la <span style={{ color: '#2e7d53' }}>eficiencia</span>
+              </h2>
+            </div>
             {/* decorative line under title */}
-            <div style={{ marginTop: 24, width: 60, height: 2, background: 'linear-gradient(90deg, #35C36B, transparent)' }} />
+            <div style={{ marginTop: 24, width: 60, height: 2, background: `linear-gradient(90deg, ${G}, transparent)` }} />
           </div>
 
           {/* RIGHT — value cards with timeline */}
           <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 16 }}>
             {/* timeline vertical line */}
-            <div aria-hidden="true" style={{ position: 'absolute', left: 23, top: 28, bottom: 28, width: 1, background: 'linear-gradient(to bottom, rgba(53,195,107,.3), rgba(53,195,107,.1))', pointerEvents: 'none' }} />
+            <div aria-hidden="true" style={{ position: 'absolute', left: 23, top: 28, bottom: 28, width: 1, background: `linear-gradient(to bottom, rgba(59,183,126,.3), rgba(59,183,126,.1))`, pointerEvents: 'none' }} />
             
             {values.map((v, i) => (
               <div key={v.title} style={{
@@ -597,18 +610,18 @@ function RecognitionSection() {
                 position: 'relative',
               }} className="recognition-card">
                 {/* number background */}
-                <div aria-hidden="true" className="recognition-num" style={{ position: 'absolute', top: 8, right: 16, fontFamily: HEADING, fontWeight: 800, fontSize: 48, color: '#35C36B', opacity: .06, lineHeight: 1, pointerEvents: 'none', userSelect: 'none', transition: 'opacity .3s ease' }}>{v.num}</div>
+                <div aria-hidden="true" className="recognition-num" style={{ position: 'absolute', top: 14, right: 20, fontFamily: HEADING, fontWeight: 700, fontSize: 14, color: G, opacity: .2, letterSpacing: '.05em', lineHeight: 1, pointerEvents: 'none', userSelect: 'none', transition: 'opacity .3s ease' }}>{v.num}</div>
                 {/* timeline dot */}
-                <div aria-hidden="true" className="recognition-dot" style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', width: 10, height: 10, borderRadius: '50%', background: '#fff', border: '2px solid #35C36B', boxShadow: '0 0 0 4px rgba(53,195,107,.1)', zIndex: 1, transition: 'background .3s ease, border-color .3s ease, box-shadow .3s ease' }} />
+                <div aria-hidden="true" className="recognition-dot" style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', width: 10, height: 10, borderRadius: '50%', background: '#fff', border: `2px solid ${G}`, boxShadow: `0 0 0 4px rgba(59,183,126,.1)`, zIndex: 1, transition: 'background .3s ease, border-color .3s ease, box-shadow .3s ease' }} />
                 {/* left accent bar */}
-                <div style={{ position: 'absolute', top: 12, bottom: 12, left: 0, width: 2, background: 'linear-gradient(to bottom, #35C36B, #2a7a4a)', opacity: .3, borderRadius: 2 }} />
+                <div style={{ position: 'absolute', top: 12, bottom: 12, left: 0, width: 2, background: `linear-gradient(to bottom, ${G}, #2e7d53)`, opacity: .3, borderRadius: 2 }} />
                 {/* content */}
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
                   <div style={{ flexShrink: 0, marginTop: 2 }}>
-                    <span style={{ color: '#2a7a4a', fontSize: 24, lineHeight: 1 }}>{v.icon}</span>
+                    <span style={{ color: '#2e7d53', fontSize: 24, lineHeight: 1 }}>{v.icon}</span>
                   </div>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontWeight: 700, color: '#0e1a11', fontSize: 'clamp(15px,1.5vw,18px)', fontFamily: BODY, marginBottom: 6, letterSpacing: '.01em' }}>{v.title}</div>
+                    <div style={{ fontWeight: 700, color: '#0e1a11', fontSize: 'clamp(15px,1.5vw,18px)', fontFamily: HEADING, marginBottom: 6, letterSpacing: '.01em' }}>{v.title}</div>
                     <div style={{ color: '#5a6e60', fontSize: 'clamp(13px,1.3vw,16px)', lineHeight: 1.6, fontFamily: BODY }}>{v.text}</div>
                   </div>
                 </div>
@@ -627,7 +640,7 @@ function RecognitionSection() {
 function PressSection() {
   const [ref, vis] = useFadeIn()
   return (
-    <section ref={ref} style={{
+    <section ref={ref} className="wmu-section" style={{
       position: 'relative', padding: 'clamp(100px,12vw,160px) 0', overflow: 'hidden',
       background: '#F5F3F0',
     }}>
@@ -668,9 +681,11 @@ function PressSection() {
             <div style={{ width: 40, height: 2, background: 'linear-gradient(90deg, #35C36B, #2a7a4a)', borderRadius: 2 }} />
             <span style={{ color: '#2a7a4a', fontWeight: 700, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', fontFamily: BODY }}>Prensa y Medios</span>
           </div>
-          <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(32px,5vw,56px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.1, margin: 0, maxWidth: 600 }}>
-            Nuestra labor en los <span style={{ color: '#2a7a4a' }}>medios</span>
-          </h2>
+          <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+            <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(32px,5vw,56px)', color: '#0e1a11', textTransform: 'uppercase', lineHeight: 1.1, margin: 0, maxWidth: 600 }}>
+              Nuestra labor en los <span style={{ color: '#2e7d53' }}>medios</span>
+            </h2>
+          </div>
           <p style={{ fontFamily: BODY, color: '#5a6e60', fontSize: 'clamp(14px,1.4vw,17px)', lineHeight: 1.7, marginTop: 16, maxWidth: 520 }}>
             Cobertura mediática que respalda nuestra trayectoria y compromiso con la excelencia constructiva.
           </p>
@@ -728,7 +743,7 @@ function PressSection() {
 function SpecsSection() {
   const [ref, vis] = useFadeIn()
   return (
-    <section ref={ref} className="wmu-parallax" style={{
+    <section ref={ref} className="wmu-section wmu-parallax" style={{
       position: 'relative', padding: 'clamp(80px,10vw,140px) 0', overflow: 'hidden',
       backgroundImage: cssUrl(ARA10_URL), backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
@@ -741,9 +756,11 @@ function SpecsSection() {
         {/* top header */}
         <div style={{ textAlign: 'center', marginBottom: 'clamp(36px,5vw,64px)' }}>
           <span style={{ color: G, fontWeight: 700, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', fontFamily: BODY, display: 'block', marginBottom: 10, opacity: vis ? 1 : 0, transition: 'opacity .6s ease' }}>Todo incluido</span>
-          <h2 style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(26px,4vw,52px)', color: TXT, margin: 0, textTransform: 'uppercase', textShadow: '0 2px 16px rgba(0,0,0,.5)', opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(18px)', transition: 'opacity .7s ease .05s, transform .7s ease .05s' }}>
-            ¿Qué incluye el modelo estándar?
-          </h2>
+          <div className={`text-mask-reveal-wrapper ${vis ? 'visible' : ''}`}>
+            <h2 className="text-mask-reveal-line" style={{ fontFamily: HEADING, fontWeight: 800, fontSize: 'clamp(26px,4vw,52px)', color: TXT, margin: 0, textTransform: 'uppercase', textShadow: '0 2px 16px rgba(0,0,0,.5)' }}>
+              ¿Qué incluye el modelo estándar?
+            </h2>
+          </div>
         </div>
 
         <div className="specs-layout" style={{ display: 'grid', gridTemplateColumns: '1.1fr .9fr', gap: 'clamp(24px,4vw,48px)', alignItems: 'start' }}>
@@ -774,7 +791,7 @@ function SpecsSection() {
 
           {/* right — CTA card + image */}
           <div>
-            <div className="specs-img" style={{ borderRadius: 20, overflow: 'hidden', boxShadow: '0 20px 56px rgba(0,0,0,.4)', marginBottom: 20, opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateX(24px)', transition: 'opacity .8s ease .2s, transform .8s ease .2s' }}>
+            <div className={`specs-img image-clip-reveal ${vis ? 'visible' : ''}`} style={{ borderRadius: 20, overflow: 'hidden', boxShadow: '0 20px 56px rgba(0,0,0,.4)', marginBottom: 20 }}>
               <img src="/wmu/wmu-aldea.webp" alt="Modelo WMU Aldea" width="2048" height="1152" style={{ width: '100%', display: 'block', objectFit: 'cover' }} />
             </div>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', opacity: vis ? 1 : 0, transition: 'opacity .7s ease .4s' }}>
@@ -821,6 +838,15 @@ function WMUFooter() {
   )
 }
 
+function MobileContactBar() {
+  return (
+    <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-mobile-contact" aria-label="Contactar por WhatsApp">
+      <svg viewBox="0 0 32 32" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M16.004 3.2C9.054 3.2 3.404 8.85 3.404 15.8c0 2.22.58 4.39 1.684 6.3L3.2 28.8l6.9-1.81a12.55 12.55 0 006.004 1.53h.005c6.95 0 12.6-5.65 12.6-12.6-.003-3.37-1.314-6.53-3.69-8.91A12.53 12.53 0 0016.004 3.2zm0 23.1a10.45 10.45 0 01-5.33-1.46l-.38-.23-3.95 1.04 1.06-3.87-.25-.4A10.42 10.42 0 015.5 15.8c0-5.79 4.71-10.5 10.51-10.5 2.81 0 5.45 1.09 7.43 3.08a10.44 10.44 0 013.07 7.43c-.003 5.79-4.713 10.5-10.503 10.5zm5.76-7.87c-.32-.16-1.87-.92-2.16-1.03-.29-.1-.5-.16-.71.16-.21.31-.82 1.03-1.01 1.24-.18.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.77-2.2-.18-.31-.02-.48.14-.64.14-.14.32-.37.47-.55.16-.18.21-.31.32-.53.1-.21.05-.39-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.22 3.39 5.38 4.76.75.33 1.34.52 1.8.67.75.24 1.44.21 1.98.13.6-.09 1.87-.77 2.13-1.5.27-.74.27-1.37.19-1.5-.08-.14-.29-.22-.61-.37z"/></svg>
+      <span>CONTACTANOS POR WHATSAPP</span>
+    </a>
+  )
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    GLOBAL CSS
 ═══════════════════════════════════════════════════════════════════════════ */
@@ -831,25 +857,109 @@ const CSS = `
     width: 100%;
     max-width: 100vw;
     overflow-x: clip;
-    background-color: #000;
+    background-color: #0A0F0D;
+  }
+
+  .wmu-shell { width: 100%; min-width: 0; overflow-x: clip; }
+  .wmu-container { width: min(1200px, calc(100% - 32px)); margin-inline: auto; }
+  .wmu-section { min-width: 0; }
+  .wmu-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .wmu-mobile-only { display: none; }
+  .wmu-nav-wa {
+    position: absolute; right: 24px; display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 50%; color: #25D366;
+    text-decoration: none; transition: background-color .2s ease, transform .2s ease;
+  }
+  .wmu-nav-wa:hover { background: rgba(37,211,102,.12); transform: scale(1.06); }
+  .wmu-mobile-contact { display: none; }
+
+  @media (max-width: 768px) {
+    .wmu-shell { padding-bottom: calc(72px + env(safe-area-inset-bottom)) !important; }
+    .wmu-nav-inner { height: 68px !important; padding-inline: 16px !important; }
+    .wmu-nav a:first-child { left: 16px !important; }
+    .wmu-nav-wa { right: 16px; }
+    .wmu-mobile-contact {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 48px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      background: #25D366; color: #07130D; font: 800 13px/1.2 "Space Grotesk", sans-serif;
+      letter-spacing: .03em; text-decoration: none; box-shadow: 0 -6px 24px rgba(0,0,0,.26);
+    }
+    .wmu-actions > a { min-height: 48px; }
+  }
+  @media (max-width: 560px) {
+    .wmu-back-label { display: none; }
+    .wmu-nav img { max-width: 132px; }
+    .wmu-hero-inner { width: 100% !important; min-height: auto !important; padding: 112px 16px 56px !important; }
+    .wmu-hero-media > div { width: min(82vw, 360px) !important; }
+    .wmu-financing-cue { width: 100% !important; }
+    .wmu-container { width: min(100% - 32px, 520px); }
+    .wmu-mobile-only { display: block; }
+    .wmu-actions { flex-direction: column; }
+    .wmu-actions > a { width: 100%; text-align: center; }
   }
 
   .wmu-btn-primary {
     padding: 14px 26px; border-radius: 12px; font-weight: 800;
     letter-spacing: .2px; text-decoration: none; display: inline-block;
-    background: #337F57; color: #F3F5F4; font-family: "Nunito Sans", sans-serif;
-    box-shadow: 0 10px 26px rgba(53,195,107,.2); white-space: nowrap;
-    transition: transform .15s ease, box-shadow .25s ease;
+    background: #3BB77E; color: #F3F5F4; font-family: "Space Grotesk", sans-serif;
+    box-shadow: 0 10px 26px rgba(59,183,126,.2); white-space: nowrap;
+    transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow .25s ease;
   }
-  .wmu-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(53,195,107,.3); }
+  .wmu-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(59,183,126,.3); }
+  .wmu-btn-primary:active { transform: translateY(0) scale(0.97) !important; }
+
   .wmu-btn-ghost {
     padding: 14px 26px; border-radius: 12px; font-weight: 800;
     letter-spacing: .2px; text-decoration: none; display: inline-block;
-    background: transparent; color: #F3F5F4; font-family: "Nunito Sans", sans-serif;
+    background: transparent; color: #F3F5F4; font-family: "Space Grotesk", sans-serif;
     border: 1px solid rgba(255,255,255,.14); white-space: nowrap;
-    transition: background .2s, border-color .2s;
+    transition: background .2s, border-color .2s, transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
   }
   .wmu-btn-ghost:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.22); }
+  .wmu-btn-ghost:active { transform: scale(0.97) !important; }
+
+  /* Model cards 3D entrance and orbit hover */
+  .wmu-3d-card-reveal {
+    perspective: 800px;
+    transform-style: preserve-3d;
+    transform-origin: bottom center;
+    transform: perspective(800px) rotateX(24deg) translateY(40px) scale(0.96);
+    opacity: 0;
+    transition: transform 1400ms cubic-bezier(0.16, 1, 0.3, 1), opacity 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .wmu-3d-card-reveal.visible {
+    transform: perspective(800px) rotateX(0deg) translateY(0) scale(1);
+    opacity: 1;
+  }
+  .wmu-3d-card-reveal:hover {
+    transform: perspective(800px) rotateX(-2deg) translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 20px 48px rgba(59,183,126,.15), 0 4px 20px rgba(0,0,0,.25) !important;
+  }
+  .wmu-3d-card-reveal:active {
+    transform: perspective(800px) rotateX(0deg) translateY(0) scale(0.985) !important;
+  }
+
+  /* Clip-path sweep reveal for images */
+  .wmu-card-clip-sweep {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .visible .wmu-card-clip-sweep,
+  .visible.wmu-card-clip-sweep {
+    clip-path: inset(0 0 0 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wmu-3d-card-reveal {
+      transform: none !important;
+      transition: opacity 300ms ease !important;
+    }
+    .wmu-card-clip-sweep {
+      clip-path: none !important;
+      transition: none !important;
+    }
+  }
 
   .wmu-subnav {
     position: sticky;
@@ -862,7 +972,7 @@ const CSS = `
     margin: -22px auto -22px;
     width: max-content;
     max-width: 90%;
-    background: rgba(12, 18, 16, 0.65);
+    background: rgba(10, 15, 13, 0.65);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 99px;
     backdrop-filter: blur(16px);
@@ -875,14 +985,14 @@ const CSS = `
     border-radius: 99px;
     color: rgba(243, 245, 244, 0.72);
     text-decoration: none;
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-size: 12px;
     font-weight: 800;
     transition: color .2s ease, background-color .2s ease, transform .15s ease;
   }
   .wmu-subnav a:hover {
     color: #F3F5F4;
-    background: rgba(53, 195, 107, 0.14);
+    background: rgba(59, 183, 126, 0.14);
   }
   .wmu-subnav a:active {
     transform: scale(.96);
@@ -903,14 +1013,22 @@ const CSS = `
   }
 
   /* press card hover */
-  .press-card-new:hover { box-shadow: 0 12px 40px rgba(0,0,0,.1) !important; border-color: rgba(42,122,74,.2) !important; transform: translateY(-6px); }
+  .press-card-new {
+    transition: transform 250ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 250ms ease, border-color 250ms ease;
+  }
+  .press-card-new:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,.1) !important;
+    border-color: rgba(59,183,126,.2) !important;
+    transform: translateY(-6px);
+  }
+  .press-card-new:active { transform: translateY(-2px) scale(0.98) !important; }
   .press-card-new:hover .press-card-img-new { transform: scale(1.06); }
   .press-card-new:hover .press-link-new { gap: 12px; }
   .press-card-new:hover .press-card-line { opacity: 1 !important; }
 
   /* recognition card hover */
-  .recognition-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08) !important; border-color: rgba(42,122,74,.15) !important; }
-  .recognition-card:hover .recognition-dot { background: #35C36B !important; border-color: #35C36B !important; box-shadow: 0 0 0 6px rgba(53,195,107,.15) !important; }
+  .recognition-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08) !important; border-color: rgba(59,183,126,.15) !important; }
+  .recognition-card:hover .recognition-dot { background: #3BB77E !important; border-color: #3BB77E !important; box-shadow: 0 0 0 6px rgba(59,183,126,.15) !important; }
   .recognition-card:hover .recognition-num { opacity: .12 !important; }
 
   /* parallax — only on desktop */
@@ -926,7 +1044,8 @@ const CSS = `
   /* ── responsive ── */
   @media (max-width: 900px) {
     .hero-inner { grid-template-columns: 1fr !important; gap: 28px !important; }
-    .hero-hex   { order: -1; }
+    .wmu-hero-copy { order: 1; }
+    .wmu-hero-media { order: 2; }
     .model-featured { grid-template-columns: 1fr !important; }
     .expand-layout { grid-template-columns: 1fr !important; }
     .expand-spacer { display: none; }
@@ -964,9 +1083,14 @@ const CSS = `
   .manifiesto-section {
     padding: clamp(64px, 9vw, 110px) 0 clamp(48px, 6vw, 80px);
     isolation: isolate;
+    background-color: #F2EFE9;
+    background-image: 
+      linear-gradient(rgba(59, 183, 126, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 183, 126, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
   .manifiesto-grain {
-    position: absolute; inset: 0; pointer-events: none; opacity: .045;
+    position: absolute; inset: 0; pointer-events: none; opacity: .04;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
     background-size: 220px 220px;
     mix-blend-mode: multiply;
@@ -986,7 +1110,7 @@ const CSS = `
     top: clamp(110px, 15vw, 190px);
     bottom: clamp(90px, 11vw, 150px);
     width: 2px;
-    background: #35C36B;
+    background: #3BB77E;
     transform-origin: top;
     transform: scaleY(0);
     transition: transform 1.6s cubic-bezier(.22,.61,.36,1);
@@ -996,12 +1120,12 @@ const CSS = `
     position: absolute;
     top: clamp(20px, 4vw, 60px);
     left: clamp(16px, 3vw, 40px);
-    font-family: "Manrope", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 800;
     font-size: clamp(180px, 26vw, 320px);
     line-height: 1;
-    color: #35C36B;
-    opacity: .045;
+    color: #3BB77E;
+    opacity: .05;
     pointer-events: none;
     user-select: none;
   }
@@ -1013,7 +1137,7 @@ const CSS = `
   }
   .manifiesto-eyebrow {
     display: block;
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Manrope", sans-serif;
     font-weight: 700;
     font-size: 11px;
     letter-spacing: .18em;
@@ -1023,7 +1147,7 @@ const CSS = `
     margin-bottom: 20px;
   }
   .manifiesto-opening {
-    font-family: "Manrope", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 800;
     font-size: clamp(18px, 2vw, 26px);
     color: #0e1a11;
@@ -1050,7 +1174,7 @@ const CSS = `
     position: absolute;
     top: -.05em;
     right: 0;
-    font-family: "Manrope", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 800;
     font-size: clamp(90px, 14vw, 160px);
     line-height: .9;
@@ -1070,7 +1194,7 @@ const CSS = `
   .manifiesto-text {
     position: relative;
     z-index: 1;
-    font-family: "Manrope", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 800;
     font-size: clamp(28px, 4vw, 52px);
     color: #0e1a11;
@@ -1129,7 +1253,7 @@ const CSS = `
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: "Manrope", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 700;
     font-size: clamp(15px, 1.3vw, 17px);
     color: #0e1a11;
@@ -1169,7 +1293,7 @@ const CSS = `
     opacity: .55;
   }
   .manifiesto-signature {
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Manrope", sans-serif;
     font-style: italic;
     font-size: 12px;
     color: #0e1a11;
@@ -1184,7 +1308,7 @@ const CSS = `
 export default function WMU() {
   useEffect(() => { window.scrollTo(0, 0) }, [])
   return (
-    <div className="wmu-page" style={{ fontFamily: BODY }}>
+    <div className="wmu-page wmu-shell" style={{ fontFamily: BODY }}>
       <SEO 
         title="WMU Arquitectura Modular | Módulos Habitacionales Steel Frame"
         description="Descubrí la línea WMU de casas modulares premium llave en mano. Construcción rápida con estructura de steel frame y excelente aislación térmica en Argentina."
@@ -1212,6 +1336,7 @@ export default function WMU() {
       <SpecsSection />
       <ManifestoSection />
       <WMUFooter />
+      <MobileContactBar />
       <FloatingWhatsApp />
     </div>
   )

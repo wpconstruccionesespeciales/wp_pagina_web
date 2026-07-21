@@ -206,8 +206,8 @@ function TimelineItem({ item, index, isVisible, nodeRef }) {
         className="absolute left-7 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
       >
         <div
-          className={`relative flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-low shadow-[0_0_0_1px_rgba(61,140,90,0.15)] ring-[10px] ring-primary/[0.06] transition-transform duration-500 ${
-            isVisible ? 'scale-100' : 'scale-0'
+          className={`relative flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-low shadow-[0_0_0_1px_rgba(61,140,90,0.15)] ring-[10px] ring-primary/[0.06] transition-all duration-500 ${
+            isVisible ? 'scale-100 opacity-100' : 'scale-90 opacity-0'
           }`}
           style={delayStyle}
         >

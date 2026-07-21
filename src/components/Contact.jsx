@@ -76,7 +76,11 @@ export default function Contact() {
         {/* Info */}
         <div className={`animate-on-scroll from-left ${visible ? 'visible' : ''}`}>
           <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Contacto</p>
-          <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary tracking-tight mb-6">Inicie su construcción</h2>
+          <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary tracking-tight mb-6">
+            <span className="text-mask-reveal-wrapper">
+              <span className="text-mask-reveal-line">Inicie su construcción</span>
+            </span>
+          </h2>
           <p className="text-on-surface-variant text-lg mb-12 leading-relaxed">
             Estamos listos para materializar su visión. Complete el formulario y un asesor técnico se contactará en menos de 24 horas.
           </p>
@@ -110,7 +114,7 @@ export default function Contact() {
             <FloatingTextarea label="Mensaje / Detalles del Proyecto" name="message" />
             <button
               type="submit"
-              className="group w-full bg-primary text-white py-4 font-bold rounded-xl hover:bg-primary-container hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+              className="group w-full bg-primary text-white py-4 font-bold rounded-xl hover:bg-primary-container hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2"
             >
               Enviar Solicitud
               <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>

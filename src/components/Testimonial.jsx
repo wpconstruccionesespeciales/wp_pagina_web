@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import useInView from '../hooks/useInView'
 
 const videos = [
@@ -36,7 +37,11 @@ export default function Prensa() {
         <div className={`flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-14 animate-on-scroll ${visible ? 'visible' : ''}`}>
           <div>
             <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Prensa</p>
-            <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary tracking-tight">Nuestra labor en los medios</h2>
+            <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary tracking-tight">
+              <span className="text-mask-reveal-wrapper">
+                <span className="text-mask-reveal-line">Nuestra labor en los medios</span>
+              </span>
+            </h2>
           </div>
           <p className="text-on-surface-variant max-w-sm lg:text-right">
             Cobertura mediática que respalda nuestra trayectoria y compromiso con la excelencia constructiva.
@@ -48,39 +53,51 @@ export default function Prensa() {
           {/* Featured video */}
           <div className={`lg:col-span-3 animate-on-scroll from-left ${visible ? 'visible' : ''}`}>
             <div className="relative rounded-2xl overflow-hidden aspect-video bg-primary/10">
-              {playing ? (
-                <iframe
-                  className="w-full h-full"
-                  src={`https://www.youtube-nocookie.com/embed/${videos[active].id}?rel=0&autoplay=1`}
-                  title={videos[active].title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setPlaying(true)}
-                  className="group relative h-full w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset"
-                  aria-label={`Reproducir ${videos[active].title}`}
-                >
-                  <img
-                    className="h-full w-full object-cover"
-                    src={`/prensa/${videos[active].id}.jpg`}
-                    alt={`Miniatura de video: ${videos[active].title}`}
-                    width="480"
-                    height="360"
-                    loading="lazy"
-                    decoding="async"
+              <AnimatePresence mode="wait">
+                {playing ? (
+                  <motion.iframe
+                    key={`video-${videos[active].id}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25, ease: 'easeOut' }}
+                    className="w-full h-full"
+                    src={`https://www.youtube-nocookie.com/embed/${videos[active].id}?rel=0&autoplay=1`}
+                    title={videos[active].title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
                   />
-                  <span className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
-                  <span className="absolute inset-0 grid place-items-center">
-                    <span className="grid h-16 w-16 place-items-center rounded-full border border-white/30 bg-white/90 text-primary shadow-xl backdrop-blur-sm transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] motion-safe:group-hover:scale-105 active:scale-[0.97]">
-                      <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
+                ) : (
+                  <motion.button
+                    key={`thumb-${videos[active].id}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25, ease: 'easeOut' }}
+                    type="button"
+                    onClick={() => setPlaying(true)}
+                    className="group relative h-full w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset"
+                    aria-label={`Reproducir ${videos[active].title}`}
+                  >
+                    <img
+                      className="h-full w-full object-cover"
+                      src={`/prensa/${videos[active].id}.jpg`}
+                      alt={`Miniatura de video: ${videos[active].title}`}
+                      width="480"
+                      height="360"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
+                    <span className="absolute inset-0 grid place-items-center">
+                      <span className="grid h-16 w-16 place-items-center rounded-full border border-white/30 bg-white/90 text-primary shadow-xl backdrop-blur-sm transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] motion-safe:group-hover:scale-105 active:scale-[0.97]">
+                        <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
+                      </span>
                     </span>
-                  </span>
-                </button>
-              )}
+                  </motion.button>
+                )}
+              </AnimatePresence>
             </div>
             <h3 className="font-headline text-xl font-bold mt-4">{videos[active].title}</h3>
           </div>
@@ -94,7 +111,7 @@ export default function Prensa() {
                   setActive(i)
                   setPlaying(false)
                 }}
-                className={`relative rounded-xl overflow-hidden transition-all duration-300 ${
+                className={`relative rounded-xl overflow-hidden transition-[opacity,transform,box-shadow,ring] duration-200 active:scale-95 ${
                   i === active
                     ? 'ring-2 ring-primary shadow-lg'
                     : 'opacity-60 hover:opacity-100'

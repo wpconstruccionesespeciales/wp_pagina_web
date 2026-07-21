@@ -38,14 +38,18 @@ export default function Process() {
         {/* Header */}
         <div className={`text-center mb-20 animate-on-scroll ${visible ? 'visible' : ''}`}>
           <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Cómo Trabajamos</p>
-          <h2 className="font-headline text-4xl lg:text-6xl font-bold tracking-tight text-primary">Nuestro Proceso</h2>
+          <h2 className="font-headline text-4xl lg:text-6xl font-bold tracking-tight text-primary">
+            <span className="text-mask-reveal-wrapper">
+              <span className="text-mask-reveal-line">Nuestro Proceso</span>
+            </span>
+          </h2>
           <p className="text-on-surface-variant text-lg mt-5 max-w-lg mx-auto">De la idea al proyecto terminado, en cuatro pasos claros y transparentes.</p>
         </div>
 
         {/* Timeline */}
-        <div className="relative stagger-children">
+        <div className={`relative stagger-children ${visible ? 'visible' : ''}`}>
           {/* Horizontal line (desktop) */}
-          <div className="hidden lg:block absolute top-[3.25rem] left-[12%] right-[12%] h-px bg-outline-variant/40" />
+          <div className="hidden lg:block absolute top-[3.25rem] left-[12%] right-[12%] h-px bg-outline-variant/40 timeline-draw-line" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
             {steps.map(({ num, icon, title, desc }) => (
