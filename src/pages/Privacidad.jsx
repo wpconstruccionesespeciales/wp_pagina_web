@@ -3,6 +3,7 @@ import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
+import { BUSINESS } from '../config/site'
 
 const dataCards = [
   {
@@ -261,7 +262,7 @@ export default function Privacidad() {
                     indicados en la sección de contacto de nuestro sitio web.
                   </p>
                   <p className="text-white/55 text-xs leading-relaxed mt-4 uppercase tracking-widest font-bold">
-                    Responsable: WP Construcciones Especiales &nbsp;·&nbsp; Contacto: +54 9 3435 05-6918 &nbsp;·&nbsp; wpsascentral@gmail.com
+                    Responsable: {BUSINESS.name} &nbsp;·&nbsp; Contacto: {BUSINESS.phoneDisplay} &nbsp;·&nbsp; {BUSINESS.email}
                   </p>
                 </div>
               </div>

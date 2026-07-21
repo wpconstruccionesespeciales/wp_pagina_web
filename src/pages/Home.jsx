@@ -16,27 +16,26 @@ import Footer from '../components/Footer'
 import WhatsAppButton from '../components/WhatsAppButton'
 import SEO from '../components/SEO'
 import wpLogo from '../assets/WP.png'
-
-const SITE_URL = 'https://wpconstrucciones.com'
+import { BUSINESS, BUSINESS_ID, canonicalUrl } from '../config/site'
 
 export default function Home() {
   const businessSchema = {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
-    "@id": "https://wpconstrucciones.com/#business",
-    "name": "WP Construcciones Especiales",
-    "url": "https://wpconstrucciones.com/",
-    "logo": `${SITE_URL}${wpLogo}`,
-    "image": `${SITE_URL}/wmu/wmu-financing.webp`,
-    "description": "Líderes en construcción en seco, steel framing de alta gama y arquitectura modular en Argentina. Ingeniería de precisión milimétrica.",
-    "telephone": "+5493435056918",
+    "@id": BUSINESS_ID,
+    "name": BUSINESS.name,
+    "url": canonicalUrl('/'),
+    "logo": canonicalUrl(wpLogo),
+    "image": canonicalUrl('/wmu/wmu-financing.webp'),
+    "description": "Estudio de Paraná dedicado a arquitectura, ingeniería de detalle, construcción en Steel Frame y soluciones modulares desde 2005.",
+    "telephone": BUSINESS.phoneE164,
     "priceRange": "$$$",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Paraná",
-      "addressRegion": "Entre Ríos",
+      "addressLocality": BUSINESS.locality,
+      "addressRegion": BUSINESS.region,
       "postalCode": "3100",
-      "addressCountry": "AR"
+      "addressCountry": BUSINESS.country
     },
     "geo": {
       "@type": "GeoCoordinates",
@@ -45,8 +44,7 @@ export default function Home() {
     },
     "areaServed": [
       { "@type": "State", "name": "Entre Ríos" },
-      { "@type": "State", "name": "Santa Fe" },
-      { "@type": "Country", "name": "Argentina" }
+      { "@type": "State", "name": "Santa Fe" }
     ],
     "openingHoursSpecification": [
       {
@@ -56,10 +54,7 @@ export default function Home() {
         "closes": "16:00"
       }
     ],
-    "sameAs": [
-      "https://www.facebook.com/WPConstruccionesEspeciales",
-      "https://www.instagram.com/wpconstruccionesespeciales/?hl=en"
-    ],
+    "sameAs": Object.values(BUSINESS.social),
     "knowsAbout": [
       "Steel Framing",
       "Construcción en Seco",
@@ -74,8 +69,8 @@ export default function Home() {
     <div className="relative overflow-hidden bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
       <SEO
         title="WP Construcciones Especiales"
-        description="Líderes en construcción en seco, steel framing de alta gama y arquitectura modular en Argentina. Diseños sostenibles con cálculo estructural de precisión milimétrica."
-        keywords="steel frame, construccion en seco, arquitectura modular, casas modulares, wp construcciones, steel core, argentina, parana entre rios, de alta gama"
+        description="Arquitectura, ingeniería de detalle y construcción en Steel Frame desde Paraná. Conocé servicios, aplicaciones y criterios para desarrollar cada proyecto."
+        keywords="steel frame, construccion en seco, arquitectura modular, casas modulares, wp construcciones, steel core, argentina, parana entre rios"
       />
       <script type="application/ld+json">
         {JSON.stringify(businessSchema)}

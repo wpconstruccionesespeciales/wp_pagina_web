@@ -1,11 +1,11 @@
 import useInView from '../hooks/useInView'
 
 const rows = [
-  { feature: 'Tiempo de obra', steel: 'Ultra rápido (Meses)', trad: 'Lento (Años)', icon: 'schedule' },
-  { feature: 'Residuos', steel: 'Obra limpia (90% menos)', trad: 'Alto volumen de escombros', icon: 'delete' },
-  { feature: 'Aislación Térmica', steel: 'Excelente (70% ahorro)', trad: 'Deficiente', icon: 'thermostat' },
-  { feature: 'Precisión', steel: 'Ingeniería milimétrica', trad: 'Variable / Artesanal', icon: 'straighten' },
-  { feature: 'Mantenimiento', steel: 'Mínimo / Sin grietas', trad: 'Frecuente / Humedades', icon: 'build' },
+  { feature: 'Secuencia de obra', steel: 'Montaje en seco', trad: 'Incluye etapas húmedas', icon: 'schedule' },
+  { feature: 'Gestión de material', steel: 'Corte planificado', trad: 'Según sistema', icon: 'delete' },
+  { feature: 'Aislación térmica', steel: 'Envolvente por capas', trad: 'Según composición', icon: 'thermostat' },
+  { feature: 'Coordinación', steel: 'Modelo + CNC', trad: 'Replanteo en obra', icon: 'straighten' },
+  { feature: 'Mantenimiento', steel: 'Según envolvente', trad: 'Según materiales', icon: 'build' },
 ]
 
 export default function Comparison() {
@@ -24,18 +24,21 @@ export default function Comparison() {
               <span className="text-mask-reveal-line">Steel Frame vs. Tradicional</span>
             </span>
           </h2>
-          <p className="text-on-surface-variant text-lg mt-4 max-w-md mx-auto">Datos reales que demuestran la superioridad del sistema constructivo en seco.</p>
+          <p className="text-on-surface-variant text-lg mt-4 max-w-md mx-auto">Una lectura cualitativa de procesos; el resultado final depende del proyecto y su ejecución.</p>
         </div>
 
         <div className={`bg-white rounded-2xl shadow-sm overflow-hidden animate-on-scroll scale-in ${visible ? 'visible' : ''}`}>
           {/* Header */}
-          <div className="grid grid-cols-12 bg-primary text-white p-5 lg:p-6">
-            <div className="col-span-4 lg:col-span-5 font-headline font-bold text-sm lg:text-base">Característica</div>
-            <div className="col-span-4 lg:col-span-4 font-headline font-bold text-sm lg:text-base flex items-center gap-2">
-              <span className="material-symbols-outlined text-emerald-300 text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+          <div className="grid grid-cols-12 bg-primary text-white p-3 sm:p-5 lg:p-6">
+            <div className="col-span-4 lg:col-span-5 font-headline font-bold text-[10px] sm:text-sm lg:text-base leading-tight">Característica</div>
+            <div className="col-span-4 lg:col-span-4 font-headline font-bold text-[10px] sm:text-sm lg:text-base leading-tight flex items-center gap-1 sm:gap-2">
+              <span className="material-symbols-outlined text-white/55 text-lg hidden sm:inline">view_column</span>
               Steel Frame
             </div>
-            <div className="col-span-4 lg:col-span-3 font-headline font-bold text-sm lg:text-base text-white/60">Tradicional</div>
+            <div className="col-span-4 lg:col-span-3 font-headline font-bold text-[10px] sm:text-sm lg:text-base leading-tight text-white/75 flex items-center gap-1 sm:gap-2">
+              <span className="material-symbols-outlined text-white/55 text-lg hidden sm:inline">view_column</span>
+              Tradicional
+            </div>
           </div>
 
           {/* Rows */}
@@ -48,15 +51,15 @@ export default function Comparison() {
             >
               <div className="col-span-4 lg:col-span-5 flex items-center gap-3">
                 <span className="material-symbols-outlined text-on-surface-variant text-xl hidden sm:inline">{icon}</span>
-                <span className="font-bold text-sm lg:text-base">{feature}</span>
+                <span className="font-bold text-[11px] sm:text-sm lg:text-base leading-tight break-words">{feature}</span>
               </div>
               <div className="col-span-4 lg:col-span-4 flex items-center gap-2">
-                <span className="material-symbols-outlined text-emerald-600 text-lg flex-shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                <span className="text-primary font-medium text-sm lg:text-base">{steel}</span>
+                <span className="material-symbols-outlined text-on-surface-variant/55 text-base flex-shrink-0 hidden sm:inline">horizontal_rule</span>
+                <span className="text-on-surface font-medium text-[11px] sm:text-sm lg:text-base leading-tight break-words">{steel}</span>
               </div>
               <div className="col-span-4 lg:col-span-3 flex items-center gap-2">
-                <span className="material-symbols-outlined text-red-400 text-lg flex-shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>cancel</span>
-                <span className="text-on-surface-variant text-sm lg:text-base">{trad}</span>
+                <span className="material-symbols-outlined text-on-surface-variant/55 text-base flex-shrink-0 hidden sm:inline">horizontal_rule</span>
+                <span className="text-on-surface font-medium text-[11px] sm:text-sm lg:text-base leading-tight break-words">{trad}</span>
               </div>
             </div>
           ))}

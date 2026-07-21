@@ -298,7 +298,7 @@ function Particles() {
 
 const statItems = [
   { value: '2005', label: 'Fundación en Paraná', icon: 'calendar_month' },
-  { value: '2014', label: '1er edificio Steel Frame de la región', icon: 'apartment' },
+  { value: '2014', label: 'Edificio Steel Frame en Paraná', icon: 'apartment' },
   { value: '+20', label: 'Años de trayectoria', icon: 'auto_graph' }
 ]
 
@@ -390,15 +390,15 @@ export default function FirstSteelFrame() {
             >
               <div className="w-10 h-px bg-gradient-to-r from-primary-fixed-dim/60 to-transparent" />
               <span className="text-primary-fixed-dim/60 text-[0.55rem] font-bold tracking-[0.25em] uppercase">
-                2005 &bull; Pioneros en Paraná
+                2005 &bull; Trayectoria en Paraná
               </span>
             </Motion.div>
 
             <div className="relative">
               <AnimatedText
-                text="Fuimos los primeros en levantar un edificio con Steel Frame en la región"
+                text="Un edificio en Steel Frame como hito de nuestra trayectoria regional"
                 className="font-headline text-2xl sm:text-3xl lg:text-[2.4rem] font-bold text-white leading-[1.08] tracking-[-0.03em] mb-5"
-                highlightWords={['primeros', 'Steel', 'Frame']}
+                highlightWords={['edificio', 'Steel', 'Frame']}
               />
               {/* Subtle underline accent */}
               <Motion.div
@@ -417,10 +417,9 @@ export default function FirstSteelFrame() {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              En 2014 marcamos un hito: construimos el primer edificio de la
-              región realizado íntegramente en Steel Frame, en Paraná. Desde
-              entonces, lideramos la innovación en construcción en altura con
-              acero galvanizado.
+              En 2014 construimos en Paraná un edificio realizado íntegramente
+              en Steel Frame. El proyecto forma parte de nuestra trayectoria en
+              construcción en altura con estructura de acero galvanizado.
             </Motion.p>
 
             <Motion.div

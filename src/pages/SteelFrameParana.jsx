@@ -4,23 +4,25 @@ import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
+import { Link } from 'react-router-dom'
+import { BUSINESS, BUSINESS_ID, canonicalUrl } from '../config/site'
 
 // ─── Data local conceptual de la empresa (Paraná) ───
 const hitosParana = [
   {
     ano: '2005',
     titulo: 'Fundación en Paraná',
-    desc: 'WP Construcciones Especiales nace en la ciudad de Paraná con la visión de introducir la construcción industrializada en seco de alta precisión en la región del litoral.'
+    desc: 'WP Construcciones Especiales inicia su actividad en Paraná con foco en construcción industrializada en seco para la región del litoral.'
   },
   {
     ano: '2014',
-    titulo: 'Pioneros en Altura',
-    desc: 'WP proyecta y construye el primer edificio de mediana altura realizado íntegramente en Steel Frame en Paraná, marcando un antes y un después en la región.'
+    titulo: 'Proyecto en Altura',
+    desc: 'WP proyecta y construye un edificio de mediana altura realizado íntegramente en Steel Frame en Paraná.'
   },
   {
     ano: '2026',
-    titulo: '+20 Años de Trayectoria',
-    desc: 'Consolidados como referentes en arquitectura residencial y comercial de alta gama en Entre Ríos y Santa Fe, aplicando ingeniería de detalle a cada proyecto.'
+    titulo: 'Trayectoria en Desarrollo',
+    desc: 'Continuamos trabajando en arquitectura residencial y comercial en Entre Ríos y Santa Fe, aplicando ingeniería de detalle a cada proyecto.'
   }
 ]
 
@@ -28,25 +30,25 @@ const ventajasGeoclimaticas = [
   {
     icon: 'landscape',
     title: 'Estabilidad en Suelos Complejos',
-    desc: 'Los terrenos y lomas de Paraná sufren expansiones mecánicas por los cambios de humedad de las arcillas locales. La mampostería tradicional rígida tiende a agrietarse. La flexibilidad controlada del Steel Frame absorbe los movimientos del terreno sin fisurarse, distribuyendo las cargas de forma óptima.'
+    desc: 'Los cambios de humedad y las características del suelo pueden condicionar las fundaciones. La menor carga propia del Steel Frame puede ser una ventaja, siempre sujeta al estudio de suelo y al cálculo del proyecto.'
   },
   {
     icon: 'water_drop',
     title: 'Comportamiento Higrotérmico Litoral',
-    desc: 'La cercanía al Río Paraná genera un ambiente de alta humedad constante. Diseñamos envolventes multicapa con barreras activas de viento y agua que impiden la entrada de humedad exterior y permiten la evaporación interna, erradicando filtraciones y hongos.'
+    desc: 'La humedad del litoral requiere estudiar la secuencia de capas. Diseñamos envolventes con barreras de viento y agua y control de vapor según las condiciones de uso y exposición.'
   },
   {
     icon: 'thermostat',
     title: 'Eficiencia ante el Clima Extremo',
-    desc: 'El clima de Entre Ríos oscila entre veranos calurosos e inviernos muy húmedos y fríos. La estructura multicapa de muros y cubiertas actúa como un escudo de resistencia térmica superior, reduciendo significativamente la demanda energética para la climatización del hogar.'
+    desc: 'Los veranos calurosos y los inviernos húmedos orientan el diseño de muros y cubiertas. El desempeño térmico depende de la composición elegida, la ejecución y el uso del edificio.'
   }
 ]
 
 const capasMuroConceptual = [
   {
     nombre: '1. Revestimiento Exterior Continuo',
-    descripcion: 'Una envolvente de protección continua contra la intemperie que proporciona aislamiento térmico exterior y un acabado de alta gama personalizable.',
-    concept: 'Aislamiento Térmico y Estética Premium'
+    descripcion: 'Una envolvente de protección continua contra la intemperie que puede incorporar aislamiento térmico exterior y terminaciones definidas por el proyecto.',
+    concept: 'Aislamiento Térmico y Terminación Exterior'
   },
   {
     nombre: '2. Barrera de Viento y Agua',
@@ -68,15 +70,15 @@ const capasMuroConceptual = [
 const faqsParana = [
   {
     pregunta: '¿Cómo se gestiona el permiso de obra de Steel Frame en la Municipalidad de Paraná?',
-    respuesta: 'El Steel Frame está catalogado en Argentina como construcción tradicional. El proceso de aprobación ante los organismos municipales en Paraná y Entre Ríos es estándar. WP provee toda la documentación técnica de cálculo de ingeniería de detalle y planos de arquitectura requeridos para las presentaciones locales directas.'
+    respuesta: 'La gestión depende de la normativa municipal vigente al momento de presentar, de las condiciones del terreno y del proyecto elaborado y firmado por profesionales habilitados. La documentación requerida puede incluir planos, cálculo estructural, estudio de suelo y otros antecedentes según el caso; debe confirmarse con la Municipalidad de Paraná antes de iniciar el trámite.'
   },
   {
     pregunta: '¿El Steel Frame es apto para terrenos inclinados o sobre las barrancas de Paraná?',
-    respuesta: 'Es la solución ideal. Las barrancas de Paraná presentan desafíos de relieve y suelo. Al ser una estructura de acero considerablemente más liviana que la construcción tradicional en ladrillos, reduce la carga sobre los cimientos y muros de contención, disminuyendo la complejidad y costo de la obra civil.'
+    respuesta: 'Puede ser una alternativa por su menor carga propia, pero la aptitud no puede definirse sin estudio de suelo, relevamiento topográfico, cálculo de fundaciones y proyecto profesional específico para el terreno.'
   },
   {
     pregunta: '¿Cuáles son los plazos de obra habituales para una vivienda en Paraná?',
-    respuesta: 'Una de las grandes ventajas de la construcción en seco es la rapidez. Al eliminar los tiempos de fraguado húmedo de mezclas y pre-armar paneles estructurales, los plazos de entrega se reducen hasta en un 60% en comparación con los métodos tradicionales de construcción residencial.'
+    respuesta: 'El montaje en seco evita algunos tiempos de fraguado y permite preparar paneles con anticipación. El plazo final depende de superficie, complejidad, permisos, provisión de materiales, clima, logística y alcance contratado.'
   }
 ]
 
@@ -265,17 +267,17 @@ export default function SteelFrameParana() {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
-    "@id": "https://wpconstrucciones.com/steel-frame-parana#business",
-    "name": "WP Construcciones Especiales - Steel Frame Paraná",
-    "url": "https://wpconstrucciones.com/steel-frame-parana",
-    "telephone": "+5493435056918",
+    "@id": BUSINESS_ID,
+    "name": BUSINESS.name,
+    "url": canonicalUrl('/'),
+    "telephone": BUSINESS.phoneE164,
     "priceRange": "$$$",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Paraná",
-      "addressRegion": "Entre Ríos",
+      "addressLocality": BUSINESS.locality,
+      "addressRegion": BUSINESS.region,
       "postalCode": "3100",
-      "addressCountry": "AR"
+      "addressCountry": BUSINESS.country
     },
     "geo": {
       "@type": "GeoCoordinates",
@@ -287,12 +289,12 @@ export default function SteelFrameParana() {
       { "@type": "State", "name": "Entre Ríos" },
       { "@type": "State", "name": "Santa Fe" }
     ],
-    "description": "Líderes en construcción en seco y steel frame de alta gama en Paraná, Entre Ríos. Proyectos modulares y a medida diseñados para el entorno local.",
+    "description": "Arquitectura, ingeniería y construcción en Steel Frame desde Paraná, con proyectos residenciales, comerciales y modulares definidos para cada emplazamiento.",
     "knowsAbout": [
       "Steel Framing en Paraná",
       "Construcción en Seco Paraná",
       "Arquitectura Modular en Entre Ríos",
-      "Ingeniería de Precisión"
+      "Ingeniería de Detalle"
     ]
   }
 
@@ -308,7 +310,7 @@ export default function SteelFrameParana() {
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
       <SEO 
         title="Steel Frame en Paraná | WP Construcciones Especiales"
-        description="Líderes en construcción en seco, steel frame de alta gama y arquitectura modular en Paraná, Oro Verde, Crespo y toda la región de Entre Ríos. Proyectos llave en mano con precisión milimétrica."
+        description="Steel Frame en Paraná y el litoral: criterios de suelo, clima, envolvente, permisos y servicios para proyectos residenciales y comerciales."
         keywords="steel frame parana, construccion en seco parana, casas steel frame parana, constructora parana, steel framing entre rios, wp construcciones, steel frame oro verde, construccion en seco crespo"
         breadcrumbs={[
           { name: 'Inicio', url: '/' },
@@ -477,7 +479,7 @@ export default function SteelFrameParana() {
                     className="h-px w-8 bg-[#15251b]/45 origin-left"
                   />
                   <span className="text-[#15251b]/70 text-[0.65rem] sm:text-xs font-bold tracking-[0.3em] uppercase font-headline">
-                    Arquitectura & Construcción de Alta Gama
+                    Experiencia local en Paraná y el Litoral
                   </span>
                 </div>
 
@@ -524,10 +526,10 @@ export default function SteelFrameParana() {
                   transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
                   className="text-on-surface-variant text-base sm:text-lg leading-relaxed mb-4 font-light max-w-2xl"
                 >
-                  Desde el año 2005 diseñamos y edificamos residencias de alta precisión estructural y confort termoacústico, optimizadas para integrarse en la geografía y el clima del litoral entrerriano.
+                  Desde 2005 desarrollamos proyectos residenciales y comerciales en Steel Frame. En esta página reunimos los criterios locales que conviene revisar antes de construir en Paraná y el litoral entrerriano.
                 </Motion.p>
 
-                {/* Cobertura nacional con presencia destacada en el litoral */}
+                {/* Presencia regional destacada */}
                 <Motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={heroVisible ? { opacity: 1, y: 0 } : {}}
@@ -535,7 +537,7 @@ export default function SteelFrameParana() {
                   className="flex flex-wrap items-center gap-1.5 text-[0.5rem] sm:text-[0.55rem] text-[#15251b]/35 font-bold tracking-[0.12em] uppercase font-headline mb-5"
                 >
                   <span className="material-symbols-outlined text-[11px] text-[#15251b]/25" style={{ fontVariationSettings: "'FILL' 1" }}>near_me</span>
-                  <span>Cobertura nacional</span>
+                  <span>Presencia regional</span>
                   <span className="w-1 h-1 rounded-full bg-[#15251b]/15" />
                   <span>Paraná</span>
                   <span className="w-1 h-1 rounded-full bg-[#15251b]/15" />
@@ -557,7 +559,7 @@ export default function SteelFrameParana() {
                 >
                   <span className="material-symbols-outlined text-[#15251b]/60 text-[15px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
                   <span className="text-[#15251b]/70 text-[0.6rem] font-bold tracking-[0.15em] font-headline uppercase whitespace-nowrap">
-                    21 años · Paraná · Entre Ríos
+                    Desde 2005 · Paraná · Entre Ríos
                   </span>
                 </Motion.div>
 
@@ -575,6 +577,12 @@ export default function SteelFrameParana() {
                   >
                     Ver ventajas locales
                   </a>
+                  <Link
+                    to="/servicios"
+                    className="px-8 py-4 text-[#15251b]/70 hover:text-[#15251b] font-medium text-xs tracking-widest transition-colors font-headline uppercase"
+                  >
+                    Conocer servicios
+                  </Link>
                 </div>
               </Motion.div>
             </div>
@@ -616,10 +624,10 @@ export default function SteelFrameParana() {
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="text-xs font-bold tracking-[0.25em] text-[#15251b]/70 uppercase font-headline">Trayectoria en Entre Ríos</span>
               <h2 className="font-headline text-3xl sm:text-4xl font-bold text-[#15251b] leading-tight mt-3 mb-6">
-                Pioneros en Construcción en Seco
+                Una trayectoria iniciada en Paraná
               </h2>
               <p className="text-on-surface-variant text-sm sm:text-base leading-relaxed font-light max-w-2xl mx-auto">
-                Nuestra historia en Paraná, Oro Verde, Crespo y toda la región avala el profesionalismo y el compromiso con cada obra que ejecutamos en todo el país.
+                Estos hitos reúnen antecedentes de la práctica local y explican cómo se consolidó nuestro enfoque en Steel Frame e ingeniería de detalle.
               </p>
             </div>
 
@@ -685,18 +693,18 @@ export default function SteelFrameParana() {
                   Ventajas de Construir en Paraná y la Región del Litoral
                 </h2>
                 <p className="text-white/60 text-sm sm:text-base leading-relaxed mb-6 font-light">
-                  El entorno geográfico de Entre Ríos y los terrenos del litoral exigen un sistema constructivo eficiente que prevenga problemas habituales en edificaciones húmedas tradicionales.
+                  El entorno geográfico de Entre Ríos requiere estudiar suelo, fundaciones, humedad, orientación y envolvente antes de definir el sistema constructivo.
                 </p>
                 <div className="p-5 border border-[#b8cbbc]/15 rounded bg-white/[0.03] flex gap-4 items-start">
                   <span className="material-symbols-outlined text-primary-fixed-dim text-2xl shrink-0">info</span>
                   <p className="text-xs text-white/70 leading-relaxed font-light">
-                    <strong>Evaluación Higrotérmica:</strong> Todas nuestras envolventes son validadas contra condensaciones para responder a los altos índices de humedad del Río Paraná, asegurando el confort interior.
+                    <strong>Evaluación higrotérmica:</strong> La composición de la envolvente debe verificarse según clima, uso y materiales para controlar riesgos de condensación.
                   </p>
                 </div>
                 <div className="p-5 border border-[#b8cbbc]/15 rounded bg-white/[0.03] flex gap-4 items-start mt-4">
                   <span className="material-symbols-outlined text-primary-fixed-dim text-2xl shrink-0">globe</span>
                   <p className="text-xs text-white/70 leading-relaxed font-light">
-                    <strong>Cobertura nacional:</strong> Ejecutamos proyectos en todo el país con presencia destacada en <strong>Paraná, Oro Verde, Crespo, Diamante y Santa Fe</strong>.
+                    <strong>Experiencia regional:</strong> El material institucional destaca trabajos y atención en <strong>Paraná, Oro Verde, Crespo, Diamante y Santa Fe</strong>; la disponibilidad se confirma para cada proyecto.
                   </p>
                 </div>
               </Motion.div>
@@ -743,7 +751,7 @@ export default function SteelFrameParana() {
                 Capas de la Envolvente
               </h2>
               <p className="text-on-surface-variant text-sm sm:text-base leading-relaxed font-light">
-                Conocé la composición conceptual del muro que garantiza la aislación y el confort térmico de nuestras obras.
+                Conocé una composición conceptual de muro. Las capas y prestaciones definitivas se determinan en el proyecto técnico.
               </p>
             </div>
 
@@ -886,7 +894,7 @@ export default function SteelFrameParana() {
                 </div>
                 <h3 className="font-headline text-xl font-bold text-[#15251b] mb-2">¡Consulta Recibida!</h3>
                 <p className="text-on-surface-variant text-sm max-w-md mx-auto leading-relaxed font-light">
-                  Gracias por escribirnos. Un especialista de WP se contactará en el transcurso de las próximas 24 horas hábiles.
+                  Gracias por escribirnos. El equipo de WP revisará los datos para dar seguimiento a la consulta.
                 </p>
               </Motion.div>
             ) : (

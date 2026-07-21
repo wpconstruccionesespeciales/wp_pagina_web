@@ -20,7 +20,7 @@ export default function WhyUs() {
                 </span>
               </h2>
               <p className="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
-                Elevamos el estándar de la construcción tradicional con una metodología que prioriza la eficiencia y la durabilidad extrema.
+                Trabajamos con una metodología que coordina diseño, cálculo, fabricación y montaje según las necesidades de cada proyecto.
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12">
@@ -48,7 +48,7 @@ export default function WhyUs() {
             <span className="material-symbols-outlined text-primary-fixed-dim text-6xl mb-6 block relative z-10">precision_manufacturing</span>
             <h3 className="font-headline text-3xl font-bold mb-4 relative z-10">Innovación</h3>
             <p className="text-white/60 text-lg leading-relaxed relative z-10">
-              Tecnología de punta en cada ensamblaje para garantizar milímetros de precisión.
+              Modelado y control numérico para coordinar el corte, la perforación y el ensamblaje de los perfiles.
             </p>
             <div className="mt-8 relative z-10">
               <a href="#process" className="inline-flex items-center gap-2 text-primary-fixed-dim font-bold text-sm hover:gap-3 transition-all duration-300">
