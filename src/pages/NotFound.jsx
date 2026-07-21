@@ -87,7 +87,7 @@ export default function NotFound() {
                         <span className="material-symbols-outlined text-xl text-[#35C36B] opacity-0 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300">arrow_forward</span>
                       </div>
                       <p className="text-sm text-[#20352c]/70 leading-relaxed">
-                        Acceda a nuestra página principal para conocer nuestro método de construcción en **Steel Frame de alta gama**, ver obras en ejecución, cotizar proyectos a medida y contactar con ingenieros calculistas.
+                        Volvé a la página principal para recorrer nuestros servicios de Steel Frame, conocer aplicaciones del sistema y encontrar las vías de contacto para tu proyecto.
                       </p>
                       <div className="flex flex-wrap gap-2 mt-4">
                         {['Steel Frame', 'Obras a Medida', 'Ingeniería', 'Contacto'].map(tag => (
@@ -115,10 +115,10 @@ export default function NotFound() {
                         <span className="material-symbols-outlined text-xl text-[#35C36B] opacity-0 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300">arrow_forward</span>
                       </div>
                       <p className="text-sm text-[#20352c]/70 leading-relaxed">
-                        Explore nuestro catálogo interactivo de **módulos habitacionales llave en mano** de rápido montaje y máxima eficiencia térmica. Prototipos personalizables desde 36 m² hasta 120 m² con equipamiento premium.
+                        Explorá los modelos WMU disponibles, consultá su información técnica y conocé las opciones de configuración y contacto de la propuesta modular.
                       </p>
                       <div className="flex flex-wrap gap-2 mt-4">
-                        {['Viviendas Modulares', 'Modelos WMU', 'Llave en Mano', 'Ficha Técnica'].map(tag => (
+                        {['Arquitectura Modular', 'Modelos WMU', 'Configuración', 'Información Técnica'].map(tag => (
                           <span key={tag} className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-[#f3f7f4] text-[#173b2e]/80 border border-[#e6efe9]">{tag}</span>
                         ))}
                       </div>

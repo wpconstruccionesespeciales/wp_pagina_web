@@ -61,6 +61,14 @@ function assertAbsoluteUrl(route, label, value, errors) {
   }
 }
 
+function isCatchAllRewrite(rewrite) {
+  const source = rewrite?.source?.replace(/\s/g, '')
+
+  return source === '/(.*)'
+    || source === '/*'
+    || /^\/:[^/]+(?:\*|\+|\(\.\*\)\*?)$/.test(source || '')
+}
+
 function schemaAssetUrls(schema) {
   const assets = []
 
@@ -242,42 +250,97 @@ async function auditDiscoveryFiles() {
       return null
     }
   }
-  const [sitemap, robots, notFoundPage] = await Promise.all([
+  const [sitemap, robots, notFoundPage, vercelJson] = await Promise.all([
     readAuditFile('public/sitemap.xml'),
     readAuditFile('public/robots.txt'),
     readAuditFile('build/client/404.html'),
+    readAuditFile('vercel.json'),
   ])
-  if (sitemap === null || robots === null || notFoundPage === null) return errors
 
-  const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gi)].map((match) => match[1].trim())
-  const expectedUrls = PUBLIC_ROUTES.map((route) => canonicalUrl(route))
+  if (sitemap !== null) {
+    const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gi)].map((match) => match[1].trim())
+    const expectedUrls = PUBLIC_ROUTES.map((route) => canonicalUrl(route))
 
-  if (sitemapUrls.length !== expectedUrls.length) {
-    errors.push(`sitemap: expected ${expectedUrls.length} URLs, found ${sitemapUrls.length}`)
-  }
-  if (new Set(sitemapUrls).size !== sitemapUrls.length) errors.push('sitemap: URLs must be unique')
+    if (sitemapUrls.length !== expectedUrls.length) {
+      errors.push(`sitemap: expected ${expectedUrls.length} URLs, found ${sitemapUrls.length}`)
+    }
+    if (new Set(sitemapUrls).size !== sitemapUrls.length) errors.push('sitemap: URLs must be unique')
 
-  for (const expectedUrl of expectedUrls) {
-    if (!sitemapUrls.includes(expectedUrl)) errors.push(`sitemap: missing ${expectedUrl}`)
-  }
-  for (const sitemapUrl of sitemapUrls) {
-    if (!expectedUrls.includes(sitemapUrl)) errors.push(`sitemap: unexpected ${sitemapUrl}`)
-    try {
-      const url = new URL(sitemapUrl)
-      if (url.origin !== SITE_URL) errors.push(`sitemap: URL must use ${SITE_URL}, found ${sitemapUrl}`)
-    } catch {
-      errors.push(`sitemap: invalid absolute URL ${sitemapUrl}`)
+    for (const expectedUrl of expectedUrls) {
+      if (!sitemapUrls.includes(expectedUrl)) errors.push(`sitemap: missing ${expectedUrl}`)
+    }
+    for (const sitemapUrl of sitemapUrls) {
+      if (!expectedUrls.includes(sitemapUrl)) errors.push(`sitemap: unexpected ${sitemapUrl}`)
+      try {
+        const url = new URL(sitemapUrl)
+        if (url.origin !== SITE_URL) errors.push(`sitemap: URL must use ${SITE_URL}, found ${sitemapUrl}`)
+      } catch {
+        errors.push(`sitemap: invalid absolute URL ${sitemapUrl}`)
+      }
     }
   }
 
-  const sitemapDirectives = [...robots.matchAll(/^Sitemap:\s*(\S+)\s*$/gim)].map((match) => match[1])
-  const expectedSitemap = `${SITE_URL}/sitemap.xml`
-  if (sitemapDirectives.length !== 1 || sitemapDirectives[0] !== expectedSitemap) {
-    errors.push(`robots: expected exactly one Sitemap directive for ${expectedSitemap}`)
+  if (robots !== null) {
+    const sitemapDirectives = [...robots.matchAll(/^Sitemap:\s*(\S+)\s*$/gim)].map((match) => match[1])
+    const expectedSitemap = `${SITE_URL}/sitemap.xml`
+    if (sitemapDirectives.length !== 1 || sitemapDirectives[0] !== expectedSitemap) {
+      errors.push(`robots: expected exactly one Sitemap directive for ${expectedSitemap}`)
+    }
+    if (!/^User-agent:\s*\*\s*$/im.test(robots)) errors.push('robots: missing User-agent: *')
+    if (!/^Allow:\s*\/\s*$/im.test(robots)) errors.push('robots: missing Allow: /')
   }
-  if (!/^User-agent:\s*\*\s*$/im.test(robots)) errors.push('robots: missing User-agent: *')
-  if (!/^Allow:\s*\/\s*$/im.test(robots)) errors.push('robots: missing Allow: /')
-  if (!notFoundPage.trim()) errors.push('build/client/404.html: file is empty')
+
+  if (notFoundPage !== null) {
+    if (!notFoundPage.trim()) {
+      errors.push('build/client/404.html: file is empty')
+    } else {
+      const notFoundRobots = assertSingle(
+        '/404.html',
+        'meta robots',
+        metaByName(notFoundPage, 'robots'),
+        errors,
+      )
+      const robotsContent = notFoundRobots ? attribute(notFoundRobots, 'content')?.toLowerCase() || '' : ''
+      if (notFoundRobots && !robotsContent.includes('noindex')) {
+        errors.push('/404.html: robots must contain noindex')
+      }
+    }
+  }
+
+  if (vercelJson !== null) {
+    try {
+      const vercel = JSON.parse(vercelJson)
+      if (vercel.outputDirectory !== 'build/client') {
+        errors.push(`vercel.json: outputDirectory must be build/client, found ${vercel.outputDirectory || '(empty)'}`)
+      }
+
+      const expectedRedirects = [
+        { source: '/about', destination: '/nosotros', permanent: true },
+        { source: '/services', destination: '/servicios', permanent: true },
+      ]
+      const redirects = Array.isArray(vercel.redirects) ? vercel.redirects : []
+      if (redirects.length !== expectedRedirects.length) {
+        errors.push(`vercel.json: expected exactly ${expectedRedirects.length} redirects, found ${redirects.length}`)
+      }
+      for (const expected of expectedRedirects) {
+        const matchesExpected = redirects.some((redirect) => (
+          redirect?.source === expected.source
+          && redirect?.destination === expected.destination
+          && redirect?.permanent === expected.permanent
+        ))
+        if (!matchesExpected) {
+          errors.push(`vercel.json: missing permanent redirect ${expected.source} -> ${expected.destination}`)
+        }
+      }
+
+      const rewrites = Array.isArray(vercel.rewrites) ? vercel.rewrites : []
+      for (const rewrite of rewrites.filter(isCatchAllRewrite)) {
+        errors.push(`vercel.json: catch-all rewrite ${rewrite.source} -> ${rewrite.destination || '(empty)'} would create soft-404 responses`)
+      }
+    } catch (error) {
+      errors.push(`vercel.json: invalid JSON (${error.message})`)
+    }
+  }
 
   return errors
 }
