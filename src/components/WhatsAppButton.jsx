@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { whatsappUrl } from '../config/site'
 
 export default function WhatsAppButton() {
   const [visible, setVisible] = useState(false)
@@ -12,7 +13,7 @@ export default function WhatsAppButton() {
 
   return (
     <a
-      href="https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_number&app_absent=0"
+      href={whatsappUrl()}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"

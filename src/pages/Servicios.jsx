@@ -3,6 +3,8 @@ import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
+import { Link } from 'react-router-dom'
+import { BUSINESS, BUSINESS_ID, canonicalUrl } from '../config/site'
 
 /* ─── Data from old services page ─── */
 
@@ -10,22 +12,22 @@ const coreServices = [
   {
     icon: 'architecture',
     title: 'Arquitectura',
-    desc: 'Tu visión personalizada. Creamos espacios únicos e innovadores, profesionales, para el sistema Steel Frame.',
+    desc: 'Traducimos necesidades, usos y contexto en una propuesta de arquitectura compatible con el sistema Steel Frame.',
   },
   {
     icon: 'engineering',
     title: 'Ingeniería',
-    desc: 'Seguridad y eficiencia. Nuestro enfoque innovador garantiza construcciones sólidas, eficientes y perdurables.',
+    desc: 'Desarrollamos el cálculo y los detalles necesarios para definir la estructura de acuerdo con cada proyecto.',
   },
   {
     icon: 'construction',
     title: 'Construcción',
-    desc: 'Ejecución rápida y cuidada. Detalle de nuestro proceso limpio con Steel Frame, enfocado en la eficiencia y la calidad.',
+    desc: 'Coordinamos fabricación y montaje en seco con una secuencia de obra definida para cada alcance.',
   },
   {
     icon: 'assignment_turned_in',
     title: 'Dirección de Obra',
-    desc: 'Calidad garantizada. Control total de la obra. Supervisamos cada etapa para asegurar plazos, presupuesto y máxima calidad.',
+    desc: 'Supervisamos las etapas acordadas y registramos decisiones para dar seguimiento a calidad, plazos y presupuesto.',
   },
 ]
 
@@ -35,7 +37,7 @@ const projectTypes = [
     width: 1600,
     height: 2844,
     title: 'Edificios de mediana altura',
-    desc: 'Implementamos ingeniería de precisión para proyectos de desarrollo vertical. Optimizamos la operación de la estructura y la logística, asegurando un proceso eficiente.',
+    desc: 'Estudiamos la estructura y la logística de montaje de desarrollos verticales según sus cargas, escala y emplazamiento.',
     tag: 'Desarrollo Vertical',
   },
   {
@@ -43,7 +45,7 @@ const projectTypes = [
     width: 800,
     height: 1080,
     title: 'Viviendas unifamiliares',
-    desc: 'Construcción residencial de calidad superior. Ofrecemos hogares de habitabilidad excepcional que articulen confort térmico y acústico, con alta durabilidad garantizada a largo plazo.',
+    desc: 'Proyectamos viviendas integrando estructura, distribución y soluciones de envolvente para el confort térmico y acústico previsto.',
     tag: 'Residencial',
   },
   {
@@ -51,7 +53,7 @@ const projectTypes = [
     width: 1200,
     height: 900,
     title: 'Industriales | Locales comerciales',
-    desc: 'Desarrollamos infraestructura industrial y comercial de alto rendimiento. Aseguramos máxima funcionalidad y adaptabilidad, facilitando la rentabilidad económica de cualquier proyecto privado o público.',
+    desc: 'Desarrollamos espacios industriales y comerciales atendiendo requerimientos de uso, luces estructurales, circulación y futuras adaptaciones.',
     tag: 'Comercial / Industrial',
   },
   {
@@ -59,7 +61,7 @@ const projectTypes = [
     width: 935,
     height: 457,
     title: 'Reformas y Ampliaciones',
-    desc: 'Reconfiguramos y potenciamos tus ambientes existentes. Realizamos intervenciones estructurales con mínima interferencia, potenciando la funcionalidad y el valor patrimonial de tu propiedad.',
+    desc: 'Evaluamos la estructura existente y definimos intervenciones para ampliar o reorganizar ambientes con construcción en seco.',
     tag: 'Renovación',
   },
   {
@@ -67,16 +69,16 @@ const projectTypes = [
     width: 1400,
     height: 1050,
     title: 'Clínicas | Consultorios',
-    desc: 'Desarrollamos espacios de salud con foco en la higiene y la funcionalidad. Proyectamos clínicas bajo estricto cumplimiento normativo, creando ambientes óptimos para la atención médica especializada.',
+    desc: 'Proyectamos espacios de salud con foco en higiene, circulación y funcionalidad, sujetos a la normativa aplicable y al programa profesional.',
     tag: 'Salud',
   },
 ]
 
 const differentiators = [
-  { icon: 'speed', value: '60%', label: 'Más rápido', desc: 'que la construcción tradicional en húmedo' },
-  { icon: 'recycling', value: '100%', label: 'Reciclable', desc: 'acero galvanizado de alta calidad' },
-  { icon: 'verified', value: '10+', label: 'Años', desc: 'de garantía estructural documentada' },
-  { icon: 'shield_with_heart', value: '100%', label: 'Antisísmico', desc: 'diseño resistente certificado' },
+  { icon: 'speed', value: 'EN SECO', label: 'Montaje', desc: 'sin tiempos de fraguado propios de sistemas húmedos' },
+  { icon: 'recycling', value: 'ACERO', label: 'Material', desc: 'perfiles dimensionados para cada estructura' },
+  { icon: 'verified', value: 'CNC', label: 'Fabricación', desc: 'corte y perforado coordinados con el modelo' },
+  { icon: 'shield_with_heart', value: 'CÁLCULO', label: 'Resistencia', desc: 'definida según cargas, normativa y emplazamiento' },
 ]
 
 export default function Servicios() {
@@ -96,13 +98,13 @@ export default function Servicios() {
     "serviceType": "Construcción en Steel Frame y Arquitectura Modular",
     "provider": {
       "@type": "HomeAndConstructionBusiness",
-      "name": "WP Construcciones Especiales",
-      "url": "https://wpconstrucciones.com/"
+      "@id": BUSINESS_ID,
+      "name": BUSINESS.name,
+      "url": canonicalUrl('/')
     },
     "areaServed": [
       { "@type": "State", "name": "Entre Ríos" },
-      { "@type": "State", "name": "Santa Fe" },
-      { "@type": "Country", "name": "Argentina" }
+      { "@type": "State", "name": "Santa Fe" }
     ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
@@ -121,7 +123,7 @@ export default function Servicios() {
           "itemOffered": {
             "@type": "Service",
             "name": "Ingeniería Estructural y Cálculo",
-            "description": "Cálculo estructural de ingeniería de detalle para garantizar la máxima seguridad y eficiencia."
+            "description": "Cálculo estructural e ingeniería de detalle definidos según cargas, normativa y condiciones del proyecto."
           }
         },
         {
@@ -140,7 +142,7 @@ export default function Servicios() {
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
       <SEO 
         title="Servicios de Steel Frame y Construcción en Seco | WP"
-        description="Ofrecemos servicios de cálculo de ingeniería estructural de detalle, montaje de estructuras steel frame, aberturas de aluminio a medida y dirección de obra llave en mano."
+        description="Servicios de arquitectura, cálculo estructural, montaje en Steel Frame y dirección de obra con alcance definido para cada proyecto."
         keywords="servicios steel frame, calculo estructural, aberturas de aluminio, reformas en seco, ampliaciones planta alta, construccion steel frame argentina"
         breadcrumbs={[
           { name: 'Inicio', url: '/' },
@@ -190,9 +192,8 @@ export default function Servicios() {
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-fixed-dim via-[#a4c7aa] to-primary-fixed-dim">Servicios</span>
                   </h1>
                   <p className="text-white/55 text-base md:text-lg leading-relaxed max-w-2xl font-medium mb-8">
-                    Transformá tus ideas en realidad. Agendá una cita sin compromiso con nuestros
-                    expertos en construcción. Descubrí cómo revolucionamos tus espacios con
-                    soluciones innovadoras y sustentables.
+                    Conocé qué podemos aportar en arquitectura, ingeniería, construcción y dirección de obra.
+                    El alcance se define a partir del uso, el terreno, la ubicación y la documentación disponible.
                   </p>
                   <a
                     href="/#contact"
@@ -263,9 +264,9 @@ export default function Servicios() {
 
                       <div className="grid grid-cols-3 gap-3">
                         {[
-                          { value: '200+', label: 'Proyectos' },
-                          { value: '15+', label: 'Años' },
-                          { value: '100%', label: 'Garantía' },
+                          { value: '4', label: 'Áreas' },
+                          { value: '2005', label: 'Inicio' },
+                          { value: 'A medida', label: 'Alcance' },
                         ].map(({ value, label }, i) => (
                           <div
                             key={label}
@@ -303,7 +304,7 @@ export default function Servicios() {
                 Cuatro pilares,<br /><span className="text-[#3a7a4a]">un equipo integral</span>
               </h2>
               <p className="text-on-surface-variant text-lg max-w-xl font-medium leading-relaxed">
-                Cada proyecto pasa por nuestras cuatro áreas especializadas, garantizando un proceso fluido desde la idea hasta la entrega.
+                Las cuatro áreas se coordinan según el alcance contratado, desde la idea inicial hasta la documentación y la ejecución.
               </p>
             </div>
 
@@ -462,7 +463,7 @@ export default function Servicios() {
               {differentiators.map(({ icon, value, label, desc }, i) => (
                 <div
                   key={label}
-                  className="page-card group relative p-8 rounded-3xl bg-white/70 backdrop-blur-md border border-white/90 hover:border-primary-fixed-dim overflow-hidden text-center"
+                  className="page-card group relative p-5 sm:p-8 rounded-3xl bg-white/70 backdrop-blur-md border border-white/90 hover:border-primary-fixed-dim overflow-hidden text-center"
                   style={{ transitionDelay: `${i * 80}ms` }}
                 >
                   <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
@@ -471,7 +472,7 @@ export default function Servicios() {
                     <span className="material-symbols-outlined text-primary text-xl">{icon}</span>
                   </div>
 
-                  <p className="font-headline text-4xl lg:text-5xl font-black bg-gradient-to-br from-primary to-[#2a5a3a] bg-clip-text text-transparent mb-1">{value}</p>
+                  <p className="font-headline text-lg sm:text-3xl lg:text-5xl font-black leading-none break-words [overflow-wrap:anywhere] bg-gradient-to-br from-primary to-[#2a5a3a] bg-clip-text text-transparent mb-2">{value}</p>
                   <p className="font-headline text-sm font-extrabold text-primary uppercase tracking-wider mb-2">{label}</p>
                   <p className="text-on-surface-variant text-xs font-semibold leading-relaxed">{desc}</p>
                 </div>
@@ -509,13 +510,13 @@ export default function Servicios() {
                 <span>Hablemos</span>
                 <span className="material-symbols-outlined text-xl group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
               </a>
-              <a
-                href="/"
+              <Link
+                to="/steel-frame-parana"
                 className="group flex items-center gap-2 text-primary/70 hover:text-primary text-sm font-bold transition-colors py-5 px-4"
               >
-                <span>Volver al Inicio</span>
+                <span>Ver Steel Frame en Paraná</span>
                 <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
-              </a>
+              </Link>
             </div>
           </div>
         </section>

@@ -5,19 +5,19 @@ const cards = [
   {
     img: '/wp/project-vivienda.webp',
     title: 'Viviendas Unifamiliares',
-    desc: 'Hogares diseñados para la vida moderna con eficiencia energética superior.',
+    desc: 'Viviendas cuya estructura y envolvente se definen según el uso, el clima y las necesidades del proyecto.',
     tag: 'Residencial',
   },
   {
     img: '/wp/project-comercial.webp',
     title: 'Oficinas y Comercial',
-    desc: 'Espacios de trabajo dinámicos con grandes luces y plantas libres.',
+    desc: 'Espacios de trabajo que pueden resolver grandes luces y plantas flexibles mediante cálculo específico.',
     tag: 'Comercial',
   },
   {
     img: '/wp/project-ampliacion.webp',
     title: 'Ampliaciones',
-    desc: 'Crecimiento vertical u horizontal sin peso excesivo para estructuras existentes.',
+    desc: 'Alternativas de crecimiento vertical u horizontal sujetas a la evaluación de la estructura existente.',
     tag: 'Expansión',
   },
 ]
@@ -33,12 +33,12 @@ export default function Projects() {
             <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Trabajos</p>
             <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tight">
               <span className="text-mask-reveal-wrapper">
-                <span className="text-mask-reveal-line">Lo que hacemos</span>
+                <span className="text-mask-reveal-line">Ideas para cada tipo de proyecto</span>
               </span>
             </h2>
           </div>
           <p className="text-on-surface-variant max-w-sm">
-            Soluciones versátiles para cada necesidad de espacio y funcionalidad.
+            Explorá aplicaciones residenciales, comerciales y de ampliación; en Servicios explicamos cómo las abordamos.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-children">

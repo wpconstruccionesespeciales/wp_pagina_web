@@ -1,104 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Home / Principal -->
-  <url>
-    <loc>https://wpconstrucciones.com/</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.00</priority>
-  </url>
-
-  <!-- Nosotros -->
-  <url>
-    <loc>https://wpconstrucciones.com/nosotros</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- Servicios -->
-  <url>
-    <loc>https://wpconstrucciones.com/servicios</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- Steel Frame Paraná (SEO Local) -->
-  <url>
-    <loc>https://wpconstrucciones.com/steel-frame-parana</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-
-  <!-- Sostenibilidad -->
-  <url>
-    <loc>https://wpconstrucciones.com/sostenibilidad</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- WMU Principal -->
-  <url>
-    <loc>https://wpconstrucciones.com/wmu</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-
-  <!-- WMU Especificaciones -->
-  <url>
-    <loc>https://wpconstrucciones.com/wmu-especificaciones</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Modelos WMU -->
-  <url>
-    <loc>https://wpconstrucciones.com/wmu-cero</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://wpconstrucciones.com/wmu-cero-2</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://wpconstrucciones.com/wmu-campo</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://wpconstrucciones.com/wmu-aldea</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://wpconstrucciones.com/wmu-sauce</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <!-- Legal -->
-  <url>
-    <loc>https://wpconstrucciones.com/privacidad</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.30</priority>
-  </url>
-  <url>
-    <loc>https://wpconstrucciones.com/terminos</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.30</priority>
-  </url>
+  <url><loc>https://www.wpconstrucciones.com/</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/nosotros</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/wmu</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/wmu-especificaciones</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/wmu-cero</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/wmu-cero-2</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/wmu-campo</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/wmu-aldea</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/wmu-sauce</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/privacidad</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/terminos</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/sostenibilidad</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/servicios</loc></url>
+  <url><loc>https://www.wpconstrucciones.com/steel-frame-parana</loc></url>
 </urlset>

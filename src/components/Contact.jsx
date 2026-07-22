@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useInView from '../hooks/useInView'
+import { BUSINESS } from '../config/site'
 
 function FloatingInput({ label, type = 'text', name }) {
   const [focused, setFocused] = useState(false)
@@ -78,27 +79,31 @@ export default function Contact() {
           <p className="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Contacto</p>
           <h2 className="font-headline text-4xl lg:text-5xl font-bold text-primary tracking-tight mb-6">
             <span className="text-mask-reveal-wrapper">
-              <span className="text-mask-reveal-line">Inicie su construcción</span>
+              <span className="text-mask-reveal-line">Iniciá tu proyecto</span>
             </span>
           </h2>
           <p className="text-on-surface-variant text-lg mb-12 leading-relaxed">
-            Estamos listos para materializar su visión. Complete el formulario y un asesor técnico se contactará en menos de 24 horas.
+            Contanos las características de tu proyecto. El equipo revisará la información para coordinar el seguimiento de la consulta.
           </p>
 
           <div className="space-y-6">
             {[
-              { icon: 'location_on', text: 'Entre Ríos, Paraná, Argentina', label: 'Ubicación' },
-              { icon: 'phone_in_talk', text: '+54 9 3435 05-6918', label: 'Teléfono' },
-              { icon: 'mail', text: 'wpsascentral@gmail.com', label: 'Email' },
+              { icon: 'location_on', text: `${BUSINESS.region}, ${BUSINESS.locality}, Argentina`, label: 'Ubicación' },
+              { icon: 'phone_in_talk', text: BUSINESS.phoneDisplay, label: 'Teléfono', href: BUSINESS.telHref },
+              { icon: 'mail', text: BUSINESS.email, label: 'Email', href: BUSINESS.mailtoHref },
               { icon: 'schedule', text: 'Lunes a Viernes 8:00 - 16:00', label: 'Horario' },
-            ].map(({ icon, text, label }) => (
+            ].map(({ icon, text, label, href }) => (
               <div key={icon} className="flex items-center gap-4 group">
                 <div className="w-12 h-12 bg-primary/8 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors duration-300">
                   <span className="material-symbols-outlined text-primary text-xl group-hover:text-white transition-colors duration-300">{icon}</span>
                 </div>
                 <div>
                   <p className="text-xs text-on-surface-variant uppercase font-bold tracking-widest">{label}</p>
-                  <p className="text-on-surface font-medium">{text}</p>
+                  {href ? (
+                    <a href={href} className="text-on-surface font-medium hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded-sm transition-colors">{text}</a>
+                  ) : (
+                    <p className="text-on-surface font-medium">{text}</p>
+                  )}
                 </div>
               </div>
             ))}
@@ -116,11 +121,11 @@ export default function Contact() {
               type="submit"
               className="group w-full bg-primary text-white py-4 font-bold rounded-xl hover:bg-primary-container hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2"
             >
-              Enviar Solicitud
+              Enviá tu solicitud
               <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </button>
             <p className="text-xs text-on-surface-variant text-center">
-              Al enviar, aceptás nuestra política de privacidad. Respuesta garantizada en 24hs.
+              Al enviar, aceptás nuestra política de privacidad. La consulta será revisada por el equipo de WP.
             </p>
           </form>
         </div>

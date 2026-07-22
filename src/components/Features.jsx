@@ -3,24 +3,24 @@ import useInView from '../hooks/useInView'
 const features = [
   {
     icon: 'speed',
-    title: 'Obra Rápida',
-    desc: 'Reducción del 60% en los tiempos de ejecución comparado con la obra húmeda.',
-    stat: '60%',
-    statLabel: 'más rápido',
+    title: 'Montaje en Seco',
+    desc: 'La secuencia evita tiempos de fraguado propios de la obra húmeda y se planifica según el alcance.',
+    stat: 'SECO',
+    statLabel: 'secuencia coordinada',
   },
   {
     icon: 'weight',
     title: 'Estructura Ligera',
-    desc: 'Menor carga sobre los cimientos, ideal para ampliaciones y terrenos complejos.',
-    stat: '40%',
-    statLabel: 'menos peso',
+    desc: 'Su menor carga propia puede ser útil en ampliaciones, después de evaluar estructura, suelo y fundaciones.',
+    stat: 'ACERO',
+    statLabel: 'menor carga propia',
   },
   {
     icon: 'shield_with_heart',
-    title: 'Alta Resistencia',
-    desc: 'Durabilidad superior ante sismos y condiciones climáticas extremas.',
-    stat: '100%',
-    statLabel: 'antisísmico',
+    title: 'Resistencia Calculada',
+    desc: 'La respuesta estructural se define mediante cálculo según cargas, normativa y emplazamiento.',
+    stat: 'CÁLCULO',
+    statLabel: 'según proyecto',
   },
 ]
 

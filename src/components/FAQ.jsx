@@ -4,12 +4,12 @@ import useInView from '../hooks/useInView'
 const items = [
   {
     q: '¿Cuál es el tiempo de obra promedio?',
-    a: 'Una vivienda tipo de 100m² puede estar terminada en aproximadamente 4 a 6 meses, dependiendo de la complejidad del diseño y las terminaciones elegidas.',
+    a: 'El plazo se estima para cada proyecto según superficie, complejidad, permisos, provisión de materiales, logística y terminaciones.',
     icon: 'schedule',
   },
   {
     q: '¿Ofrecen llave en mano?',
-    a: 'Sí, nos encargamos de todo el proceso: desde el diseño arquitectónico inicial, cálculo estructural, hasta la ejecución final y entrega de llaves.',
+    a: 'El alcance puede integrar diseño, cálculo estructural, dirección y ejecución. Las etapas incluidas se detallan en cada propuesta y contrato.',
     icon: 'key',
   },
   {
@@ -19,12 +19,12 @@ const items = [
   },
   {
     q: '¿El Steel Frame es resistente al fuego?',
-    a: 'Sí. Utilizamos placas ignífugas y materiales con clasificación REI que cumplen con todas las normativas de seguridad contra incendios vigentes.',
+    a: 'La resistencia al fuego depende de la composición completa del muro o entrepiso. Se especifican placas, aislaciones y encuentros según el proyecto y la normativa aplicable.',
     icon: 'local_fire_department',
   },
   {
-    q: '¿Qué garantía ofrecen sobre la estructura?',
-    a: 'Ofrecemos una garantía estructural de 10 años, respaldada por certificaciones internacionales y controles de calidad en cada etapa del proyecto.',
+    q: '¿Cómo se define la garantía del proyecto?',
+    a: 'El alcance, las condiciones y el plazo de garantía se informan en la propuesta y la documentación contractual de cada obra.',
     icon: 'verified_user',
   },
 ]

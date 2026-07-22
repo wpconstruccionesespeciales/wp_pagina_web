@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wpconstrucciones.com/sitemap.xml
+Sitemap: https://www.wpconstrucciones.com/sitemap.xml

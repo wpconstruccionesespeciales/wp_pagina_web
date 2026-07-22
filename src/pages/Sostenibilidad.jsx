@@ -3,38 +3,39 @@ import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
+import { Link } from 'react-router-dom'
 
 const environmentalStats = [
-  { value: '100%', label: 'Acero reciclable', icon: 'recycling' },
-  { value: '80%', label: 'Menos residuos', icon: 'delete' },
-  { value: '60%', label: 'Menos CO₂', icon: 'cloud' },
-  { value: '0L', label: 'Agua en obra', icon: 'water_drop' },
+  { value: 'ACERO', label: 'Material recuperable', icon: 'recycling' },
+  { value: 'CNC', label: 'Corte planificado', icon: 'delete' },
+  { value: 'SECO', label: 'Montaje sin mezclas', icon: 'cloud' },
+  { value: 'CAPAS', label: 'Envolvente adaptable', icon: 'water_drop' },
 ]
 
 const impactCards = [
   {
     icon: 'recycling',
-    title: 'Acero 100% Reciclable',
-    desc: 'El acero es el material más reciclado del mundo. Los perfiles Steel Frame pueden ser reutilizados infinitamente sin perder sus propiedades mecánicas.',
-    highlight: '∞',
+    title: 'Acero con potencial de recuperación',
+    desc: 'Los componentes de acero pueden incorporarse a circuitos de recuperación y reciclaje cuando la separación y la gestión al final de su uso lo permiten.',
+    highlight: 'ACERO',
   },
   {
     icon: 'water_drop',
-    title: 'Mínimo Consumo de Agua',
-    desc: 'Al ser un sistema en seco, no requiere agua para la mezcla de materiales. Solo se usa agua para galvanizado, un proceso altamente controlado.',
-    highlight: '0L',
+    title: 'Montaje sin mezclas húmedas',
+    desc: 'El montaje principal evita las mezclas propias de la mampostería; otros trabajos y terminaciones pueden requerir agua según el proyecto.',
+    highlight: 'SECO',
   },
   {
     icon: 'construction',
     title: 'Residuos Reducidos en Obra',
-    desc: 'Los perfiles se cortan a medida en planta con maquinaria CNC. Esto elimina los excedentes de material que genera la construcción tradicional.',
-    highlight: '-80%',
+    desc: 'El corte a medida con maquinaria CNC permite planificar piezas y orientar el proceso a reducir recortes y sobrantes.',
+    highlight: 'CNC',
   },
   {
     icon: 'bolt',
     title: 'Eficiencia Energética',
-    desc: 'El Steel Frame permite incorporar aislamientos de alto rendimiento, reduciendo el consumo energético de las viviendas durante toda su vida útil.',
-    highlight: 'A++',
+    desc: 'El Steel Frame permite combinar capas de aislamiento; el desempeño final depende del diseño, los materiales, la ejecución y el uso del edificio.',
+    highlight: 'CAPAS',
   },
 ]
 
@@ -42,22 +43,22 @@ const greenCards = [
   {
     icon: 'science',
     title: 'Proceso Limpio',
-    desc: 'Sin cementos, cales ni morteros húmedos. La construcción en seco genera mínima contaminación en el terreno y permite trabajar en cualquier época del año.',
+    desc: 'El montaje principal prescinde de cementos, cales y morteros; el impacto total depende del alcance, las terminaciones y la gestión de obra.',
   },
   {
     icon: 'straighten',
-    title: 'Precisión Milimétrica',
-    desc: 'El perfilado CNC de última generación garantiza que cada pieza se fabriqué exactamente según especificaciones, eliminando desperdicios.',
+    title: 'Perfilado Controlado',
+    desc: 'El perfilado CNC produce piezas coordinadas con el modelo y ayuda a reducir ajustes y recortes durante el montaje.',
   },
   {
     icon: 'air',
-    title: 'Mejor Calidad del Aire',
-    desc: 'Al no usar materiales húmedos, se reduce la proliferación de moho y hongos durante la construcción, garantizando un ambiente interior más saludable.',
+    title: 'Control de Humedad Interior',
+    desc: 'Una envolvente correctamente diseñada y ejecutada puede contribuir al control de humedad; la ventilación y el uso también inciden en el ambiente interior.',
   },
   {
     icon: 'home',
-    title: 'Durabilidad Garantizada',
-    desc: 'El acero galvanizado resiste la corrosión, las termitas y el paso del tiempo, manteniendo sus propiedades estructurales durante décadas.',
+    title: 'Protección y mantenimiento',
+    desc: 'El galvanizado protege los perfiles; la durabilidad depende además del diseño de la envolvente, la ejecución, la exposición y el mantenimiento.',
   },
 ]
 
@@ -65,19 +66,19 @@ const methodSteps = [
   {
     icon: 'factory',
     title: 'Fabricación Controlada',
-    desc: 'Toda la producción se realiza bajo rigurosos controles de calidad, minimizando residuos y optimizando el uso de cada perfil.',
+    desc: 'La fabricación coordinada permite verificar medidas y organizar el aprovechamiento de cada perfil antes del montaje.',
     number: '01',
   },
   {
     icon: 'local_shipping',
     title: 'Logística Eficiente',
-    desc: 'Al fabricar componentes modulares en planta, reducimos significativamente los viajes a obra y el impacto asociado con el transporte.',
+    desc: 'La planificación de componentes y cargas permite ordenar los viajes a obra según la escala y la distancia de cada proyecto.',
     number: '02',
   },
   {
     icon: 'engineering',
     title: 'Diseño Optimizado',
-    desc: 'Utilizamos software de modelado paramétrico para maximizar la eficiencia de cada perfil, eliminando material innecesario desde el diseño.',
+    desc: 'Utilizamos modelado para dimensionar y coordinar perfiles de acuerdo con los requerimientos estructurales del proyecto.',
     number: '03',
   },
 ]
@@ -85,18 +86,18 @@ const methodSteps = [
 const futureCards = [
   {
     icon: 'verified',
-    title: 'Materiales Certificados',
-    desc: 'Trabajamos con aceros de grado estructural, asegurando trazabilidad completa desde el origen del material hasta la instalación.',
+    title: 'Materiales Estructurales',
+    desc: 'Trabajamos con aceros de grado estructural y revisamos la documentación disponible para cada suministro.',
   },
   {
     icon: 'thermostat',
     title: 'Eficiencia Térmica',
-    desc: 'Incorporamos capas de aislamiento de alta densidad que maximizan la eficiencia energética y reducen el consumo en climatización.',
+    desc: 'Definimos capas de aislamiento según clima, uso y objetivos de desempeño del proyecto.',
   },
   {
     icon: 'handshake',
     title: 'Economía Regional',
-    desc: 'Fomentamos el desarrollo local priorizando proveedores de cercanía, reduciendo la huella de carbono y fortaleciendo el ecosistema productivo.',
+    desc: 'Consideramos proveedores de cercanía cuando el alcance, la disponibilidad y las especificaciones del proyecto lo permiten.',
   },
 ]
 
@@ -116,9 +117,9 @@ export default function Sostenibilidad() {
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
       <SEO 
-        title="Construcción Sostenible y Eficiencia Energética | WP"
-        description="Edificaciones de steel frame sustentables con alma de acero y máxima aislación térmica (celulosa y poliuretano). Ahorro energético y respeto ambiental en Argentina."
-        keywords="construccion sostenible, eficiencia energetica, steel frame ecologico, aislacion termica, poliuretano proyectado, celulosa insuflada, huella de carbono argentina"
+        title="Criterios Ambientales en Steel Frame | WP"
+        description="Materiales, fabricación, logística, envolvente y fin de vida: criterios para evaluar el desempeño ambiental de cada proyecto en Steel Frame."
+        keywords="criterios ambientales steel frame, eficiencia energetica, construccion en seco, aislacion termica, materiales, gestion de residuos argentina"
         breadcrumbs={[
           { name: 'Inicio', url: '/' },
           { name: 'Sostenibilidad', url: '/sostenibilidad' },
@@ -150,9 +151,9 @@ export default function Sostenibilidad() {
                 </h1>
 
                 <p className="text-on-surface-variant text-lg md:text-xl leading-relaxed mb-8 max-w-lg">
-                  En WP Construcciones Especiales creemos que construir en Steel Frame es construir
-                  para el futuro. Nuestro proceso reduce significativamente el impacto ambiental
-                  de la construcción, sin comprometer la calidad ni la durabilidad.
+                  Esta página explica los criterios que consideramos al proyectar en Steel Frame:
+                  uso de materiales, fabricación, logística, envolvente y posibilidades de recuperación.
+                  El impacto final debe evaluarse para cada obra.
                 </p>
 
                 <div className="flex items-center gap-4 mb-8">
@@ -167,10 +168,10 @@ export default function Sostenibilidad() {
                     <span className="font-bold text-sm tracking-wide">Ver impacto ambiental</span>
                     <span className="material-symbols-outlined text-lg group-hover:translate-y-0.5 transition-transform duration-300">expand_more</span>
                   </a>
-                  <a href="/#services" className="group flex items-center gap-2 text-primary font-bold text-sm hover:gap-3 transition-all py-3 px-2">
+                  <Link to="/servicios" className="group flex items-center gap-2 text-primary font-bold text-sm hover:gap-3 transition-all py-3 px-2">
                     Ver servicios
                     <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -181,7 +182,7 @@ export default function Sostenibilidad() {
                 
                 <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl shadow-primary/5 border border-primary/5">
                   <img
-                    alt="Construcción sostenible Steel Frame"
+                    alt="Vista de referencia de una construcción en Steel Frame"
                     width="1200"
                     height="900"
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
@@ -195,7 +196,7 @@ export default function Sostenibilidad() {
                       </div>
                       <div>
                         <p className="text-white font-black text-sm tracking-wide">Steel Frame</p>
-                        <p className="text-white/80 text-xs font-semibold">Construcción Limpia</p>
+                        <p className="text-white/80 text-xs font-semibold">Aplicación de referencia</p>
                       </div>
                     </div>
                   </div>
@@ -205,10 +206,10 @@ export default function Sostenibilidad() {
                 <div className="absolute -bottom-6 -left-6 bg-white/85 backdrop-blur-md border border-white/70 shadow-xl shadow-primary/5 rounded-2xl p-4 max-w-[200px] z-20 hover:scale-105 transition-transform duration-500 hidden sm:block">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="material-symbols-outlined text-[#5cb876] text-lg font-bold" style={{ fontVariationSettings: "'FILL' 1" }}>recycling</span>
-                    <span className="text-[#5cb876] text-[10px] font-extrabold tracking-widest uppercase">Ecológico</span>
+                    <span className="text-[#5cb876] text-[10px] font-extrabold tracking-widest uppercase">Fin de vida</span>
                   </div>
-                  <p className="text-primary font-headline text-lg font-black leading-tight">100% Reciclable</p>
-                  <p className="text-on-surface-variant text-[11px] font-semibold mt-1">El acero se reutiliza infinitamente sin perder propiedades.</p>
+                  <p className="text-primary font-headline text-lg font-black leading-tight">Acero recuperable</p>
+                  <p className="text-on-surface-variant text-[11px] font-semibold mt-1">Sujeto a separación y circuitos de gestión disponibles.</p>
                 </div>
               </div>
             </div>
@@ -227,7 +228,7 @@ export default function Sostenibilidad() {
           <div className="relative max-w-7xl mx-auto">
             <div className={`grid grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll ${statsVisible ? 'visible' : ''}`}>
               {environmentalStats.map(({ value, label, icon }, i) => (
-                <div key={label} className="page-card group relative p-6 lg:p-8 rounded-3xl bg-white/70 backdrop-blur-md border border-white/90 hover:border-primary-fixed-dim overflow-hidden">
+                <div key={label} className="page-card group relative p-5 sm:p-6 lg:p-8 rounded-3xl bg-white/70 backdrop-blur-md border border-white/90 hover:border-primary-fixed-dim overflow-hidden">
                   {/* Hover green glow background inside the card */}
                   <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
                   
@@ -238,7 +239,7 @@ export default function Sostenibilidad() {
                     <span className="text-primary/30 text-xs font-bold tracking-widest">{String(i + 1).padStart(2, '0')}</span>
                   </div>
                   
-                  <p className="font-headline text-4xl lg:text-5xl font-black bg-gradient-to-br from-primary to-[#2a5a3a] bg-clip-text text-transparent mb-2 relative z-10">{value}</p>
+                  <p className="font-headline text-lg sm:text-3xl lg:text-5xl font-black leading-none break-words [overflow-wrap:anywhere] bg-gradient-to-br from-primary to-[#2a5a3a] bg-clip-text text-transparent mb-2 relative z-10">{value}</p>
                   <p className="text-on-surface-variant text-xs lg:text-sm font-bold tracking-tight relative z-10">{label}</p>
                 </div>
               ))}
@@ -260,11 +261,11 @@ export default function Sostenibilidad() {
                 <span className="text-primary text-xs font-extrabold tracking-[0.25em] uppercase">Impacto Ambiental</span>
               </div>
               <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tighter text-primary mb-4 leading-tight">
-                Por qué el Steel Frame<br />es mejor para el planeta
+                Criterios para evaluar<br />el impacto del Steel Frame
               </h2>
               <p className="text-on-surface-variant text-lg max-w-xl font-medium">
-                El sistema constructivo en acero galvanizado ofrece ventajas ambientales
-                significativas frente a los métodos tradicionales en húmedo.
+                Materiales, fabricación, logística, envolvente y fin de vida deben analizarse
+                en conjunto para entender el desempeño ambiental de cada obra.
               </p>
             </div>
  
@@ -313,8 +314,8 @@ export default function Sostenibilidad() {
                 Construir en seco,<br /><span className="text-[#5cb876]">pensar en verde</span>
               </h2>
               <p className="text-on-surface-variant text-lg max-w-xl font-medium">
-                La construcción en seco minimiza la perturbación del terreno y reduce
-                significativamente los tiempos de obra, generando menos impacto en el entorno.
+                La construcción en seco puede reducir tareas húmedas y ordenar la intervención;
+                el resultado depende del proyecto, la logística y la gestión de residuos.
               </p>
             </div>
 
@@ -327,18 +328,18 @@ export default function Sostenibilidad() {
                   <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>forest</span>
                 </div>
                 
-                <h3 className="font-headline text-2xl lg:text-3xl font-black text-primary mb-4">Sin Tala de Árboles</h3>
+                <h3 className="font-headline text-2xl lg:text-3xl font-black text-primary mb-4">Elección de materiales</h3>
                 <p className="text-on-surface-variant text-sm font-semibold leading-relaxed mb-6">
-                  A diferencia de los sistemas constructivos tradicionales en madera, el Steel Frame
-                  no requiere tala de árboles. El acero galvanizado proviene de fuentes
-                  responsables y puede reciclarse completamente al final de la vida útil del edificio.
+                  La estructura principal utiliza perfiles de acero. Su impacto debe evaluarse junto
+                  con el origen de los materiales, la cantidad empleada, el transporte y las opciones
+                  reales de recuperación disponibles al final de la vida útil.
                 </p>
                 
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center">
                     <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
                   </div>
-                  <span className="text-primary font-bold text-sm">Estructura 100% ecológica y sustentable</span>
+                  <span className="text-primary font-bold text-sm">Decisiones documentadas para cada proyecto</span>
                 </div>
               </div>
 
@@ -375,11 +376,11 @@ export default function Sostenibilidad() {
                 <span className="text-primary text-xs font-extrabold tracking-[0.25em] uppercase">Nuestro Método</span>
               </div>
               <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tighter text-primary mb-4 leading-tight">
-                Proceso de Construcción<br />Sostenible
+                Proceso y Criterios<br />Ambientales
               </h2>
               <p className="text-on-surface-variant text-lg max-w-xl font-medium">
-                Cada decisión que tomamos está orientada a minimizar el impacto ambiental
-                sin sacrificar la calidad constructiva que nos distingue.
+                Nuestro enfoque busca usar la información del proyecto para optimizar materiales,
+                fabricación y logística sin presentar un resultado ambiental único para todas las obras.
               </p>
             </div>
 
@@ -468,8 +469,8 @@ export default function Sostenibilidad() {
             </h2>
 
             <p className="text-on-surface-variant text-lg md:text-xl leading-relaxed mb-12 max-w-2xl mx-auto font-semibold">
-              Elija Steel Frame para su próximo proyecto y sea parte de la revolución
-              hacia una construcción más sostenible y eficiente.
+              Si querés incorporar criterios ambientales, podemos revisar materiales, envolvente,
+              logística y alcance junto con las necesidades concretas de tu proyecto.
             </p>
 
             <div className="flex flex-col md:flex-row justify-center items-center gap-6">
@@ -480,13 +481,13 @@ export default function Sostenibilidad() {
                 <span>Solicitar Presupuesto</span>
                 <span className="material-symbols-outlined text-xl group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
               </a>
-              <a
-                href="/#services"
+              <Link
+                to="/servicios"
                 className="group flex items-center gap-2 text-primary/70 hover:text-primary text-sm font-bold transition-colors py-5 px-4"
               >
                 <span>Ver Servicios Steel Frame</span>
                 <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
-              </a>
+              </Link>
             </div>
           </div>
         </section>

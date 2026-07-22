@@ -90,6 +90,12 @@ export const WMU_CERO = {
     { k: 'Estructura',   v: 'Steel Frame' },
     { k: 'Aislación',    v: 'Poliuretano + Celulosa' },
   ],
+  faq: [
+    { question: '¿Qué superficie y ambientes tiene WMU CERO?', answer: 'WMU CERO tiene 36 m² cubiertos, 1 habitación, 1 baño y un estar-cocina integrado.' },
+    { question: '¿WMU CERO puede incorporar una galería?', answer: 'Sí. El modelo contempla una galería opcional de 22,80 m².' },
+    { question: '¿Qué estructura y aislación utiliza WMU CERO?', answer: 'Utiliza estructura Steel Frame, aislación de poliuretano en cubierta y celulosa en muros.' },
+    { question: '¿Qué alcance de terminaciones e instalaciones tiene WMU CERO?', answer: 'El alcance común incluye estructura y cerramientos, terminaciones interiores, equipamiento, instalaciones sanitarias y eléctricas, y documentación técnica.' },
+  ],
   ctaBgIndex: 3,
 }
 
@@ -134,6 +140,12 @@ export const WMU_CERO_2 = {
     { k: 'Estructura',   v: 'Steel Frame' },
     { k: 'Aislación',    v: 'Poliuretano + Celulosa' },
   ],
+  faq: [
+    { question: '¿Qué superficie y ambientes tiene WMU CERO 2?', answer: 'WMU CERO 2 tiene 55 m² cubiertos, 2 habitaciones, 1 baño y estar-cocina-comedor integrados.' },
+    { question: '¿Qué opciones de ampliación tiene WMU CERO 2?', answer: 'El modelo contempla una galería exterior opcional de 18 m² y la posibilidad de ampliación con baño y lavadero.' },
+    { question: '¿Qué estructura y aislación utiliza WMU CERO 2?', answer: 'Utiliza estructura Steel Frame, aislación de poliuretano en cubierta y celulosa en muros.' },
+    { question: '¿Qué alcance de terminaciones e instalaciones tiene WMU CERO 2?', answer: 'El alcance común incluye estructura y cerramientos, terminaciones interiores, equipamiento, instalaciones sanitarias y eléctricas, y documentación técnica.' },
+  ],
   ctaBgIndex: 3,
 }
 
@@ -172,6 +184,12 @@ export const WMU_CAMPO = {
     { k: 'Estructura', v: 'Steel Frame' },
     { k: 'Aislación',  v: 'Poliuretano + Celulosa' },
   ],
+  faq: [
+    { question: '¿Qué superficie y ambientes tiene WMU CAMPO?', answer: 'WMU CAMPO tiene 94 m² cubiertos, 2 habitaciones, 1 baño y un estar-cocina-comedor integrado.' },
+    { question: '¿Cómo se integra la galería en WMU CAMPO?', answer: 'El espacio interior se conecta con una galería exterior de 80 m².' },
+    { question: '¿Qué estructura y aislación utiliza WMU CAMPO?', answer: 'Utiliza estructura Steel Frame, aislación de poliuretano en cubierta y celulosa en muros.' },
+    { question: '¿Qué alcance de terminaciones e instalaciones tiene WMU CAMPO?', answer: 'El alcance común incluye estructura y cerramientos, terminaciones interiores, equipamiento, instalaciones sanitarias y eléctricas, y documentación técnica.' },
+  ],
   ctaBgIndex: 3,
 }
 
@@ -206,6 +224,12 @@ export const WMU_ALDEA = {
     { k: 'Galería',    v: '21 m²' },
     { k: 'Estructura', v: 'Steel Frame' },
     { k: 'Aislación',  v: 'Poliuretano + Celulosa' },
+  ],
+  faq: [
+    { question: '¿Qué superficie y ambientes tiene WMU ALDEA?', answer: 'WMU ALDEA tiene 120 m² cubiertos, 4 habitaciones, 2 baños y un estar-cocina-comedor integrado.' },
+    { question: '¿Qué superficie tiene la galería de WMU ALDEA?', answer: 'El modelo incorpora una galería semicubierta de 21 m² conectada con el área social.' },
+    { question: '¿Qué estructura y aislación utiliza WMU ALDEA?', answer: 'Utiliza estructura Steel Frame, aislación de poliuretano en cubierta y celulosa en muros.' },
+    { question: '¿Qué alcance de terminaciones e instalaciones tiene WMU ALDEA?', answer: 'El alcance común incluye estructura y cerramientos, terminaciones interiores, equipamiento, instalaciones sanitarias y eléctricas, y documentación técnica.' },
   ],
   ctaBgIndex: 3,
 }
@@ -242,5 +266,13 @@ export const WMU_SAUCE = {
     { k: 'Estructura', v: 'Steel Frame' },
     { k: 'Aislación',  v: 'Poliuretano + Celulosa' },
   ],
+  faq: [
+    { question: '¿Qué superficie y ambientes tiene la primera etapa de WMU SAUCE?', answer: 'La primera etapa de WMU SAUCE tiene 86 m² cubiertos, 2 habitaciones, 1 baño, estar y cocina-comedor social.' },
+    { question: '¿Cómo puede ampliarse WMU SAUCE?', answer: 'El modelo admite una ampliación opcional de 46 m² que suma una habitación, un baño completo y una sala de TV que también puede funcionar como dormitorio.' },
+    { question: '¿Qué relación tiene WMU SAUCE con el exterior?', answer: 'La primera etapa se conecta con una galería semicubierta de 10 m².' },
+    { question: '¿Qué estructura, aislación y alcance tiene WMU SAUCE?', answer: 'Utiliza estructura Steel Frame, aislación de poliuretano en cubierta y celulosa en muros. El alcance común incluye cerramientos, terminaciones interiores, equipamiento, instalaciones y documentación técnica.' },
+  ],
   ctaBgIndex: 3,
 }
+
+export const WMU_MODELS = [WMU_CERO, WMU_CERO_2, WMU_CAMPO, WMU_ALDEA, WMU_SAUCE]

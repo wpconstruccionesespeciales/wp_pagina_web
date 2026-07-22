@@ -17,13 +17,13 @@ const steps = [
     num: '03',
     icon: 'precision_manufacturing',
     title: 'Fabricación',
-    desc: 'Cada perfil es cortado y perforado con precisión milimétrica en nuestras instalaciones.',
+    desc: 'Cada perfil es cortado y perforado por control numérico de acuerdo con el modelo del proyecto.',
   },
   {
     num: '04',
     icon: 'construction',
     title: 'Montaje & Entrega',
-    desc: 'Ensamblaje en sitio con equipos especializados. Obra limpia, rápida y sin sorpresas.',
+    desc: 'Ensamblaje en sitio con equipos especializados y una secuencia coordinada según el alcance de obra.',
   },
 ]
 

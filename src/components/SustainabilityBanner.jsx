@@ -198,10 +198,10 @@ export default function SustainabilityBanner() {
             <div className="relative flex-grow">
               {/* Vertically split indicator */}
               <div className="absolute -left-4 top-1.5 bottom-1.5 w-[2px] bg-gradient-to-b from-transparent via-[#2a7a42]/30 to-transparent hidden sm:block" />
-              <p className="text-[#2a7a42] text-[11px] font-black tracking-[0.3em] uppercase mb-1.5">Compromiso Ambiental</p>
+              <p className="text-[#2a7a42] text-[11px] font-black tracking-[0.3em] uppercase mb-1.5">Criterios Ambientales</p>
               <h2 className="font-headline text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-snug text-primary">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-[#5cb876] to-[#2a7a42]">Steel Frame:</span>{' '}
-                <span className="text-on-surface-variant/90 font-medium">construcción que cuida el planeta</span>
+                <span className="text-on-surface-variant/90 font-medium">decisiones de material, montaje y envolvente</span>
               </h2>
             </div>
           </div>
@@ -214,20 +214,20 @@ export default function SustainabilityBanner() {
               
               {/* Stat 1 */}
               <div className="group flex flex-col items-center justify-center px-4 py-2.5 rounded-xl bg-white/60 border border-[#2a7a42]/12 backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.03)] hover:bg-white/80 hover:border-primary hover:shadow-[0_4px_20px_rgba(42,122,66,0.08)] hover:-translate-y-0.5 transition-all duration-500">
-                <span className="text-[#2a7a42] text-xl md:text-2xl font-black font-headline tracking-tight group-hover:scale-105 transition-transform duration-300">80%</span>
-                <span className="text-on-surface-variant/60 text-[9px] font-bold uppercase tracking-wider text-center mt-0.5 group-hover:text-primary transition-colors duration-300">menos residuos</span>
+                <span className="text-[#2a7a42] text-xl md:text-2xl font-black font-headline tracking-tight group-hover:scale-105 transition-transform duration-300">CNC</span>
+                <span className="text-on-surface-variant/60 text-[9px] font-bold uppercase tracking-wider text-center mt-0.5 group-hover:text-primary transition-colors duration-300">corte planificado</span>
               </div>
               
               {/* Stat 2 */}
               <div className="group flex flex-col items-center justify-center px-4 py-2.5 rounded-xl bg-white/60 border border-[#2a7a42]/12 backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.03)] hover:bg-white/80 hover:border-primary hover:shadow-[0_4px_20px_rgba(42,122,66,0.08)] hover:-translate-y-0.5 transition-all duration-500">
-                <span className="text-[#2a7a42] text-xl md:text-2xl font-black font-headline tracking-tight group-hover:scale-105 transition-transform duration-300">100%</span>
-                <span className="text-on-surface-variant/60 text-[9px] font-bold uppercase tracking-wider text-center mt-0.5 group-hover:text-primary transition-colors duration-300">acero reciclable</span>
+                <span className="text-[#2a7a42] text-xl md:text-2xl font-black font-headline tracking-tight group-hover:scale-105 transition-transform duration-300">ACERO</span>
+                <span className="text-on-surface-variant/60 text-[9px] font-bold uppercase tracking-wider text-center mt-0.5 group-hover:text-primary transition-colors duration-300">material recuperable</span>
               </div>
               
               {/* Stat 3 */}
               <div className="group flex flex-col items-center justify-center px-4 py-2.5 rounded-xl bg-white/60 border border-[#2a7a42]/12 backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.03)] hover:bg-white/80 hover:border-primary hover:shadow-[0_4px_20px_rgba(42,122,66,0.08)] hover:-translate-y-0.5 transition-all duration-500">
-                <span className="text-[#2a7a42] text-xl md:text-2xl font-black font-headline tracking-tight group-hover:scale-105 transition-transform duration-300">60%</span>
-                <span className="text-on-surface-variant/60 text-[9px] font-bold uppercase tracking-wider text-center mt-0.5 group-hover:text-primary transition-colors duration-300">menos CO₂</span>
+                <span className="text-[#2a7a42] text-xl md:text-2xl font-black font-headline tracking-tight group-hover:scale-105 transition-transform duration-300">CAPAS</span>
+                <span className="text-on-surface-variant/60 text-[9px] font-bold uppercase tracking-wider text-center mt-0.5 group-hover:text-primary transition-colors duration-300">envolvente adaptable</span>
               </div>
               
             </div>

@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { AnimatePresence, motion as Motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import SEO from './SEO'
 import NavBar from './NavBar'
 import Footer from './Footer'
 import WhatsAppButton from './WhatsAppButton'
 import { WMU_INCLUDES } from '../data/wmu-modules'
+import { BUSINESS, canonicalUrl, whatsappUrl } from '../config/site'
 
 /* ───────────────────────── tokens ───────────────────────── */
 const G      = '#35C36B'
@@ -20,7 +22,7 @@ const INK    = '#0e1a11'
 const HEADING_F = '"Manrope", sans-serif'
 const BODY_F    = '"Nunito Sans", sans-serif'
 
-const WA = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_number&app_absent=0'
+const WA = whatsappUrl()
 
 /* ───────────────────────── hooks ───────────────────────── */
 function useFadeIn(threshold = 0.12) {
@@ -515,6 +517,32 @@ function QueIncluyeSection() {
   )
 }
 
+function FaqSection({ data }) {
+  return (
+    <section id="preguntas-frecuentes" aria-labelledby="faq-title" style={{ padding: 'clamp(72px, 9vw, 112px) 0', background: '#f4f8f5' }}>
+      <div style={{ maxWidth: 920, margin: '0 auto', padding: '0 clamp(16px, 4vw, 40px)' }}>
+        <span style={{ color: G_DEEP, fontWeight: 700, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', fontFamily: BODY_F }}>Información del modelo</span>
+        <h2 id="faq-title" style={{ margin: '10px 0 28px', fontFamily: HEADING_F, fontWeight: 800, fontSize: 'clamp(27px, 4vw, 42px)', color: HEAD }}>
+          Preguntas frecuentes sobre {data.module.name}
+        </h2>
+        <div style={{ display: 'grid', gap: 12 }}>
+          {data.faq.map(({ question, answer }) => (
+            <details key={question} className="wc-faq-item" style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: '0 20px', boxShadow: '0 8px 24px rgba(15,31,21,.04)' }}>
+              <summary className="wc-faq-summary" style={{ cursor: 'pointer', padding: '20px 0', color: HEAD, fontFamily: HEADING_F, fontSize: 16, fontWeight: 750, lineHeight: 1.45 }}>
+                <span>{question}</span>
+                <svg className="wc-faq-chevron" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </summary>
+              <p style={{ margin: '0 0 20px', color: BODY_C, fontFamily: BODY_F, fontSize: 15, lineHeight: 1.7 }}>{answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ═════════════════════════════════════════════════════════════
    5 · CTA
    ═════════════════════════════════════════════════════════════ */
@@ -637,6 +665,20 @@ const CSS = `
   .wc-subnav a:hover { color: ${G_DARK}; background: #e8f5ee; }
   .wc-subnav a:active { transform: scale(.97); }
 
+  .wc-faq-summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    list-style: none;
+  }
+  .wc-faq-summary::-webkit-details-marker { display: none; }
+  .wc-faq-summary:focus-visible {
+    outline: 3px solid ${G}; outline-offset: 4px; border-radius: 6px;
+  }
+  .wc-faq-chevron {
+    flex: 0 0 auto; color: ${G_DARK};
+    transition: transform .2s ease;
+  }
+  .wc-faq-item[open] .wc-faq-chevron { transform: rotate(180deg); }
+
   .wc-btn-primary:active { transform: scale(0.97) translateY(0); }
   .wc-btn-dark:active { transform: scale(0.97) translateY(0); }
   .wc-btn-ghost-dark:active { transform: scale(0.97); }
@@ -680,11 +722,18 @@ const CSS = `
     .wc-features { grid-template-columns: repeat(2, 1fr) !important; }
     .wc-gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .wc-includes-grid { grid-template-columns: 1fr !important; }
+    .wc-subnav {
+      justify-content: flex-start; overflow-x: auto; white-space: nowrap;
+      -webkit-overflow-scrolling: touch; scrollbar-width: thin;
+    }
+    .wc-subnav a { flex: 0 0 auto; }
   }
   @media (max-width: 480px) {
     .wc-gallery-grid { grid-template-columns: 1fr !important; }
-    .wc-subnav { top: 72px; justify-content: flex-start; overflow-x: auto; }
-    .wc-subnav a { white-space: nowrap; }
+    .wc-subnav { top: 72px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wc-faq-chevron { transition: none; }
   }
 `
 
@@ -699,21 +748,32 @@ export default function ModulePage({ data }) {
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "Product",
+    "@id": `${canonicalUrl(`/${data.id}`)}#product`,
+    "url": canonicalUrl(`/${data.id}`),
     "name": data.module.name,
     "image": data.renderTabs && data.renderTabs.length > 0 
-      ? `${window.location.origin}${data.renderTabs[0].src}`
-      : (data.gallery && data.gallery.length > 0 ? `${window.location.origin}${data.gallery[0].src}` : ""),
+      ? canonicalUrl(data.renderTabs[0].src)
+      : (data.gallery && data.gallery.length > 0 ? canonicalUrl(data.gallery[0].src) : ""),
     "description": data.module.description,
     "brand": {
       "@type": "Brand",
-      "name": "WP Construcciones Especiales"
+      "name": BUSINESS.name
     },
-    "category": "SingleFamilyResidence",
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/PreOrder"
-    }
+    "category": "Módulo habitacional",
+    "additionalProperty": data.fichaStats.map(({ k, v }) => ({
+      "@type": "PropertyValue",
+      "name": k,
+      "value": v
+    }))
+  }
+  const faqMarkup = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": data.faq.map(({ question, answer }) => ({
+      "@type": "Question",
+      "name": question,
+      "acceptedAnswer": { "@type": "Answer", "text": answer }
+    }))
   }
 
   return (
@@ -732,18 +792,25 @@ export default function ModulePage({ data }) {
       <script type="application/ld+json">
         {JSON.stringify(schemaMarkup)}
       </script>
+      <script type="application/ld+json">
+        {JSON.stringify(faqMarkup)}
+      </script>
       <style>{CSS}</style>
       <NavBar />
       <main>
         <HeroSection    data={data} />
         <nav className="wc-subnav" aria-label={`Secciones de ${data.module.name}`}>
+          <Link to="/wmu#models">Modelos WMU</Link>
           <a href="#galeria">Galería</a>
           <a href="#ficha">Ficha técnica</a>
           <a href="#que-incluye">Qué incluye</a>
+          <a href="#preguntas-frecuentes">Preguntas frecuentes</a>
+          <Link to="/wmu-especificaciones">Especificaciones</Link>
         </nav>
         <GallerySection data={data} />
         <FichaSection   data={data} />
         <QueIncluyeSection />
+        <FaqSection data={data} />
         <CtaSection     data={data} />
       </main>
       <Footer showCTA={false} />

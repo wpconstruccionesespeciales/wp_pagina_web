@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Hero() {
-  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
   const videoRef = useRef(null)
   const sectionRef = useRef(null)
   const gridRef = useRef(null)
@@ -9,6 +9,16 @@ export default function Hero() {
   const accentRef = useRef(null)
   const panelLeftRef = useRef(null)
   const panelRightRef = useRef(null)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches)
+
+    updatePreference()
+    mediaQuery.addEventListener('change', updatePreference)
+
+    return () => mediaQuery.removeEventListener('change', updatePreference)
+  }, [])
 
   useEffect(() => {
     let ticking = false
@@ -40,6 +50,7 @@ export default function Hero() {
 
     const video = videoRef.current
     const section = sectionRef.current
+    if (video && prefersReducedMotion) video.pause()
     if (video && section && !prefersReducedMotion && 'IntersectionObserver' in window) {
       io = new IntersectionObserver(
         (entries) => {
@@ -103,7 +114,7 @@ export default function Hero() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 w-full pt-32 pb-24 hero-reveal">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white/90 text-xs font-bold tracking-widest uppercase mb-8">
             <span className="hero-badge-mark" />
-            Innovación en Construcción
+            Arquitectura, ingeniería y construcción
           </span>
 
           <h1 className="font-headline text-5xl md:text-7xl font-bold text-white leading-[0.95] tracking-[-0.04em] mb-8">
@@ -111,11 +122,11 @@ export default function Hero() {
             <br />
             <span className="text-primary-fixed-dim">Steel Frame</span>
             <br />
-            a nivel nacional
+            desde Paraná
           </h1>
 
           <p className="text-white/60 text-lg lg:text-xl max-w-lg mb-12 leading-relaxed">
-            Redefiniendo la arquitectura moderna a través de la precisión técnica y la sostenibilidad estructural.
+            Integramos diseño, cálculo, fabricación y montaje para desarrollar cada proyecto según su uso y emplazamiento.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -142,13 +153,13 @@ export default function Hero() {
                 icon: 'mode_heat',
               },
               {
-                value: 'Montaje de precisión',
+                value: 'Montaje coordinado',
                 detail: 'Sistema modular',
                 icon: 'grid_view',
               },
               {
-                value: 'Obra rápida',
-                detail: 'Ejecución limpia',
+                value: 'Construcción en seco',
+                detail: 'Secuencia planificada',
                 icon: 'construction',
               },
             ].map(({ value, detail, icon }) => (
@@ -171,14 +182,14 @@ export default function Hero() {
               <span className="hero-badge-mark hero-badge-mark--small" />
               Ventajas del sistema
             </div>
-            <div className="hero-detail-card__value">60% menos tiempo de obra</div>
+            <div className="hero-detail-card__value">Montaje sin tiempos de fraguado</div>
             <p className="hero-detail-card__copy">
               Montaje en seco, mayor control de ejecución y una obra más limpia desde el primer día.
             </p>
             <div className="hero-detail-card__stats">
               <div>
-                <strong>4-6 meses</strong>
-                <span>plazo promedio</span>
+                <strong>Por proyecto</strong>
+                <span>plazo estimado</span>
               </div>
               <div>
                 <strong>Menos residuos</strong>
@@ -201,10 +212,10 @@ export default function Hero() {
       <div className="bg-primary">
         <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
           {[
-            { value: '100+', label: 'Proyectos Realizados', icon: 'domain' },
-            { value: '21', label: 'Años de Experiencia', icon: 'calendar_month' },
-            { value: '4-6', label: 'Meses Promedio de Obra', icon: 'bolt' },
-            { value: '60%', label: 'Más Rápido vs Tradicional', icon: 'speed' },
+            { value: 'Steel Frame', label: 'Sistema Constructivo', icon: 'domain' },
+            { value: 'Desde 2005', label: 'Trayectoria Técnica', icon: 'calendar_month' },
+            { value: 'En seco', label: 'Secuencia de Montaje', icon: 'bolt' },
+            { value: 'CNC', label: 'Perfilado Coordinado', icon: 'speed' },
           ].map(({ value, label, icon }) => (
             <div key={label} className="text-center py-8 lg:py-10 px-4 group hover:bg-white/5 transition-colors duration-300">
               <span className="material-symbols-outlined text-primary-fixed-dim text-xl mb-2 block opacity-60">{icon}</span>

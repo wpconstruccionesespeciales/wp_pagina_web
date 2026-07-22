@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import wpWhite from '../assets/wpblanco.webp'
+import { BUSINESS } from '../config/site'
 
 export default function Footer({ showCTA = true }) {
   return (
@@ -10,10 +11,10 @@ export default function Footer({ showCTA = true }) {
           <div className="bg-white/8 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-12 mb-20 flex flex-col lg:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="font-headline text-2xl lg:text-3xl font-bold mb-2">¿Listo para construir el futuro?</h3>
-              <p className="text-white/50">Contactanos hoy y recibí una cotización sin compromiso.</p>
+              <p className="text-white/50">Contanos qué querés construir y coordinemos una primera evaluación.</p>
             </div>
             <a
-              href="#contact"
+              href="/#contact"
               className="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-white/10 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] transition-[background-color,color,transform,box-shadow] duration-200 flex-shrink-0"
             >
               Solicitar Cotización
@@ -29,11 +30,11 @@ export default function Footer({ showCTA = true }) {
               <img src={wpWhite} alt="WP Construcciones Especiales" className="h-15 w-auto" />
             </div>
             <p className="text-white/40 leading-relaxed mb-8 text-sm">
-              Líderes en construcción industrializada de alta precisión. Innovando el futuro del acero desde el año 2005.
+              Arquitectura, ingeniería y construcción en Steel Frame desde Paraná, con trayectoria iniciada en 2005.
             </p>
             <div className="flex gap-3">
               <a
-                href="https://www.facebook.com/WPConstruccionesEspeciales"
+                href={BUSINESS.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/8 rounded-lg flex items-center justify-center hover:bg-white/20 transition-[background-color,color,transform] duration-200 active:scale-95 text-white/60 hover:text-white"
@@ -44,7 +45,7 @@ export default function Footer({ showCTA = true }) {
                 </svg>
               </a>
               <a
-                href="https://www.instagram.com/wpconstruccionesespeciales/?hl=en"
+                href={BUSINESS.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/8 rounded-lg flex items-center justify-center hover:bg-white/20 transition-[background-color,color,transform] duration-200 active:scale-95 text-white/60 hover:text-white"
@@ -67,6 +68,7 @@ export default function Footer({ showCTA = true }) {
                 { label: 'Nosotros', href: '/nosotros' },
                 { label: 'Servicios', href: '/servicios' },
                 { label: 'Steel Frame Paraná', href: '/steel-frame-parana' },
+                { label: 'Sostenibilidad', href: '/sostenibilidad' },
                 { label: 'Arquitectura Modular', href: '/wmu' },
               ].map(({ label, href }) => (
                 <li key={label}>
@@ -92,13 +94,15 @@ export default function Footer({ showCTA = true }) {
             <ul className="space-y-4">
               {[
                 { icon: 'schedule', text: 'Lunes a Viernes 8:00 - 16:00' },
-                { icon: 'phone', text: '+54 9 3435 05-6918' },
-                { icon: 'mail', text: 'wpsascentral@gmail.com' },
-                { icon: 'location_on', text: 'Entre Ríos, Paraná, Argentina' },
-              ].map(({ icon, text }) => (
+                { icon: 'phone', text: BUSINESS.phoneDisplay, href: BUSINESS.telHref },
+                { icon: 'mail', text: BUSINESS.email, href: BUSINESS.mailtoHref },
+                { icon: 'location_on', text: `${BUSINESS.region}, ${BUSINESS.locality}, Argentina` },
+              ].map(({ icon, text, href }) => (
                 <li key={icon} className="flex items-center gap-3 text-white/40 text-sm">
                   <span className="material-symbols-outlined text-white/30 text-lg">{icon}</span>
-                  {text}
+                  {href ? (
+                    <a href={href} className="hover:text-white focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded-sm transition-colors">{text}</a>
+                  ) : text}
                 </li>
               ))}
             </ul>
@@ -107,7 +111,7 @@ export default function Footer({ showCTA = true }) {
 
         {/* Bottom */}
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-white/25 text-xs">
-          <p>© 2026 WP Construcciones Especiales. Hecho con precisión milimétrica. — Sitio web desarrollado por <a href="https://tomygiorgi.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">Tomás Giorgi</a></p>
+          <p>© 2026 WP Construcciones Especiales. Arquitectura e ingeniería de detalle. — Sitio web desarrollado por <a href="https://tomygiorgi.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">Tomás Giorgi</a></p>
         </div>
       </div>
     </footer>

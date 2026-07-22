@@ -5,8 +5,8 @@ const services = [
     img: '/wp/service-especial.webp',
     title: 'Construcciones Especiales',
     label: 'Solución a medida',
-    desc: 'Proyectos únicos que desafían los límites de la construcción tradicional con estructuras de acero de alta resistencia.',
-    tags: ['A-36 Steel', 'LEED Ready', 'Custom'],
+    desc: 'Soluciones desarrolladas a medida para resolver geometrías, usos y condicionantes que requieren un estudio técnico específico.',
+    tags: ['Acero según cálculo', 'A medida', 'Ingeniería'],
     stat: 'Alta complejidad',
     cta: 'Consultar Proyecto',
   },
@@ -14,8 +14,8 @@ const services = [
     img: '/wp/Secuencia 01_1.jpg',
     title: 'Arquitectura Modular',
     label: 'Sistema industrializado',
-    desc: 'Eficiencia industrializada para una ejecución rápida, limpia y con estándares de calidad superiores.',
-    tags: ['Prefab', 'Modular', 'Fast Build'],
+    desc: 'Componentes coordinados desde el diseño para ordenar la fabricación, el traslado y el montaje de cada módulo.',
+    tags: ['Prefabricación', 'Modular', 'Montaje'],
     stat: 'Entrega optimizada',
     cta: 'Ver Catálogo',
   },
@@ -39,7 +39,7 @@ export default function Services() {
               </span>
             </h2>
             <p className="text-on-surface-variant text-base lg:text-lg leading-relaxed max-w-xl">
-              Diseñamos sistemas constructivos que combinan ingeniería, velocidad de ejecución y una estética contemporánea adaptada a cada proyecto.
+              Una primera vista de nuestras dos líneas de trabajo: soluciones especiales y arquitectura modular, ambas adaptadas a cada proyecto.
             </p>
           </div>
           <div className="services-header__aside">
@@ -82,7 +82,7 @@ export default function Services() {
                   <h3 className="font-headline text-[1.9rem] lg:text-[2.05rem] font-bold mb-3 leading-tight max-w-md">{title}</h3>
                   <p className="text-white/72 mb-6 max-w-md leading-relaxed text-[0.98rem]">{desc}</p>
                   <a
-                    href="#contact"
+                    href={title === 'Arquitectura Modular' ? '/wmu' : '/servicios'}
                     className="services-card__cta"
                   >
                     {cta}

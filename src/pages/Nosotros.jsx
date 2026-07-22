@@ -1,8 +1,11 @@
 import { useRef, useState, useCallback, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
 import SEO from '../components/SEO'
+import wpLogo from '../assets/WP.png'
+import { BUSINESS, BUSINESS_ID, canonicalUrl } from '../config/site'
 
 
 /* ──────────────── BEFORE / AFTER SLIDER ──────────────── */
@@ -37,21 +40,21 @@ function BeforeAfterSlider() {
       onTouchMove={(e) => move(e.touches[0].clientX)}
       onTouchStart={(e) => move(e.touches[0].clientX)}
     >
-      {/* DESPUÉS — full size, clipped from left */}
+      {/* VISTA B — full size, clipped from left */}
       <img
         src="/wp/after.webp"
-        alt="Resultado final Steel Frame"
+        alt="Vista arquitectónica de referencia B"
         width="935"
         height="457"
         className="before-after-image before-after-image--after absolute inset-0 w-full h-full object-cover"
         draggable={false}
       />
 
-      {/* ANTES — full size, clipped from right */}
+      {/* VISTA A — full size, clipped from right */}
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
         <img
           src="/wp/before.webp"
-          alt="Estado original antes de obra"
+          alt="Vista arquitectónica de referencia A"
           width="906"
           height="448"
           className="before-after-image before-after-image--before w-full h-full object-cover"
@@ -72,38 +75,38 @@ function BeforeAfterSlider() {
 
       {/* Labels fijos */}
       <div className="absolute top-3 left-3 sm:top-8 sm:left-8 z-10 bg-black/60 backdrop-blur-md px-3 py-1 sm:px-6 sm:py-2 text-white font-headline font-bold uppercase tracking-widest text-[10px] sm:text-sm pointer-events-none rounded-full">
-        Antes
+        Vista A
       </div>
       <div className="absolute top-3 right-3 sm:top-8 sm:right-8 z-10 bg-primary/90 backdrop-blur-md px-3 py-1 sm:px-6 sm:py-2 text-white font-headline font-bold uppercase tracking-widest text-[10px] sm:text-sm pointer-events-none rounded-full">
-        Después
+        Vista B
       </div>
 
-      {/* Info box ANTES */}
+      {/* Info box VISTA A */}
       <div className="absolute bottom-3 left-3 sm:bottom-8 sm:left-8 z-10 w-36 sm:w-72 bg-black/50 backdrop-blur-lg p-2.5 sm:p-6 border border-white/10 pointer-events-none rounded-2xl">
-        <p className="hidden sm:block text-white text-sm font-body uppercase tracking-tighter opacity-80 mb-2">Estado original</p>
-        <h3 className="text-white text-xs sm:text-2xl font-headline font-bold leading-tight">Traditional Masonry Warehouse</h3>
+        <p className="hidden sm:block text-white text-sm font-body uppercase tracking-tighter opacity-80 mb-2">Referencia visual</p>
+        <h3 className="text-white text-xs sm:text-2xl font-headline font-bold leading-tight">Configuración A</h3>
       </div>
 
-      {/* Info box DESPUÉS */}
+      {/* Info box VISTA B */}
       <div className="absolute bottom-3 right-3 sm:bottom-8 sm:right-8 z-10 w-36 sm:w-72 bg-primary/90 backdrop-blur-lg p-2.5 sm:p-6 border border-white/5 pointer-events-none rounded-2xl">
-        <p className="hidden sm:block text-white/70 text-sm font-body uppercase tracking-tighter mb-2">Transformación WP</p>
-        <h3 className="text-white text-xs sm:text-2xl font-headline font-bold leading-tight">Steel-Frame Loft Conversion</h3>
+        <p className="hidden sm:block text-white/70 text-sm font-body uppercase tracking-tighter mb-2">Referencia visual</p>
+        <h3 className="text-white text-xs sm:text-2xl font-headline font-bold leading-tight">Configuración B</h3>
       </div>
     </div>
   )
 }
 
 const metaStats = [
-  { value: '60%', label: 'Ejecución más rápida' },
-  { value: '30%', label: 'Carga más ligera' },
-  { value: 'CERO', label: 'Desperdicio de material' },
-  { value: 'A-36', label: 'Grado de acero' },
+  { value: 'CNC', label: 'Perfilado controlado' },
+  { value: 'SECO', label: 'Sistema constructivo' },
+  { value: 'ACERO', label: 'Estructura portante' },
+  { value: 'PROYECTO', label: 'Acero según cálculo' },
 ]
 
 const processFeatures = [
-  { icon: 'precision_manufacturing', title: 'Precisión Milimétrica', desc: 'Cada perfil es cortado y perforado por control numérico.' },
-  { icon: 'eco', title: 'Residuo Cero', desc: 'Construcción en seco optimizada para la sostenibilidad urbana.' },
-  { icon: 'humidity_low', title: 'Resistencia a Humedad', desc: 'Acero galvanizado tratado para durabilidad eterna.' },
+  { icon: 'precision_manufacturing', title: 'Perfilado Controlado', desc: 'Cada perfil es cortado y perforado por control numérico.' },
+  { icon: 'eco', title: 'Uso Optimizado', desc: 'Construcción en seco orientada a reducir recortes y residuos de obra.' },
+  { icon: 'humidity_low', title: 'Protección del Acero', desc: 'Perfiles galvanizados integrados a una envolvente diseñada según el proyecto.' },
 ]
 
 const timelineItems = [
@@ -112,15 +115,15 @@ const timelineItems = [
     label: 'Los Cimientos',
     subtitle: 'The Foundation',
     description:
-      'Nuestra historia comienza a principios de siglo. Arrancamos como una firma boutique de estructuras enfocada en la pureza del material. Esos primeros proyectos establecieron nuestra reputación de calidad sin compromiso y precisión técnica.',
+      'Nuestra historia comienza en Paraná en 2005, con una práctica enfocada en estructuras y en el desarrollo técnico de cada proyecto.',
     highlighted: false,
   },
   {
     year: 'HOY',
-    label: 'Pioneros Steel Frame',
+    label: 'Especialización Steel Frame',
     subtitle: 'Modern Mastery',
     description:
-      'Nos convertimos en líderes del Steel Frame a nivel nacional, optimizando la eficiencia estructural y la velocidad de obra sin sacrificar el alma arquitectónica del proyecto. Más de 100 obras ejecutadas avalan nuestro camino.',
+      'Hoy concentramos nuestro enfoque en Steel Frame, integrando arquitectura, ingeniería de detalle, fabricación y ejecución para proyectos residenciales y comerciales.',
     highlighted: true,
   },
   {
@@ -128,7 +131,7 @@ const timelineItems = [
     label: 'Ingeniería & Soluciones',
     subtitle: 'The Vision',
     description:
-      'Un compromiso con la ingeniería sostenible y circular. Nuestro futuro está definido por tecnologías de acero inteligente y diseños net-zero que amplían los límites de lo que el hábitat moderno puede alcanzar.',
+      'Seguimos explorando soluciones de ingeniería que aprovechen mejor los materiales, la construcción en seco y el desempeño de la envolvente.',
     highlighted: false,
   },
 ]
@@ -139,7 +142,7 @@ const bentoCards = [
     type: 'image',
     img: '/wp/wp imagen.jpg',
     title: 'Edificios de mediana altura',
-    desc: 'Soluciones verticales con máxima eficiencia estructural y rapidez de montaje.',
+    desc: 'Soluciones verticales estudiadas según las cargas, la logística y las condiciones de cada proyecto.',
   },
   {
     span: 'md:col-span-4 md:row-span-1',
@@ -159,7 +162,7 @@ const bentoCards = [
     span: 'md:col-span-4 md:row-span-2',
     type: 'reforma',
     title: 'Reformas y Ampliaciones',
-    desc: 'La ligereza del acero permite ampliar estructuras existentes sin comprometer la cimentación original.',
+    desc: 'La menor carga propia del sistema puede ser útil en ampliaciones, siempre después de evaluar la estructura y la cimentación existentes.',
     img: '/wp/after.jpg',
   },
   {
@@ -317,30 +320,27 @@ export default function Nosotros() {
     "@graph": [
       {
         "@type": "AboutPage",
-        "@id": "https://wpconstrucciones.com/nosotros#webpage",
-        "url": "https://wpconstrucciones.com/nosotros",
+        "@id": `${canonicalUrl('/nosotros')}#webpage`,
+        "url": canonicalUrl('/nosotros'),
         "name": "Nosotros | WP Construcciones Especiales",
-        "description": "Conocé la trayectoria de WP Construcciones Especiales en Paraná, Entre Ríos. Desde 2005 diseñando y construyendo estructuras duraderas en Steel Frame.",
+        "description": "Conocé la trayectoria de WP Construcciones Especiales en Paraná, Entre Ríos. Desde 2005 desarrollando arquitectura, ingeniería de detalle y construcción en Steel Frame.",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://wpconstrucciones.com/#website",
-          "url": "https://wpconstrucciones.com/",
-          "name": "WP Construcciones Especiales"
+          "@id": `${canonicalUrl('/')}#website`,
+          "url": canonicalUrl('/'),
+          "name": BUSINESS.name
         }
       },
       {
         "@type": "Organization",
-        "@id": "https://wpconstrucciones.com/#organization",
-        "name": "WP Construcciones Especiales",
-        "url": "https://wpconstrucciones.com/",
+        "@id": BUSINESS_ID,
+        "name": BUSINESS.name,
+        "url": canonicalUrl('/'),
         "logo": {
           "@type": "ImageObject",
-          "url": "https://wpconstrucciones.com/assets/WP.png"
+          "url": canonicalUrl(wpLogo)
         },
-        "sameAs": [
-          "https://www.facebook.com/WPConstruccionesEspeciales",
-          "https://www.instagram.com/wpconstruccionesespeciales/?hl=en"
-        ]
+        "sameAs": Object.values(BUSINESS.social)
       }
     ]
   }
@@ -348,8 +348,8 @@ export default function Nosotros() {
   return (
     <div className="relative bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
       <SEO 
-        title="Nosotros | Líderes en Steel Framing y Construcción en Seco · WP"
-        description="Conocé la trayectoria de WP Construcciones Especiales en Paraná, Entre Ríos. Desde 2005 diseñando y construyendo estructuras duraderas en Steel Frame con precisión industrial."
+        title="Nosotros | Trayectoria en Steel Frame y Construcción en Seco · WP"
+        description="Conocé la trayectoria de WP Construcciones Especiales en Paraná, Entre Ríos. Desde 2005 desarrollando arquitectura, ingeniería de detalle y construcción en Steel Frame."
         keywords="nosotros, trayectoria, guillermo matteoda, steel frame parana, construccion en seco entre rios, fabrica de aberturas, historia steel frame, argentina"
         breadcrumbs={[
           { name: 'Inicio', url: '/' },
@@ -387,18 +387,18 @@ export default function Nosotros() {
                 </div>
 
                 <h1 className="font-headline text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[0.95] mb-5 lg:mb-6 xl:mb-8 text-primary">
-                  Ingeniería con <span className="gradient-text">alma de acero</span>
+                  Nuestra historia en <span className="gradient-text">arquitectura y acero</span>
                 </h1>
 
                 <p className="text-on-surface-variant text-lg md:text-xl leading-relaxed mb-5 lg:mb-6 xl:mb-8 max-w-2xl font-medium">
                   En WP no solo construimos estructuras; ingeniamos el futuro de la arquitectura residencial
-                  y comercial de alta gama a través de soluciones de Steel Frame de precisión.
+                  y comercial mediante soluciones de Steel Frame desarrolladas para cada proyecto.
                 </p>
 
                 <div className="flex items-center gap-4 max-w-xl">
                   <div className="w-12 h-px bg-primary/20" />
                   <p className="text-primary/60 text-base italic font-medium">
-                    Forjando excelencia desde el comienzo del nuevo milenio.
+                    Trayectoria técnica iniciada en Paraná en 2005.
                   </p>
                 </div>
               </div>
@@ -408,7 +408,7 @@ export default function Nosotros() {
                 <div className="scale-90 origin-right">
                 <div className="relative rounded-[2rem] overflow-hidden group border border-outline/10 shadow-2xl shadow-primary/5">
                   <img
-                    alt="Ingeniería estructural de precisión"
+                    alt="Vista de referencia de una estructura en Steel Frame"
                     width="800"
                     height="1080"
                     className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
@@ -427,8 +427,8 @@ export default function Nosotros() {
                     <span className="material-symbols-outlined text-white text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>calendar_month</span>
                   </div>
                   <div>
-                    <p className="font-headline text-2xl lg:text-3xl font-black text-primary leading-none">21+</p>
-                    <p className="text-on-surface-variant text-xs uppercase tracking-widest font-bold mt-1">Años de excelencia</p>
+                    <p className="font-headline text-2xl lg:text-3xl font-black text-primary leading-none">Desde 2005</p>
+                    <p className="text-on-surface-variant text-xs uppercase tracking-widest font-bold mt-1">Trayectoria técnica</p>
                   </div>
                 </div>
 
@@ -503,7 +503,7 @@ export default function Nosotros() {
         </section>
 
         {/* ═══════════════════════════════════════════════════════
-            ANTES / DESPUÉS
+            VISTAS DE REFERENCIA
         ═══════════════════════════════════════════════════════ */}
         <section className="subpage-section relative py-28 px-6 lg:px-16 overflow-hidden bg-background" ref={beforeAfterRef}>
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/15 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 pointer-events-none" />
@@ -513,15 +513,15 @@ export default function Nosotros() {
             <div className={`text-center mb-16 animate-on-scroll ${beforeAfterVisible ? 'visible' : ''}`}>
               <div className="flex items-center justify-center gap-3 mb-4">
                 <div className="w-12 h-px bg-primary/40" />
-                <span className="text-primary text-xs font-extrabold tracking-[0.25em] uppercase">Transformación</span>
+                <span className="text-primary text-xs font-extrabold tracking-[0.25em] uppercase">Exploración visual</span>
                 <div className="w-12 h-px bg-primary/40" />
               </div>
               <h2 className="font-headline text-4xl lg:text-5xl font-bold tracking-tighter text-primary mb-4 leading-tight">
-                Metamorfosis Estructural
+                Dos configuraciones de referencia
               </h2>
               <p className="text-on-surface-variant text-lg max-w-2xl mx-auto font-medium leading-relaxed">
-                Presenciá la precisión de WP. Transformamos estructuras obsoletas en obras maestras
-                industriales usando nuestra metodología de Steel Frame.
+                Las imágenes ilustran alternativas visuales sin afirmar una relación temporal entre ellas.
+                Cada intervención real requiere relevamiento y un proyecto específico.
               </p>
             </div>
 
@@ -534,12 +534,12 @@ export default function Nosotros() {
               {metaStats.map(({ value, label }) => (
                 <div
                   key={label}
-                  className="page-card group relative p-6 lg:p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim overflow-hidden"
+                  className="page-card group relative p-5 sm:p-6 lg:p-8 rounded-3xl bg-white border border-outline/10 hover:border-primary-fixed-dim overflow-hidden"
                 >
                   <div className="absolute -inset-10 bg-primary-fixed/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 rounded-full scale-75" />
                   <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-primary/20 rounded-tl-xl pointer-events-none" />
                   <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-primary/20 rounded-br-xl pointer-events-none" />
-                  <p className="font-headline text-3xl lg:text-4xl font-black text-primary mb-1 relative z-10">{value}</p>
+                  <p className="font-headline text-lg sm:text-2xl lg:text-4xl font-black leading-none break-words [overflow-wrap:anywhere] text-primary mb-2 relative z-10">{value}</p>
                   <p className="text-on-surface-variant text-xs uppercase tracking-widest font-bold relative z-10">{label}</p>
                 </div>
               ))}
@@ -566,8 +566,8 @@ export default function Nosotros() {
                   Trae tu proyecto
                 </h2>
                 <p className="text-on-surface-variant text-lg max-w-xl font-medium leading-relaxed mb-8">
-                  Nuestra metodología integra software de modelado avanzado con maquinaria de perfilado
-                  (roll-forming) de última generación, eliminando el error humano y el desperdicio de obra.
+                  Nuestra metodología integra modelado y maquinaria de perfilado (roll-forming) para
+                  coordinar piezas, anticipar encuentros y optimizar el uso de material.
                 </p>
 
                 <div className="space-y-5">
@@ -611,7 +611,7 @@ export default function Nosotros() {
                       "La estructura es el alma de la arquitectura."
                     </p>
                     <span className="text-xs uppercase tracking-widest text-primary-fixed-dim font-bold relative z-10">
-                      V. Structural Engineering Team
+                      Enfoque WP: coordinación entre estructura y arquitectura
                     </span>
                   </div>
                 </div>
@@ -756,10 +756,10 @@ export default function Nosotros() {
             </div>
 
             <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-primary mb-6 leading-tight">
-              Transforme su visión<br /><span className="text-[#3a7a4a]">en una estructura de precisión.</span>
+              Transformá tu visión<br /><span className="text-[#3a7a4a]">en un proyecto bien coordinado.</span>
             </h2>
             <p className="text-on-surface-variant text-lg md:text-xl leading-relaxed mb-12 max-w-2xl mx-auto font-semibold">
-              Nuestros ingenieros están listos para analizar su proyecto y proporcionar una cotización técnica detallada.
+              Nuestros ingenieros están listos para analizar tu proyecto y preparar una cotización técnica detallada.
             </p>
 
             <div className="flex flex-col md:flex-row justify-center items-center gap-6">
@@ -767,16 +767,16 @@ export default function Nosotros() {
                 href="/#contact"
                 className="group flex items-center gap-3 bg-primary hover:bg-[#203728] text-white px-10 py-5 rounded-xl font-headline font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5"
               >
-                <span>Iniciar Proyecto</span>
+                <span>Iniciá tu proyecto</span>
                 <span className="material-symbols-outlined text-xl group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
               </a>
-              <a
-                href="/#contact"
+              <Link
+                to="/servicios"
                 className="group flex items-center gap-2 text-primary/70 hover:text-primary text-sm font-bold transition-colors py-5 px-4"
               >
-                <span>Descargar Especificaciones Técnicas</span>
+                <span>Conocé nuestros servicios</span>
                 <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
-              </a>
+              </Link>
             </div>
           </div>
         </section>

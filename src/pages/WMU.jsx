@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import SEO from '../components/SEO'
 import { Link } from 'react-router-dom'
 import wpWhite from '../assets/wpblanco.webp'
+import { BUSINESS, whatsappUrl } from '../config/site'
 
 /* ── tokens ── */
 const G     = '#3BB77E' // Moss Green (organic, elegant)
@@ -19,7 +20,7 @@ const HEADING = '"Space Grotesk", sans-serif'
 const BODY    = '"Manrope", sans-serif'
 
 /* ── urls ── */
-const WA  = 'https://api.whatsapp.com/send/?phone=5493434056918&text&type=phone_number&app_absent=0'
+const WA = whatsappUrl()
 
 /* parallax image URLs (local) */
 const SKY_URL   = '/media/sky-hero.webp'
@@ -815,7 +816,11 @@ function WMUFooter() {
         <div className="footer-cols" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 40, marginBottom: 48 }}>
           <div>
             <div style={{ fontWeight: 800, fontSize: 15, color: TXT, marginBottom: 10, fontFamily: BODY }}>WP construcciones especiales</div>
-            <div style={{ color: SOFT, fontSize: 13, lineHeight: 1.75, fontFamily: BODY }}>PARANÁ, E.RÍOS ARGENTINA CP3100<br/>wpsascentral@gmail.com<br/>+54 9 3435 05-6918</div>
+            <div style={{ color: SOFT, fontSize: 13, lineHeight: 1.75, fontFamily: BODY }}>
+              {BUSINESS.locality.toUpperCase()}, E.RÍOS ARGENTINA CP3100<br/>
+              <a href={BUSINESS.mailtoHref} style={{ color: 'inherit' }}>{BUSINESS.email}</a><br/>
+              <a href={BUSINESS.telHref} style={{ color: 'inherit' }}>{BUSINESS.phoneDisplay}</a>
+            </div>
           </div>
           <div>
             <div style={{ fontWeight: 700, fontSize: 13, color: TXT, marginBottom: 10, fontFamily: BODY }}>Horario</div>
@@ -824,8 +829,8 @@ function WMUFooter() {
           <div>
             <div style={{ fontWeight: 700, fontSize: 13, color: TXT, marginBottom: 10, fontFamily: BODY }}>Seguinos</div>
             <div style={{ display: 'flex', gap: 16 }}>
-              <a href="https://www.facebook.com/wpconstruccionesespeciales" target="_blank" rel="noopener noreferrer" style={{ color: SOFT, textDecoration: 'none', fontSize: 13, fontWeight: 600, fontFamily: BODY }}>Facebook</a>
-              <a href="https://www.instagram.com/wpconstrucciones.especiales" target="_blank" rel="noopener noreferrer" style={{ color: SOFT, textDecoration: 'none', fontSize: 13, fontWeight: 600, fontFamily: BODY }}>Instagram</a>
+              <a href={BUSINESS.social.facebook} target="_blank" rel="noopener noreferrer" style={{ color: SOFT, textDecoration: 'none', fontSize: 13, fontWeight: 600, fontFamily: BODY }}>Facebook</a>
+              <a href={BUSINESS.social.instagram} target="_blank" rel="noopener noreferrer" style={{ color: SOFT, textDecoration: 'none', fontSize: 13, fontWeight: 600, fontFamily: BODY }}>Instagram</a>
             </div>
           </div>
         </div>
@@ -1326,7 +1331,7 @@ export default function WMU() {
         <a href="#proceso-wmu">Proceso</a>
         <a href="#models">Modelos</a>
         <a href="#extender">Extensiones</a>
-        <a href="#manifiesto">Manifiesto</a>
+        <Link to="/wmu-especificaciones">Especificaciones técnicas</Link>
       </nav>
       <ProcessSection />
       <ModelsSection />
