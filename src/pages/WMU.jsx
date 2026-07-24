@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import SEO from '../components/SEO'
 import { Link } from 'react-router-dom'
+import ParallaxLayer from '../components/ParallaxLayer'
 import wpWhite from '../assets/wpblanco.webp'
 import { BUSINESS, whatsappUrl } from '../config/site'
 
@@ -366,16 +367,21 @@ function ModelCard({ model, delay, vis, featured }) {
 function ModelsSection() {
   const [ref, vis] = useFadeIn(0.05)
   return (
-    <section id="models" ref={ref} className="wmu-section wmu-parallax" style={{
+    <section id="models" ref={ref} className="wmu-section" style={{
       position: 'relative', padding: 'clamp(80px,10vw,140px) 0', scrollMarginTop: '-20px',
-      backgroundImage: `url(${SKY_URL})`, backgroundSize: 'cover', backgroundPosition: 'center',
+      overflow: 'hidden'
     }}>
-      {/* layered overlay — gradient instead of flat */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,.7) 0%, rgba(12,18,16,.5) 50%, rgba(0,0,0,.7) 100%)', pointerEvents: 'none' }} />
-      {/* diagonal grid — DNA from hero */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .06, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
-      {/* green radial glow */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 60% 40% at 50% 20%, rgba(53,195,107,.08), transparent)', pointerEvents: 'none' }} />
+      <ParallaxLayer
+        src={SKY_URL}
+        speed={0.22}
+        alt="Fondo catálogo WMU"
+        overlayStyle={{ background: 'linear-gradient(180deg, rgba(0,0,0,.7) 0%, rgba(12,18,16,.5) 50%, rgba(0,0,0,.7) 100%)' }}
+      >
+        {/* diagonal grid — DNA from hero */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .06, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
+        {/* green radial glow */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 60% 40% at 50% 20%, rgba(53,195,107,.08), transparent)', pointerEvents: 'none' }} />
+      </ParallaxLayer>
 
       <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px,4vw,48px)' }}>
         <div style={{ textAlign: 'center', marginBottom: 'clamp(36px,5vw,64px)' }}>
@@ -489,14 +495,18 @@ function ManifestoSection() {
 function ExpandSection() {
   const [ref, vis] = useFadeIn()
   return (
-    <section id="extender" ref={ref} className="wmu-section wmu-parallax" style={{
-      position: 'relative', padding: 'clamp(30px,4vw,50px) 0', overflow: 'hidden',
-      backgroundImage: cssUrl(ALDEA_URL), backgroundSize: 'cover', backgroundPosition: 'center',
+    <section id="extender" ref={ref} className="wmu-section" style={{
+      position: 'relative', padding: 'clamp(30px,4vw,50px) 0', overflow: 'hidden'
     }}>
-      {/* gradient overlay — more nuanced than flat */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(12,18,16,.75) 0%, rgba(30,30,30,.4) 50%, rgba(12,18,16,.65) 100%)', pointerEvents: 'none', zIndex: 1 }} />
-      {/* diagonal grid DNA */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .05, pointerEvents: 'none', zIndex: 2, background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
+      <ParallaxLayer
+        src={ALDEA_URL}
+        speed={0.25}
+        alt="Fondo ampliación WMU"
+        overlayStyle={{ background: 'linear-gradient(135deg, rgba(12,18,16,.75) 0%, rgba(30,30,30,.4) 50%, rgba(12,18,16,.65) 100%)' }}
+      >
+        {/* diagonal grid DNA */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .05, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
+      </ParallaxLayer>
 
       <div style={{ position: 'relative', zIndex: 3, maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px,4vw,48px)' }}>
         <div className="expand-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 'clamp(32px,5vw,72px)', alignItems: 'center' }}>
@@ -744,14 +754,18 @@ function PressSection() {
 function SpecsSection() {
   const [ref, vis] = useFadeIn()
   return (
-    <section ref={ref} className="wmu-section wmu-parallax" style={{
-      position: 'relative', padding: 'clamp(80px,10vw,140px) 0', overflow: 'hidden',
-      backgroundImage: cssUrl(ARA10_URL), backgroundSize: 'cover', backgroundPosition: 'center',
+    <section ref={ref} className="wmu-section" style={{
+      position: 'relative', padding: 'clamp(80px,10vw,140px) 0', overflow: 'hidden'
     }}>
-      {/* layered gradient overlay */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(12,18,16,.8) 0%, rgba(30,30,30,.45) 50%, rgba(12,18,16,.7) 100%)', pointerEvents: 'none', zIndex: 0 }} />
-      {/* diagonal grid DNA */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .05, pointerEvents: 'none', zIndex: 1, background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
+      <ParallaxLayer
+        src={ARA10_URL}
+        speed={0.22}
+        alt="Fondo especificaciones WMU"
+        overlayStyle={{ background: 'linear-gradient(135deg, rgba(12,18,16,.8) 0%, rgba(30,30,30,.45) 50%, rgba(12,18,16,.7) 100%)' }}
+      >
+        {/* diagonal grid DNA */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .05, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
+      </ParallaxLayer>
 
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px,4vw,48px)' }}>
         {/* top header */}
@@ -1035,16 +1049,6 @@ const CSS = `
   .recognition-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08) !important; border-color: rgba(59,183,126,.15) !important; }
   .recognition-card:hover .recognition-dot { background: #3BB77E !important; border-color: #3BB77E !important; box-shadow: 0 0 0 6px rgba(59,183,126,.15) !important; }
   .recognition-card:hover .recognition-num { opacity: .12 !important; }
-
-  /* parallax — only on desktop */
-  .wmu-parallax {
-    background-attachment: scroll;
-  }
-  @media (min-width: 1025px) {
-    .wmu-parallax {
-      background-attachment: fixed !important;
-    }
-  }
 
   /* ── responsive ── */
   @media (max-width: 900px) {
