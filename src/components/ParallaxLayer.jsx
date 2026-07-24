@@ -1,87 +1,173 @@
 import { useEffect, useRef, useState } from 'react'
 
 /**
- * ParallaxLayer — Componente de parallax acelerado por GPU de alto rendimiento
- * Compatible con celulares (touch) y desktop (60/120 fps).
+ * ParallaxLayer — Parallax acelerado por GPU.
+ * Doble vía:
+ *   • Vía CSS (animation-timeline: view())  → 0 main-thread, corre en compositor.
+ *     Soportado en Chrome/Edge/Android modernos.
+ *   • Vía JS (rAF + IntersectionObserver)   → fallback universal (Safari/iOS/legacy).
  *
- * @param {string} src - Ruta de la imagen de fondo
- * @param {number} speed - Intensidad del efecto parallax (0.1 a 0.4 recomendado)
- * @param {string} alt - Texto alternativo para accesibilidad (opcional)
- * @param {object} overlayStyle - Estilos adicionales para la capa de gradiente u overlay
- * @param {React.ReactNode} children - Elementos adicionales dentro de la capa (gradientes, grillas)
+ * @param {string} src           Ruta de la imagen de fondo
+ * @param {number} speed         Intensidad (0.1–0.4 recomendado). Define cuánto
+ *                               "excedente" se reserva arriba/abajo (buffer) y
+ *                               el rango de translación. Las dos vías producen
+ *                               el mismo resultado visual.
+ * @param {string} alt           Texto alternativo (accesibilidad)
+ * @param {string} loading       'lazy' (default) | 'eager'  — hint al navegador
+ * @param {object} overlayStyle  Estilos extra para la capa overlay/gradiente
+ * @param {React.ReactNode} children  Capas extra (gradients, grids, glows)
  */
+
+const STYLE_ID = '__plx_layer_style__'
+function injectStyle() {
+  if (typeof document === 'undefined') return
+  if (document.getElementById(STYLE_ID)) return
+  const style = document.createElement('style')
+  style.id = STYLE_ID
+  style.textContent = `
+@keyframes plx-y {
+  from { transform: translate3d(0, var(--plx-t, 0), 0); }
+  to   { transform: translate3d(0, calc(var(--plx-t, 0) * -1), 0); }
+}
+.plx-native {
+  animation: plx-y linear both;
+  animation-timeline: view();
+  animation-range: cover;
+}
+@media (prefers-reduced-motion: reduce) {
+  .plx-native { animation: none; }
+}
+`
+  document.head.appendChild(style)
+}
+
+let _supports = null
+function supportsScrollTimeline() {
+  if (_supports !== null) return _supports
+  if (typeof window === 'undefined' || !window.CSS || typeof CSS.supports !== 'function') {
+    return (_supports = false)
+  }
+  try {
+    _supports = CSS.supports('animation-timeline: view()')
+  } catch {
+    _supports = false
+  }
+  return _supports
+}
+
+const pct = (n) => `${(n * 100).toFixed(4)}%`
+
 export default function ParallaxLayer({
   src,
   speed = 0.22,
   alt = '',
+  loading = 'lazy',
   overlayStyle = {},
-  children = null
+  children = null,
 }) {
   const containerRef = useRef(null)
   const layerRef = useRef(null)
-  const [offsetY, setOffsetY] = useState(0)
+
+  const [native] = useState(() => {
+    if (!supportsScrollTimeline()) return false
+    injectStyle()
+    return true
+  })
 
   useEffect(() => {
-    // Si el usuario prefiere movimiento reducido, desactivar parallax
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return
-    }
+    if (native) return
 
     const container = containerRef.current
     const layer = layerRef.current
     if (!container || !layer) return
 
-    let rafId = null
-    let isVisible = false
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mq.matches) return
 
-    // intersection observer para computar scroll solo cuando la sección está en pantalla
-    const observer = new IntersectionObserver(
+    let rafId = null
+    let visible = false
+    let running = true
+
+    const calc = () => {
+      rafId = null
+      if (!running || !visible) return
+      const rect = container.getBoundingClientRect()
+      const vh = window.innerHeight || document.documentElement.clientHeight
+      const containerCenter = rect.top + rect.height / 2
+      const denom = vh / 2 + rect.height / 2
+      const relativeDist = denom > 0 ? (containerCenter - vh / 2) / denom : 0
+      const maxTranslate = rect.height * speed
+      const y = relativeDist * maxTranslate
+      layer.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0)`
+    }
+
+    const schedule = () => {
+      if (!visible || rafId !== null) return
+      rafId = requestAnimationFrame(calc)
+    }
+
+    const io = new IntersectionObserver(
       ([entry]) => {
-        isVisible = entry.isIntersecting
-        if (isVisible) {
-          onScroll()
+        visible = entry.isIntersecting
+        if (visible) {
+          layer.style.willChange = 'transform'
+          schedule()
+        } else {
+          layer.style.willChange = 'auto'
+          if (rafId !== null) {
+            cancelAnimationFrame(rafId)
+            rafId = null
+          }
         }
       },
-      { root: null, rootMargin: '100px 0px 100px 0px', threshold: 0 }
+      { rootMargin: '100px 0px 100px 0px', threshold: 0 }
     )
 
-    const calculateOffset = () => {
-      if (!container) return
-      const rect = container.getBoundingClientRect()
-      const windowHeight = window.innerHeight || document.documentElement.clientHeight
-
-      // Posición relativa del centro del contenedor respecto al centro del viewport (-1 a 1)
-      const containerCenter = rect.top + rect.height / 2
-      const viewportCenter = windowHeight / 2
-      const relativeDist = (containerCenter - viewportCenter) / (windowHeight / 2 + rect.height / 2)
-
-      // Rango de desplazamiento clamped en pixeles
-      const maxTranslate = rect.height * speed
-      const targetY = relativeDist * maxTranslate
-
-      layer.style.transform = `translate3d(0, ${targetY.toFixed(1)}px, 0)`
+    const onMq = (e) => {
+      if (e.matches) {
+        layer.style.transform = ''
+        layer.style.willChange = 'auto'
+        if (rafId !== null) {
+          cancelAnimationFrame(rafId)
+          rafId = null
+        }
+      } else {
+        schedule()
+      }
     }
+    mq.addEventListener('change', onMq)
 
-    const onScroll = () => {
-      if (!isVisible) return
-      if (rafId) cancelAnimationFrame(rafId)
-      rafId = requestAnimationFrame(calculateOffset)
-    }
-
-    observer.observe(container)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll, { passive: true })
-
-    // Ejecutar cálculo inicial
-    calculateOffset()
+    io.observe(container)
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule, { passive: true })
+    calc()
 
     return () => {
-      observer.disconnect()
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-      if (rafId) cancelAnimationFrame(rafId)
+      running = false
+      io.disconnect()
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      mq.removeEventListener('change', onMq)
+      if (rafId !== null) cancelAnimationFrame(rafId)
+      layer.style.willChange = 'auto'
     }
-  }, [speed])
+  }, [speed, native])
+
+  const buffer = pct(speed)
+  const layerHeight = `calc(100% + ${pct(2 * speed)})`
+  const tVar = pct(speed / (1 + 2 * speed))
+
+  const layerStyle = {
+    position: 'absolute',
+    top: `-${buffer}`,
+    left: 0,
+    width: '100%',
+    height: layerHeight,
+    willChange: 'transform',
+    ...(native
+      ? { '--plx-t': tVar }
+      : { transform: 'translate3d(0, 0, 0)' }),
+  }
 
   return (
     <div
@@ -94,25 +180,13 @@ export default function ParallaxLayer({
         zIndex: 0,
       }}
     >
-      <div
-        ref={layerRef}
-        style={{
-          position: 'absolute',
-          top: '-20%',
-          left: 0,
-          right: 0,
-          bottom: '-20%',
-          width: '100%',
-          height: '140%',
-          willChange: 'transform',
-          transform: 'translate3d(0, 0px, 0)',
-          transition: 'transform 0.05s linear',
-        }}
-      >
+      <div ref={layerRef} className={native ? 'plx-native' : undefined} style={layerStyle}>
         <img
           src={src}
           alt={alt}
-          loading="eager"
+          loading={loading}
+          decoding="async"
+          draggable={false}
           style={{
             width: '100%',
             height: '100%',
@@ -123,7 +197,7 @@ export default function ParallaxLayer({
         />
       </div>
 
-      {/* Capa opcional de overlay / gradiente */}
+      {/* Overlay / gradiente */}
       <div
         style={{
           position: 'absolute',
