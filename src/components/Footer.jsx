@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import wpWhite from '../assets/wpblanco.webp'
-import { BUSINESS } from '../config/site'
+import { BUSINESS, whatsappUrl } from '../config/site'
 
 export default function Footer({ showCTA = true }) {
   return (
@@ -14,7 +14,9 @@ export default function Footer({ showCTA = true }) {
               <p className="text-white/50">Contanos qué querés construir y coordinemos una primera evaluación.</p>
             </div>
             <a
-              href="/#contact"
+              href={whatsappUrl('Hola, quiero solicitar una cotización.')}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-white/10 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] transition-[background-color,color,transform,box-shadow] duration-200 flex-shrink-0"
             >
               Solicitar Cotización

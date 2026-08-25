@@ -5,7 +5,7 @@ import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
 import { Link } from 'react-router-dom'
-import { BUSINESS, BUSINESS_ID, canonicalUrl } from '../config/site'
+import { BUSINESS, BUSINESS_ID, canonicalUrl, whatsappUrl } from '../config/site'
 
 // ─── Data local conceptual de la empresa (Paraná) ───
 const hitosParana = [
@@ -227,8 +227,6 @@ function EditorialMosaic() {
 
 export default function SteelFrameParana() {
   const [activeCapamuro, setActiveCapamuro] = useState(0)
-  const [formStatus, setFormStatus] = useState('idle')
-  const [selectedProjectType, setSelectedProjectType] = useState('')
 
   // Referencias de Scroll
   const [heroRef, heroVisible] = useInView()
@@ -296,14 +294,6 @@ export default function SteelFrameParana() {
       "Arquitectura Modular en Entre Ríos",
       "Ingeniería de Detalle"
     ]
-  }
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault()
-    setFormStatus('sending')
-    setTimeout(() => {
-      setFormStatus('success')
-    }, 1500)
   }
 
   return (
@@ -566,7 +556,9 @@ export default function SteelFrameParana() {
                 {/* CTAs con hover mejorado */}
                 <div className="flex flex-wrap gap-4">
                   <a
-                    href="#cotizar"
+                    href={whatsappUrl('Hola, quiero cotizar un proyecto de Steel Frame en Paraná.')}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="px-8 py-4 bg-[#15251b] text-white hover:bg-[#344a3c] hover:-translate-y-0.5 rounded-xl font-semibold text-xs tracking-widest transition-all duration-300 font-headline uppercase shadow-md hover:shadow-xl"
                   >
                     Cotizar mi Proyecto
@@ -865,124 +857,33 @@ export default function SteelFrameParana() {
         </section>
 
         {/* ═══════════════════════════════════════════════════════
-            6. COTIZAR — Premium Quote Form
+            6. COTIZAR — WhatsApp contact
             ═══════════════════════════════════════════════════════ */}
         <section
           ref={contactRef}
           id="cotizar"
           className="relative py-24 px-6 lg:px-16 bg-[#fafaf9] text-on-surface"
         >
-          <div className="relative z-10 w-full max-w-3xl mx-auto bg-white border border-[#15251b]/10 rounded-3xl p-8 lg:p-12 shadow-lg">
+          <div className="relative z-10 w-full max-w-3xl mx-auto bg-white border border-[#15251b]/10 rounded-3xl p-8 lg:p-12 shadow-lg text-center">
             <div className="text-center mb-10">
               <span className="text-xs font-bold tracking-[0.25em] text-[#15251b]/70 uppercase font-headline">Tu Proyecto</span>
               <h2 className="font-headline text-3xl font-bold text-[#15251b] leading-tight mt-3 mb-4">
                 Solicitá Presupuesto y Asesoramiento
               </h2>
               <p className="text-on-surface-variant text-sm leading-relaxed font-light">
-                Completá el formulario para que nos comuniquemos y analicemos tu idea de construcción en seco en Entre Ríos o Santa Fe.
+                Escribinos por WhatsApp para contarnos tu idea de construcción en seco en Entre Ríos o Santa Fe.
               </p>
             </div>
-
-            {formStatus === 'success' ? (
-              <Motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-12 px-6"
-              >
-                <div className="w-16 h-16 rounded-full bg-[#d4e7d8] text-[#15251b] flex items-center justify-center mx-auto mb-6 shadow-sm">
-                  <span className="material-symbols-outlined text-3xl">done</span>
-                </div>
-                <h3 className="font-headline text-xl font-bold text-[#15251b] mb-2">¡Consulta Recibida!</h3>
-                <p className="text-on-surface-variant text-sm max-w-md mx-auto leading-relaxed font-light">
-                  Gracias por escribirnos. El equipo de WP revisará los datos para dar seguimiento a la consulta.
-                </p>
-              </Motion.div>
-            ) : (
-              <form onSubmit={handleFormSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="nombre" className="block text-xs font-headline font-bold text-[#15251b] uppercase mb-2">Nombre y Apellido *</label>
-                    <input
-                      type="text"
-                      id="nombre"
-                      required
-                      className="w-full bg-[#fafaf9] border border-[#15251b]/20 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary transition-colors text-on-surface font-light"
-                      placeholder="Ej. Juan Pérez"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="telefono" className="block text-xs font-headline font-bold text-[#15251b] uppercase mb-2">Teléfono de Contacto *</label>
-                    <input
-                      type="tel"
-                      id="telefono"
-                      required
-                      className="w-full bg-[#fafaf9] border border-[#15251b]/20 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary transition-colors text-on-surface font-light"
-                      placeholder="Ej. +54 9 343 000 0000"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="email" className="block text-xs font-headline font-bold text-[#15251b] uppercase mb-2">Email *</label>
-                    <input
-                      type="email"
-                      id="email"
-                      required
-                      className="w-full bg-[#fafaf9] border border-[#15251b]/20 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary transition-colors text-on-surface font-light"
-                      placeholder="Ej. juan@correo.com"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="tipo" className="block text-xs font-headline font-bold text-[#15251b] uppercase mb-2">Tipo de Proyecto *</label>
-                    <select
-                      id="tipo"
-                      required
-                      value={selectedProjectType}
-                      onChange={(e) => setSelectedProjectType(e.target.value)}
-                      className="w-full bg-[#fafaf9] border border-[#15251b]/20 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary transition-colors text-on-surface font-light"
-                    >
-                      <option value="" disabled>Seleccioná una opción</option>
-                      <option value="vivienda">Vivienda Residencial</option>
-                      <option value="ampliacion">Ampliación / Planta Alta</option>
-                      <option value="wmu">Módulo WMU (Vivienda Modular)</option>
-                      <option value="comercial">Comercial / Industrial</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="ubicacion" className="block text-xs font-headline font-bold text-[#15251b] uppercase mb-2">Ubicación de la obra *</label>
-                  <input
-                    type="text"
-                    id="ubicacion"
-                    required
-                    className="w-full bg-[#fafaf9] border border-[#15251b]/20 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary transition-colors text-on-surface font-light"
-                    placeholder="Ej. Paraná, Oro Verde, Crespo, Santa Fe, etc."
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="mensaje" className="block text-xs font-headline font-bold text-[#15251b] uppercase mb-2">Detalles de la Consulta</label>
-                  <textarea
-                    id="mensaje"
-                    rows="4"
-                    className="w-full bg-[#fafaf9] border border-[#15251b]/20 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary transition-colors text-on-surface resize-none font-light"
-                    placeholder="Escribí aquí tus dudas o detalles sobre las dimensiones o estado de tu proyecto..."
-                  />
-                </div>
-
-                <div className="text-right">
-                  <button
-                    type="submit"
-                    disabled={formStatus === 'sending'}
-                    className="px-8 py-4 bg-[#15251b] text-white hover:bg-[#344a3c] rounded-xl font-semibold text-xs tracking-widest transition-all duration-300 font-headline uppercase disabled:opacity-50"
-                  >
-                    {formStatus === 'sending' ? 'Enviando...' : 'Enviar Consulta'}
-                  </button>
-                </div>
-              </form>
-            )}
+            <a
+              href={whatsappUrl('Hola, quiero cotizar un proyecto de Steel Frame en Paraná.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-[#25D366] text-white hover:bg-[#1ebe5d] rounded-xl font-semibold text-xs tracking-widest transition-all duration-300 font-headline uppercase shadow-md hover:shadow-lg hover:-translate-y-0.5"
+            >
+              <span className="material-symbols-outlined text-xl">chat</span>
+              Cotizar por WhatsApp
+              <span className="material-symbols-outlined text-lg">arrow_forward</span>
+            </a>
           </div>
         </section>
 
