@@ -2,15 +2,15 @@ export const SITE_URL = 'https://www.wpconstrucciones.com'
 export const SITE_NAME = 'WP Construcciones Especiales'
 export const BUSINESS_ID = `${SITE_URL}/#business`
 
-const PHONE_E164 = '+5493435056918'
+const PHONE_E164 = '+5493434056918'
 const EMAIL = 'wpsascentral@gmail.com'
 
 export const BUSINESS = Object.freeze({
   name: SITE_NAME,
-  phoneDisplay: '+54 9 3435 05-6918',
+  phoneDisplay: '+54 9 3434 05-6918',
   phoneE164: PHONE_E164,
   telHref: `tel:${PHONE_E164}`,
-  whatsapp: '5493435056918',
+  whatsapp: '5493434056918',
   email: EMAIL,
   mailtoHref: `mailto:${EMAIL}`,
   locality: 'Paraná',
