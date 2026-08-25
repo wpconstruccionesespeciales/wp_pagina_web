@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import SEO from '../components/SEO'
 import { Link } from 'react-router-dom'
-import ParallaxLayer from '../components/ParallaxLayer'
 import wpWhite from '../assets/wpblanco.webp'
 import { BUSINESS, whatsappUrl } from '../config/site'
 
@@ -10,6 +9,8 @@ const G     = '#3BB77E' // Moss Green (organic, elegant)
 const BG    = '#0A0F0D' // Deep Pine Slate
 const TXT   = '#F3F5F4'
 const SOFT  = '#B7C0BB'
+const SAND  = '#E6DED4' // Cedar / Warm Sand highlight
+const STEEL = '#2F363F' // Industrial Slate
 
 /* Fuentes anteriores (guardadas para referencia):
    const HEADING = '"Manrope", sans-serif'
@@ -26,9 +27,7 @@ const SKY_URL   = '/media/sky-hero.webp'
 const ARA10_URL = '/wmu/Ara10.webp'
 const ALDEA_URL = '/wmu/aldea+(3).webp'
 const HEX_IMG   = '/wmu/aldea+(3).webp'
-
-/* WhatsApp icon path — reused 4x */
-const WA_ICON_PATH = 'M16.004 3.2C9.054 3.2 3.404 8.85 3.404 15.8c0 2.22.58 4.39 1.684 6.3L3.2 28.8l6.9-1.81a12.55 12.55 0 006.004 1.53h.005c6.95 0 12.6-5.65 12.6-12.6-.003-3.37-1.314-6.53-3.69-8.91A12.53 12.53 0 0016.004 3.2zm0 23.1a10.45 10.45 0 01-5.33-1.46l-.38-.23-3.95 1.04 1.06-3.87-.25-.4A10.42 10.42 0 015.5 15.8c0-5.79 4.71-10.5 10.51-10.5 2.81 0 5.45 1.09 7.43 3.08a10.44 10.44 0 013.07 7.43c-.003 5.79-4.713 10.5-10.503 10.5zm5.76-7.87c-.32-.16-1.87-.92-2.16-1.03-.29-.1-.5-.16-.71.16-.21.31-.82 1.03-1.01 1.24-.18.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.77-2.2-.18-.31-.02-.48.14-.64.14-.14.32-.37.47-.55.16-.18.21-.31.32-.53.1-.21.05-.39-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.22 3.39 5.38 4.76.75.33 1.34.52 1.8.67.75.24 1.44.21 1.98.13.6-.09 1.87-.77 2.13-1.5.27-.74.27-1.37.19-1.5-.08-.14-.29-.22-.61-.37z'
+const cssUrl = (url) => `url("${url}")`
 
 /* ── data ── */
 const MODELS = [
@@ -58,22 +57,6 @@ const PRESS = [
   { tag: 'Más Eficiencia, Menos Precio', portal: 'Oleinizak',     img: '/wmu/xmas.jpg',      title: 'Enfoque en eficiencia de producción',  href: 'https://oleinizak.com/matteoda-wp-construcciones-ahora-debemos-enfocarnos-en-ser-mas-eficientes-en-la-produccion-y-no-en-el-precio' },
 ]
 
-const NON_FEATURED_MODELS = MODELS.filter((_, i) => i !== 3)
-
-const RECOGNITION_VALUES = [
-  { num: '[MOD-3.6m]', title: 'Nuestra visión',  text: 'Seguir construyendo con la misma calidad y método que nos distingue, para que tu inversión sea sólida.' },
-  { num: '[MOD-6.0m]', title: 'Nuestra misión',  text: 'Calidad innegociable y máxima eficiencia, cumpliendo siempre el compromiso de entrega pactado.' },
-  { num: '[MOD-12.0m]', title: 'Sustentabilidad', text: 'Construcciones más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
-]
-
-function WaGlyph({ size = 22, color = 'currentColor', className, ariaHidden = true }) {
-  return (
-    <svg viewBox="0 0 32 32" fill={color} width={size} height={size} aria-hidden={ariaHidden} className={className}>
-      <path d={WA_ICON_PATH} />
-    </svg>
-  )
-}
-
 /* ── hook ── */
 function useFadeIn(threshold = 0.12) {
   const ref = useRef(null)
@@ -93,37 +76,32 @@ function useFadeIn(threshold = 0.12) {
   return [ref, vis]
 }
 
-/* ── hook: cascade reveal via single IntersectionObserver ── */
+/* ── hook: cascade reveal via IntersectionObserver ── */
 function useCascadeReveal(itemCount) {
   const refs = useRef([])
   const [vis, setVis] = useState(() => Array(itemCount).fill(false))
   useEffect(() => {
-    const els = refs.current.filter(Boolean)
-    if (!els.length) return
-    const idxByEl = new Map()
-    refs.current.forEach((el, i) => { if (el) idxByEl.set(el, i) })
-    const obs = new IntersectionObserver(
-      (entries) => {
-        let changed = false
-        const visibleIdxs = []
-        for (const e of entries) {
-          if (e.isIntersecting) visibleIdxs.push(idxByEl.get(e.target))
-        }
-        if (visibleIdxs.length) {
-          setVis(prev => {
-            const next = prev.slice()
-            for (const i of visibleIdxs) {
-              if (!next[i]) { next[i] = true; changed = true }
-            }
-            return changed ? next : prev
-          })
-          for (const i of visibleIdxs) obs.unobserve(refs.current[i])
-        }
-      },
-      { threshold: 0.04, rootMargin: '0px 0px -48px 0px' }
-    )
-    els.forEach(el => obs.observe(el))
-    return () => obs.disconnect()
+    const observers = []
+    refs.current.forEach((el, i) => {
+      if (!el) return
+      const obs = new IntersectionObserver(
+        ([e]) => {
+          if (e.isIntersecting) {
+            setVis(prev => {
+              if (prev[i]) return prev
+              const next = [...prev]
+              next[i] = true
+              return next
+            })
+            obs.disconnect()
+          }
+        },
+        { threshold: 0.04, rootMargin: '0px 0px -48px 0px' }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+    return () => observers.forEach(o => o.disconnect())
   }, [])
   const setRef = (i) => (el) => { refs.current[i] = el }
   return [setRef, vis]
@@ -135,20 +113,9 @@ function useCascadeReveal(itemCount) {
 function WMUNav() {
   const [sc, setSc] = useState(false)
   useEffect(() => {
-    let raf = null
-    const fn = () => {
-      if (raf !== null) return
-      raf = requestAnimationFrame(() => {
-        raf = null
-        setSc(window.scrollY > 60)
-      })
-    }
+    const fn = () => setSc(window.scrollY > 60)
     window.addEventListener('scroll', fn, { passive: true })
-    fn()
-    return () => {
-      if (raf !== null) cancelAnimationFrame(raf)
-      window.removeEventListener('scroll', fn)
-    }
+    return () => window.removeEventListener('scroll', fn)
   }, [])
   return (
     <nav className="wmu-nav" style={{
@@ -169,8 +136,8 @@ function WMUNav() {
         <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
           <img src={wpWhite} alt="WP Construcciones" style={{ height: 'clamp(42px, 5vw, 54px)', objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: .96 }} />
         </Link>
-<a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-nav-wa" aria-label="Contactar por WhatsApp">
-          <WaGlyph size={22} />
+        <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-nav-wa" aria-label="Contactar por WhatsApp">
+          <svg viewBox="0 0 32 32" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M16.004 3.2C9.054 3.2 3.404 8.85 3.404 15.8c0 2.22.58 4.39 1.684 6.3L3.2 28.8l6.9-1.81a12.55 12.55 0 006.004 1.53h.005c6.95 0 12.6-5.65 12.6-12.6-.003-3.37-1.314-6.53-3.69-8.91A12.53 12.53 0 0016.004 3.2zm0 23.1a10.45 10.45 0 01-5.33-1.46l-.38-.23-3.95 1.04 1.06-3.87-.25-.4A10.42 10.42 0 015.5 15.8c0-5.79 4.71-10.5 10.51-10.5 2.81 0 5.45 1.09 7.43 3.08a10.44 10.44 0 013.07 7.43c-.003 5.79-4.713 10.5-10.503 10.5zm5.76-7.87c-.32-.16-1.87-.92-2.16-1.03-.29-.1-.5-.16-.71.16-.21.31-.82 1.03-1.01 1.24-.18.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.77-2.2-.18-.31-.02-.48.14-.64.14-.14.32-.37.47-.55.16-.18.21-.31.32-.53.1-.21.05-.39-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.22 3.39 5.38 4.76.75.33 1.34.52 1.8.67.75.24 1.44.21 1.98.13.6-.09 1.87-.77 2.13-1.5.27-.74.27-1.37.19-1.5-.08-.14-.29-.22-.61-.37z"/></svg>
         </a>
       </div>
     </nav>
@@ -183,20 +150,10 @@ function WMUNav() {
 function FloatingWhatsApp() {
   const [show, setShow] = useState(false)
   useEffect(() => {
-    let raf = null
-    const fn = () => {
-      if (raf !== null) return
-      raf = requestAnimationFrame(() => {
-        raf = null
-        setShow(window.scrollY > 300)
-      })
-    }
+    const fn = () => setShow(window.scrollY > 300)
     window.addEventListener('scroll', fn, { passive: true })
     fn()
-    return () => {
-      if (raf !== null) cancelAnimationFrame(raf)
-      window.removeEventListener('scroll', fn)
-    }
+    return () => window.removeEventListener('scroll', fn)
   }, [])
   return (
     <a href={WA} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp"
@@ -211,7 +168,9 @@ function FloatingWhatsApp() {
         pointerEvents: show ? 'auto' : 'none',
         textDecoration: 'none',
       }}>
-<WaGlyph size={28} color="white" />
+      <svg viewBox="0 0 32 32" fill="white" width="28" height="28">
+        <path d="M16.004 3.2C9.054 3.2 3.404 8.85 3.404 15.8c0 2.22.58 4.39 1.684 6.3L3.2 28.8l6.9-1.81a12.55 12.55 0 006.004 1.53h.005c6.95 0 12.6-5.65 12.6-12.6-.003-3.37-1.314-6.53-3.69-8.91A12.53 12.53 0 0016.004 3.2zm0 23.1a10.45 10.45 0 01-5.33-1.46l-.38-.23-3.95 1.04 1.06-3.87-.25-.4A10.42 10.42 0 015.5 15.8c0-5.79 4.71-10.5 10.51-10.5 2.81 0 5.45 1.09 7.43 3.08a10.44 10.44 0 013.07 7.43c-.003 5.79-4.713 10.5-10.503 10.5zm5.76-7.87c-.32-.16-1.87-.92-2.16-1.03-.29-.1-.5-.16-.71.16-.21.31-.82 1.03-1.01 1.24-.18.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.77-2.2-.18-.31-.02-.48.14-.64.14-.14.32-.37.47-.55.16-.18.21-.31.32-.53.1-.21.05-.39-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.22 3.39 5.38 4.76.75.33 1.34.52 1.8.67.75.24 1.44.21 1.98.13.6-.09 1.87-.77 2.13-1.5.27-.74.27-1.37.19-1.5-.08-.14-.29-.22-.61-.37z"/>
+      </svg>
     </a>
   )
 }
@@ -331,11 +290,17 @@ function CardLink({ model, className, style, children }) {
 }
 
 function ModelCard({ model, delay, vis, featured }) {
+  const [hov, setHov] = useState(false)
+  const hoverHandlers = {
+    onMouseEnter: () => setHov(true),
+    onMouseLeave: () => setHov(false),
+  }
   if (featured) {
     return (
       <CardLink
         model={model}
         className={`model-featured wmu-3d-card-reveal ${vis ? 'visible' : ''}`}
+        {...hoverHandlers}
         style={{
           display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 0, textDecoration: 'none',
           borderRadius: 20, overflow: 'hidden',
@@ -345,7 +310,7 @@ function ModelCard({ model, delay, vis, featured }) {
           transitionDelay: vis ? '0s' : `${delay}s`,
         }}>
         <div className={`wmu-card-clip-sweep ${vis ? 'visible' : ''}`} style={{ overflow: 'hidden', minHeight: 320, transitionDelay: vis ? '0s' : `${delay}s` }}>
-          <img src={model.img} alt={model.name} width="1600" height="900" loading="lazy" decoding="async" className="wmu-card-img-featured" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <img src={model.img} alt={model.name} width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hov ? 'scale(1.04)' : 'scale(1)', transition: 'transform .6s ease' }} />
         </div>
         <div style={{ padding: 'clamp(28px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <span style={{ color: G, fontWeight: 700, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', fontFamily: BODY, marginBottom: 10 }}>Modelo destacado</span>
@@ -371,6 +336,7 @@ function ModelCard({ model, delay, vis, featured }) {
     <CardLink
       model={model}
       className={`wmu-3d-card-reveal ${vis ? 'visible' : ''}`}
+      {...hoverHandlers}
       style={{
         display: 'block', textDecoration: 'none', borderRadius: 16, overflow: 'hidden',
         background: 'rgba(12,18,16,.6)', border: '1px solid rgba(255,255,255,.1)',
@@ -378,8 +344,10 @@ function ModelCard({ model, delay, vis, featured }) {
         transitionDelay: vis ? '0s' : `${delay}s`,
       }}>
       <div className={`wmu-card-clip-sweep ${vis ? 'visible' : ''}`} style={{ aspectRatio: '4/3', overflow: 'hidden', position: 'relative', transitionDelay: vis ? '0s' : `${delay}s` }}>
-        <img src={model.img} alt={model.name} width="1600" height="900" loading="lazy" decoding="async" className="wmu-card-img-grid" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-        <div aria-hidden="true" className="wmu-card-glow" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 100%, rgba(53,195,107,.15), transparent 70%)', opacity: 0, transition: 'opacity .4s ease', pointerEvents: 'none' }} />
+        <img src={model.img} alt={model.name} width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hov ? 'scale(1.06)' : 'scale(1)', transition: 'transform .5s ease' }} />
+        {/* green glow on hover */}
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 100%, rgba(53,195,107,.15), transparent 70%)', opacity: hov ? 1 : 0, transition: 'opacity .4s ease', pointerEvents: 'none' }} />
+        {/* size badge */}
         <div style={{ position: 'absolute', top: 12, right: 12, padding: '5px 12px', borderRadius: 8, background: 'rgba(12,18,16,.7)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,.1)' }}>
           <span style={{ color: TXT, fontSize: 12, fontWeight: 700, fontFamily: BODY }}>{model.size}</span>
         </div>
@@ -398,21 +366,16 @@ function ModelCard({ model, delay, vis, featured }) {
 function ModelsSection() {
   const [ref, vis] = useFadeIn(0.05)
   return (
-    <section id="models" ref={ref} className="wmu-section" style={{
+    <section id="models" ref={ref} className="wmu-section wmu-parallax" style={{
       position: 'relative', padding: 'clamp(80px,10vw,140px) 0', scrollMarginTop: '-20px',
-      overflow: 'hidden'
+      backgroundImage: `url(${SKY_URL})`, backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
-      <ParallaxLayer
-        src={SKY_URL}
-        speed={0.22}
-        alt="Fondo catálogo WMU"
-        overlayStyle={{ background: 'linear-gradient(180deg, rgba(0,0,0,.7) 0%, rgba(12,18,16,.5) 50%, rgba(0,0,0,.7) 100%)' }}
-      >
-        {/* diagonal grid — DNA from hero */}
-        <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .06, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
-        {/* green radial glow */}
-        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 60% 40% at 50% 20%, rgba(53,195,107,.08), transparent)', pointerEvents: 'none' }} />
-      </ParallaxLayer>
+      {/* layered overlay — gradient instead of flat */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,.7) 0%, rgba(12,18,16,.5) 50%, rgba(0,0,0,.7) 100%)', pointerEvents: 'none' }} />
+      {/* diagonal grid — DNA from hero */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .06, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
+      {/* green radial glow */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 60% 40% at 50% 20%, rgba(53,195,107,.08), transparent)', pointerEvents: 'none' }} />
 
       <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px,4vw,48px)' }}>
         <div style={{ textAlign: 'center', marginBottom: 'clamp(36px,5vw,64px)' }}>
@@ -427,9 +390,9 @@ function ModelsSection() {
         {/* featured model — ALDEA (biggest) */}
         <ModelCard model={MODELS[3]} delay={0} vis={vis} featured />
 
-{/* remaining 4 in a grid */}
+        {/* remaining 4 in a grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 16 }} className="models-grid">
-          {NON_FEATURED_MODELS.map((m,i) => (
+          {MODELS.filter((_,i) => i !== 3).map((m,i) => (
             <ModelCard key={m.name} model={m} delay={.12 + i*.15} vis={vis} />
           ))}
         </div>
@@ -526,18 +489,14 @@ function ManifestoSection() {
 function ExpandSection() {
   const [ref, vis] = useFadeIn()
   return (
-    <section id="extender" ref={ref} className="wmu-section" style={{
-      position: 'relative', padding: 'clamp(30px,4vw,50px) 0', overflow: 'hidden'
+    <section id="extender" ref={ref} className="wmu-section wmu-parallax" style={{
+      position: 'relative', padding: 'clamp(30px,4vw,50px) 0', overflow: 'hidden',
+      backgroundImage: cssUrl(ALDEA_URL), backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
-      <ParallaxLayer
-        src={ALDEA_URL}
-        speed={0.25}
-        alt="Fondo ampliación WMU"
-        overlayStyle={{ background: 'linear-gradient(135deg, rgba(12,18,16,.75) 0%, rgba(30,30,30,.4) 50%, rgba(12,18,16,.65) 100%)' }}
-      >
-        {/* diagonal grid DNA */}
-        <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .05, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
-      </ParallaxLayer>
+      {/* gradient overlay — more nuanced than flat */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(12,18,16,.75) 0%, rgba(30,30,30,.4) 50%, rgba(12,18,16,.65) 100%)', pointerEvents: 'none', zIndex: 1 }} />
+      {/* diagonal grid DNA */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .05, pointerEvents: 'none', zIndex: 2, background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
 
       <div style={{ position: 'relative', zIndex: 3, maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px,4vw,48px)' }}>
         <div className="expand-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 'clamp(32px,5vw,72px)', alignItems: 'center' }}>
@@ -583,7 +542,11 @@ function ExpandSection() {
 ═══════════════════════════════════════════════════════════════════════════ */
 function RecognitionSection() {
   const [ref, vis] = useFadeIn()
-  const values = RECOGNITION_VALUES
+  const values = [
+    { num: '[MOD-3.6m]', title: 'Nuestra visión',  text: 'Seguir construyendo con la misma calidad y método que nos distingue, para que tu inversión sea sólida.' },
+    { num: '[MOD-6.0m]', title: 'Nuestra misión',  text: 'Calidad innegociable y máxima eficiencia, cumpliendo siempre el compromiso de entrega pactado.' },
+    { num: '[MOD-12.0m]', title: 'Sustentabilidad', text: 'Construcciones más cómodas que gastan menos luz, contribuyendo a un futuro más limpio y eficiente.' },
+  ]
   return (
     <section ref={ref} className="wmu-section" style={{
       background: '#EDE9E3',
@@ -781,18 +744,14 @@ function PressSection() {
 function SpecsSection() {
   const [ref, vis] = useFadeIn()
   return (
-    <section ref={ref} className="wmu-section" style={{
-      position: 'relative', padding: 'clamp(80px,10vw,140px) 0', overflow: 'hidden'
+    <section ref={ref} className="wmu-section wmu-parallax" style={{
+      position: 'relative', padding: 'clamp(80px,10vw,140px) 0', overflow: 'hidden',
+      backgroundImage: cssUrl(ARA10_URL), backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
-      <ParallaxLayer
-        src={ARA10_URL}
-        speed={0.22}
-        alt="Fondo especificaciones WMU"
-        overlayStyle={{ background: 'linear-gradient(135deg, rgba(12,18,16,.8) 0%, rgba(30,30,30,.45) 50%, rgba(12,18,16,.7) 100%)' }}
-      >
-        {/* diagonal grid DNA */}
-        <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .05, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
-      </ParallaxLayer>
+      {/* layered gradient overlay */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(12,18,16,.8) 0%, rgba(30,30,30,.45) 50%, rgba(12,18,16,.7) 100%)', pointerEvents: 'none', zIndex: 0 }} />
+      {/* diagonal grid DNA */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: '-20% -10% -10% -20%', opacity: .05, pointerEvents: 'none', zIndex: 1, background: 'repeating-linear-gradient(60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px),repeating-linear-gradient(-60deg,rgba(255,255,255,.3) 0 1px,transparent 1px 36px)', transform: 'skewY(-4deg)' }} />
 
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px,4vw,48px)' }}>
         {/* top header */}
@@ -887,7 +846,7 @@ function WMUFooter() {
 function MobileContactBar() {
   return (
     <a href={WA} target="_blank" rel="noopener noreferrer" className="wmu-mobile-contact" aria-label="Contactar por WhatsApp">
-      <WaGlyph size={22} />
+      <svg viewBox="0 0 32 32" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M16.004 3.2C9.054 3.2 3.404 8.85 3.404 15.8c0 2.22.58 4.39 1.684 6.3L3.2 28.8l6.9-1.81a12.55 12.55 0 006.004 1.53h.005c6.95 0 12.6-5.65 12.6-12.6-.003-3.37-1.314-6.53-3.69-8.91A12.53 12.53 0 0016.004 3.2zm0 23.1a10.45 10.45 0 01-5.33-1.46l-.38-.23-3.95 1.04 1.06-3.87-.25-.4A10.42 10.42 0 015.5 15.8c0-5.79 4.71-10.5 10.51-10.5 2.81 0 5.45 1.09 7.43 3.08a10.44 10.44 0 013.07 7.43c-.003 5.79-4.713 10.5-10.503 10.5zm5.76-7.87c-.32-.16-1.87-.92-2.16-1.03-.29-.1-.5-.16-.71.16-.21.31-.82 1.03-1.01 1.24-.18.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.77-2.2-.18-.31-.02-.48.14-.64.14-.14.32-.37.47-.55.16-.18.21-.31.32-.53.1-.21.05-.39-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.22 3.39 5.38 4.76.75.33 1.34.52 1.8.67.75.24 1.44.21 1.98.13.6-.09 1.87-.77 2.13-1.5.27-.74.27-1.37.19-1.5-.08-.14-.29-.22-.61-.37z"/></svg>
       <span>CONTACTANOS POR WHATSAPP</span>
     </a>
   )
@@ -986,7 +945,7 @@ const CSS = `
     transform: perspective(800px) rotateX(0deg) translateY(0) scale(0.985) !important;
   }
 
-/* Clip-path sweep reveal for images */
+  /* Clip-path sweep reveal for images */
   .wmu-card-clip-sweep {
     clip-path: inset(0 100% 0 0);
     transition: clip-path 1600ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -995,13 +954,6 @@ const CSS = `
   .visible.wmu-card-clip-sweep {
     clip-path: inset(0 0 0 0);
   }
-
-  /* Card image hover-zoom (CSS-only, replaces React hover state) */
-  .wmu-card-img-featured { transition: transform .6s ease; will-change: transform; }
-  .wmu-3d-card-reveal:hover .wmu-card-img-featured { transform: scale(1.04); }
-  .wmu-card-img-grid { transition: transform .5s ease; will-change: transform; }
-  .wmu-3d-card-reveal:hover .wmu-card-img-grid { transform: scale(1.06); }
-  .wmu-3d-card-reveal:hover .wmu-card-glow { opacity: 1; }
 
   @media (prefers-reduced-motion: reduce) {
     .wmu-3d-card-reveal {
@@ -1084,6 +1036,16 @@ const CSS = `
   .recognition-card:hover .recognition-dot { background: #3BB77E !important; border-color: #3BB77E !important; box-shadow: 0 0 0 6px rgba(59,183,126,.15) !important; }
   .recognition-card:hover .recognition-num { opacity: .12 !important; }
 
+  /* parallax — only on desktop */
+  .wmu-parallax {
+    background-attachment: scroll;
+  }
+  @media (min-width: 1025px) {
+    .wmu-parallax {
+      background-attachment: fixed !important;
+    }
+  }
+
   /* ── responsive ── */
   @media (max-width: 900px) {
     .hero-inner { grid-template-columns: 1fr !important; gap: 28px !important; }
@@ -1132,16 +1094,12 @@ const CSS = `
       linear-gradient(90deg, rgba(59, 183, 126, 0.05) 1px, transparent 1px);
     background-size: 24px 24px;
   }
-.manifiesto-grain {
+  .manifiesto-grain {
     position: absolute; inset: 0; pointer-events: none; opacity: .04;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
     background-size: 220px 220px;
     mix-blend-mode: multiply;
     animation: mf-grain 12s steps(8) infinite;
-    animation-play-state: paused;
-  }
-  .manifiesto-section.is-revealed .manifiesto-grain {
-    animation-play-state: running;
   }
   @keyframes mf-grain {
     0%   { transform: translate(0, 0); }

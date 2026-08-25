@@ -393,9 +393,9 @@ Adoptar los valores predominantes del sitio actual:
 ```js
 export const BUSINESS = {
   name: 'WP Construcciones Especiales',
-  phoneDisplay: '+54 9 3434 05-6918',
-  phoneE164: '+5493434056918',
-  whatsapp: '5493434056918',
+  phoneDisplay: '+54 9 3435 05-6918',
+  phoneE164: '+5493435056918',
+  whatsapp: '5493435056918',
   email: 'wpsascentral@gmail.com',
   locality: 'Paraná',
   region: 'Entre Ríos',
