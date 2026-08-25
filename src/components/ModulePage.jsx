@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import SEO from './SEO'
 import NavBar from './NavBar'
 import Footer from './Footer'
+import ParallaxLayer from './ParallaxLayer'
 import WhatsAppButton from './WhatsAppButton'
 import { WMU_INCLUDES } from '../data/wmu-modules'
 import { BUSINESS, canonicalUrl, whatsappUrl } from '../config/site'
@@ -553,18 +554,15 @@ function CtaSection({ data }) {
   return (
     <section ref={ref} style={{ padding: 'clamp(80px, 9vw, 120px) 0', position: 'relative', overflow: 'hidden', background: '#0e1a11' }}>
       {bg && (
-        <img
+        <ParallaxLayer
           src={imgSrc(bg, 1500)}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', filter: 'brightness(.7) contrast(1.05) saturate(.95)' }}
-        />
+          speed={0.2}
+          overlayStyle={{ background: 'linear-gradient(180deg, rgba(15,31,21,.55) 0%, rgba(8,18,12,.82) 100%)' }}
+        >
+          <div aria-hidden="true" style={{ position: 'absolute', inset: 0, opacity: .05, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg, #fff 0 1px, transparent 1px 64px),repeating-linear-gradient(-60deg, #fff 0 1px, transparent 1px 64px)' }} />
+          <div aria-hidden="true" style={{ position: 'absolute', top: '-12%', right: '-6%', width: 340, height: 340, borderRadius: '50%', background: 'radial-gradient(circle, rgba(53,195,107,.18), transparent 70%)', filter: 'blur(36px)', pointerEvents: 'none' }} />
+        </ParallaxLayer>
       )}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(15,31,21,.55) 0%, rgba(8,18,12,.82) 100%)' }} />
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, opacity: .05, pointerEvents: 'none', background: 'repeating-linear-gradient(60deg, #fff 0 1px, transparent 1px 64px),repeating-linear-gradient(-60deg, #fff 0 1px, transparent 1px 64px)' }} />
-      <div aria-hidden="true" style={{ position: 'absolute', top: '-12%', right: '-6%', width: 340, height: 340, borderRadius: '50%', background: 'radial-gradient(circle, rgba(53,195,107,.18), transparent 70%)', filter: 'blur(36px)', pointerEvents: 'none' }} />
 
       <div style={{ position: 'relative', maxWidth: 880, margin: '0 auto', padding: '0 clamp(16px, 4vw, 40px)', textAlign: 'center', color: '#ecfff5', opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(20px)', transition: 'opacity .8s ease, transform .8s ease' }}>
         <span style={{ color: G, fontWeight: 700, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', fontFamily: BODY_F, display: 'inline-block', marginBottom: 14 }}>¿Listo para empezar?</span>
