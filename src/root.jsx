@@ -1,4 +1,5 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
+import { Analytics } from '@vercel/analytics/react'
 import './index.css'
 
 export function Layout({ children }) {
@@ -21,6 +22,7 @@ export function Layout({ children }) {
       </head>
       <body>
         {children}
+        <Analytics/>
         <ScrollRestoration />
         <Scripts />
       </body>
