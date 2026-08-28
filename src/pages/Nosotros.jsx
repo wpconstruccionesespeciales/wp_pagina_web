@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
 import SEO from '../components/SEO'
 import wpLogo from '../assets/WP.png'
-import { BUSINESS, BUSINESS_ID, canonicalUrl } from '../config/site'
+import { BUSINESS, BUSINESS_ID, canonicalUrl, whatsappUrl } from '../config/site'
 
 
 /* ──────────────── BEFORE / AFTER SLIDER ──────────────── */
@@ -764,7 +764,9 @@ export default function Nosotros() {
 
             <div className="flex flex-col md:flex-row justify-center items-center gap-6">
               <a
-                href="/#contact"
+                href={whatsappUrl('Hola, quiero iniciar un proyecto con WP Construcciones.')}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-3 bg-primary hover:bg-[#203728] text-white px-10 py-5 rounded-xl font-headline font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5"
               >
                 <span>Iniciá tu proyecto</span>

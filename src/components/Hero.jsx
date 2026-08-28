@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { whatsappUrl } from '../config/site'
 
 export default function Hero() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
@@ -22,7 +23,6 @@ export default function Hero() {
 
   useEffect(() => {
     let ticking = false
-    let io
 
     const update = () => {
       const scrollY = window.scrollY
@@ -48,29 +48,87 @@ export default function Hero() {
       window.addEventListener('scroll', onScroll, { passive: true })
     }
 
+    // ——— Robust autoplay for Android / mobile ———
+    // Problema anterior: IntersectionObserver pausaba el video cuando el hero
+    // salía del viewport. En Android Chrome el observer se dispara de forma
+    // agresiva (address-bar resize, ahorro de batería) y el video quedaba pausado.
+    // Además Android exige muted + playsInline + play() vía JS con reintentos.
     const video = videoRef.current
-    const section = sectionRef.current
-    if (video && prefersReducedMotion) video.pause()
-    if (video && section && !prefersReducedMotion && 'IntersectionObserver' in window) {
-      io = new IntersectionObserver(
-        (entries) => {
-          for (const e of entries) {
-            if (e.isIntersecting) {
-              const p = video.play()
-              if (p && typeof p.catch === 'function') p.catch(() => {})
-            } else {
-              video.pause()
-            }
-          }
-        },
-        { threshold: 0.1 }
-      )
-      io.observe(section)
+    if (!video) {
+      return () => window.removeEventListener('scroll', onScroll)
     }
 
+    if (prefersReducedMotion) {
+      video.pause()
+      return () => window.removeEventListener('scroll', onScroll)
+    }
+
+    // Forzar atributos críticos vía JS (algunos Android ignoran el atributo JSX)
+    video.muted = true
+    video.defaultMuted = true
+    video.playsInline = true
+    // @ts-ignore — webkit / x5 attrs para iOS / Android WeChat
+    video.setAttribute('webkit-playsinline', '')
+    video.setAttribute('x5-playsinline', '')
+    video.setAttribute('x5-video-player-type', 'h5')
+    video.setAttribute('x5-video-player-fullscreen', 'false')
+
+    let isCleaningUp = false
+
+    const tryPlay = () => {
+      if (isCleaningUp || prefersReducedMotion) return
+      if (document.visibilityState !== 'visible') return
+      // Re-afirmar muted antes de cada intento (Android lo resetea en algunos casos)
+      video.muted = true
+      const p = video.play()
+      if (p && typeof p.catch === 'function') p.catch(() => {})
+    }
+
+    // Intento inmediato + cuando metadata/canplay estén listos
+    tryPlay()
+    const onLoadedData = () => tryPlay()
+    const onCanPlay = () => tryPlay()
+
+    // Si Android pausó el video por ahorro de batería / tab oculta, reanudar
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') tryPlay()
+    }
+    const onPageShow = () => tryPlay()
+    const onFocus = () => tryPlay()
+    // Primer gesto del usuario desbloquea autoplay bloqueado por política
+    const onFirstInteraction = () => {
+      tryPlay()
+      window.removeEventListener('touchend', onFirstInteraction)
+      window.removeEventListener('click', onFirstInteraction)
+    }
+    // Si algo externo pausó el video (Data Saver, low-power), reanudar si seguimos visibles
+    const onPause = () => {
+      if (isCleaningUp || prefersReducedMotion) return
+      if (document.visibilityState !== 'visible') return
+      // pequeño delay para no pelear con pause intencional del cleanup
+      window.setTimeout(tryPlay, 300)
+    }
+
+    video.addEventListener('loadeddata', onLoadedData)
+    video.addEventListener('canplay', onCanPlay)
+    video.addEventListener('pause', onPause)
+    document.addEventListener('visibilitychange', onVisibilityChange)
+    window.addEventListener('pageshow', onPageShow)
+    window.addEventListener('focus', onFocus)
+    window.addEventListener('touchend', onFirstInteraction, { passive: true })
+    window.addEventListener('click', onFirstInteraction)
+
     return () => {
+      isCleaningUp = true
       window.removeEventListener('scroll', onScroll)
-      if (io) io.disconnect()
+      video.removeEventListener('loadeddata', onLoadedData)
+      video.removeEventListener('canplay', onCanPlay)
+      video.removeEventListener('pause', onPause)
+      document.removeEventListener('visibilitychange', onVisibilityChange)
+      window.removeEventListener('pageshow', onPageShow)
+      window.removeEventListener('focus', onFocus)
+      window.removeEventListener('touchend', onFirstInteraction)
+      window.removeEventListener('click', onFirstInteraction)
     }
   }, [prefersReducedMotion])
 
@@ -82,11 +140,15 @@ export default function Hero() {
           <video
             ref={videoRef}
             className={`${prefersReducedMotion ? '' : 'hero-video-kenburns'} absolute inset-0 w-full h-full object-cover`}
-            autoPlay={!prefersReducedMotion}
+            autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            webkit-playsinline=""
+            x5-playsinline=""
+            x5-video-player-type="h5"
+            x5-video-player-fullscreen="false"
+            preload="auto"
             poster="/wp/Secuencia%2001_1.jpg"
             aria-hidden="true"
           >
@@ -131,7 +193,9 @@ export default function Hero() {
 
           <div className="flex flex-col sm:flex-row gap-4">
             <a
-              href="#contact"
+              href={whatsappUrl('Hola, quiero iniciar un proyecto de construcción.')}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:shadow-white/10 hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0 transition-all duration-300"
             >
               Iniciar Proyecto

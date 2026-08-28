@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
 import { Link } from 'react-router-dom'
+import { whatsappUrl } from '../config/site'
 
 const environmentalStats = [
   { value: 'ACERO', label: 'Material recuperable', icon: 'recycling' },
@@ -475,7 +476,9 @@ export default function Sostenibilidad() {
 
             <div className="flex flex-col md:flex-row justify-center items-center gap-6">
               <a
-                href="/#contact"
+                href={whatsappUrl('Hola, quiero consultar por un proyecto de construcción sostenible.')}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-3 bg-primary hover:bg-[#203728] text-white px-10 py-5 rounded-xl font-headline font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5"
               >
                 <span>Solicitar Presupuesto</span>

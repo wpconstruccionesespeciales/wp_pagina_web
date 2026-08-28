@@ -4,7 +4,7 @@ import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import useInView from '../hooks/useInView'
 import { Link } from 'react-router-dom'
-import { BUSINESS, BUSINESS_ID, canonicalUrl } from '../config/site'
+import { BUSINESS, BUSINESS_ID, canonicalUrl, whatsappUrl } from '../config/site'
 
 /* ─── Data from old services page ─── */
 
@@ -196,7 +196,9 @@ export default function Servicios() {
                     El alcance se define a partir del uso, el terreno, la ubicación y la documentación disponible.
                   </p>
                   <a
-                    href="/#contact"
+                    href={whatsappUrl('Hola, quiero agendar una consulta sobre un proyecto.')}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group inline-flex items-center gap-3 bg-white/6 hover:bg-white/10 border border-white/12 hover:border-primary-fixed-dim/40 text-white px-7 py-3.5 rounded-xl font-headline font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 backdrop-blur-sm"
                   >
                     <span>Agendar consulta</span>
@@ -394,7 +396,9 @@ export default function Servicios() {
                       <h3 className="font-headline text-xl lg:text-2xl font-bold text-white mb-2 leading-tight">{title}</h3>
                       <p className="text-white/70 text-sm leading-relaxed mb-4 line-clamp-3 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">{desc}</p>
                       <a
-                        href="/#contact"
+                        href={whatsappUrl(`Hola, quiero consultar por el servicio de ${title}.`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-white font-bold text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:gap-3"
                         aria-label={`Ver más detalles sobre nuestro servicio de ${title}`}
                       >
@@ -435,7 +439,9 @@ export default function Servicios() {
                       <h3 className="font-headline text-xl lg:text-2xl font-bold text-white mb-2 leading-tight">{title}</h3>
                       <p className="text-white/70 text-sm leading-relaxed mb-4 line-clamp-3 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">{desc}</p>
                       <a
-                        href="/#contact"
+                        href={whatsappUrl(`Hola, quiero consultar por el servicio de ${title}.`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-white font-bold text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:gap-3"
                         aria-label={`Ver más detalles sobre nuestro servicio de ${title}`}
                       >
@@ -504,7 +510,9 @@ export default function Servicios() {
 
             <div className="flex flex-col md:flex-row justify-center items-center gap-6">
               <a
-                href="/#contact"
+                href={whatsappUrl('Hola, quiero hablar sobre un proyecto de construcción.')}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-3 bg-primary hover:bg-[#203728] text-white px-10 py-5 rounded-xl font-headline font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5"
               >
                 <span>Hablemos</span>
